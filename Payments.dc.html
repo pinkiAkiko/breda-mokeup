@@ -17,10 +17,10 @@
 
   <!-- ===== SIDEBAR ===== -->
   <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
-    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
-      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+    <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:52px;height:52px;flex:none;object-fit:contain;display:block;">
       <div>
-        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-weight:700;font-size:18px;color:#fff;line-height:1.15;">BREDA SWCS</div>
         <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">{{portalLabel}}</div>
       </div>
     </div>
@@ -130,11 +130,11 @@
             <h2 style="font-size:15px;font-weight:700;margin:0;color:#0f2319;">Registration fee payments</h2>
             <span style="font-size:12.5px;color:#8e9e97;">Per-project processing fees (non-refundable)</span>
           </div>
-          <div style="display:grid;grid-template-columns:2.4fr 1.1fr 1.3fr 0.9fr 1.1fr 130px;gap:0;padding:10px 20px;background:#f6f8f7;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;border-bottom:1px solid #e3e9e6;">
+          <div style="display:grid;grid-template-columns:2.2fr 0.85fr 1.15fr 1.5fr 0.95fr 130px;gap:0;padding:10px 20px;background:#f6f8f7;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;border-bottom:1px solid #e3e9e6;">
             <span>PROJECT</span><span>AMOUNT</span><span>METHOD</span><span>STATUS</span><span>DATE</span><span style="text-align:right;">ACTION</span>
           </div>
           <sc-for list="{{payRows}}" as="p" hint-placeholder-count="4">
-            <div style="position:relative;display:grid;grid-template-columns:2.4fr 1.1fr 1.3fr 0.9fr 1.1fr 130px;gap:0;align-items:center;padding:14px 20px 14px 23px;border-bottom:1px solid #f0f4f2;background:{{p.rowBg}};">
+            <div style="position:relative;display:grid;grid-template-columns:2.2fr 0.85fr 1.15fr 1.5fr 0.95fr 130px;gap:0;align-items:center;padding:14px 20px 14px 23px;border-bottom:1px solid #f0f4f2;background:{{p.rowBg}};">
               <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:{{p.accent}};"></div>
               <div style="min-width:0;padding-right:12px;">
                 <div style="font-size:14px;font-weight:600;color:#1c2530;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{p.project}}</div>
@@ -143,11 +143,11 @@
               <div style="font-size:14px;font-weight:700;color:#0f2319;font-variant-numeric:tabular-nums;">{{p.amount}}</div>
               <div style="font-size:12.5px;color:#46524b;">{{p.method}}</div>
               <div>
-                <span style="display:inline-flex;align-items:center;gap:6px;background:{{p.pillBg}};border:1px solid {{p.pillBd}};color:{{p.pillFg}};border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:600;white-space:nowrap;">
-                  <span style="width:7px;height:7px;border-radius:50%;background:{{p.dot}};flex:none;"></span>{{p.status}}
+                <span style="display:inline-flex;align-items:center;gap:6px;background:{{p.pillBg}};border:1px solid {{p.pillBd}};color:{{p.pillFg}};border-radius:999px;padding:4px 10px;font-size:11.5px;font-weight:600;white-space:nowrap;">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{p.dot}};flex:none;"></span>{{p.status}}
                 </span>
               </div>
-              <div style="font-size:12px;color:#6b7c72;">{{p.date}}</div>
+              <div style="font-size:12px;color:#6b7c72;white-space:nowrap;">{{p.date}}</div>
               <div style="text-align:right;">
                 <a href="{{p.actionHref}}" style="font-size:12.5px;font-weight:600;color:{{p.actionFg}};white-space:nowrap;">{{p.action}} →</a>
               </div>
@@ -267,11 +267,12 @@ class Component extends DCLogic {
     const slate = { pillBg:'#f6f8f7', pillBd:'#d6dfd8', pillFg:'#46524b', dot:'#8e9e97', accent:'#9aa9a1' };
 
     // ===== APPLICANT: per-project registration fees =====
+    // Typical individual applicant capacities. calculateFee: <10→₹1k | 10–100→₹2k | 100–500→₹5k | 500–1MW→₹10k
     const payRows = [
-      { project:'Solar Rooftop — Patna',       ack:'Ack/2025/014', feeType:'Registration fee', amount:'₹15,000', method:'Online · NEFT',     tone:green, status:'Verified',             date:'15 May 2026', action:'View receipt', actionHref:'#' },
-      { project:'Ground-Mounted Solar — Gaya', ack:'Ack/2025/009', feeType:'Registration fee', amount:'₹25,000', method:'Online · Net banking', tone:green, status:'Verified',             date:'8 Apr 2026',  action:'View receipt', actionHref:'#' },
-      { project:'Solar + Storage — Bhagalpur', ack:'Ack pending',  feeType:'Registration fee', amount:'₹50,000', method:'Offline · DD / Cheque', tone:amber, status:'Verification Pending', date:'Submitted 18 May', action:'Track',     actionHref:'Application Track.dc.html' },
-      { project:'Solar Pump — Nalanda',        ack:'Draft',        feeType:'Registration fee', amount:'₹2,360',  method:'—',                    tone:slate, status:'Payment Due',          date:'—',           action:'Pay now',      actionHref:'New Project Application.dc.html' },
+      { project:'Solar Rooftop — Patna',       ack:'Ack/2025/014', feeType:'Registration fee · 20 kW rooftop',      amount:'₹2,000', method:'Online · NEFT',        tone:green, status:'Verified',             date:'15 May 2026', action:'View receipt', actionHref:'#' },
+      { project:'Ground-Mounted Solar — Gaya', ack:'Ack/2025/009', feeType:'Registration fee · 150 kW ground mount', amount:'₹5,000', method:'Online · Net banking',  tone:green, status:'Verified',             date:'8 Apr 2026',  action:'View receipt', actionHref:'#' },
+      { project:'Solar + Storage — Bhagalpur', ack:'Ack pending',  feeType:'Registration fee · 50 kW + storage',     amount:'₹2,000', method:'Offline · DD / Cheque', tone:amber, status:'Verification Pending', date:'18 May 2026', action:'Track',        actionHref:'Application Track.dc.html' },
+      { project:'Solar Pump — Nalanda',        ack:'Draft',        feeType:'Registration fee · 5 kW solar pump',     amount:'₹1,000', method:'—',                     tone:slate, status:'Payment Due',          date:'—',           action:'Pay now',      actionHref:'New Project Application.dc.html' },
     ].map(p => ({
       ...p,
       pillBg:p.tone.pillBg, pillBd:p.tone.pillBd, pillFg:p.tone.pillFg, dot:p.tone.dot, accent:p.tone.accent,
@@ -279,19 +280,20 @@ class Component extends DCLogic {
       actionFg: p.tone === amber ? '#e05c1a' : p.tone === slate ? '#1e9b5f' : '#1e9b5f',
     }));
 
+    const appVerified = payRows.filter(p => p.status === 'Verified').length;
+    const appPending  = payRows.filter(p => p.status === 'Verification Pending').length;
     const applicantStats = [
-      { value:'₹40,000',  label:'Total verified',         accent:'#1e9b5f' },
-      { value:'₹50,000',  label:'Pending verification',   accent:'#c2740f' },
-      { value:'₹2,360',   label:'Payment due',            accent:'#9aa9a1' },
-      { value:'4',        label:'Fee transactions · FY26', accent:'#1d6fb8' },
+      { value: String(appVerified), label:'Projects verified',    accent:'#1e9b5f' },
+      { value: String(appPending),  label:'Pending verification', accent:'#c2740f' },
     ];
 
     // ===== FINANCE: verification queue =====
+    // Amounts per BREDA fee table: 500–1000kW→₹10k | ≥1MW→₹50k/MW (max ₹5L)
     const QUEUE = [
-      { id:'q1', applicant:'Rajesh Kumar',         discom:'SBPDCL', project:'Solar + Storage',     capacity:'12 MW', district:'Bhagalpur',    amount:'₹50,000', payRef:'DD 418225 · SBI', submitted:'18 May 2026' },
-      { id:'q2', applicant:'Sunita Devi',          discom:'NBPDCL', project:'Ground-Mounted Solar', capacity:'2 MW',  district:'Muzaffarpur',  amount:'₹20,000', payRef:'Cheque 552190 · PNB', submitted:'19 May 2026' },
-      { id:'q3', applicant:'M/s Green Power Bihar', discom:'SBPDCL', project:'Ground-Mounted Solar', capacity:'10 MW', district:'Nalanda',      amount:'₹50,000', payRef:'DD 419904 · BOI', submitted:'20 May 2026' },
-      { id:'q4', applicant:'Prakash Jha',          discom:'NBPDCL', project:'Solar Rooftop',        capacity:'250 kW', district:'Darbhanga',   amount:'₹5,000',  payRef:'Cheque 408551 · SBI', submitted:'14 May 2026' },
+      { id:'q1', applicant:'Rajesh Kumar',          discom:'SBPDCL', project:'Solar + Storage',     capacity:'1 MW',    district:'Bhagalpur',   amount:'₹50,000',  payRef:'DD 418225 · SBI',     submitted:'18 May 2026' },
+      { id:'q2', applicant:'Sunita Devi',           discom:'NBPDCL', project:'Ground-Mounted Solar', capacity:'950 kW',  district:'Muzaffarpur', amount:'₹10,000',  payRef:'Cheque 552190 · PNB', submitted:'19 May 2026' },
+      { id:'q3', applicant:'M/s Green Power Bihar', discom:'SBPDCL', project:'Ground-Mounted Solar', capacity:'800 kW',  district:'Nalanda',     amount:'₹10,000',  payRef:'DD 419904 · BOI',     submitted:'20 May 2026' },
+      { id:'q4', applicant:'Prakash Jha',           discom:'NBPDCL', project:'Solar Rooftop',        capacity:'250 kW',  district:'Darbhanga',   amount:'₹5,000',   payRef:'Cheque 408551 · SBI', submitted:'14 May 2026' },
     ];
     const queueRows = QUEUE.map(q => {
       const d = this.state.decisions[q.id] || 'pending';
@@ -309,7 +311,7 @@ class Component extends DCLogic {
     const financeStats = [
       { value:String(pendingCount), label:'Pending verification', accent:'#c2740f' },
       { value:String(verifiedCount), label:'Verified this session', accent:'#1e9b5f' },
-      { value:'₹1.25 L', label:'Collected · this month',  accent:'#1d6fb8' },
+      { value:'₹75,000', label:'Collected · this month', accent:'#1d6fb8' },
       { value:'2–5 days', label:'Avg. verification time',  accent:'#9aa9a1' },
     ];
 

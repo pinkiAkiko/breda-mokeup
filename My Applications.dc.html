@@ -17,10 +17,10 @@
 
   <!-- ===== SIDEBAR ===== -->
   <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
-    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
-      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+    <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:52px;height:52px;flex:none;object-fit:contain;display:block;">
       <div>
-        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-weight:700;font-size:18px;color:#fff;line-height:1.15;">BREDA SWCS</div>
         <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
       </div>
     </div>
@@ -126,7 +126,7 @@
 
         <!-- Column headers -->
         <div style="display:grid;grid-template-columns:1.5fr 2.1fr .75fr .85fr 1.5fr 1.4fr;gap:0;padding:11px 18px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-bottom:1px solid #e3e9e6;">
-          <div>ID / FILE NO.</div>
+          <div>Acknowledgement / Registration No.</div>
           <div>PROJECT</div>
           <div>CAPACITY</div>
           <div>DISCOM</div>
@@ -137,7 +137,10 @@
         <sc-for list="{{rows}}" as="row" hint-placeholder-count="6">
           <div style="display:grid;grid-template-columns:1.5fr 2.1fr .75fr .85fr 1.5fr 1.4fr;gap:0;align-items:center;background:{{row.rowBg}};border-bottom:1px solid #eef1ef;border-left:3px solid {{row.accent}};padding:13px 18px;">
 
-            <div style="font-size:13px;font-weight:600;color:#1c2530;font-variant-numeric:tabular-nums;padding-right:10px;">{{row.id}}</div>
+            <div style="padding-right:10px;">
+              <div style="font-size:12.5px;font-weight:600;color:#1c2530;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{row.displayNo}}</div>
+              <div style="font-size:11px;color:#8e9e97;margin-top:2px;letter-spacing:.3px;text-transform:uppercase;">{{row.displayLabel}}</div>
+            </div>
 
             <div style="font-size:14px;font-weight:600;color:#0f2319;padding-right:14px;">{{row.project}}</div>
 
@@ -217,19 +220,21 @@ class Component extends DCLogic {
     };
 
     // data -----------------------------------------------------------------
+    // ack: Acknowledgement No. (issued on submission)
+    // reg: Registration No.    (issued only after APPROVED)
     const ALL = [
-      { id:'BREDA/RE/2025/04201', project:'Rajeev Rooftop Solar 8kW',     capacity:'8 kW',   discom:'SBPDCL', statusKey:'approved' },
-      { id:'PRJ-1003',            project:'Rajeev — Solar Pump 5HP',       capacity:'4 kW',   discom:'SBPDCL', statusKey:'draft' },
-      { id:'BREDA/RE/2025/04231', project:'Rajeev Hybrid Storage 15 kW',  capacity:'15 kW',  discom:'SBPDCL', statusKey:'breda_query' },
-      { id:'BREDA/RE/2026/04250', project:'Rajeev Industrial Solar 250 kW',capacity:'250 kW', discom:'SBPDCL', statusKey:'breda_approved' },
-      { id:'PRJ-1008',            project:'Rajeev Wind-Solar Hybrid 10 kW',capacity:'10 kW',  discom:'SBPDCL', statusKey:'draft' },
-      { id:'PRJ-1009',            project:'Rajeev Agri Solar Pump 3HP',    capacity:'3 kW',   discom:'NBPDCL', statusKey:'payment_pending' },
-      { id:'BREDA/RE/2026/04261', project:'Rajeev Floating Solar 30 kW',   capacity:'30 kW',  discom:'SBPDCL', statusKey:'submitted' },
-      { id:'BREDA/RE/2026/04265', project:'Rajeev Canal-Bank Solar 100 kW',capacity:'100 kW', discom:'NBPDCL', statusKey:'resubmitted' },
-      { id:'BREDA/RE/2026/04270', project:'Rajeev Biomass Gasifier 75 kW', capacity:'75 kW',  discom:'SBPDCL', statusKey:'dept_query' },
-      { id:'BREDA/RE/2025/03990', project:'Rajeev Ground Mount 1 MW',      capacity:'1 MW',   discom:'SBPDCL', statusKey:'rejected' },
-      { id:'BREDA/RE/2026/04243', project:'Rajeev Commercial Rooftop 40 kW',capacity:'40 kW', discom:'SBPDCL', statusKey:'cod_rejected' },
-      { id:'BREDA/RE/2026/04277', project:'Rajeev Commissioning Demo 50 kW',capacity:'50 kW', discom:'SBPDCL', statusKey:'awaiting_cod' }
+      { id:'PRJ-1001', ack:'BREDA/ACK/2025/04201', reg:'BREDA/REG/2025/00112', project:'Rajeev Rooftop Solar 8kW',        capacity:'8 kW',   discom:'SBPDCL', statusKey:'approved' },
+      { id:'PRJ-1003', ack:null,                    reg:null,                   project:'Rajeev — Solar Pump 5HP',          capacity:'4 kW',   discom:'SBPDCL', statusKey:'draft' },
+      { id:'PRJ-1005', ack:'BREDA/ACK/2025/04231', reg:null,                   project:'Rajeev Hybrid Storage 15 kW',     capacity:'15 kW',  discom:'SBPDCL', statusKey:'breda_query' },
+      { id:'PRJ-1006', ack:'BREDA/ACK/2026/04250', reg:null,                   project:'Rajeev Industrial Solar 250 kW',  capacity:'250 kW', discom:'SBPDCL', statusKey:'breda_approved' },
+      { id:'PRJ-1008', ack:null,                    reg:null,                   project:'Rajeev Wind-Solar Hybrid 10 kW',  capacity:'10 kW',  discom:'SBPDCL', statusKey:'draft' },
+      { id:'PRJ-1009', ack:null,                    reg:null,                   project:'Rajeev Agri Solar Pump 3HP',      capacity:'3 kW',   discom:'NBPDCL', statusKey:'payment_pending' },
+      { id:'PRJ-1010', ack:'BREDA/ACK/2026/04261', reg:null,                   project:'Rajeev Floating Solar 30 kW',     capacity:'30 kW',  discom:'SBPDCL', statusKey:'submitted' },
+      { id:'PRJ-1011', ack:'BREDA/ACK/2026/04265', reg:null,                   project:'Rajeev Canal-Bank Solar 100 kW',  capacity:'100 kW', discom:'NBPDCL', statusKey:'resubmitted' },
+      { id:'PRJ-1012', ack:'BREDA/ACK/2026/04270', reg:null,                   project:'Rajeev Biomass Gasifier 75 kW',   capacity:'75 kW',  discom:'SBPDCL', statusKey:'dept_query' },
+      { id:'PRJ-1013', ack:'BREDA/ACK/2025/03990', reg:null,                   project:'Rajeev Ground Mount 1 MW',        capacity:'1 MW',   discom:'SBPDCL', statusKey:'rejected' },
+      { id:'PRJ-1014', ack:'BREDA/ACK/2026/04243', reg:null,                   project:'Rajeev Commercial Rooftop 40 kW', capacity:'40 kW',  discom:'SBPDCL', statusKey:'cod_rejected' },
+      { id:'PRJ-1007', ack:'BREDA/ACK/2026/04277', reg:'BREDA/REG/2026/00145', project:'Rajeev Commissioning Demo 50 kW', capacity:'50 kW',  discom:'SBPDCL', statusKey:'awaiting_cod' }
     ];
 
     const tab = this.state.activeTab;
@@ -237,8 +242,12 @@ class Component extends DCLogic {
 
     const rows = filtered.map(r => {
       const s = STATUS[r.statusKey];
+      const isApproved = r.statusKey === 'approved' || r.statusKey === 'awaiting_cod';
+      const displayNo    = isApproved && r.reg ? r.reg : r.ack ? r.ack : r.id;
+      const displayLabel = isApproved && r.reg ? 'Registration No.' : r.ack ? 'Acknowledgement No.' : 'Project ID';
       return {
         ...r,
+        displayNo, displayLabel,
         status:s.label, statusBg:s.tone.bg, statusBd:s.tone.bd, statusFg:s.tone.fg, dot:s.tone.dot,
         accent:s.tone.accent, actions:s.actions,
         rowBg: (s.cat==='action' && s.tone===amber) ? '#fffdf9' : '#fff'
