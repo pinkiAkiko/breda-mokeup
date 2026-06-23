@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}input,select{font-family:inherit;}a{text-decoration:none;}select{appearance:auto;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+        Dashboard
+      </a>
+      <a href="#" style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        New Project Application
+      </a>
+      <a href="My Applications.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg>
+        My Applications
+      </a>
+      <a href="Payments.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path></svg>
+        Payments
+      </a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+        Help &amp; Grievance
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        Profile
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">New Project Application</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e9b5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;">RK</div>
+      </div>
+    </div>
+
+    <!-- ===== SUCCESS SCREEN ===== -->
+    <sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:48px 28px;">
+        <div style="max-width:480px;margin:0 auto;text-align:center;background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);padding:40px;">
+          <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#e7f4ec;display:flex;align-items:center;justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e9b5f" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+          </div>
+          <div style="font-family:'IBM Plex Serif',serif;font-size:22px;font-weight:700;color:#0f2319;">{{ succTitle }}</div>
+          <sc-if value="{{ showAck }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;color:#8e9e97;margin-top:12px;">Your Acknowledgement Number</div>
+            <div style="font-size:26px;font-weight:700;color:#c2740f;letter-spacing:.04em;margin-top:4px;font-variant-numeric:tabular-nums;">{{ ack }}</div>
+          </sc-if>
+          <div style="font-size:11px;color:#8e9e97;font-family:monospace;margin-top:6px;">{{ txnText }}</div>
+          <div style="font-size:12.5px;color:#5b6b62;margin-top:14px;line-height:1.6;">{{ succNote }}</div>
+          <button onClick="{{ onBackDash }}" style="margin-top:20px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:700;">← Back to Dashboard</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== FORM ===== -->
+    <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Home / New Project Application</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0;color:#0f2319;line-height:1.1;">New Project Application</h1>
+        <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid #bfe3cd;background:#e7f4ec;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:600;color:#1e7a4d;">
+          <span style="width:7px;height:7px;border-radius:50%;background:#1e9b5f;display:inline-block;"></span>{{ autosaveText }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Body: stepper + content -->
+    <div style="padding:22px 28px 56px;display:grid;grid-template-columns:236px 1fr;gap:20px;align-items:start;">
+
+      <!-- Stepper -->
+      <aside style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);padding:12px;position:sticky;top:72px;">
+        <div style="display:flex;flex-direction:column;">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="8">
+            <button onClick="{{ s.onClick }}" style="display:flex;align-items:flex-start;gap:10px;width:100%;padding:7px 8px;background:{{ s.btnBg }};border:none;border-radius:8px;text-align:left;">
+              <div style="display:flex;flex-direction:column;align-items:center;flex:none;">
+                <div style="width:26px;height:26px;border-radius:50%;border:2px solid {{ s.bubbleBorder }};background:{{ s.bubbleBg }};color:{{ s.bubbleColor }};font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">{{ s.bubbleText }}</div>
+                <sc-if value="{{ s.hasConnector }}" hint-placeholder-val="{{ true }}"><div style="width:2px;flex:1;min-height:10px;margin-top:2px;background:{{ s.connectorBg }};"></div></sc-if>
+              </div>
+              <div style="padding-bottom:10px;min-width:0;">
+                <div style="font-size:{{ stepperFontSizePx }};font-weight:{{ s.labelWeight }};color:{{ s.labelColor }};line-height:1.35;">{{ s.label }}</div>
+                <sc-if value="{{ s.showSub }}" hint-placeholder-val="{{ false }}"><div style="font-size:{{ stepperSubFontSizePx }};color:#7c8c83;margin-top:2px;">{{ s.sub }}</div></sc-if>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showSidebarNote }}" hint-placeholder-val="{{ true }}"><div style="margin-top:12px;border:1px solid #c9dff2;border-left:3px solid #1d6fb8;background:#e6f0f9;border-radius:8px;padding:9px 11px;font-size:11px;line-height:1.6;color:#1c2530;">
+          <strong style="color:#1a5a96;">Note:</strong> Clearances from individual departments are applied for in a separate step, after BREDA approves this application.
+        </div></sc-if>
+      </aside>
+
+      <!-- Content card -->
+      <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);padding:24px;">
+
+        <!-- STEP 0 -->
+        <sc-if value="{{ isStep0 }}" hint-placeholder-val="{{ true }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Project Capacity &amp; Purpose</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Plant Capacity <span style="color:#dc3545;">*</span></label>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+              <input type="number" value="{{ capValue }}" onChange="{{ onCapValue }}" placeholder="e.g. 500" style="width:140px;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="unit" checked="{{ unitKw }}" onChange="{{ onUnitKw }}" style="accent-color:#c2740f;"> kW (AC)</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="unit" checked="{{ unitMw }}" onChange="{{ onUnitMw }}" style="accent-color:#c2740f;"> MW (AC)</label>
+            </div>
+            <sc-if value="{{ showCapRule }}" hint-placeholder-val="{{ false }}"><div style="font-size:11px;color:#1a5a96;margin-top:4px;">{{ capRuleText }}</div></sc-if>
+          </div>
+          <div style="margin-top:20px;">
+            <p style="font-size:12px;font-weight:500;color:#1c2530;margin:0 0 8px;">Purpose of Grid Connected RE Project <span style="color:#dc3545;">*</span></p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <sc-for list="{{ purposes }}" as="p" hint-placeholder-count="5">
+                <div onClick="{{ p.onClick }}" style="display:flex;align-items:center;gap:10px;border:1px solid {{ p.border }};background:{{ p.bg }};border-radius:8px;padding:10px 12px;cursor:pointer;">
+                  <input type="radio" name="purpose" checked="{{ p.selected }}" readOnly="{{ true }}" style="accent-color:#c2740f;flex:none;">
+                  <span style="font-size:13px;font-weight:500;">{{ p.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ showPurposeOther }}" hint-placeholder-val="{{ false }}">
+              <input value="{{ purposeOther }}" onChange="{{ onPurposeOther }}" placeholder="Specify purpose" style="margin-top:8px;width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- SECTION A -->
+        <sc-if value="{{ isA }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section A — General Profile of Applicant</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Name of Applicant <span style="color:#dc3545;">*</span></label><input value="Rajesh Kumar Sharma" disabled="" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;background:#eef1ef;color:#6b7c72;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Type of Applicant <span style="color:#dc3545;">*</span></label><input value="Pvt. Ltd." disabled="" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;background:#eef1ef;color:#6b7c72;outline:none;"></div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 8px;">Communication Address</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <sc-for list="{{ fieldsComm }}" as="f" hint-placeholder-count="7">
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <label style="font-size:12px;font-weight:500;color:#1c2530;">{{ f.label }} <sc-if value="{{ f.required }}" hint-placeholder-val="{{ false }}"><span style="color:#dc3545;">*</span></sc-if></label>
+                <sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}">
+                  <select value="{{ f.value }}" onChange="{{ f.onChange }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                    <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
+                  </select>
+                </sc-if>
+                <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                  <input value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.placeholder }}" maxlength="{{ f.maxlength }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 8px;">
+            <span>Project Address</span>
+            <label style="display:flex;align-items:center;gap:6px;font-weight:400;font-size:12px;cursor:pointer;color:#5b6b62;"><input type="checkbox" checked="{{ sameAddr }}" onChange="{{ onSameAddr }}" style="accent-color:#1e9b5f;"> Same as Communication Address</label>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <sc-for list="{{ fieldsProj }}" as="f" hint-placeholder-count="9">
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <label style="font-size:12px;font-weight:500;color:#1c2530;">{{ f.label }} <sc-if value="{{ f.required }}" hint-placeholder-val="{{ false }}"><span style="color:#dc3545;">*</span></sc-if></label>
+                <sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}">
+                  <select value="{{ f.value }}" onChange="{{ f.onChange }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                    <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
+                  </select>
+                </sc-if>
+                <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                  <input value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="{{ f.placeholder }}" maxlength="{{ f.maxlength }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 8px;">Contact &amp; Identity</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Mobile No. <span style="color:#dc3545;">*</span></label><input value="+91 98765 43210" readOnly="{{ true }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;background:#eef1ef;color:#6b7c72;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">E-mail <span style="color:#dc3545;">*</span></label><input value="rajesh.sharma@solarenergy.in" readOnly="{{ true }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;background:#eef1ef;color:#6b7c72;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Alternate Mobile No.</label><input value="{{ altMobile }}" onChange="{{ onAltMobile }}" placeholder="Optional" maxlength="10" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Alternate Email</label><input value="{{ altEmail }}" onChange="{{ onAltEmail }}" placeholder="Optional" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">PAN Number <span style="color:#dc3545;">*</span></label><input value="{{ pan }}" onChange="{{ onPan }}" placeholder="ABCDE1234F" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;text-transform:uppercase;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Aadhaar Number <span style="color:#dc3545;">*</span></label>
+              <input value="{{ aadhaar }}" onChange="{{ onAadhaar }}" placeholder="XXXX XXXX XXXX" inputmode="numeric" maxlength="12" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+              <div style="display:inline-flex;align-items:flex-start;gap:5px;border:1px solid #f0d6ac;background:#fef3e3;padding:4px 8px;border-radius:6px;font-size:10.5px;font-weight:500;color:#92400e;line-height:1.4;margin-top:2px;">⚠ Integration pending: Aadhaar must be tokenised via Aadhaar Vault; raw number is not persisted.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">GST Number <span style="font-size:11px;color:#8e8e8e;font-style:italic;">(Mandatory if applicable)</span></label><input value="{{ gst }}" onChange="{{ onGst }}" placeholder="22ABCDE1234F1Z5" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;text-transform:uppercase;"></div>
+          </div>
+        </sc-if>
+
+        <!-- SECTION B -->
+        <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section B — Technical and Financial Details</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Type of Power Plant <span style="color:#dc3545;">*</span></label>
+              <select value="{{ plantKind }}" onChange="{{ onPlantKind }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                <option value="">Select</option><option value="Solar">Solar</option><option value="Non-Solar">Non-Solar</option>
+              </select>
+            </div>
+            <sc-if value="{{ showSubtype }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <label style="font-size:12px;font-weight:500;color:#1c2530;">Sub-type <span style="color:#dc3545;">*</span></label>
+                <select value="{{ subtype }}" onChange="{{ onSubtype }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                  <sc-for list="{{ subtypeOptions }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
+                </select>
+              </div>
+            </sc-if>
+          </div>
+          <sc-if value="{{ showStorage }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="storage" checked="{{ storageOff }}" onChange="{{ onStorageOff }}" style="accent-color:#1e9b5f;"> Without Storage</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="storage" checked="{{ storageOn }}" onChange="{{ onStorageOn }}" style="accent-color:#1e9b5f;"> With Storage</label>
+            </div>
+          </sc-if>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:16px;">
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Name of concerned DISCOM <span style="color:#dc3545;">*</span></label>
+              <select value="{{ discom }}" onChange="{{ onDiscom }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                <option value="">Select</option><option value="NBPDCL">NBPDCL</option><option value="SBPDCL">SBPDCL</option>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">{{ stationLabel }} <span style="color:#dc3545;">*</span></label>
+              <select value="{{ station }}" onChange="{{ onStation }}" disabled="{{ stationDisabled }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:{{ stationBg }};outline:none;">
+                <sc-for list="{{ stationOptions }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
+              </select>
+              <div style="font-size:11px;color:#8e8e8e;font-style:italic;">{{ stationHint }}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Distance (km) <span style="color:#dc3545;">*</span></label>
+              <input type="number" value="{{ stationDist }}" onChange="{{ onDist }}" placeholder="e.g. 2.5" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+              <sc-if value="{{ showDistM }}" hint-placeholder-val="{{ false }}"><div style="font-size:11px;color:#8e9e97;">{{ distMText }}</div></sc-if>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:16px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Type of Power Evacuation <span style="color:#dc3545;">*</span></label>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="evac" checked="{{ evacLILO }}" onChange="{{ onEvacLILO }}" style="accent-color:#1e9b5f;"> LILO</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="evac" checked="{{ evacDirect }}" onChange="{{ onEvacDirect }}" style="accent-color:#1e9b5f;"> Direct Evacuation</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="evac" checked="{{ evacOtherSel }}" onChange="{{ onEvacOther }}" style="accent-color:#1e9b5f;"> Other</label>
+            </div>
+            <sc-if value="{{ evacOtherSel }}" hint-placeholder-val="{{ false }}">
+              <input value="{{ evacOther }}" onChange="{{ onEvacOtherText }}" placeholder="Specify" style="margin-top:8px;width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+            </sc-if>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Proposed Date of Commissioning <span style="color:#dc3545;">*</span></label><input type="date" value="{{ cod }}" onChange="{{ onCod }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Approximate Project Cost (₹) <span style="color:#dc3545;">*</span></label><input type="number" value="{{ cost }}" onChange="{{ onCost }}" placeholder="e.g. 5000000" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 8px;">EPC Contractor / Developer</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Name <span style="color:#dc3545;">*</span></label><input value="{{ epcName }}" onChange="{{ onEpcName }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Address <span style="color:#dc3545;">*</span></label><input value="{{ epcAddr }}" onChange="{{ onEpcAddr }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Contact Person <span style="color:#dc3545;">*</span></label><input value="{{ epcContact }}" onChange="{{ onEpcContact }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Mobile No. <span style="color:#dc3545;">*</span></label><input value="{{ epcMobile }}" onChange="{{ onEpcMobile }}" maxlength="10" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">E-mail <span style="color:#dc3545;">*</span></label><input type="email" value="{{ epcEmail }}" onChange="{{ onEpcEmail }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
+          </div>
+        </sc-if>
+
+        <!-- SECTION C -->
+        <sc-if value="{{ isC }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section C — Land Availability</div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Type of Area Ownership Document <span style="color:#dc3545;">*</span></label>
+            <select value="{{ ownership }}" onChange="{{ onOwnership }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+              <option value="">Select</option>
+              <option value="Copy of House Tax Bill">Copy of House Tax Bill</option>
+              <option value="Property Card">Property Card</option>
+              <option value="Rent / lease agreement or NOC of Society in case of flat / multi-storied apartments">Rent / lease agreement or NOC of Society (flats / apartments)</option>
+              <option value="Building Use (BU) permission">Building Use (BU) permission</option>
+            </select>
+          </div>
+          <sc-if value="{{ showOwnUpload }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Upload self-attested copy (max 5 MB) <span style="color:#dc3545;">*</span></label>
+              <div style="display:flex;align-items:center;gap:10px;border:1px solid #cdd6d0;border-radius:8px;padding:10px 12px;">
+                <span style="color:#1e9b5f;font-size:16px;flex:none;">📄</span>
+                <div style="flex:1;min-width:0;font-size:13px;font-weight:500;color:{{ ownFileColor }};">{{ ownFileName }}</div>
+                <label style="flex:none;border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;">📎 Upload<input type="file" style="display:none;" accept=".pdf,.doc,.docx,image/*" onChange="{{ onOwnerFile }}"></label>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:16px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Land Category <span style="color:#dc3545;">*</span></label>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="landcat" checked="{{ landPrivate }}" onChange="{{ onLandPrivate }}" style="accent-color:#1e9b5f;"> Private</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="landcat" checked="{{ landGovt }}" onChange="{{ onLandGovt }}" style="accent-color:#1e9b5f;"> Government</label>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:16px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Land / Rooftop Area (acres) <span style="color:#dc3545;">*</span></label>
+            <input type="number" value="{{ landArea }}" onChange="{{ onLandArea }}" placeholder="e.g. 5.0" style="width:160px;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+          </div>
+        </sc-if>
+
+        <!-- SECTION D -->
+        <sc-if value="{{ isD }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:14px;">Section D — Documents Upload</div>
+          <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:0 0 14px;">File size limits: DPR up to 25 MB · Documents up to 5 MB · Scanned images up to 2 MB</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ docRows }}" as="d" hint-placeholder-count="6">
+              <div style="display:flex;align-items:center;gap:10px;border:1px solid #cdd6d0;border-radius:8px;padding:10px 12px;">
+                <span style="color:#1e9b5f;font-size:16px;flex:none;">📄</span>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13px;font-weight:500;color:#1c2530;">{{ d.label }}<sc-if value="{{ d.req }}" hint-placeholder-val="{{ false }}"><span style="color:#dc3545;"> *</span></sc-if> <span style="font-size:11px;color:#8e9e97;">(max {{ d.limit }} MB)</span></div>
+                  <div style="font-size:11px;color:{{ d.statusColor }};margin-top:1px;">{{ d.statusText }}</div>
+                </div>
+                <sc-if value="{{ d.uploaded }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ d.onRemove }}" style="background:none;border:none;cursor:pointer;color:#dc3545;padding:4px;border-radius:4px;font-size:14px;">✕</button>
+                </sc-if>
+                <sc-if value="{{ d.notUploaded }}" hint-placeholder-val="{{ true }}">
+                  <label style="flex:none;border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;">📎 Upload<input type="file" style="display:none;" onChange="{{ d.onUpload }}"></label>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 6px;">Custom Documents (Optional)</div>
+          <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:0 0 10px;">Add any additional document with a label of your choice. Each up to 5 MB.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ customRows }}" as="c" hint-placeholder-count="1">
+              <div style="display:flex;align-items:center;gap:8px;border:1px solid #cdd6d0;border-radius:8px;padding:8px 12px;">
+                <span style="flex:none;border-radius:6px;background:#eef1ef;font-family:monospace;font-size:10px;color:#8e9e97;padding:2px 6px;">{{ c.id }}</span>
+                <input value="{{ c.label }}" onChange="{{ c.onLabel }}" placeholder="Document label (e.g. Land NOC)" style="flex:1;border:1px solid #cdd6d0;border-radius:6px;padding:5px 9px;font-size:12px;color:#1c2530;outline:none;">
+                <sc-if value="{{ c.hasFile }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#1e7a4d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">✓ {{ c.file }}</span></sc-if>
+                <sc-if value="{{ c.noFile }}" hint-placeholder-val="{{ true }}"><label style="border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;">📎 Upload<input type="file" style="display:none;" onChange="{{ c.onFile }}"></label></sc-if>
+                <button onClick="{{ c.onRemove }}" style="background:none;border:none;cursor:pointer;color:#dc3545;padding:4px;font-size:14px;">✕</button>
+              </div>
+            </sc-for>
+          </div>
+          <button onClick="{{ onAddCustom }}" style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;border:1px dashed rgba(30,155,95,.5);background:transparent;color:#1e9b5f;font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;">+ Add another document</button>
+        </sc-if>
+
+        <!-- SECTION E -->
+        <sc-if value="{{ isE }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section E — Declaration</div>
+          <div style="border:1px solid #cdd6d0;border-radius:10px;background:#f6f8f7;padding:16px;font-size:13px;line-height:1.7;">
+            <p style="margin:0;">I <strong>Rajesh Kumar Sharma</strong> (authorized representative of M/s. <strong>XYC Company</strong>) declare that the information filled in the application form is true and correct to the best of my knowledge and BREDA is not responsible for providing land, power evacuation and water supply facility, or for the operation &amp; maintenance of the plant. BREDA is absolved from any loss that may occur on account of failure of the substation/transmission line and/or non-performance of any system of the project. I fully understand that this registration process does not provide any extra claim/benefit other than prevailing RE Policy for any assistance.</p>
+            <div style="border-left:4px solid #1d6fb8;background:#e6f0f9;padding:9px 12px;font-size:12px;margin-top:12px;border-radius:0 8px 8px 0;"><strong style="color: rgb(26, 90, 150);">Note*:</strong> I understand that I am responsible for selecting all clearances applicable to my project. Non-selection of any required clearance may delay commissioning, or statutory compliance. BREDA will facilitate processing of only the clearances selected and submitted through this application.</div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;margin-top:14px;cursor:pointer;"><input type="checkbox" checked="{{ declared }}" onChange="{{ onDeclared }}" style="margin-top:2px;accent-color:#1e9b5f;flex:none;"> I confirm the above declaration is true and correct.</label>
+          <div style="margin-top:20px;">
+            <button onClick="{{ onGoPreview }}" disabled="{{ previewBtnDisabled }}" style="background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:10px 20px;font-size:13px;font-weight:700;opacity:{{ previewBtnOpacity }};">Review &amp; Proceed to Preview →</button>
+          </div>
+        </sc-if>
+
+        <!-- PREVIEW -->
+        <sc-if value="{{ isPreview }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;">Preview Application</div>
+            <button onClick="{{ onPrint }}" style="border:2px solid #c2740f;background:transparent;color:#c2740f;font-size:12px;font-weight:700;padding:6px 12px;border-radius:8px;">🖨 Print</button>
+          </div>
+          <p style="font-size:12px;color:#8e9e97;margin:0 0 14px;">Review all details carefully. Once you confirm, Section F (payment) will unlock.</p>
+          <div style="max-height:52vh;overflow-y:auto;border:1px solid #e3e9e6;border-radius:10px;padding:18px;">
+            <sc-for list="{{ previewSections }}" as="ps" hint-placeholder-count="7">
+              <div style="margin-bottom:18px;">
+                <div style="font-size:12px;font-weight:700;color:#1e9b5f;border-left:3px solid #1e9b5f;padding-left:8px;margin-bottom:8px;">{{ ps.title }}</div>
+                <sc-for list="{{ ps.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(198,198,198,.4);padding:5px 0;font-size:12px;">
+                    <span style="color:#8e9e97;">{{ r.l }}</span>
+                    <span style="font-weight:600;text-align:right;color:{{ r.color }};">{{ r.v }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:14px;border:1px solid #e3e9e6;border-radius:10px;background:#f6f8f7;padding:16px;">
+            <sc-if value="{{ previewConfirmed }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#1e7a4d;">✅ Application reviewed and confirmed. Proceed to Section F to pay.</div></sc-if>
+            <sc-if value="{{ previewNotConfirmed }}" hint-placeholder-val="{{ true }}">
+              <label style="display:flex;align-items:flex-start;gap:9px;font-size:13px;cursor:pointer;"><input type="checkbox" onChange="{{ onPreviewConfirm }}" style="margin-top:2px;accent-color:#1e9b5f;flex:none;"> <span>I have reviewed all the information above and confirm it is correct. I understand the registration fee is <strong>non-refundable</strong>.</span></label>
+              <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:8px 0 0;">Ticking this box will unlock Section F (payment).</p>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- SECTION F -->
+        <sc-if value="{{ isF }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section F — Registration Fees Submission</div>
+          <sc-if value="{{ showFLock }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:9px;border:1px solid #f0d6ac;background:#fef3e3;border-radius:8px;padding:10px 12px;font-size:12px;align-items:flex-start;margin-bottom:14px;color:#92400e;"><span>🔒</span><p style="margin:0;">Review and confirm your application in the Preview section before payment.</p></div>
+          </sc-if>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
+            <div style="border:1px solid #e3e9e6;background:#f6f8f7;border-radius:10px;padding:12px;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5c6b62;font-weight:600;">Plant Capacity</div>
+              <div style="font-size:16px;font-weight:700;margin-top:3px;color:#1c2530;">{{ capDisplay }}</div>
+            </div>
+            <div style="border:1px solid #f0d6ac;background:rgba(194,116,15,.05);border-radius:10px;padding:12px;">
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5c6b62;font-weight:600;">Registration Fee</div>
+              <div style="font-size:13px;margin-top:8px;color:#1c2530;">
+                <div style="display:flex;justify-content:space-between;padding:2px 0;"><span style="color:#5c6b62;">Processing fee</span><span>{{ feeBase }}</span></div>
+                <div style="display:flex;justify-content:space-between;padding:2px 0;"><span style="color:#5c6b62;">GST @ 18%</span><span>{{ feeGst }}</span></div>
+                <div style="display:flex;justify-content:space-between;font-weight:700;color:#c2740f;border-top:1px solid rgba(194,116,15,.3);padding-top:4px;margin-top:3px;"><span>Total payable</span><span>{{ feeTotal }}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:9px;border:1px solid rgba(220,53,69,.4);background:rgba(220,53,69,.05);border-radius:8px;padding:10px 12px;font-size:12px;align-items:flex-start;margin-bottom:18px;"><span>🔒</span><p style="margin:0;"><strong style="color:#dc3545;">Non-refundable:</strong> the registration/processing fee is non-refundable. If the application is rejected at any stage after payment, no refund is issued. The application cannot be withdrawn once the fee is paid.</p></div>
+
+          <table style="width:100%;border-collapse:collapse;font-size:12px;border:1px solid #e3e9e6;border-radius:8px;overflow:hidden;margin-bottom:18px;">
+            <thead><tr><th style="text-align:left;padding:7px 12px;background:#eef1ef;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#8e9e97;">Capacity</th><th style="text-align:left;padding:7px 12px;background:#eef1ef;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#8e9e97;">Processing Fee</th></tr></thead>
+            <tbody>
+              <tr><td style="padding:7px 12px;">&lt; 10 KW</td><td style="padding:7px 12px;">₹ 1,000/-</td></tr>
+              <tr><td style="padding:7px 12px;background:rgba(238,241,239,.6);">≥ 10 KW &lt; 100 KW</td><td style="padding:7px 12px;background:rgba(238,241,239,.6);">₹ 2,000/-</td></tr>
+              <tr><td style="padding:7px 12px;">≥ 100 KW &lt; 500 KW</td><td style="padding:7px 12px;">₹ 5,000/-</td></tr>
+              <tr><td style="padding:7px 12px;background:rgba(238,241,239,.6);">≥ 500 KW &lt; 1000 KW</td><td style="padding:7px 12px;background:rgba(238,241,239,.6);">₹ 10,000/-</td></tr>
+              <tr><td style="padding:7px 12px;">1 MW and above</td><td style="padding:7px 12px;">₹ 50,000/- per MW (max ₹ 5 Lakh)</td></tr>
+            </tbody>
+          </table>
+
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:12px;font-weight:500;color:#1c2530;">Payment Method <span style="color:#dc3545;">*</span></label>
+            <div style="display:flex;gap:20px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pay" checked="{{ payOnline }}" onChange="{{ onPayOnline }}" style="accent-color:#1e9b5f;"> Online Payment (GRAS / e-Treasury)</label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;"><input type="radio" name="pay" checked="{{ payOffline }}" onChange="{{ onPayOffline }}" style="accent-color:#1e9b5f;"> Offline (DD / Cheque)</label>
+            </div>
+          </div>
+
+          <sc-if value="{{ payOnline }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:16px;">
+              <button onClick="{{ doPayOnline }}" style="background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 24px;font-size:14px;font-weight:700;">Pay {{ feeTotal }} Now</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ payOffline }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:16px;">
+              <div style="display:flex;flex-direction:column;gap:5px;max-width:340px;">
+                <label style="font-size:12px;font-weight:500;color:#1c2530;">DD / Cheque Number <span style="color:#dc3545;">*</span></label>
+                <input value="{{ offlineRef }}" onChange="{{ onOfflineRef }}" placeholder="e.g. 004521" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+                <div style="font-size:11px;color:#8e8e8e;font-style:italic;">Pay by Demand Draft or cheque at the bank, then enter its number here for Finance verification.</div>
+              </div>
+              <button onClick="{{ doPayOffline }}" style="margin-top:12px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:10px 20px;font-size:13px;font-weight:700;">Submit DD / Cheque Number</button>
+              <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:8px 0 0;">Finance will verify your payment. The Acknowledgement Number is generated only after successful verification.</p>
+            </div>
+          </sc-if>
+
+          <div style="margin-top:20px;border:2px dashed rgba(245,158,11,.5);background:rgba(245,158,11,.05);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;">
+            <div><div style="font-size:12px;font-weight:700;">Demo shortcut</div><div style="font-size:11px;color:#8e9e97;margin-top:2px;">Skip validations &amp; payment gateway — submit the application instantly for client demonstration.</div></div>
+            <button onClick="{{ doDemo }}" style="background:rgba(245,158,11,.12);color:#92400e;border:2px solid #f59e0b;border-radius:9px;padding:8px 16px;font-size:12px;font-weight:700;">Mark as Paid (Demo) →</button>
+          </div>
+        </sc-if>
+
+        <!-- NAV -->
+        <div data-nav="1" style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e3e9e6;padding-top:16px;margin-top:28px;gap:10px;flex-wrap:wrap;">
+          <button onClick="{{ onPrev }}" disabled="{{ prevDisabled }}" style="border-radius:9px;font-size:13px;font-weight:600;padding:9px 18px;background:#fff;color:{{ prevColor }};border:1px solid #cdd6d0;opacity:{{ prevOpacity }};">← Previous</button>
+          <div style="display:flex;gap:8px;">
+            <button onClick="{{ onSaveDraft }}" style="border-radius:9px;font-size:13px;font-weight:600;padding:9px 18px;background:#fff;color:#1c2530;border:1px solid #cdd6d0;">Save as Draft</button>
+            <button onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="border-radius:9px;font-size:13px;font-weight:700;padding:9px 18px;background:#1e9b5f;color:#fff;border:none;opacity:{{ nextOpacity }};">Next →</button>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;stepperFontSize&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:14,&quot;min&quot;:11,&quot;max&quot;:18,&quot;tsType&quot;:&quot;number&quot;},&quot;stepperSubFontSize&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;min&quot;:9,&quot;max&quot;:15,&quot;tsType&quot;:&quot;number&quot;},&quot;showSidebarNote&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = {
+      screen:'form', activeStep:'step0', completed:{},
+      capValue:'', unit:'kW', purpose:'', purposeOther:'',
+      commStreet:'12, Gandhi Marg, Block B', commVillage:'Phulwari', commCity:'Patna', commDistrict:'Patna', commBlock:'Patna Sadar', commPanchayat:'Patna', commPin:'800006',
+      sameAddr:false,
+      projStreet:'', projVillage:'', projCity:'', projDistrict:'', projBlock:'', projPanchayat:'', projPin:'', projLat:'', projLng:'',
+      altMobile:'', altEmail:'', pan:'', aadhaar:'', gst:'',
+      plantKind:'', subtype:'', storage:'0', discom:'', station:'', stationDist:'', evac:'LILO', evacOther:'', cod:'', cost:'',
+      epcName:'', epcAddr:'', epcContact:'', epcMobile:'', epcEmail:'',
+      ownership:'', ownershipFile:null, landCat:'Private', landArea:'',
+      uploadedDocs:{}, customDocs:[], cdCounter:0,
+      declared:false, previewConfirmed:false,
+      payMethod:'online', offlineRef:'',
+      successMethod:'', ack:'', txn:'',
+      autosaveText:'Auto-saved · 10:42 AM'
+    };
+    this._t = null;
+  }
+
+  // ---- constants ----
+  steps(){ return [
+    {id:'step0', label:'Project Capacity & Purpose'},
+    {id:'A', label:'Section A — General Profile'},
+    {id:'B', label:'Section B — Technical & Financial'},
+    {id:'C', label:'Section C — Land Availability'},
+    {id:'D', label:'Section D — Documents Upload'},
+    {id:'E', label:'Section E — Declaration', sub:'Locked until D is complete'},
+    {id:'Preview', label:'Preview Application', sub:'Locked until E is complete'},
+    {id:'F', label:'Section F — Registration Fees', sub:'Locked until Preview is confirmed'}
+  ]; }
+
+  // ---- helpers ----
+  upd(obj){ this.setState(obj); this.autosave(); }
+  field(k, transform){ return (e)=>{ let v = e.target.type==='checkbox' ? e.target.checked : e.target.value; if(transform) v = transform(v); this.upd({[k]:v}); }; }
+  autosave(){
+    clearTimeout(this._t);
+    this.setState({ autosaveText:'Auto-saving…' });
+    this._t = setTimeout(()=> this.setState({ autosaveText:'Auto-saved · ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }), 900);
+  }
+  capacityKW(){ const v = parseFloat(this.state.capValue)||0; return this.state.unit==='MW' ? v*1000 : v; }
+  calcFee(kw){ if(kw<10)return 1000; if(kw<100)return 2000; if(kw<500)return 5000; if(kw<1000)return 10000; return Math.min(Math.round(kw/1000*50000), 500000); }
+  fmt(n){ return '₹ ' + n.toLocaleString('en-IN'); }
+
+  goToStep(id){ this.setState({ activeStep:id }); }
+  navStep(dir){ const s=this.steps(); const i=s.findIndex(x=>x.id===this.state.activeStep); const n=s[i+dir]; if(n) this.goToStep(n.id); }
+  selectPurpose(v){ this.upd({ purpose:v }); }
+  onSameAddr(e){
+    if(!e.target.checked){ this.setState({ sameAddr:false }); return; }
+    const s=this.state;
+    this.upd({ sameAddr:true, projStreet:s.commStreet, projVillage:s.commVillage, projCity:s.commCity, projDistrict:s.commDistrict, projBlock:s.commBlock, projPanchayat:s.commPanchayat, projPin:s.commPin });
+  }
+  onDocFile(key, limit, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>limit*1024*1024){ alert('File exceeds '+limit+' MB limit'); e.target.value=''; return; } this.setState(st=>({ uploadedDocs:{...st.uploadedDocs, [key]:f.name} })); this.autosave(); }
+  clearDoc(key){ this.setState(st=>{ const d={...st.uploadedDocs}; delete d[key]; return { uploadedDocs:d }; }); }
+  onOwnerFile(e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>5*1024*1024){ alert('File exceeds 5 MB limit'); e.target.value=''; return; } this.upd({ ownershipFile:f.name }); }
+  addCustomDoc(){ this.setState(st=>{ const n=st.cdCounter+1; return { cdCounter:n, customDocs:[...st.customDocs, {id:'cd-'+n, label:'', file:null}] }; }); }
+  updateCdLabel(id, v){ this.setState(st=>({ customDocs: st.customDocs.map(c=> c.id===id ? {...c, label:v} : c) })); }
+  onCdFile(id, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>5*1024*1024){ alert('File exceeds 5 MB limit'); return; } this.setState(st=>({ customDocs: st.customDocs.map(c=> c.id===id ? {...c, file:f.name} : c) })); }
+  removeCd(id){ this.setState(st=>({ customDocs: st.customDocs.filter(c=>c.id!==id) })); }
+  goToPreview(){ if(!this.state.declared) return; this.setState(st=>({ completed:{...st.completed, E:true}, activeStep:'Preview' })); }
+  onPreviewConfirm(e){ if(!e.target.checked) return; this.setState(st=>({ previewConfirmed:true, completed:{...st.completed, Preview:true} })); setTimeout(()=> this.goToStep('F'), 500); }
+  genAck(){ const seq=String(Math.floor(Math.random()*9000)+1000); return 'Ack/2026/'+seq; }
+  showSuccess(method, ack, txn){ this.setState({ screen:'success', successMethod:method, ack:ack||'', txn:txn||'' }); }
+  doPayOnline(){ this.showSuccess('online', this.genAck(), 'TXN'+Date.now().toString().slice(-10)); }
+  doPayOffline(){ if(!this.state.offlineRef.trim()){ alert('Enter the DD / cheque number'); return; } this.showSuccess('offline', null, null); }
+  doDemo(){ this.showSuccess('online', this.genAck(), 'DEMO-'+Date.now().toString().slice(-8)); }
+  resetForm(){ this.setState({ screen:'form', activeStep:'step0' }); }
+  saveDraft(){ this.setState({ autosaveText:'Draft saved · ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); }
+
+  renderVals(){
+    const S = this.state;
+    const DISTRICTS = ['Patna','Gaya','Bhagalpur','Muzaffarpur','Darbhanga','Purnia','Begusarai','Nalanda','Vaishali','Saran','Rohtas','Samastipur'];
+    const VILLAGES  = ['Bhikhampur','Manjhaul','Naubatpur','Bihta','Phulwari','Danapur','Maner','Punpun','Masaurhi','Paliganj','Barh','Mokama','Bakhtiyarpur','Khusrupur','Fatuha'];
+    const BLOCKS    = ['Patna Sadar','Bihta','Mushahari','Gaya Town','Manpur','Sasaram'];
+    const PANCH     = ['Patna','Bihta','Mushahari','Gaya','Manpur'];
+    const PURPOSES  = ['Captive / Individual / Domestic Use','Open Access','Third Party Sale','Power Purchase Agreement with DISCOM','Other as mentioned in RE Policy'];
+    const opts = arr => [{v:'',t:'Select'}].concat(arr.map(x=>({v:x,t:x})));
+    const PSS_MAP = {
+      NBPDCL:['Muzaffarpur PSS-I','Darbhanga PSS-II','Begusarai GSS','Purnia PSS-III','Saharsa PSS'],
+      SBPDCL:['Patna Boring Road PSS','Patliputra PSS','Gaya GSS','Bhagalpur PSS','Rohtas PSS-II']
+    };
+    const BASE_DOCS = [
+      {key:'DPR',    label:'Detailed Project Report (DPR)', limit:25, req:true},
+      {key:'PAN',    label:'PAN Card', limit:5, req:true},
+      {key:'FIRM',   label:"Firm's Registration Certificate / Identity Document", limit:5, req:true},
+      {key:'STARTUP',label:'Startup India / Udyam / NSIC / Industry Dept. Certificate', limit:5, req:true},
+      {key:'BALANCE',label:'Audited Balance Sheet — at least one year (if applicable)', limit:5, req:false},
+      {key:'ITR',    label:'Income Tax Return Certificate — at least one year', limit:5, req:true}
+    ];
+
+    // stepper
+    const arr = this.steps();
+    const order = ['step0','A','B','C','D','E','Preview','F'];
+    const steps = arr.map((s,i)=>{
+      const done = !!S.completed[s.id];
+      const active = s.id===S.activeStep;
+      return {
+        ...s, label:s.label, sub:s.sub||'', showSub:!!s.sub,
+        bubbleText: done ? '✓' : String(i+1),
+        bubbleBg: active ? '#c2740f' : (done ? '#0f2319' : '#fff'),
+        bubbleBorder: active ? '#c2740f' : (done ? '#0f2319' : '#cdd6d0'),
+        bubbleColor: (active||done) ? '#fff' : '#6b7c72',
+        btnBg: active ? '#f1f4f2' : 'transparent',
+        labelColor: active ? '#1c2530' : (done ? '#1e9b5f' : '#6b7c72'),
+        labelWeight: active ? 700 : (done ? 600 : 500),
+        connectorBg: done ? '#0f2319' : '#cdd6d0',
+        hasConnector: i < arr.length-1,
+        onClick: ()=> this.goToStep(s.id)
+      };
+    });
+
+    // panel flags
+    const is = id => S.activeStep===id;
+
+    // step 0
+    const kw = this.capacityKW();
+    const isHigh = kw>=10000;
+    const purposes = PURPOSES.map(p=>({
+      label:p, selected:S.purpose===p,
+      border: S.purpose===p ? '#c2740f' : '#cdd6d0',
+      bg: S.purpose===p ? 'rgba(194,116,15,.06)' : '#fff',
+      onClick: ()=> this.selectPurpose(p)
+    }));
+
+    // section A field arrays
+    const tf = (k, label, required, placeholder, maxlength) => ({ k, label, required:!!required, placeholder:placeholder||'', maxlength:maxlength||100, isText:true, isSelect:false, value:S[k], onChange:this.field(k) });
+    const sf = (k, label, required, options) => ({ k, label, required:!!required, isSelect:true, isText:false, options, value:S[k], onChange:this.field(k) });
+    const fieldsComm = [
+      tf('commStreet','Street / House No.',true),
+      sf('commVillage','Village',true, opts(VILLAGES)),
+      tf('commCity','City',false,'Optional'),
+      sf('commDistrict','District',true, opts(DISTRICTS)),
+      sf('commBlock','Block',true, opts(BLOCKS)),
+      sf('commPanchayat','Panchayat',true, opts(PANCH)),
+      tf('commPin','Pin Code',true,'6-digit PIN',6)
+    ];
+    const fieldsProj = [
+      tf('projStreet','Street / House No.',true,'House / plot no., street'),
+      sf('projVillage','Village',true, opts(VILLAGES)),
+      tf('projCity','City',false,'Optional'),
+      sf('projDistrict','District',true, opts(DISTRICTS)),
+      sf('projBlock','Block',true, opts(BLOCKS)),
+      sf('projPanchayat','Panchayat',true, opts(PANCH)),
+      tf('projPin','Pin Code',true,'6-digit PIN',6),
+      tf('projLat','Latitude',true,'e.g. 25.6127'),
+      tf('projLng','Longitude',true,'e.g. 85.1376')
+    ];
+
+    // fee
+    const feeBase = this.calcFee(kw);
+    const feeGst = Math.round(feeBase*0.18);
+    const feeTotal = feeBase + feeGst;
+
+    // documents (dynamic: GST cert if GST entered, PPA if PPA purpose)
+    let docs = [...BASE_DOCS];
+    if(S.gst) docs.splice(4, 0, {key:'GST', label:'GST Certificate', limit:5, req:true});
+    if(S.purpose==='Power Purchase Agreement with DISCOM') docs.push({key:'PPA', label:'Power Purchase Agreement (PPA)', limit:5, req:false});
+    const docRows = docs.map(d=>{
+      const file = S.uploadedDocs[d.key];
+      return { ...d, file, uploaded:!!file, statusText: file ? ('✓ '+file) : 'Not uploaded', onUpload:(e)=>this.onDocFile(d.key, d.limit, e), onRemove:()=>this.clearDoc(d.key) };
+    });
+
+    // preview sections
+    const dash = v => (v===undefined || v===null || v==='') ? '—' : v;
+    const sec = (title, rows) => ({ title, rows: rows.map(r=>({ l:r[0], v:dash(r[1]), color:r[2]||'#1c2530' })) });
+    const plantStr = S.plantKind ? (S.plantKind + (S.subtype ? ' — '+S.subtype : '') + (S.plantKind==='Solar' ? ' ('+(S.storage==='1'?'With':'Without')+' Storage)' : '')) : '—';
+    const previewSections = [
+      sec('Step 0 — Capacity & Purpose', [
+        ['Plant Capacity', S.capValue ? (S.capValue+' '+S.unit) : '—'],
+        ['Purpose', S.purpose==='Other as mentioned in RE Policy' ? ('Other — '+S.purposeOther) : S.purpose]
+      ]),
+      sec('Section A — General Profile', [
+        ['Applicant','Rajesh Kumar Sharma'],
+        ['Type','Pvt. Ltd.'],
+        ['Communication Address', S.commStreet+', '+S.commVillage+', '+S.commDistrict+' — '+S.commPin],
+        ['Project Address', (S.projStreet||'—')+', '+(S.projVillage||'—')+', '+(S.projDistrict||'—')+' — '+(S.projPin||'—')],
+        ['Lat / Long', (S.projLat && S.projLng) ? (S.projLat+', '+S.projLng) : '—'],
+        ['Mobile / Email','+91 98765 43210 · rajesh.sharma@solarenergy.in'],
+        ['PAN', S.pan],
+        ['Aadhaar', S.aadhaar ? ('XXXX XXXX '+S.aadhaar.slice(-4)) : '—'],
+        ['GST', S.gst]
+      ]),
+      sec('Section B — Technical & Financial', [
+        ['Power Plant', plantStr],
+        ['DISCOM', S.discom],
+        [isHigh?'Nearest GSS':'Nearest PSS', S.station],
+        ['Distance', S.stationDist ? (S.stationDist+' km') : '—'],
+        ['Evacuation', S.evac==='Other' ? ('Other — '+S.evacOther) : S.evac],
+        ['Proposed COD', S.cod],
+        ['Project Cost', S.cost ? ('₹ '+Number(S.cost).toLocaleString('en-IN')) : '—'],
+        ['EPC Contractor', S.epcName ? (S.epcName+' · '+(S.epcContact||'—')+' · '+(S.epcMobile||'—')) : '—']
+      ]),
+      sec('Section C — Land Availability', [
+        ['Ownership Document', S.ownership],
+        ['Uploaded copy', S.ownershipFile],
+        ['Land Category', S.landCat],
+        ['Area', S.landArea ? (S.landArea+' acres') : '—']
+      ]),
+      sec('Section D — Documents',
+        docs.map(d=>[d.label+(d.req?' *':''), S.uploadedDocs[d.key] || 'Not uploaded'])
+          .concat(S.customDocs.map(c=>[c.label||c.id, c.file || 'Not uploaded']))
+      ),
+      sec('Section E — Declaration', [['Declaration confirmed', S.declared ? 'Yes ✓' : 'No']]),
+      sec('Registration Fee', [
+        ['Processing fee', this.fmt(feeBase)],
+        ['GST @ 18%', this.fmt(feeGst)],
+        ['Total payable', this.fmt(feeTotal), '#c2740f']
+      ])
+    ];
+
+    // nav
+    const idx = order.indexOf(S.activeStep);
+    const prevDisabled = idx===0;
+    const nextDisabled = idx===order.length-1;
+
+    // success
+    const succTitle = S.successMethod==='offline' ? 'Receipt Submitted' : 'Payment Successful';
+    const succNote = S.successMethod==='offline'
+      ? 'Your DD / Cheque has been submitted. Finance will verify your payment; the Acknowledgement Number is generated after successful verification.'
+      : 'Confirmation sent via SMS and Email. Apply for Clearances will unlock after BREDA approves your application.';
+
+    return {
+      isForm: S.screen==='form', isSuccess: S.screen==='success',
+      autosaveText: S.autosaveText,
+      steps,
+      stepperFontSizePx: (this.props.stepperFontSize ?? 14) + 'px',
+      stepperSubFontSizePx: (this.props.stepperSubFontSize ?? 12) + 'px',
+      showSidebarNote: this.props.showSidebarNote ?? true,
+      isStep0:is('step0'), isA:is('A'), isB:is('B'), isC:is('C'), isD:is('D'), isE:is('E'), isPreview:is('Preview'), isF:is('F'),
+
+      // step 0
+      capValue:S.capValue, onCapValue:this.field('capValue'),
+      unitKw:S.unit==='kW', unitMw:S.unit==='MW',
+      onUnitKw:()=>this.upd({unit:'kW'}), onUnitMw:()=>this.upd({unit:'MW'}),
+      showCapRule: kw>0,
+      capRuleText: 'Auto-rule: ' + kw + ' kW → ' + (isHigh?'Grid Sub-Station (GSS)':'Power Sub-Station (PSS)') + ' integration · Fee slab applies.',
+      purposes,
+      showPurposeOther: S.purpose==='Other as mentioned in RE Policy',
+      purposeOther:S.purposeOther, onPurposeOther:this.field('purposeOther'),
+
+      // section A
+      fieldsComm, fieldsProj,
+      sameAddr:S.sameAddr, onSameAddr:(e)=>this.onSameAddr(e),
+      altMobile:S.altMobile, onAltMobile:this.field('altMobile', v=>v.replace(/\D/g,'')),
+      altEmail:S.altEmail, onAltEmail:this.field('altEmail'),
+      pan:S.pan, onPan:this.field('pan', v=>v.toUpperCase()),
+      aadhaar:S.aadhaar, onAadhaar:this.field('aadhaar', v=>v.replace(/\D/g,'')),
+      gst:S.gst, onGst:this.field('gst', v=>v.toUpperCase()),
+
+      // section B
+      plantKind:S.plantKind, onPlantKind:(e)=>{ const v=e.target.value; this.upd({ plantKind:v, subtype:'', storage:'0' }); },
+      showSubtype: !!S.plantKind,
+      subtypeOptions: opts(S.plantKind==='Solar' ? ['Rooftop','Ground Mounted','Floating','Canal bank/top','Others'] : (S.plantKind==='Non-Solar' ? ['Bio','Wind','Waste to Energy','Geothermal','Hydro','Others'] : [])),
+      subtype:S.subtype, onSubtype:this.field('subtype'),
+      showStorage: S.plantKind==='Solar',
+      storageOff:S.storage==='0', storageOn:S.storage==='1',
+      onStorageOff:()=>this.upd({storage:'0'}), onStorageOn:()=>this.upd({storage:'1'}),
+      discom:S.discom, onDiscom:(e)=>{ this.upd({ discom:e.target.value, station:'' }); },
+      stationLabel: isHigh ? 'Nearest GSS' : 'Nearest PSS',
+      stationDisabled: !S.discom,
+      stationBg: S.discom ? '#fff' : '#eef1ef',
+      stationOptions: S.discom ? opts((PSS_MAP[S.discom]||[])) : [{v:'',t:'Select DISCOM first'}],
+      station:S.station, onStation:this.field('station'),
+      stationHint: 'Auto: ' + (isHigh ? '≥ 10 MW → GSS' : '< 10 MW → PSS'),
+      stationDist:S.stationDist, onDist:this.field('stationDist'),
+      showDistM: (parseFloat(S.stationDist)||0) > 0,
+      distMText: '= ' + ((parseFloat(S.stationDist)||0)*1000) + ' metres',
+      evacLILO:S.evac==='LILO', evacDirect:S.evac==='Direct', evacOtherSel:S.evac==='Other',
+      onEvacLILO:()=>this.upd({evac:'LILO'}), onEvacDirect:()=>this.upd({evac:'Direct'}), onEvacOther:()=>this.upd({evac:'Other'}),
+      evacOther:S.evacOther, onEvacOtherText:this.field('evacOther'),
+      cod:S.cod, onCod:this.field('cod'),
+      cost:S.cost, onCost:this.field('cost'),
+      epcName:S.epcName, onEpcName:this.field('epcName'),
+      epcAddr:S.epcAddr, onEpcAddr:this.field('epcAddr'),
+      epcContact:S.epcContact, onEpcContact:this.field('epcContact'),
+      epcMobile:S.epcMobile, onEpcMobile:this.field('epcMobile', v=>v.replace(/\D/g,'')),
+      epcEmail:S.epcEmail, onEpcEmail:this.field('epcEmail'),
+
+      // section C
+      ownership:S.ownership, onOwnership:this.field('ownership'),
+      showOwnUpload: !!S.ownership,
+      ownFileName: S.ownershipFile ? ('✓ ' + S.ownershipFile) : 'PDF / DOC / image',
+      ownFileColor: S.ownershipFile ? '#1e7a4d' : '#1c2530',
+      onOwnerFile:(e)=>this.onOwnerFile(e),
+      landPrivate:S.landCat==='Private', landGovt:S.landCat==='Government',
+      onLandPrivate:()=>this.upd({landCat:'Private'}), onLandGovt:()=>this.upd({landCat:'Government'}),
+      landArea:S.landArea, onLandArea:this.field('landArea'),
+
+      // section D
+      docRows: docRows.map(d=>({ ...d, statusColor: d.uploaded ? '#1e7a4d' : '#8e9e97', notUploaded: !d.uploaded })),
+      customRows: S.customDocs.map(c=>({ ...c, hasFile:!!c.file, noFile:!c.file, onLabel:(e)=>this.updateCdLabel(c.id, e.target.value), onFile:(e)=>this.onCdFile(c.id, e), onRemove:()=>this.removeCd(c.id) })),
+      onAddCustom:()=>this.addCustomDoc(),
+
+      // section E
+      declared:S.declared, onDeclared:this.field('declared'),
+      previewBtnDisabled: !S.declared, previewBtnOpacity: S.declared ? 1 : 0.45,
+      onGoPreview:()=>this.goToPreview(),
+
+      // preview
+      previewSections,
+      previewConfirmed:S.previewConfirmed, previewNotConfirmed:!S.previewConfirmed,
+      onPreviewConfirm:(e)=>this.onPreviewConfirm(e),
+      onPrint:()=>window.print(),
+
+      // section F
+      showFLock: !S.previewConfirmed,
+      capDisplay: S.capValue ? (S.capValue + ' ' + S.unit) : '— kW',
+      feeBase:this.fmt(feeBase), feeGst:this.fmt(feeGst), feeTotal:this.fmt(feeTotal),
+      payOnline:S.payMethod==='online', payOffline:S.payMethod==='offline',
+      onPayOnline:()=>this.upd({payMethod:'online'}), onPayOffline:()=>this.upd({payMethod:'offline'}),
+      offlineRef:S.offlineRef, onOfflineRef:this.field('offlineRef'),
+      doPayOnline:()=>this.doPayOnline(), doPayOffline:()=>this.doPayOffline(), doDemo:()=>this.doDemo(),
+
+      // nav
+      prevDisabled, nextDisabled,
+      prevColor: prevDisabled ? '#9aa9a1' : '#1c2530',
+      prevOpacity: prevDisabled ? 0.5 : 1,
+      nextOpacity: nextDisabled ? 0.5 : 1,
+      onPrev:()=>this.navStep(-1), onNext:()=>this.navStep(1),
+      onSaveDraft:()=>this.saveDraft(),
+
+      // success
+      succTitle, showAck: S.successMethod==='online' && !!S.ack, ack:S.ack,
+      txnText: S.txn ? ('Transaction ID: ' + S.txn) : '',
+      succNote, onBackDash:()=>this.resetForm()
+    };
+  }
+}
+</script>
+</body>
+</html>

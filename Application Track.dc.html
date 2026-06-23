@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef1ef;}
+  button{font-family:inherit;cursor:pointer;}
+  a{text-decoration:none;}
+</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+        Dashboard
+      </a>
+      <a href="New Project Application.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        New Project Application
+      </a>
+      <a href="My Applications.dc.html" style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg>
+        My Applications
+      </a>
+      <a href="Payments.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path></svg>
+        Payments
+      </a>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"></path></svg>
+        Help &amp; Grievance
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        Profile
+      </div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Track Application</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:12px;color:#6b7c72;font-weight:500;">DEMO PROJECT</span>
+        <div style="display:flex;align-items:center;gap:1px;background:#f0f4f2;border-radius:8px;padding:3px;">
+          <button onclick="{{setPatna}}" style="background:{{patnaTabBg}};color:{{patnaTabColor}};border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;">Patna · Query</button>
+          <button onclick="{{setGaya}}" style="background:{{gayaTabBg}};color:{{gayaTabColor}};border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;">Gaya · Clearances</button>
+          <button onclick="{{setGayaDone}}" style="background:{{gayaDoneTabBg}};color:{{gayaDoneTabColor}};border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;">Gaya · All Clear</button>
+          <button onclick="{{setGayaRegistered}}" style="background:{{gayaRegisteredTabBg}};color:{{gayaRegisteredTabColor}};border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;">Gaya · Registered</button>
+          <button onclick="{{setBhagalpur}}" style="background:{{bhagalpurTabBg}};color:{{bhagalpurTabColor}};border:none;border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;">Bhagalpur · Payment</button>
+        </div>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e9b5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;">RK</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:18px 28px 16px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Home / My Applications / Track</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div>
+          <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0 0 4px;color:#0f2319;line-height:1.1;">{{projectTitle}}</h1>
+          <div style="font-size:13px;color:#6b7c72;">{{ackNo}} · {{projectMeta}}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex:none;padding-top:2px;">
+          <a href="My Applications.dc.html" style="font-size:13px;color:#5b6b62;display:flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"></path></svg>
+            Back to applications
+          </a>
+          <button style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #dce5e0;border-radius:8px;padding:9px 14px;font-size:13px;color:#46524b;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download receipt
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amber banner — Patna only -->
+    <sc-if value="{{isPatna}}" hint-placeholder-val="{{true}}">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 28px;background:#fef3e3;border-bottom:1px solid #f0d6ac;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2.2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#92400e;line-height:1.3;">Action needed — respond to 2 BREDA queries</div>
+            <div style="font-size:12.5px;color:#b45309;margin-top:1px;">Your 15-day review clock is paused until you reply.</div>
+          </div>
+        </div>
+        <a href="BREDA Review Page.dc.html" style="display:flex;align-items:center;gap:8px;background:#e05c1a;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 2px rgba(224,92,26,.3);">
+          Respond to Queries
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </sc-if>
+
+    <!-- Info banner — Bhagalpur only -->
+    <sc-if value="{{isBhagalpur}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 28px;background:#eef5ff;border-bottom:1px solid #c9dff2;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d6fb8" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+        <div style="font-size:13.5px;color:#1a5a96;">Payment submitted via offline demand draft — awaiting Finance Officer verification. No action required. Typically takes 2–3 working days.</div>
+      </div>
+    </sc-if>
+
+    <!-- Success banner — Gaya all-clearances-done only -->
+    <sc-if value="{{isGayaDone}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 28px;background:#e9f6ef;border-bottom:1px solid #b8e0cc;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#1e9b5f;display:flex;align-items:center;justify-content:center;flex:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#145c3a;line-height:1.3;">All 6 departmental clearances received</div>
+            <div style="font-size:12.5px;color:#3a8a5c;margin-top:1px;">Stage 4 complete — your project is now ready for commissioning (COD).</div>
+          </div>
+        </div>
+        <a href="Commissioning.dc.html" style="display:flex;align-items:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 2px rgba(30,155,95,.25);">
+          Apply for Commissioning
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </sc-if>
+
+    <!-- Registered banner — Gaya registered only -->
+    <sc-if value="{{isGayaRegistered}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 28px;background:#e9f6ef;border-bottom:1px solid #b8e0cc;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:30px;height:30px;border-radius:50%;background:#1e9b5f;display:flex;align-items:center;justify-content:center;flex:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#145c3a;line-height:1.3;">Project registered with BREDA</div>
+            <div style="font-size:12.5px;color:#3a8a5c;margin-top:1px;">Registration No. <strong style="font-variant-numeric:tabular-nums;">{{regNo}}</strong> · issued 5 Jul 2026</div>
+          </div>
+        </div>
+        <a href="Commissioning.dc.html#registered" style="display:flex;align-items:center;gap:8px;background:#fff;color:#1e7a4d;border:1px solid #b8e0cc;border-radius:8px;padding:10px 18px;font-size:13.5px;font-weight:600;white-space:nowrap;">
+          View certificate
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    </sc-if>
+
+    <main style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
+
+      <!-- ===== 6-STAGE STEPPER ===== -->
+      <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;padding:22px 28px 18px;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+        <div style="position:relative;">
+
+          <!-- Base connector line -->
+          <div style="position:absolute;top:22px;left:8.33%;width:83.34%;height:2px;background:#e3e9e6;z-index:0;"></div>
+
+          <!-- Progress line — Patna (steps 1+2 done, step 3 active → green to node 3 center) -->
+          <sc-if value="{{isPatna}}" hint-placeholder-val="{{true}}">
+            <div style="position:absolute;top:22px;left:8.33%;width:33.34%;height:2px;background:#1e9b5f;z-index:1;"></div>
+          </sc-if>
+
+          <!-- Progress line — Gaya (steps 1+2+3 done, step 4 active → green to node 4 center) -->
+          <sc-if value="{{isGaya}}" hint-placeholder-val="{{false}}">
+            <div style="position:absolute;top:22px;left:8.33%;width:50%;height:2px;background:#1e9b5f;z-index:1;"></div>
+          </sc-if>
+
+          <!-- Progress line — Gaya done (steps 1-4 done, step 5 active → green to node 5 center) -->
+          <sc-if value="{{isGayaDone}}" hint-placeholder-val="{{false}}">
+            <div style="position:absolute;top:22px;left:8.33%;width:66.67%;height:2px;background:#1e9b5f;z-index:1;"></div>
+          </sc-if>
+
+          <!-- Progress line — Gaya registered (all 6 done → full green line) -->
+          <sc-if value="{{isGayaRegistered}}" hint-placeholder-val="{{false}}">
+            <div style="position:absolute;top:22px;left:8.33%;width:83.34%;height:2px;background:#1e9b5f;z-index:1;"></div>
+          </sc-if>
+
+          <!-- Progress line — Bhagalpur (step 1 done, step 2 active → green to node 2 center) -->
+          <sc-if value="{{isBhagalpur}}" hint-placeholder-val="{{false}}">
+            <div style="position:absolute;top:22px;left:8.33%;width:16.67%;height:2px;background:#1e9b5f;z-index:1;"></div>
+          </sc-if>
+
+          <!-- 6 nodes -->
+          <div style="display:grid;grid-template-columns:repeat(6,1fr);position:relative;z-index:2;">
+            <sc-for list="{{steps}}" as="s" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:9px;">
+
+                <!-- Done node -->
+                <sc-if value="{{s.isDone}}" hint-placeholder-val="{{true}}">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#0f2319;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(15,35,25,.09);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="8.5" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"></circle>
+                      <path d="M8 12.5l2.5 2.5 5.5-5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </div>
+                </sc-if>
+
+                <!-- Active amber node (query / action needed) -->
+                <sc-if value="{{s.isActiveAmber}}" hint-placeholder-val="{{false}}">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#fffbf5;border:2px solid #c2740f;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(194,116,15,.13);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 9v4M12 17h.01" stroke="#c2740f" stroke-width="2.5" stroke-linecap="round"></path>
+                    </svg>
+                  </div>
+                </sc-if>
+
+                <!-- Active blue node (in progress) -->
+                <sc-if value="{{s.isActiveBlue}}" hint-placeholder-val="{{false}}">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#eef5ff;border:2px solid #1d6fb8;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px rgba(29,111,184,.11);">
+                    <div style="width:14px;height:14px;border-radius:50%;background:#1d6fb8;"></div>
+                  </div>
+                </sc-if>
+
+                <!-- Pending node -->
+                <sc-if value="{{s.isPending}}" hint-placeholder-val="{{false}}">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#f3f6f4;border:2px solid #dce5e0;display:flex;align-items:center;justify-content:center;">
+                    <div style="width:12px;height:12px;border-radius:50%;background:#dce5e0;"></div>
+                  </div>
+                </sc-if>
+
+                <div style="text-align:center;max-width:108px;">
+                  <div style="font-size:12.5px;font-weight:600;line-height:1.3;color:{{s.labelColor}};">{{s.label}}</div>
+                  <div style="font-size:11px;margin-top:3px;color:{{s.subColor}};">{{s.sub}}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BODY ===== -->
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start;">
+
+        <!-- LEFT COLUMN -->
+        <div style="display:flex;flex-direction:column;gap:16px;">
+
+          <!-- ——— PATNA: BREDA query stage ——— -->
+          <sc-if value="{{isPatna}}" hint-placeholder-val="{{true}}">
+
+            <!-- Review clock + queries card -->
+            <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fffaf5;border-bottom:1px solid #f0d6ac;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#c2740f;box-shadow:0 0 0 3px #fde8c5;"></div>
+                  <span style="font-size:15px;font-weight:700;color:#0f2319;">Stage 3 — BREDA Technical Review</span>
+                  <span style="background:#fef3e3;border:1px solid #f0d6ac;color:#92400e;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;">Query Raised</span>
+                </div>
+                <div style="font-size:12.5px;color:#8e9e97;">Er. S. Mishra · BREDA</div>
+              </div>
+              <div style="padding:16px 20px;border-bottom:1px solid #f3f6f4;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                  <span style="font-size:13px;font-weight:600;color:#1c2530;">15-day review clock</span>
+                  <span style="display:flex;align-items:center;gap:6px;font-size:12.5px;color:#b45309;font-weight:500;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+                    Paused — day 8 of 15
+                  </span>
+                </div>
+                <div style="position:relative;height:8px;background:#eef1ef;border-radius:999px;overflow:hidden;">
+                  <div style="position:absolute;left:0;top:0;height:100%;width:53%;background:#c2740f;border-radius:999px;"></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:#8e9e97;">
+                  <span>Started 2026-06-12</span>
+                  <span>7 working days left after response</span>
+                </div>
+              </div>
+              <div style="padding:16px 20px;">
+                <div style="font-size:13px;font-weight:600;color:#1c2530;margin-bottom:12px;">Queries raised by BREDA</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                  <sc-for list="{{queries}}" as="q" hint-placeholder-count="2">
+                    <div style="border:1px solid #f0d6ac;border-radius:10px;overflow:hidden;">
+                      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 14px;background:#fffaf5;">
+                        <div style="display:flex;align-items:flex-start;gap:10px;flex:1;min-width:0;">
+                          <div style="width:7px;height:7px;border-radius:50%;background:#c2740f;flex:none;margin-top:5px;"></div>
+                          <div>
+                            <div style="font-size:13px;font-weight:600;color:#1c2530;">{{q.field}}</div>
+                            <div style="font-size:12.5px;color:#6b7c72;margin-top:2px;line-height:1.45;">{{q.text}}</div>
+                          </div>
+                        </div>
+                        <span style="flex:none;font-size:11.5px;color:#8e9e97;white-space:nowrap;">{{q.age}}</span>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <a href="BREDA Review Page.dc.html" style="width:100%;margin-top:14px;background:#e05c1a;color:#fff;border:none;border-radius:9px;padding:12px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                  Open application &amp; respond to all queries
+                </a>
+              </div>
+            </section>
+
+            <!-- Upcoming clearances (locked preview) -->
+            <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+              <div style="padding:14px 20px;border-bottom:1px solid #edf1ee;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#c9cdc7;"></div>
+                  <span style="font-size:14px;font-weight:700;color:#6b7c72;">Stage 4 — Departmental Clearances</span>
+                  <span style="background:#eef1ef;border:1px solid #dde5e0;color:#6b7c72;font-size:11.5px;border-radius:999px;padding:2px 9px;">Upcoming</span>
+                </div>
+                <span style="font-size:12px;color:#8e9e97;">Unlocks after BREDA approval</span>
+              </div>
+              <sc-for list="{{upcomingClearances}}" as="c" hint-placeholder-count="6">
+                <div style="display:flex;align-items:center;gap:14px;padding:11px 20px;border-bottom:1px solid #f6f8f7;">
+                  <div style="width:7px;height:7px;border-radius:50%;background:#dce5e0;flex:none;"></div>
+                  <div style="flex:1;min-width:0;">
+                    <span style="font-size:13px;color:#8e9e97;font-weight:500;">{{c.name}}</span>
+                    <span style="font-size:12px;color:#a0aaa4;margin-left:8px;">{{c.dept}}</span>
+                  </div>
+                  <span style="font-size:11.5px;color:#a0aaa4;white-space:nowrap;">{{c.sla}}</span>
+                </div>
+              </sc-for>
+            </section>
+
+          </sc-if>
+          <!-- END PATNA -->
+
+          <!-- ——— GAYA: BREDA done + live clearances tracker (serves both in-progress & all-done) ——— -->
+          <sc-if value="{{isGayaAny}}" hint-placeholder-val="{{false}}">
+
+            <!-- BREDA history mini-card -->
+            <div style="display:flex;align-items:center;gap:12px;background:#f0f8f4;border:1px solid #b8e0cc;border-radius:10px;padding:12px 16px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:#1e9b5f;display:flex;align-items:center;justify-content:center;flex:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <span style="font-size:13px;font-weight:600;color:#145c3a;">BREDA Review completed — 28 May 2026</span>
+                <span style="font-size:12px;color:#3a8a5c;margin-left:8px;">2 queries raised and resolved in round 1</span>
+              </div>
+              <a href="BREDA Review Page.dc.html" style="font-size:12.5px;font-weight:500;color:#1e9b5f;white-space:nowrap;flex:none;">View review →</a>
+            </div>
+
+            <!-- Clearances tracker -->
+            <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+              <!-- Section header -->
+              <div style="padding:16px 20px;background:#f3f6f4;border-bottom:1px solid #e3e9e6;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:{{clearanceDotBg}};box-shadow:0 0 0 3px {{clearanceDotShadow}};"></div>
+                  <span style="font-size:15px;font-weight:700;color:#0f2319;">Stage 4 — Departmental Clearances</span>
+                  <span style="background:{{clearanceBadgeBg}};border:1px solid {{clearanceBadgeBd}};color:{{clearanceBadgeFg}};font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;">{{clearanceBadge}}</span>
+                </div>
+                <div style="font-size:12.5px;color:#6b7c72;display:flex;align-items:center;gap:8px;">
+                  <span style="color:#1e9b5f;font-weight:600;">{{clearanceObtained}}</span> of 6 obtained
+                </div>
+              </div>
+              <!-- Overall progress bar -->
+              <div style="padding:10px 20px;background:#f8faf9;border-bottom:1px solid #edf1ee;display:flex;align-items:center;gap:12px;">
+                <div style="flex:1;height:5px;background:#e3e9e6;border-radius:999px;overflow:hidden;">
+                  <div style="height:100%;width:{{clearanceBarPct}};background:#1e9b5f;border-radius:999px;"></div>
+                </div>
+                <span style="font-size:11.5px;color:#6b7c72;white-space:nowrap;flex:none;">{{clearanceBarCaption}}</span>
+              </div>
+
+              <!-- Per-dept rows -->
+              <sc-for list="{{clearanceDepts}}" as="c" hint-placeholder-count="6">
+                <div style="position:relative;display:flex;align-items:flex-start;gap:14px;padding:14px 20px 14px 23px;border-bottom:1px solid #f0f4f2;">
+
+                  <!-- Left border accent -->
+                  <sc-if value="{{c.isDone}}" hint-placeholder-val="{{false}}">
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#1e9b5f;"></div>
+                  </sc-if>
+                  <sc-if value="{{c.isQuery}}" hint-placeholder-val="{{false}}">
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#c2740f;"></div>
+                  </sc-if>
+                  <sc-if value="{{c.isReview}}" hint-placeholder-val="{{false}}">
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#1d6fb8;"></div>
+                  </sc-if>
+                  <sc-if value="{{c.isPending}}" hint-placeholder-val="{{false}}">
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#dce5e0;"></div>
+                  </sc-if>
+
+                  <!-- Status icon -->
+                  <div style="flex:none;margin-top:1px;">
+                    <sc-if value="{{c.isDone}}" hint-placeholder-val="{{false}}">
+                      <div style="width:28px;height:28px;border-radius:50%;background:#e5f6ed;display:flex;align-items:center;justify-content:center;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1e9b5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isQuery}}" hint-placeholder-val="{{false}}">
+                      <div style="width:28px;height:28px;border-radius:50%;background:#fef3e3;display:flex;align-items:center;justify-content:center;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 8v4M12 16h.01" stroke="#c2740f" stroke-width="2.5" stroke-linecap="round"></path></svg>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isReview}}" hint-placeholder-val="{{false}}">
+                      <div style="width:28px;height:28px;border-radius:50%;background:#e6f0f9;display:flex;align-items:center;justify-content:center;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#1d6fb8" stroke-width="2"></circle><path d="M12 7v5l3 3" stroke="#1d6fb8" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isPending}}" hint-placeholder-val="{{false}}">
+                      <div style="width:28px;height:28px;border-radius:50%;background:#eef1ef;display:flex;align-items:center;justify-content:center;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#c9cdc7" stroke-width="2"></circle></svg>
+                      </div>
+                    </sc-if>
+                  </div>
+
+                  <!-- Main content -->
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;">
+                      <div>
+                        <div style="font-size:13.5px;font-weight:600;color:#0f2319;line-height:1.2;">{{c.name}}</div>
+                        <div style="font-size:12px;color:#6b7c72;margin-top:2px;">{{c.dept}}</div>
+                      </div>
+                      <sc-if value="{{c.isDone}}" hint-placeholder-val="{{false}}">
+                        <span style="flex:none;background:#e5f6ed;border:1px solid #b8e0cc;color:#145c3a;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap;">Approved</span>
+                      </sc-if>
+                      <sc-if value="{{c.isQuery}}" hint-placeholder-val="{{false}}">
+                        <span style="flex:none;background:#fef3e3;border:1px solid #f0d6ac;color:#92400e;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap;">Query Raised</span>
+                      </sc-if>
+                      <sc-if value="{{c.isReview}}" hint-placeholder-val="{{false}}">
+                        <span style="flex:none;background:#e6f0f9;border:1px solid #c9dff2;color:#1a5a96;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap;">Under Review</span>
+                      </sc-if>
+                      <sc-if value="{{c.isPending}}" hint-placeholder-val="{{false}}">
+                        <span style="flex:none;background:#eef1ef;border:1px solid #dde5e0;color:#6b7c72;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap;">Not Started</span>
+                      </sc-if>
+                    </div>
+
+                    <!-- SLA row -->
+                    <sc-if value="{{c.isDone}}" hint-placeholder-val="{{false}}">
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="flex:1;height:4px;background:#e3e9e6;border-radius:999px;overflow:hidden;">
+                          <div style="height:100%;width:{{c.slaPercent}}%;background:#1e9b5f;border-radius:999px;"></div>
+                        </div>
+                        <span style="font-size:11.5px;color:#6b7c72;white-space:nowrap;flex:none;">Approved {{c.approvedOn}} · {{c.daysUsed}}/{{c.sla}} days</span>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isQuery}}" hint-placeholder-val="{{false}}">
+                      <div>
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                          <div style="flex:1;height:4px;background:#fde8c5;border-radius:999px;overflow:hidden;">
+                            <div style="height:100%;width:{{c.slaPercent}}%;background:#c2740f;border-radius:999px;"></div>
+                          </div>
+                          <span style="font-size:11.5px;color:#b45309;white-space:nowrap;flex:none;">Day {{c.daysUsed}} of {{c.sla}} · clock paused</span>
+                        </div>
+                        <div style="background:#fffaf5;border:1px solid #f0d6ac;border-radius:8px;padding:10px 13px;">
+                          <div style="font-size:12.5px;font-weight:600;color:#92400e;margin-bottom:4px;">Query from Gaya Municipal Corporation</div>
+                          <div style="font-size:12.5px;color:#6b7c72;line-height:1.5;">Ownership document for land parcel No. 14/A is missing. Please upload registered sale deed or lease agreement.</div>
+                          <div style="margin-top:9px;">
+                            <a href="BREDA Review Page.dc.html" style="font-size:13px;font-weight:600;color:#e05c1a;">Respond to query →</a>
+                          </div>
+                        </div>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isReview}}" hint-placeholder-val="{{false}}">
+                      <div style="display:flex;align-items:center;gap:10px;">
+                        <div style="flex:1;height:4px;background:#e6f0f9;border-radius:999px;overflow:hidden;">
+                          <div style="height:100%;width:{{c.slaPercent}}%;background:#1d6fb8;border-radius:999px;"></div>
+                        </div>
+                        <span style="font-size:11.5px;color:#1d6fb8;white-space:nowrap;flex:none;">Day {{c.daysUsed}} of {{c.sla}} SLA</span>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{c.isPending}}" hint-placeholder-val="{{false}}">
+                      <span style="font-size:12px;color:#a0aaa4;">SLA: {{c.sla}} days · Will begin after Land Revenue clearance</span>
+                    </sc-if>
+
+                  </div>
+                </div>
+              </sc-for>
+            </section>
+
+            <!-- Next step card — all clearances done -->
+            <sc-if value="{{isGayaDone}}" hint-placeholder-val="{{false}}">
+              <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+                <div style="padding:14px 20px;border-bottom:1px solid #edf1ee;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#1d6fb8;box-shadow:0 0 0 3px #cfe0f3;"></div>
+                  <span style="font-size:15px;font-weight:700;color:#0f2319;">Stage 5 — Commissioning (COD)</span>
+                  <span style="background:#e6f0f9;border:1px solid #c9dff2;color:#1a5a96;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;">Ready to start</span>
+                </div>
+                <div style="padding:18px 20px;display:flex;align-items:center;gap:16px;">
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:13.5px;font-weight:600;color:#1c2530;margin-bottom:4px;">Submit your Commissioning / Date-of-Commissioning request</div>
+                    <div style="font-size:12.5px;color:#6b7c72;line-height:1.5;">All departmental clearances are in place. Upload the commissioning certificate and synchronisation report to begin the final COD verification by BREDA.</div>
+                  </div>
+                  <a href="Commissioning.dc.html" style="flex:none;display:flex;align-items:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:13.5px;font-weight:600;white-space:nowrap;">
+                    Apply for Commissioning
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                  </a>
+                </div>
+              </section>
+            </sc-if>
+
+            <!-- Completion card — registered -->
+            <sc-if value="{{isGayaRegistered}}" hint-placeholder-val="{{false}}">
+              <section style="background:#fff;border:1px solid #cfe6da;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+                <div style="padding:14px 20px;border-bottom:1px solid #edf1ee;display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#1e9b5f;box-shadow:0 0 0 3px #c5e8d5;"></div>
+                  <span style="font-size:15px;font-weight:700;color:#0f2319;">Stage 6 — Registered</span>
+                  <span style="background:#e5f6ed;border:1px solid #b8e0cc;color:#145c3a;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;">Complete</span>
+                </div>
+                <div style="padding:18px 20px;">
+                  <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:12px 16px;">
+                    <div style="padding:12px 14px;background:#f1f9f4;border:1px solid #cfe6da;border-radius:9px;">
+                      <div style="font-size:11.5px;color:#1e7a4d;font-weight:700;letter-spacing:.3px;margin-bottom:3px;">REGISTRATION NUMBER</div>
+                      <div style="font-size:15px;font-weight:700;color:#0f2319;font-variant-numeric:tabular-nums;letter-spacing:.2px;">{{regNo}}</div>
+                    </div>
+                    <div style="padding:12px 14px;background:#f8faf9;border:1px solid #edf1ee;border-radius:9px;">
+                      <div style="font-size:11.5px;color:#6b7c72;margin-bottom:3px;">Registered on</div>
+                      <div style="font-size:14px;font-weight:600;color:#0f2319;">5 Jul 2026</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:12px;margin-top:16px;">
+                    <a href="Commissioning.dc.html#registered" style="display:flex;align-items:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:13.5px;font-weight:600;white-space:nowrap;">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v5h5"></path></svg>
+                      View Registration Certificate
+                    </a>
+                    <a href="Commissioning.dc.html#registered" style="display:flex;align-items:center;gap:8px;background:#fff;color:#46524b;border:1px solid #dce5e0;border-radius:9px;padding:11px 18px;font-size:13.5px;font-weight:500;white-space:nowrap;">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                      Download (PDF)
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </sc-if>
+
+          </sc-if>
+          <!-- END GAYA -->
+
+          <!-- ——— BHAGALPUR: Payment verification ——— -->
+          <sc-if value="{{isBhagalpur}}" hint-placeholder-val="{{false}}">
+            <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fffbf5;border-bottom:1px solid #f0d6ac;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#c2740f;box-shadow:0 0 0 3px #fde8c5;"></div>
+                  <span style="font-size:15px;font-weight:700;color:#0f2319;">Stage 2 — Payment &amp; Acknowledgement</span>
+                  <span style="background:#fef3e3;border:1px solid #f0d6ac;color:#92400e;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;">Verification Pending</span>
+                </div>
+              </div>
+              <div style="padding:18px 20px;display:flex;flex-direction:column;gap:12px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                  <div style="padding:12px 14px;background:#f8faf9;border:1px solid #edf1ee;border-radius:9px;">
+                    <div style="font-size:11.5px;color:#6b7c72;margin-bottom:3px;">Processing fee</div>
+                    <div style="font-size:15px;font-weight:700;color:#0f2319;">₹50,000</div>
+                    <div style="font-size:11.5px;color:#8e9e97;margin-top:1px;">For 12 MW capacity</div>
+                  </div>
+                  <div style="padding:12px 14px;background:#f8faf9;border:1px solid #edf1ee;border-radius:9px;">
+                    <div style="font-size:11.5px;color:#6b7c72;margin-bottom:3px;">Payment mode</div>
+                    <div style="font-size:14px;font-weight:600;color:#0f2319;">Offline - DD/Cheque</div>
+                    <div style="font-size:11.5px;color:#8e9e97;margin-top:1px;">NEFT / District Finance</div>
+                  </div>
+                  <div style="padding:12px 14px;background:#f8faf9;border:1px solid #edf1ee;border-radius:9px;">
+                    <div style="font-size:11.5px;color:#6b7c72;margin-bottom:3px;">DD / Cheque No.</div>
+                    <div style="font-size:13px;font-weight:600;color:#0f2319;font-variant-numeric:tabular-nums;">DD 418225 · SBI</div>
+                  </div>
+                  <div style="padding:12px 14px;background:#f8faf9;border:1px solid #edf1ee;border-radius:9px;">
+                    <div style="font-size:11.5px;color:#6b7c72;margin-bottom:3px;">Submitted on</div>
+                    <div style="font-size:13px;font-weight:600;color:#0f2319;">18 May 2026</div>
+                    <div style="font-size:11.5px;color:#8e9e97;margin-top:1px;">Day 3 of ~5 verification</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#eef5ff;border:1px solid #c9dff2;border-radius:9px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d6fb8" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+                  <span style="font-size:12.5px;color:#1a5a96;line-height:1.4;">Finance Officer verification typically takes 2–5 working days. You will receive an SMS &amp; email once your Acknowledgement No. is issued.</span>
+                </div>
+              </div>
+            </section>
+          </sc-if>
+          <!-- END BHAGALPUR -->
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+        <!-- RIGHT COLUMN -->
+        <div style="display:flex;flex-direction:column;gap:16px;">
+
+          <!-- App details -->
+          <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+            <div style="padding:14px 16px;border-bottom:1px solid #edf1ee;">
+              <span style="font-size:14px;font-weight:700;color:#0f2319;">Application details</span>
+            </div>
+            <div style="padding:14px 16px;display:flex;flex-direction:column;gap:11px;">
+              <sc-for list="{{summary}}" as="s" hint-placeholder-count="8">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+                  <span style="font-size:12.5px;color:#6b7c72;flex:none;width:128px;">{{s.l}}</span>
+                  <span style="font-size:13px;font-weight:500;color:#1c2530;text-align:right;">{{s.v}}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="padding:12px 16px;border-top:1px solid #edf1ee;background:#f8faf9;">
+              <div style="display:flex;gap:8px;">
+                <button style="flex:1;background:#fff;border:1px solid #dce5e0;border-radius:8px;padding:8px;font-size:12.5px;color:#46524b;cursor:pointer;">View application</button>
+                <button style="flex:1;background:#fff;border:1px solid #dce5e0;border-radius:8px;padding:8px;font-size:12.5px;color:#46524b;cursor:pointer;">Raise ticket</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Activity timeline -->
+          <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+            <div style="padding:14px 16px;border-bottom:1px solid #edf1ee;">
+              <span style="font-size:14px;font-weight:700;color:#0f2319;">Activity timeline</span>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:0;">
+              <sc-for list="{{timeline}}" as="t" hint-placeholder-count="5">
+                <div style="display:flex;gap:12px;padding-bottom:16px;position:relative;">
+                  <div style="display:flex;flex-direction:column;align-items:center;flex:none;">
+                    <div style="width:10px;height:10px;border-radius:50%;background:{{t.dot}};border:2px solid {{t.dotBd}};flex:none;margin-top:3px;"></div>
+                    <div style="width:1px;flex:1;background:#edf1ee;margin-top:4px;"></div>
+                  </div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="font-size:13px;font-weight:500;color:#1c2530;line-height:1.3;">{{t.text}}</div>
+                    <div style="font-size:11.5px;color:#8e9e97;margin-top:3px;">{{t.time}}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+      </div>
+
+    </main>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900},
+  &quot;scenario&quot;: {
+    &quot;editor&quot;: &quot;enum&quot;,
+    &quot;options&quot;: [&quot;patna&quot;, &quot;gaya&quot;, &quot;gaya_done&quot;, &quot;gaya_registered&quot;, &quot;bhagalpur&quot;],
+    &quot;default&quot;: &quot;patna&quot;,
+    &quot;tsType&quot;: &quot;'patna'|'gaya'|'gaya_done'|'gaya_registered'|'bhagalpur'&quot;
+  }
+}">
+
+class Component extends DCLogic {
+  state = { activeScenario: null };
+
+  renderVals() {
+    const scenario = this.state.activeScenario ?? (this.props.scenario ?? 'patna');
+    const isPatna = scenario === 'patna';
+    const isGaya = scenario === 'gaya';
+    const isGayaDone = scenario === 'gaya_done';
+    const isGayaRegistered = scenario === 'gaya_registered';
+    const isGayaAny = isGaya || isGayaDone || isGayaRegistered;
+    const isBhagalpur = scenario === 'bhagalpur';
+    const regNo = 'BREDA/SPV/Power Plant/0142/2026';
+
+    const setPatna          = () => this.setState({ activeScenario: 'patna' });
+    const setGaya           = () => this.setState({ activeScenario: 'gaya' });
+    const setGayaDone       = () => this.setState({ activeScenario: 'gaya_done' });
+    const setGayaRegistered = () => this.setState({ activeScenario: 'gaya_registered' });
+    const setBhagalpur      = () => this.setState({ activeScenario: 'bhagalpur' });
+
+    const tabActive   = { bg: '#fff',         color: '#0f2319' };
+    const tabInactive = { bg: 'transparent',  color: '#6b7c72' };
+    const tP = isPatna     ? tabActive : tabInactive;
+    const tG = isGaya      ? tabActive : tabInactive;
+    const tGD = isGayaDone ? tabActive : tabInactive;
+    const tGR = isGayaRegistered ? tabActive : tabInactive;
+    const tB = isBhagalpur ? tabActive : tabInactive;
+
+    const makeStep = (type, label, sub) => ({
+      isDone:        type === 'done',
+      isActiveAmber: type === 'active-amber',
+      isActiveBlue:  type === 'active-blue',
+      isPending:     type === 'pending',
+      label,
+      sub,
+      labelColor: type === 'done' ? '#0f2319' : type === 'active-amber' ? '#92400e' : type === 'active-blue' ? '#1c2530' : '#8e9e97',
+      subColor:   type === 'done' ? '#1e9b5f' : type === 'active-amber' ? '#c2740f' : type === 'active-blue' ? '#1d6fb8' : '#a0aaa4',
+    });
+
+    let steps, projectTitle, ackNo, projectMeta, summary, timeline;
+
+    if (isPatna) {
+      projectTitle = 'Solar Rooftop — Patna';
+      ackNo        = 'Ack/2025/014';
+      projectMeta  = '500 kW · Solar Rooftop · SBPDCL · Captive use';
+      steps = [
+        makeStep('done',         'Application Submission',    'Done · 10 May 2026'),
+        makeStep('done',         'Payment & Acknowledgement', 'Done · 15 May 2026'),
+        makeStep('active-amber', 'BREDA Review',              'Query raised · Day 8/15'),
+        makeStep('pending',      'Departmental Clearances',   '6 departments'),
+        makeStep('pending',      'Commissioning (COD)',       'Pending'),
+        makeStep('pending',      'Registered',                'Pending'),
+      ];
+      summary = [
+        { l: 'Acknowledgement No.', v: 'Ack/2025/014' },
+        { l: 'Project type',        v: 'Solar Rooftop (With Storage)' },
+        { l: 'Capacity',            v: '500 kW' },
+        { l: 'Purpose',             v: 'Captive use' },
+        { l: 'DISCOM / PSS',        v: 'SBPDCL · Boring Road PSS' },
+        { l: 'Submitted on',        v: '10 May 2026' },
+        { l: 'Applicant',           v: 'Rajesh Kumar' },
+        { l: 'Current status',      v: 'BREDA Query Raised' },
+      ];
+      timeline = [
+        { text: 'BREDA raised 2 queries on your application', time: '20 Jun 2026 · 09:14', dot: '#c2740f', dotBd: '#fde8c5' },
+        { text: 'BREDA review started — 15-day clock began',  time: '12 Jun 2026 · 10:00', dot: '#1d6fb8', dotBd: '#cfe0f3' },
+        { text: 'Payment verified by Finance Officer',        time: '15 May 2026 · 16:45', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Processing fee of ₹15,000 paid via NEFT',   time: '14 May 2026 · 11:22', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Application submitted successfully',         time: '10 May 2026 · 14:05', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+      ];
+    } else if (isGaya) {
+      projectTitle = 'Ground-Mounted Solar — Gaya';
+      ackNo        = 'Ack/2025/009';
+      projectMeta  = '5 MW · Ground-Mounted Solar · NBPDCL · Grid export';
+      steps = [
+        makeStep('done',        'Application Submission',    'Done · 2 Apr 2026'),
+        makeStep('done',        'Payment & Acknowledgement', 'Done · 8 Apr 2026'),
+        makeStep('done',        'BREDA Review',              'Done · 28 May 2026'),
+        makeStep('active-blue', 'Departmental Clearances',  '3 of 6 obtained'),
+        makeStep('pending',     'Commissioning (COD)',       'Pending'),
+        makeStep('pending',     'Registered',                'Pending'),
+      ];
+      summary = [
+        { l: 'Acknowledgement No.', v: 'Ack/2025/009' },
+        { l: 'Project type',        v: 'Ground-Mounted Solar' },
+        { l: 'Capacity',            v: '5 MW' },
+        { l: 'Purpose',             v: 'Grid export' },
+        { l: 'DISCOM / PSS',        v: 'NBPDCL · Bodh Gaya GSS' },
+        { l: 'Submitted on',        v: '2 Apr 2026' },
+        { l: 'Applicant',           v: 'Rajesh Kumar' },
+        { l: 'Current status',      v: 'Under Dept. Review' },
+      ];
+      timeline = [
+        { text: 'Gaya MC raised a query — ownership document missing',  time: '18 Jun 2026 · 14:30', dot: '#c2740f', dotBd: '#fde8c5' },
+        { text: 'Fire Safety NOC approved by Fire Department',          time: '8 Jun 2026 · 11:00',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Pollution Control Board clearance approved',           time: '5 Jun 2026 · 09:45',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Grid Connectivity approval received from SBPDCL',      time: '2 Jun 2026 · 16:20',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Departmental clearances phase initiated',              time: '1 Jun 2026 · 10:00',  dot: '#1d6fb8', dotBd: '#cfe0f3' },
+        { text: 'BREDA approved your application',                      time: '28 May 2026 · 15:30', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Application submitted successfully',                   time: '2 Apr 2026 · 09:30',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+      ];
+    } else if (isGayaDone) {
+      projectTitle = 'Ground-Mounted Solar — Gaya';
+      ackNo        = 'Ack/2025/009';
+      projectMeta  = '5 MW · Ground-Mounted Solar · NBPDCL · Grid export';
+      steps = [
+        makeStep('done',        'Application Submission',    'Done · 2 Apr 2026'),
+        makeStep('done',        'Payment & Acknowledgement', 'Done · 8 Apr 2026'),
+        makeStep('done',        'BREDA Review',              'Done · 28 May 2026'),
+        makeStep('done',        'Departmental Clearances',   'All 6 obtained'),
+        makeStep('active-blue', 'Commissioning (COD)',       'Ready to start'),
+        makeStep('pending',     'Registered',                'Pending'),
+      ];
+      summary = [
+        { l: 'Acknowledgement No.', v: 'Ack/2025/009' },
+        { l: 'Project type',        v: 'Ground-Mounted Solar' },
+        { l: 'Capacity',            v: '5 MW' },
+        { l: 'Purpose',             v: 'Grid export' },
+        { l: 'DISCOM / PSS',        v: 'NBPDCL · Bodh Gaya GSS' },
+        { l: 'Submitted on',        v: '2 Apr 2026' },
+        { l: 'Applicant',           v: 'Rajesh Kumar' },
+        { l: 'Current status',      v: 'Clearances Complete' },
+      ];
+      timeline = [
+        { text: 'All departmental clearances obtained — ready for COD',  time: '28 Jun 2026 · 12:10', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Forest Clearance approved by State Forest Department',  time: '28 Jun 2026 · 11:50', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Land Revenue (Jama-bandi) verified — District Revenue', time: '24 Jun 2026 · 15:05', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Municipal clearance approved after query resolved',     time: '21 Jun 2026 · 10:40', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Fire Safety NOC approved by Fire Department',          time: '8 Jun 2026 · 11:00',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'BREDA approved your application',                      time: '28 May 2026 · 15:30', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Application submitted successfully',                   time: '2 Apr 2026 · 09:30',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+      ];
+    } else if (isGayaRegistered) {
+      projectTitle = 'Ground-Mounted Solar — Gaya';
+      ackNo        = 'Ack/2025/009';
+      projectMeta  = '5 MW · Ground-Mounted Solar · NBPDCL · Grid export';
+      steps = [
+        makeStep('done', 'Application Submission',    'Done · 2 Apr 2026'),
+        makeStep('done', 'Payment & Acknowledgement', 'Done · 8 Apr 2026'),
+        makeStep('done', 'BREDA Review',              'Done · 28 May 2026'),
+        makeStep('done', 'Departmental Clearances',   'All 6 obtained'),
+        makeStep('done', 'Commissioning (COD)',       'COD verified · 5 Jul 2026'),
+        makeStep('done', 'Registered',                'Done · 5 Jul 2026'),
+      ];
+      summary = [
+        { l: 'Acknowledgement No.', v: 'Ack/2025/009' },
+        { l: 'Registration No.',    v: regNo },
+        { l: 'Project type',        v: 'Ground-Mounted Solar' },
+        { l: 'Capacity',            v: '5 MW' },
+        { l: 'Actual COD',          v: '28 Jun 2026' },
+        { l: 'DISCOM / PSS',        v: 'NBPDCL · Bodh Gaya GSS' },
+        { l: 'Applicant',           v: 'Rajesh Kumar' },
+        { l: 'Current status',      v: 'Registered' },
+      ];
+      timeline = [
+        { text: 'Registration Certificate issued — ' + regNo,           time: '5 Jul 2026 · 16:20',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'COD certificate verified by BREDA Admin',              time: '5 Jul 2026 · 16:18',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Actual COD & certificate submitted for verification',  time: '28 Jun 2026 · 10:05', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'All departmental clearances obtained — ready for COD',  time: '28 Jun 2026 · 12:10', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'BREDA approved your application',                      time: '28 May 2026 · 15:30', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+        { text: 'Application submitted successfully',                   time: '2 Apr 2026 · 09:30',  dot: '#1e9b5f', dotBd: '#c5e8d5' },
+      ];
+    } else {
+      ackNo        = 'Ack pending';
+      projectMeta  = '12 MW + 4 MWh storage · SBPDCL · Grid export';
+      steps = [
+        makeStep('done',         'Application Submission',    'Done · 15 May 2026'),
+        makeStep('active-amber', 'Payment & Acknowledgement', 'Verification pending'),
+        makeStep('pending',      'BREDA Review',              'Pending'),
+        makeStep('pending',      'Departmental Clearances',   '6 departments'),
+        makeStep('pending',      'Commissioning (COD)',       'Pending'),
+        makeStep('pending',      'Registered',                'Pending'),
+      ];
+      summary = [
+        { l: 'Acknowledgement No.', v: 'Pending' },
+        { l: 'Project type',        v: 'Solar + Storage (Grid-Scale)' },
+        { l: 'Capacity',            v: '12 MW + 4 MWh storage' },
+        { l: 'Purpose',             v: 'Grid export' },
+        { l: 'DISCOM / PSS',        v: 'SBPDCL · Bhagalpur GSS' },
+        { l: 'Submitted on',        v: '15 May 2026' },
+        { l: 'Applicant',           v: 'Rajesh Kumar' },
+        { l: 'Current status',      v: 'Payment Verification' },
+      ];
+      timeline = [
+        { text: 'Offline demand draft submitted to District Finance Office', time: '18 May 2026 · 11:30', dot: '#c2740f', dotBd: '#fde8c5' },
+        { text: 'Processing fee of ₹50,000 generated',                 time: '16 May 2026 · 14:00', dot: '#6b7c72', dotBd: '#e3e9e6' },
+        { text: 'Application submitted successfully',                   time: '15 May 2026 · 10:20', dot: '#1e9b5f', dotBd: '#c5e8d5' },
+      ];
+    }
+
+    const queries = [
+      { field: 'Nearest PSS',  text: 'Boring Road PSS does not serve the declared district. Verify and provide the correct PSS name with grid zone reference.', age: '2 hrs ago' },
+      { field: 'DPR Document', text: 'BMS specification sheet is missing from the uploaded Detailed Project Report. Please re-upload with the BMS section included.', age: '2 hrs ago' },
+    ];
+
+    const clearanceDepts = (isGayaDone || isGayaRegistered) ? [
+      { name: 'Grid Connectivity',          dept: 'SBPDCL',                      isDone: true, isQuery: false, isReview: false, isPending: false, sla: 30, daysUsed: 18, slaPercent: 60, approvedOn: '2 Jun 2026'  },
+      { name: 'Pollution Control Board',    dept: 'BSPCB',                       isDone: true, isQuery: false, isReview: false, isPending: false, sla: 21, daysUsed: 14, slaPercent: 67, approvedOn: '5 Jun 2026'  },
+      { name: 'Fire Safety NOC',            dept: 'Fire Department',              isDone: true, isQuery: false, isReview: false, isPending: false, sla: 15, daysUsed: 12, slaPercent: 80, approvedOn: '8 Jun 2026'  },
+      { name: 'Municipal / Gram Panchayat', dept: 'Gaya Municipal Corporation',   isDone: true, isQuery: false, isReview: false, isPending: false, sla: 21, daysUsed: 19, slaPercent: 90, approvedOn: '21 Jun 2026' },
+      { name: 'Land Revenue (Jama-bandi)', dept: 'District Revenue Office',      isDone: true, isQuery: false, isReview: false, isPending: false, sla: 30, daysUsed: 22, slaPercent: 73, approvedOn: '24 Jun 2026' },
+      { name: 'Forest Clearance',           dept: 'State Forest Department',      isDone: true, isQuery: false, isReview: false, isPending: false, sla: 45, daysUsed: 41, slaPercent: 91, approvedOn: '28 Jun 2026' },
+    ] : [
+      { name: 'Grid Connectivity',          dept: 'SBPDCL',                      isDone: true,  isQuery: false, isReview: false, isPending: false, sla: 30, daysUsed: 18, slaPercent: 60, approvedOn: '2 Jun 2026'  },
+      { name: 'Pollution Control Board',    dept: 'BSPCB',                       isDone: true,  isQuery: false, isReview: false, isPending: false, sla: 21, daysUsed: 14, slaPercent: 67, approvedOn: '5 Jun 2026'  },
+      { name: 'Fire Safety NOC',            dept: 'Fire Department',              isDone: true,  isQuery: false, isReview: false, isPending: false, sla: 15, daysUsed: 12, slaPercent: 80, approvedOn: '8 Jun 2026'  },
+      { name: 'Municipal / Gram Panchayat', dept: 'Gaya Municipal Corporation',   isDone: false, isQuery: true,  isReview: false, isPending: false, sla: 21, daysUsed: 8,  slaPercent: 38, approvedOn: null          },
+      { name: 'Land Revenue (Jama-bandi)', dept: 'District Revenue Office',      isDone: false, isQuery: false, isReview: true,  isPending: false, sla: 30, daysUsed: 5,  slaPercent: 17, approvedOn: null          },
+      { name: 'Forest Clearance',           dept: 'State Forest Department',      isDone: false, isQuery: false, isReview: false, isPending: true,  sla: 45, daysUsed: 0,  slaPercent: 0,  approvedOn: null          },
+    ];
+
+    // clearance-tracker header (shared by gaya / gaya_done / gaya_registered)
+    const clearanceHeader = (isGayaDone || isGayaRegistered)
+      ? { dotBg:'#1e9b5f', dotShadow:'#c5e8d5', badge:'Completed',   badgeBg:'#e5f6ed', badgeBd:'#b8e0cc', badgeFg:'#145c3a', obtained:'6', barPct:'100%', caption:'All 6 clearances approved' }
+      : { dotBg:'#1d6fb8', dotShadow:'#cfe0f3', badge:'In Progress', badgeBg:'#e6f0f9', badgeBd:'#c9dff2', badgeFg:'#1a5a96', obtained:'3', barPct:'50%',  caption:'3 approved · 1 query · 1 under review · 1 pending' };
+
+    const upcomingClearances = [
+      { name: 'Grid Connectivity',          dept: 'SBPDCL',                  sla: 'SLA: 30 days' },
+      { name: 'Pollution Control Board',    dept: 'BSPCB',                   sla: 'SLA: 21 days' },
+      { name: 'Fire Safety NOC',            dept: 'Fire Department',         sla: 'SLA: 15 days' },
+      { name: 'Municipal / Gram Panchayat', dept: 'Municipal Corporation',   sla: 'SLA: 21 days' },
+      { name: 'Land Revenue (Jama-bandi)', dept: 'District Revenue Office', sla: 'SLA: 30 days' },
+      { name: 'Forest Clearance',           dept: 'State Forest Dept.',      sla: 'SLA: 45 days' },
+    ];
+
+    return {
+      isPatna, isGaya, isGayaDone, isGayaRegistered, isGayaAny, isBhagalpur, regNo,
+      setPatna, setGaya, setGayaDone, setGayaRegistered, setBhagalpur,
+      patnaTabBg:        tP.bg,    patnaTabColor:        tP.color,
+      gayaTabBg:         tG.bg,    gayaTabColor:         tG.color,
+      gayaDoneTabBg:     tGD.bg,   gayaDoneTabColor:     tGD.color,
+      gayaRegisteredTabBg: tGR.bg, gayaRegisteredTabColor: tGR.color,
+      bhagalpurTabBg:    tB.bg,    bhagalpurTabColor:    tB.color,
+      projectTitle, ackNo, projectMeta,
+      steps, summary, timeline,
+      queries, clearanceDepts, upcomingClearances,
+      clearanceDotBg: clearanceHeader.dotBg, clearanceDotShadow: clearanceHeader.dotShadow,
+      clearanceBadge: clearanceHeader.badge, clearanceBadgeBg: clearanceHeader.badgeBg,
+      clearanceBadgeBd: clearanceHeader.badgeBd, clearanceBadgeFg: clearanceHeader.badgeFg,
+      clearanceObtained: clearanceHeader.obtained, clearanceBarPct: clearanceHeader.barPct,
+      clearanceBarCaption: clearanceHeader.caption,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}input{font-family:inherit;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Officer Console</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </div>
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+        Applications
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Notifications
+        <span style="margin-left:auto;background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;">4</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </div>
+    </nav>
+    <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.07);">
+      <div style="font-size:12px;color:#7d9a8a;">Signed in as</div>
+      <div style="font-size:13.5px;font-weight:600;color:#fff;margin-top:2px;">Officer Priya S.</div>
+      <div style="font-size:11.5px;color:#7d9a8a;margin-top:1px;">BREDA HQ · Solar Division</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Applications</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">BREDA OFFICER</span>
+        <div style="position:relative;width:36px;height:36px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e5c3a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">PS</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / Applications</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">Applications Assigned to Me</h1>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+              <button onClick="{{t.onClick}}" style="background:{{t.bg}};color:{{t.fg}};border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;box-shadow:{{t.shadow}};">{{t.label}} <sc-if value="{{t.showBadge}}" hint-placeholder-val="{{false}}"><span style="background:{{t.badgeBg}};color:{{t.badgeFg}};border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px;">{{t.count}}</span></sc-if></button>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e6;border-radius:9px;padding:7px 12px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e9e97" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input placeholder="Search by name, ack. no…" style="border:none;outline:none;font-size:13px;color:#1c2530;width:200px;background:transparent;">
+          </div>
+          <sc-if value="{{showClear}}" hint-placeholder-val="{{false}}">
+            <button onClick="{{onClear}}" style="background:none;border:none;font-size:12.5px;color:#8e9e97;cursor:pointer;padding:4px 8px;white-space:nowrap;">&#x2715; Clear filter</button>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <sc-if value="{{showStats}}" hint-placeholder-val="{{true}}">
+    <div style="display:flex;gap:0;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+        <div style="flex:1;padding:12px 20px;border-right:1px solid #eef1ef;display:flex;align-items:center;gap:14px;">
+          <span style="width:4px;align-self:stretch;border-radius:2px;background:{{s.iconColor}};flex:none;"></span>
+          <div>
+            <div style="font-size:22px;font-weight:700;color:#0f2319;line-height:1;">{{s.value}}</div>
+            <div style="font-size:11.5px;color:#8e9e97;margin-top:3px;white-space:nowrap;">{{s.label}}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    </sc-if>
+
+    <!-- Table -->
+    <div style="padding:20px 28px 40px;">
+
+      <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(15,35,25,.05);">
+      <!-- Column headers -->
+      <div style="display:grid;grid-template-columns:2fr 1.2fr .85fr .85fr 1.2fr 120px;gap:0;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-bottom:1px solid #e3e9e6;">
+        <div>APPLICANT / PROJECT</div>
+        <div>ACK. NO. &amp; TYPE</div>
+        <div>CAPACITY</div>
+        <div>DISTRICT</div>
+        <div>STATUS</div>
+        <div style="text-align:right;">ACTION</div>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{rows}}" as="row" hint-placeholder-count="5">
+          <div style="display:grid;grid-template-columns:2fr 1.2fr .85fr .85fr 1.2fr 120px;gap:0;align-items:center;background:{{row.rowBg}};border-bottom:1px solid #eef1ef;border-left:3px solid {{row.accentLeft}};padding:{{rowPad}};">
+
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="font-size:14px;font-weight:600;color:#0f2319;">{{row.name}}</div>
+              <div style="font-size:12px;color:#6b7c72;">{{row.project}}</div>
+              <sc-if value="{{row.hasRound}}" hint-placeholder-val="{{false}}">
+                <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#92400e;background:#fef3e3;border:1px solid #f0d6ac;border-radius:999px;padding:2px 8px;width:fit-content;margin-top:2px;">⟳ Round {{row.round}}</span>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="font-size:13px;font-weight:600;color:#1c2530;">{{row.ack}}</div>
+              <div style="font-size:12px;color:#8e9e97;">{{row.type}}</div>
+            </div>
+
+            <div style="font-size:13.5px;color:#1c2530;">{{row.capacity}}</div>
+            <div style="font-size:13.5px;color:#1c2530;">{{row.district}}</div>
+
+            <div>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 11px;background:{{row.statusBg}};border:1px solid {{row.statusBd}};color:{{row.statusFg}};">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{row.dot}};flex:none;"></span>
+                {{row.status}}
+              </span>
+              <sc-if value="{{row.hasQ}}" hint-placeholder-val="{{false}}">
+                <div style="font-size:11px;color:#b45309;margin-top:4px;">{{row.qLabel}}</div>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;">
+              <a href="{{row.href}}" style="display:inline-flex;align-items:center;gap:5px;color:{{row.ctaFg}};font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">
+                {{row.cta}}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+
+          </div>
+        </sc-for>
+      </div>
+      </div>
+
+      <!-- Empty state for filtered tabs -->
+      <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
+        <div style="text-align:center;padding:60px 24px;color:#8e9e97;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c9cdc7" stroke-width="1.5" style="margin:0 auto 14px;display:block;"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+          <div style="font-size:15px;font-weight:600;color:#5b6b62;margin-bottom:6px;">No applications in this view</div>
+          <div style="font-size:13px;">Try switching to All Applications above.</div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;action&quot;,&quot;all&quot;,&quot;closed&quot;],&quot;default&quot;:&quot;action&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;compactRows&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { activeTab: props.defaultTab || 'action' };
+  }
+  setTab(t){ this.setState({ activeTab:t }); }
+
+  renderVals(){
+    const ALL = [
+      {
+        id:'014', name:'Rajesh Kumar', project:'Solar Rooftop · 500 kW',
+        ack:'Ack/2025/014', type:'Solar Rooftop', capacity:'500 kW', district:'Patna',
+        statusKey:'query_raised', round:2, hasRound:true,
+        href:'BREDA Review Page.dc.html'
+      },
+      {
+        id:'021', name:'Sunita Devi', project:'Ground-Mounted Solar · 2 MW',
+        ack:'Ack/2025/021', type:'Ground-Mounted', capacity:'2 MW', district:'Muzaffarpur',
+        statusKey:'pending_review', round:0, hasRound:false,
+        href:'BREDA Review Page.dc.html'
+      },
+      {
+        id:'009', name:'Bihar Solar Pvt. Ltd.', project:'Ground-Mounted Solar · 5 MW',
+        ack:'Ack/2025/009', type:'Ground-Mounted', capacity:'5 MW', district:'Gaya',
+        statusKey:'under_review', round:0, hasRound:false,
+        href:'BREDA Review Page.dc.html'
+      },
+      {
+        id:'031', name:'Amit Verma', project:'Solar + Storage · 12 MW',
+        ack:'Ack/2025/031', type:'Solar + Storage', capacity:'12 MW', district:'Bhagalpur',
+        statusKey:'resubmitted', round:2, hasRound:true,
+        href:'BREDA Review Page.dc.html'
+      },
+      {
+        id:'003', name:'Prakash Jha', project:'Solar Rooftop · 250 kW',
+        ack:'Ack/2024/003', type:'Solar Rooftop', capacity:'250 kW', district:'Darbhanga',
+        statusKey:'approved', round:0, hasRound:false,
+        href:'BREDA Review Page.dc.html'
+      },
+      {
+        id:'044', name:'M/s Green Power Bihar', project:'Ground-Mounted Solar · 10 MW',
+        ack:'Ack/2025/044', type:'Ground-Mounted', capacity:'10 MW', district:'Nalanda',
+        statusKey:'rejected', round:0, hasRound:false,
+        href:'BREDA Review Page.dc.html'
+      }
+    ];
+
+    const STATUS = {
+      query_raised: { label:'Query Raised',  bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', dot:'#e0922a', cta:'Review',          ctaFg:'#e05c1a', action:true  },
+      pending_review:{ label:'Pending Review', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', cta:'Start Review',    ctaFg:'#1e9b5f', action:true  },
+      under_review:  { label:'Under Review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', cta:'Continue Review', ctaFg:'#1a5a96', action:true  },
+      resubmitted:   { label:'Resubmitted',    bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', cta:'Review',     ctaFg:'#1d6fb8', action:true  },
+      approved:      { label:'Approved',       bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', dot:'#1e9b5f', cta:'View',            ctaFg:'#8e9e97', action:false },
+      rejected:      { label:'Rejected',       bg:'#fdf0f0', bd:'#f8d0cc', fg:'#b3261e', dot:'#b3261e', cta:'View',            ctaFg:'#8e9e97', action:false }
+    };
+
+    const tab = this.state.activeTab;
+    const filtered = tab==='all' ? ALL
+      : tab==='action' ? ALL.filter(r => STATUS[r.statusKey].action)
+      : ALL.filter(r => r.statusKey==='approved'||r.statusKey==='rejected');
+
+    const rows = filtered.map(r => {
+      const s = STATUS[r.statusKey];
+      const hasQ = r.statusKey==='query_raised'||r.statusKey==='resubmitted';
+      return {
+        ...r,
+        status:s.label, statusBg:s.bg, statusBd:s.bd, statusFg:s.fg, dot:s.dot,
+        cta:s.cta, ctaFg:s.ctaFg,
+        bd: hasQ ? '#f0d6ac' : '#e3e9e6',
+        accentLeft: r.statusKey==='query_raised' ? '#e0922a' : r.statusKey==='resubmitted' ? '#1d6fb8' : r.statusKey==='approved' ? '#1e9b5f' : r.statusKey==='rejected' ? '#b3261e' : r.statusKey==='under_review' ? '#1d6fb8' : '#d6dfd8',
+        rowBg: r.statusKey==='query_raised' ? '#fffdf9' : '#fff',
+        hasQ, qLabel: r.hasRound ? 'Round '+r.round+' · awaiting decision' : ''
+      };
+    });
+
+    const actionCount = ALL.filter(r => STATUS[r.statusKey].action).length;
+    const tabs = [
+      { key:'action', label:'Needs Action', count:actionCount, showBadge:true, badgeBg:'#e05c1a', badgeFg:'#fff' },
+      { key:'all',    label:'All',          count:ALL.length,  showBadge:false, badgeBg:'', badgeFg:'' },
+      { key:'closed', label:'Closed',       count:0,           showBadge:false, badgeBg:'', badgeFg:'' }
+    ].map(t => ({
+      ...t,
+      bg: t.key===tab ? '#fff' : 'transparent',
+      fg: t.key===tab ? '#0f2319' : '#5b6b62',
+      shadow: t.key===tab ? '0 1px 3px rgba(0,0,0,.1)' : 'none',
+      onClick: () => this.setTab(t.key)
+    }));
+
+    const stats = [
+      { value: ALL.length, label:'Total assigned', iconBg:'#eef1ef', iconColor:'#5b6b62', icon:'<path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/>' },
+      { value: actionCount, label:'Needs action',   iconBg:'#fef3e3', iconColor:'#e0922a', icon:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>' },
+      { value: ALL.filter(r=>r.statusKey==='resubmitted').length, label:'Resubmitted (diff pending)', iconBg:'#e6f0f9', iconColor:'#1d6fb8', icon:'<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' },
+      { value: ALL.filter(r=>r.statusKey==='approved').length, label:'Approved this month', iconBg:'#e7f4ec', iconColor:'#1e9b5f', icon:'<path d="M20 6 9 17l-5-5"/>' }
+    ];
+
+    const compact = this.props.compactRows ?? false;
+    return { tabs, stats, rows, isEmpty: rows.length===0,
+      showClear: tab!=='all', onClear: () => this.setTab('all'),
+      showStats: this.props.showStats ?? true,
+      rowPad: compact ? '8px 16px' : '12px 16px'
+    };
+  }
+}
+</script>
+</body>
+</html>

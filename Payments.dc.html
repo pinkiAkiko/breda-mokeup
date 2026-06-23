@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}a{text-decoration:none;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">{{portalLabel}}</div>
+      </div>
+    </div>
+
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+        Dashboard
+      </a>
+      <a href="New Project Application.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        New Project Application
+      </a>
+      <a href="My Applications.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg>
+        My Applications
+      </a>
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path></svg>
+        Payments
+      </div>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"></path></svg>
+        Help &amp; Grievance
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        Profile
+      </a>
+    </nav>
+
+    <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.07);">
+      <div style="font-size:12px;color:#7d9a8a;">Signed in as</div>
+      <div style="font-size:13.5px;font-weight:600;color:#fff;margin-top:2px;">{{signedInName}}</div>
+      <div style="font-size:11.5px;color:#7d9a8a;margin-top:1px;">{{signedInDesc}}</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Payments</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">DEMO ROLE</span>
+        <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+          <sc-for list="{{roleTabs}}" as="t" hint-placeholder-count="4">
+            <button onClick="{{t.onClick}}" style="background:{{t.bg}};color:{{t.fg}};border:none;border-radius:7px;padding:6px 11px;font-size:12.5px;font-weight:600;">{{t.label}}</button>
+          </sc-for>
+        </div>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:{{avatarBg}};color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">{{avatarInitials}}</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">{{crumb}}</div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;">
+        <div>
+          <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0;color:#0f2319;line-height:1.1;">{{h1}}</h1>
+          <div style="font-size:13px;color:#6b7c72;margin-top:5px;">{{subtitle}}</div>
+        </div>
+        <sc-if value="{{isApplicant}}" hint-placeholder-val="{{true}}">
+          <button style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #dce5e0;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:500;color:#46524b;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download statement
+          </button>
+        </sc-if>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <sc-if value="{{showStats}}" hint-placeholder-val="{{true}}">
+    <div style="display:flex;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+        <div style="flex:1;padding:13px 22px;border-right:1px solid #eef1ef;display:flex;align-items:center;gap:14px;">
+          <span style="width:4px;align-self:stretch;border-radius:2px;background:{{s.accent}};flex:none;"></span>
+          <div>
+            <div style="font-size:21px;font-weight:700;color:#0f2319;line-height:1;">{{s.value}}</div>
+            <div style="font-size:11.5px;color:#8e9e97;margin-top:4px;white-space:nowrap;">{{s.label}}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    </sc-if>
+
+    <main style="padding:20px 28px 44px;">
+
+      <!-- ===================== APPLICANT MODE ===================== -->
+      <sc-if value="{{isApplicant}}" hint-placeholder-val="{{true}}">
+        <div style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(15,35,25,.05);">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #edf1ee;">
+            <h2 style="font-size:15px;font-weight:700;margin:0;color:#0f2319;">Registration fee payments</h2>
+            <span style="font-size:12.5px;color:#8e9e97;">Per-project processing fees (non-refundable)</span>
+          </div>
+          <div style="display:grid;grid-template-columns:2.4fr 1.1fr 1.3fr 0.9fr 1.1fr 130px;gap:0;padding:10px 20px;background:#f6f8f7;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;border-bottom:1px solid #e3e9e6;">
+            <span>PROJECT</span><span>AMOUNT</span><span>METHOD</span><span>STATUS</span><span>DATE</span><span style="text-align:right;">ACTION</span>
+          </div>
+          <sc-for list="{{payRows}}" as="p" hint-placeholder-count="4">
+            <div style="position:relative;display:grid;grid-template-columns:2.4fr 1.1fr 1.3fr 0.9fr 1.1fr 130px;gap:0;align-items:center;padding:14px 20px 14px 23px;border-bottom:1px solid #f0f4f2;background:{{p.rowBg}};">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:{{p.accent}};"></div>
+              <div style="min-width:0;padding-right:12px;">
+                <div style="font-size:14px;font-weight:600;color:#1c2530;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{p.project}}</div>
+                <div style="font-size:12px;color:#8e9e97;margin-top:2px;">{{p.feeType}} · {{p.ack}}</div>
+              </div>
+              <div style="font-size:14px;font-weight:700;color:#0f2319;font-variant-numeric:tabular-nums;">{{p.amount}}</div>
+              <div style="font-size:12.5px;color:#46524b;">{{p.method}}</div>
+              <div>
+                <span style="display:inline-flex;align-items:center;gap:6px;background:{{p.pillBg}};border:1px solid {{p.pillBd}};color:{{p.pillFg}};border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:600;white-space:nowrap;">
+                  <span style="width:7px;height:7px;border-radius:50%;background:{{p.dot}};flex:none;"></span>{{p.status}}
+                </span>
+              </div>
+              <div style="font-size:12px;color:#6b7c72;">{{p.date}}</div>
+              <div style="text-align:right;">
+                <a href="{{p.actionHref}}" style="font-size:12.5px;font-weight:600;color:{{p.actionFg}};white-space:nowrap;">{{p.action}} →</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:13px 16px;background:#eef5ff;border:1px solid #c9dff2;border-radius:11px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d6fb8" stroke-width="2" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+          <div style="font-size:12.5px;color:#1a5a96;line-height:1.55;">Offline payments (DD / cheque) are verified by the BREDA Finance Officer before your Acknowledgement Number is issued. Verification typically takes 2–5 working days. The registration fee is non-refundable once the application is submitted.</div>
+        </div>
+      </sc-if>
+
+      <!-- ===================== FINANCE MODE ===================== -->
+      <sc-if value="{{isFinance}}" hint-placeholder-val="{{false}}">
+        <div style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(15,35,25,.05);">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #edf1ee;">
+            <h2 style="font-size:15px;font-weight:700;margin:0;color:#0f2319;">Offline payments awaiting verification</h2>
+            <span style="font-size:12.5px;color:#8e9e97;">Verify the demand-draft / cheque against the bank record, then release the Acknowledgement No.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1.4fr 1.55fr 0.85fr 1.6fr 1.05fr 188px;gap:0;padding:10px 20px;background:#f6f8f7;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;border-bottom:1px solid #e3e9e6;">
+            <span>APPLICANT</span><span>PROJECT</span><span>AMOUNT</span><span>DD / CHEQUE NO.</span><span>SUBMITTED</span><span style="text-align:right;">VERIFICATION</span>
+          </div>
+          <sc-for list="{{queueRows}}" as="q" hint-placeholder-count="4">
+            <div style="position:relative;display:grid;grid-template-columns:1.4fr 1.55fr 0.85fr 1.6fr 1.05fr 188px;gap:0;align-items:center;padding:14px 20px 14px 23px;border-bottom:1px solid #f0f4f2;background:{{q.rowBg}};">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:{{q.accent}};"></div>
+              <div style="min-width:0;padding-right:10px;">
+                <div style="font-size:13.5px;font-weight:600;color:#0f2319;">{{q.applicant}}</div>
+                <div style="font-size:11.5px;color:#8e9e97;margin-top:2px;">{{q.discom}}</div>
+              </div>
+              <div style="min-width:0;padding-right:10px;">
+                <div style="font-size:13px;color:#1c2530;">{{q.project}}</div>
+                <div style="font-size:11.5px;color:#8e9e97;margin-top:2px;">{{q.capacity}} · {{q.district}}</div>
+              </div>
+              <div style="font-size:14px;font-weight:700;color:#0f2319;font-variant-numeric:tabular-nums;">{{q.amount}}</div>
+              <div style="min-width:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#1c2530;font-variant-numeric:tabular-nums;white-space:nowrap;">{{q.payRef}}</div>
+                <a href="#" style="font-size:11.5px;font-weight:500;color:#1d6fb8;">View proof</a>
+              </div>
+              <div style="font-size:12px;color:#6b7c72;white-space:nowrap;">{{q.submitted}}</div>
+              <div style="display:flex;justify-content:flex-end;">
+                <!-- pending: action buttons -->
+                <sc-if value="{{q.isPending}}" hint-placeholder-val="{{true}}">
+                  <div style="display:flex;gap:8px;">
+                    <button onClick="{{q.onReject}}" style="background:#fff;border:1.5px solid #f0c8c4;color:#b3261e;border-radius:8px;padding:7px 13px;font-size:12.5px;font-weight:600;">Reject</button>
+                    <button onClick="{{q.onVerify}}" style="background:#1e9b5f;border:none;color:#fff;border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:6px;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                      Verify
+                    </button>
+                  </div>
+                </sc-if>
+                <!-- verified -->
+                <sc-if value="{{q.isVerified}}" hint-placeholder-val="{{false}}">
+                  <span style="display:inline-flex;align-items:center;gap:6px;background:#e5f6ed;border:1px solid #b8e0cc;color:#145c3a;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;white-space:nowrap;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#1e9b5f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Verified · Ack issued
+                  </span>
+                </sc-if>
+                <!-- rejected -->
+                <sc-if value="{{q.isRejected}}" hint-placeholder-val="{{false}}">
+                  <span style="display:inline-flex;align-items:center;gap:6px;background:#fdf0f0;border:1px solid #f8d0cc;color:#b3261e;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:600;white-space:nowrap;">
+                    Rejected · returned
+                  </span>
+                </sc-if>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:13px 16px;background:#f6f8f7;border:1px solid #dce5e0;border-radius:11px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7c72" stroke-width="2" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+          <div style="font-size:12.5px;color:#46524b;line-height:1.55;">Verifying a payment releases the applicant's Acknowledgement Number and moves the application into the BREDA technical-review queue. Rejecting returns it to the applicant to re-submit a corrected challan.</div>
+        </div>
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;role&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;applicant&quot;,&quot;finance&quot;],&quot;default&quot;:&quot;applicant&quot;,&quot;tsType&quot;:&quot;'applicant'|'finance'&quot;},&quot;showStats&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = {
+      role: props.role === 'finance' ? 'finance' : 'applicant',
+      decisions: {}  // payment id -> 'verified' | 'rejected'
+    };
+  }
+  setRole(r){ this.setState({ role:r }); }
+  decide(id, d){ this.setState(s => ({ decisions: { ...s.decisions, [id]: d } })); }
+
+  renderVals(){
+    const role = this.state.role;
+    const isApplicant = role === 'applicant';
+    const isFinance = role === 'finance';
+
+    // ---- role toggle (Applicant + Finance live; others dimmed) ----
+    const roleDefs = [
+      { key:'applicant', label:'Applicant',     live:true  },
+      { key:'officer',   label:'BREDA Officer',  live:false },
+      { key:'dept',      label:'Dept. Officer',  live:false },
+      { key:'finance',   label:'Finance',        live:true  },
+    ];
+    const roleTabs = roleDefs.map(t => {
+      const active = t.key === role;
+      return {
+        label: t.label,
+        bg: active ? '#0f2319' : 'transparent',
+        fg: active ? '#ffffff' : (t.live ? '#46524b' : '#aab4ad'),
+        onClick: () => { if (t.live) this.setRole(t.key); }
+      };
+    });
+
+    // ---- status tones ----
+    const green = { pillBg:'#e7f4ec', pillBd:'#bfe3cd', pillFg:'#1e7a4d', dot:'#1e9b5f', accent:'#1e9b5f' };
+    const amber = { pillBg:'#fef3e3', pillBd:'#f0d6ac', pillFg:'#92400e', dot:'#c2740f', accent:'#c2740f' };
+    const slate = { pillBg:'#f6f8f7', pillBd:'#d6dfd8', pillFg:'#46524b', dot:'#8e9e97', accent:'#9aa9a1' };
+
+    // ===== APPLICANT: per-project registration fees =====
+    const payRows = [
+      { project:'Solar Rooftop — Patna',       ack:'Ack/2025/014', feeType:'Registration fee', amount:'₹15,000', method:'Online · NEFT',     tone:green, status:'Verified',             date:'15 May 2026', action:'View receipt', actionHref:'#' },
+      { project:'Ground-Mounted Solar — Gaya', ack:'Ack/2025/009', feeType:'Registration fee', amount:'₹25,000', method:'Online · Net banking', tone:green, status:'Verified',             date:'8 Apr 2026',  action:'View receipt', actionHref:'#' },
+      { project:'Solar + Storage — Bhagalpur', ack:'Ack pending',  feeType:'Registration fee', amount:'₹50,000', method:'Offline · DD / Cheque', tone:amber, status:'Verification Pending', date:'Submitted 18 May', action:'Track',     actionHref:'Application Track.dc.html' },
+      { project:'Solar Pump — Nalanda',        ack:'Draft',        feeType:'Registration fee', amount:'₹2,360',  method:'—',                    tone:slate, status:'Payment Due',          date:'—',           action:'Pay now',      actionHref:'New Project Application.dc.html' },
+    ].map(p => ({
+      ...p,
+      pillBg:p.tone.pillBg, pillBd:p.tone.pillBd, pillFg:p.tone.pillFg, dot:p.tone.dot, accent:p.tone.accent,
+      rowBg: p.tone === amber ? '#fffdf9' : '#fff',
+      actionFg: p.tone === amber ? '#e05c1a' : p.tone === slate ? '#1e9b5f' : '#1e9b5f',
+    }));
+
+    const applicantStats = [
+      { value:'₹40,000',  label:'Total verified',         accent:'#1e9b5f' },
+      { value:'₹50,000',  label:'Pending verification',   accent:'#c2740f' },
+      { value:'₹2,360',   label:'Payment due',            accent:'#9aa9a1' },
+      { value:'4',        label:'Fee transactions · FY26', accent:'#1d6fb8' },
+    ];
+
+    // ===== FINANCE: verification queue =====
+    const QUEUE = [
+      { id:'q1', applicant:'Rajesh Kumar',         discom:'SBPDCL', project:'Solar + Storage',     capacity:'12 MW', district:'Bhagalpur',    amount:'₹50,000', payRef:'DD 418225 · SBI', submitted:'18 May 2026' },
+      { id:'q2', applicant:'Sunita Devi',          discom:'NBPDCL', project:'Ground-Mounted Solar', capacity:'2 MW',  district:'Muzaffarpur',  amount:'₹20,000', payRef:'Cheque 552190 · PNB', submitted:'19 May 2026' },
+      { id:'q3', applicant:'M/s Green Power Bihar', discom:'SBPDCL', project:'Ground-Mounted Solar', capacity:'10 MW', district:'Nalanda',      amount:'₹50,000', payRef:'DD 419904 · BOI', submitted:'20 May 2026' },
+      { id:'q4', applicant:'Prakash Jha',          discom:'NBPDCL', project:'Solar Rooftop',        capacity:'250 kW', district:'Darbhanga',   amount:'₹5,000',  payRef:'Cheque 408551 · SBI', submitted:'14 May 2026' },
+    ];
+    const queueRows = QUEUE.map(q => {
+      const d = this.state.decisions[q.id] || 'pending';
+      const isPending = d === 'pending', isVerified = d === 'verified', isRejected = d === 'rejected';
+      return {
+        ...q, isPending, isVerified, isRejected,
+        accent: isPending ? '#c2740f' : isVerified ? '#1e9b5f' : '#b3261e',
+        rowBg:  isPending ? '#fffdf9' : '#fff',
+        onVerify: () => this.decide(q.id, 'verified'),
+        onReject: () => this.decide(q.id, 'rejected'),
+      };
+    });
+    const pendingCount = queueRows.filter(q => q.isPending).length;
+    const verifiedCount = queueRows.filter(q => q.isVerified).length;
+    const financeStats = [
+      { value:String(pendingCount), label:'Pending verification', accent:'#c2740f' },
+      { value:String(verifiedCount), label:'Verified this session', accent:'#1e9b5f' },
+      { value:'₹1.25 L', label:'Collected · this month',  accent:'#1d6fb8' },
+      { value:'2–5 days', label:'Avg. verification time',  accent:'#9aa9a1' },
+    ];
+
+    return {
+      isApplicant, isFinance, roleTabs,
+      showStats: this.props.showStats ?? true,
+      // shell chrome
+      portalLabel:  isFinance ? 'Finance Console' : 'Applicant Portal',
+      signedInName: isFinance ? 'Finance Officer S. Gupta' : 'Rajesh Kumar',
+      signedInDesc: isFinance ? 'BREDA HQ · Finance Division' : 'Applicant · Patna',
+      avatarBg:       isFinance ? '#1e5c3a' : '#1e9b5f',
+      avatarInitials: isFinance ? 'SG' : 'RK',
+      crumb:    isFinance ? 'Finance Console / Payment Verification' : 'Home / Payments',
+      h1:       isFinance ? 'Payment Verification' : 'Payments',
+      subtitle: isFinance ? 'Offline registration-fee payments routed to the Finance Division for verification.' : 'Registration fees and processing payments across all your projects.',
+      // data
+      stats: isFinance ? financeStats : applicantStats,
+      payRows, queueRows,
+    };
+  }
+}
+</script>
+</body>
+</html>

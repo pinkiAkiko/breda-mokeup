@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}input,select{font-family:inherit;}a{text-decoration:none;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+        Dashboard
+      </a>
+      <a href="New Project Application.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"></path></svg>
+        New Project Application
+      </a>
+      <a href="My Applications.dc.html" style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"></path><path d="M14 3v5h5"></path><path d="M9 13h6M9 17h6"></path></svg>
+        My Applications
+      </a>
+      <a href="Payments.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18"></path></svg>
+        Payments
+      </a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+        Help &amp; Grievance
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 4-6 8-6s8 2 8 6"></path></svg>
+        Profile
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Apply for Clearances</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">DEMO ROLE</span>
+        <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+          <span style="background:#fff;color:#0f2319;border-radius:7px;padding:6px 11px;font-size:12.5px;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.06);">Applicant</span>
+        </div>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e9b5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;">RK</div>
+      </div>
+    </div>
+
+    <!-- ===== SUCCESS SCREEN ===== -->
+    <sc-if value="{{ isSuccess }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:48px 28px;">
+        <div style="max-width:540px;margin:0 auto;background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);padding:36px;">
+          <div style="text-align:center;">
+            <div style="width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:#e7f4ec;display:flex;align-items:center;justify-content:center;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1e9b5f" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg>
+            </div>
+            <div style="font-family:'IBM Plex Serif',serif;font-size:22px;font-weight:700;color:#0f2319;">{{ submittedCount }} clearance application(s) submitted</div>
+            <div style="font-size:12.5px;color:#5b6b62;margin-top:10px;line-height:1.6;">Each clearance has been routed directly to its concerned department officer and is now tracked independently with its own SLA timer.</div>
+          </div>
+          <div style="margin-top:22px;display:flex;flex-direction:column;gap:8px;">
+            <sc-for list="{{ submittedRows }}" as="r" hint-placeholder-count="2">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #e3e9e6;border-radius:9px;padding:10px 13px;background:#f6f8f7;">
+                <div style="min-width:0;">
+                  <div style="font-size:13px;font-weight:600;color:#1c2530;">{{ r.name }}</div>
+                  <div style="font-size:11px;color:#8e9e97;margin-top:1px;">{{ r.abbr }} · SLA {{ r.sla }} days</div>
+                </div>
+                <span style="font-family:monospace;font-size:11px;font-weight:600;color:#c2740f;flex:none;">{{ r.trackId }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:24px;">
+            <button onClick="{{ onTrack }}" style="flex:1;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:13px;font-weight:700;">Track clearances →</button>
+            <button onClick="{{ onBackDash }}" style="flex:none;background:#fff;color:#1c2530;border:1px solid #cdd6d0;border-radius:9px;padding:11px 18px;font-size:13px;font-weight:600;">Back to Dashboard</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ===== FORM ===== -->
+    <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Home / My Applications / Apply for Clearances</div>
+      <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0;color:#0f2319;line-height:1.1;">Apply for Departmental Clearances</h1>
+      <div style="font-size:13px;color:#6b7c72;margin-top:6px;">Rajeev Industrial Solar 250 kW <span style="color:#c0ccc5;">·</span> <span style="font-variant-numeric:tabular-nums;">BREDA/RE/2026/04250</span></div>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:24px 32px 120px;width:100%;">
+
+      <!-- How it works -->
+      <sc-if value="{{ showHowItWorks }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:11px;border:1px solid #c9dff2;border-left:3px solid #1d6fb8;background:#e6f0f9;border-radius:10px;padding:13px 15px;margin-bottom:18px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5a96" stroke-width="2" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 16v-5M12 8h.01"></path></svg>
+          <div style="font-size:12.5px;line-height:1.6;color:#1c2530;">
+            <strong style="color:#1a5a96;">How it works:</strong> Select the clearances you need from any department. For each one, download the challan, pay the prescribed fee at the department counter, and upload the receipt. Each clearance is routed directly to the concerned officer and tracked independently with its own SLA timer.
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- Department cards -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <sc-for list="{{ departments }}" as="d" hint-placeholder-count="7">
+          <div style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);overflow:hidden;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:#f6f8f7;border-bottom:1px solid #e8edea;">
+              <div style="min-width:0;">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#c2740f;text-transform:uppercase;">{{ d.label }}</div>
+                <div style="font-size:15px;font-weight:700;color:#0f2319;margin-top:2px;line-height:1.25;">{{ d.name }}</div>
+              </div>
+              <span style="flex:none;font-size:12px;color:#8e9e97;white-space:nowrap;">{{ d.countText }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;">
+              <sc-for list="{{ d.services }}" as="s" hint-placeholder-count="1">
+                <div style="border-top:1px solid #eef1ef;background:{{ s.rowBg }};">
+                  <div onClick="{{ s.onToggle }}" style="display:flex;align-items:center;gap:14px;padding:{{ s.rowPad }};cursor:pointer;" style-hover="background:#f1f5f3;">
+                    <div style="width:20px;height:20px;border-radius:4px;border:2px solid {{ s.boxBorder }};background:{{ s.boxBg }};display:flex;align-items:center;justify-content:center;flex:none;">
+                      <sc-if value="{{ s.checked }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+                    </div>
+                    <div style="flex:1;min-width:0;">
+                      <div style="font-size:14px;font-weight:600;color:#1c2530;">{{ s.name }}</div>
+                      <div style="font-size:12px;color:#8e9e97;margin-top:3px;">SLA · {{ s.sla }} days · {{ s.authority }}</div>
+                    </div>
+                  </div>
+                  <sc-if value="{{ s.checked }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:0 18px 18px 52px;">
+                      <div style="border:1px solid #c8d8cf;background:#fff;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;">
+                        <div>
+                          <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">Supporting Document <span style="font-weight:500;color:#8e9e97;">(optional, max 5 MB)</span></div>
+                          <label style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.supportBorder }};color:{{ s.supportColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex:none;"><path d="M12 16V4M7 9l5-5 5 5"></path><path d="M5 20h14"></path></svg>
+                            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ s.supportLabel }}</span>
+                            <input type="file" style="display:none;" accept=".pdf,.doc,.docx,image/*" onChange="{{ s.onSupport }}">
+                          </label>
+                        </div>
+                        <div>
+                          <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">Fee Payment Proof <span style="font-weight:500;color:#b75000;">(required, offline challan)</span></div>
+                          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                            <button onClick="{{ s.onChallan }}" style="display:inline-flex;align-items:center;gap:8px;border:1px solid #cdd6d0;background:#fff;color:#1c2530;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;">
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4v12M7 11l5 5 5-5"></path><path d="M5 20h14"></path></svg>
+                              Download Challan
+                            </button>
+                            <label style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.proofBorder }};color:{{ s.proofColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
+                              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex:none;"><path d="M12 16V4M7 9l5-5 5 5"></path><path d="M5 20h14"></path></svg>
+                              <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ s.proofLabel }}</span>
+                              <input type="file" style="display:none;" accept=".pdf,image/*" onChange="{{ s.onProof }}">
+                            </label>
+                          </div>
+                          <div style="margin-top:11px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+                            <span style="font-size:12px;color:#6b7c72;">or enter receipt no.</span>
+                            <input value="{{ s.receipt }}" onChange="{{ s.onReceipt }}" placeholder="Challan / receipt number" style="border:1px solid #cdd6d0;border-radius:7px;padding:6px 10px;font-size:12.5px;width:230px;max-width:100%;outline:none;background:#fff;color:#1c2530;">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- Sticky action bar -->
+    <div style="position:sticky;bottom:0;z-index:10;background:#fff;border-top:1px solid #e3e9e6;box-shadow:0 -2px 10px rgba(15,35,25,.06);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+      <div style="font-size:13.5px;color:#5b6b62;"><strong style="color:#0f2319;font-size:15px;">{{ selectedCount }}</strong> clearance(s) selected<sc-if value="{{ hasSelection }}" hint-placeholder-val="{{ false }}"><span style="color:#8e9e97;"> · est. longest SLA {{ maxSla }} days</span></sc-if><sc-if value="{{ showProofWarn }}" hint-placeholder-val="{{ false }}"><div style="font-size:11.5px;color:#b75000;margin-top:2px;">⚠ Upload fee payment proof (or receipt no.) for all selected clearances to submit.</div></sc-if></div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button onClick="{{ onCancel }}" style="background:#fff;color:#1c2530;border:1px solid #cdd6d0;border-radius:9px;padding:10px 20px;font-size:13.5px;font-weight:600;">Cancel</button>
+        <button onClick="{{ onSubmit }}" disabled="{{ submitDisabled }}" style="display:flex;align-items:center;gap:8px;background:{{ submitBg }};color:#fff;border:none;border-radius:9px;padding:10px 22px;font-size:13.5px;font-weight:700;cursor:{{ submitCursor }};box-shadow:0 1px 3px rgba(0,0,0,.12);">
+          Submit Clearances
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showHowItWorks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;highlightSelected&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;compactRows&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const DEPARTMENTS = [
+  { label:'BSPTCL', name:'Bihar State Power Transmission Company Limited (BSPTCL / STU)', services:[
+    { id:'bsptcl-grid', name:'Grid Connectivity', sla:30, authority:'DISCOMs / BSPTCL' },
+    { id:'bsptcl-final', name:'Final Grid Connectivity Approval', sla:120, authority:'BSPTCL' },
+  ]},
+  { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
+    { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
+  ]},
+  { label:'MRT', name:'NBPDCL / SBPDCL MRT', services:[
+    { id:'mrt-sem', name:'NOC for Special Energy Meter', sla:7, authority:'DISCOMs (MRT)' },
+  ]},
+  { label:'EIO', name:'Electrical Inspector Office', services:[
+    { id:'eio-plan', name:'Plan Approval', sla:4, authority:'Electrical Inspector Office' },
+    { id:'eio-charge', name:'Charging Permission', sla:10, authority:'Electrical Inspector Office' },
+  ]},
+  { label:'PHED', name:'Public Health Engineering Department', services:[
+    { id:'phed-noc', name:'NOC for Canal / Reservoir / Pond', sla:75, authority:'Water Resource Dept. / PHED' },
+  ]},
+  { label:'BSPCB', name:'Bihar State Pollution Control Board (BSPCB)', services:[
+    { id:'bspcb-poll', name:'Pollution Clearance', sla:15, authority:'BSPCB' },
+  ]},
+  { label:'F&E', name:'Forest & Environment Department', services:[
+    { id:'fe-env', name:'Environment Clearance', sla:30, authority:'Environment & Forest Dept.' },
+  ]},
+];
+
+const ALL_SERVICES = DEPARTMENTS.flatMap(d => d.services.map(s => ({ ...s, abbr:d.label })));
+
+class Component extends DCLogic {
+  state = { screen:'form', selected:{}, docs:{} };
+
+  toggle(id){ this.setState(st => { const s={...st.selected}; if(s[id]) delete s[id]; else s[id]=true; return { selected:s }; }); }
+  setDoc(id, patch){ this.setState(st => ({ docs:{ ...st.docs, [id]:{ ...(st.docs[id]||{}), ...patch } } })); }
+  onFile(id, field, max, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>max*1024*1024){ alert('File exceeds '+max+' MB limit'); e.target.value=''; return; } this.setDoc(id, { [field]:f.name }); }
+  proofReady(id){ const d=this.state.docs[id]||{}; return !!(d.proof || (d.receipt && d.receipt.trim())); }
+  cancel(){ this.setState({ selected:{}, docs:{} }); }
+  submit(){ const ids=Object.keys(this.state.selected); if(ids.length===0) return; if(!ids.every(id=>this.proofReady(id))) return; this.setState({ screen:'success' }); }
+  backDash(){ this.setState({ screen:'form', selected:{}, docs:{} }); }
+
+  renderVals(){
+    const S = this.state;
+    const sel = S.selected;
+    const compact = this.props.compactRows ?? false;
+    const highlightSelected = this.props.highlightSelected ?? true;
+    const rowPad = compact ? '12px 18px' : '16px 18px';
+
+    const departments = DEPARTMENTS.map(d => ({
+      label: d.label,
+      name: d.name,
+      countText: d.services.length + (d.services.length===1 ? ' service' : ' services'),
+      services: d.services.map(s => {
+        const checked = !!sel[s.id];
+        const doc = S.docs[s.id] || {};
+        const hasProof = !!(doc.proof || (doc.receipt && doc.receipt.trim()));
+        return {
+          name: s.name, sla: s.sla, authority: s.authority, checked,
+          onToggle: () => this.toggle(s.id),
+          rowPad,
+          rowBg: (checked && highlightSelected) ? '#f3faf6' : '#fff',
+          boxBorder: checked ? '#1e9b5f' : '#cdd6d0',
+          boxBg: checked ? '#1e9b5f' : '#fff',
+          // expansion
+          supportLabel: doc.support ? ('✓ ' + doc.support) : 'Upload supporting doc',
+          supportBorder: doc.support ? '#1e9b5f' : '#1e7a4d',
+          supportColor: '#1e7a4d',
+          proofLabel: doc.proof ? ('✓ ' + doc.proof) : 'Upload Payment Proof *',
+          proofBorder: hasProof ? '#1e9b5f' : '#e05c1a',
+          proofColor: hasProof ? '#1e7a4d' : '#e05c1a',
+          receipt: doc.receipt || '',
+          onSupport: (e) => this.onFile(s.id, 'support', 5, e),
+          onProof: (e) => this.onFile(s.id, 'proof', 5, e),
+          onReceipt: (e) => this.setDoc(s.id, { receipt: e.target.value }),
+          onChallan: () => alert('Challan PDF for ' + s.name + ' would download here (demo).')
+        };
+      })
+    }));
+
+    const selIds = Object.keys(sel);
+    const count = selIds.length;
+    const selectedSvcs = ALL_SERVICES.filter(s => sel[s.id]);
+    const maxSla = selectedSvcs.reduce((m,s) => Math.max(m, s.sla), 0);
+    const allProofs = count>0 && selIds.every(id => this.proofReady(id));
+    const canSubmit = count>0 && allProofs;
+
+    const submittedRows = selectedSvcs.map((s,i) => ({
+      name: s.name, abbr: s.abbr, sla: s.sla,
+      trackId: 'CLR/2026/' + String(4251 + i)
+    }));
+
+    return {
+      isForm: S.screen==='form',
+      isSuccess: S.screen==='success',
+
+      showHowItWorks: this.props.showHowItWorks ?? true,
+      departments,
+
+      selectedCount: count,
+      hasSelection: count>0,
+      maxSla,
+      showProofWarn: count>0 && !allProofs,
+      submitDisabled: !canSubmit,
+      submitBg: canSubmit ? '#1e9b5f' : '#a9c6b7',
+      submitCursor: canSubmit ? 'pointer' : 'not-allowed',
+      onCancel: () => this.cancel(),
+      onSubmit: () => this.submit(),
+
+      submittedCount: count,
+      submittedRows,
+      onTrack: () => { window.location.href = 'Application Track.dc.html'; },
+      onBackDash: () => this.backDash()
+    };
+  }
+}
+</script>
+</body>
+</html>

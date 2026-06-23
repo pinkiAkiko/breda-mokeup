@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Project Application — BREDA SWCS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#1a4731; --primary-fg:#fff;
+  --accent:#e8860a;  --accent-fg:#fff;
+  --bg:#fff; --fg:#150202;
+  --card:#fff;
+  --secondary:#ebeaea; --secondary-fg:#150202;
+  --muted:#606060;
+  --border:#c6c6c6; --input:#c6c6c6;
+  --info:#0d6efd;
+  --success:#198754;
+  --warning:#ffc107; --warning-fg:#150202;
+  --destructive:#dc3545;
+  --grey:#8e8e8e;
+  --r:0.375rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans",system-ui,sans-serif;background:var(--bg);color:var(--fg);font-size:14px;line-height:1.55}
+a{color:inherit;text-decoration:none}
+
+/* topbar */
+.topbar{background:var(--primary);color:#fff;padding:0 20px;height:48px;display:flex;align-items:center;gap:6px;font-size:12px}
+.topbar a{color:rgba(255,255,255,.65)}.topbar a:hover{color:#fff}.topbar .sep{color:rgba(255,255,255,.35)}
+
+/* page */
+.page{padding:20px 24px;max-width:1200px;margin:0 auto}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.page-title{font-size:20px;font-weight:700;color:var(--primary)}
+.autosave{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(25,135,84,.35);background:rgba(25,135,84,.08);padding:4px 10px;border-radius:99px;font-size:11px;color:var(--success)}
+.autosave span{width:6px;height:6px;border-radius:50%;background:var(--success);display:inline-block}
+
+/* two-col */
+.layout{display:grid;grid-template-columns:210px 1fr;gap:18px;align-items:start}
+
+/* sidebar */
+.sidebar{border:1px solid var(--border);border-radius:var(--r);background:var(--card);padding:10px}
+.step-ol{list-style:none}
+.step-btn{display:flex;align-items:flex-start;gap:9px;width:100%;padding:7px 8px;background:none;border:none;border-radius:var(--r);cursor:pointer;text-align:left;font-family:inherit;transition:background .12s}
+.step-btn:hover{background:rgba(0,0,0,.04)}
+.step-btn.is-active{background:var(--secondary)}
+.step-num-col{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.step-bubble{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:var(--card);color:var(--muted);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-bubble.is-active{background:var(--accent);border-color:var(--accent);color:#fff}
+.step-bubble.is-done{background:var(--primary);border-color:var(--primary);color:#fff}
+.step-connector{width:2px;background:var(--border);flex:1;min-height:10px;margin-top:2px}
+.step-connector.is-done{background:var(--primary)}
+.step-text{padding-bottom:10px;min-width:0}
+.step-label{font-size:12px;font-weight:500;color:var(--muted);line-height:1.35}
+.step-btn.is-active .step-label{font-weight:700;color:var(--fg)}
+.step-btn.is-done .step-label{color:var(--primary);font-weight:600}
+.step-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.sidebar-note{margin-top:14px;border:1px solid rgba(13,110,253,.3);border-left:3px solid var(--info);background:rgba(13,110,253,.05);border-radius:var(--r);padding:9px 11px;font-size:11px;line-height:1.6;color:var(--fg)}
+.sidebar-note strong{color:var(--info)}
+
+/* content card */
+.card{border:1px solid var(--border);border-radius:var(--r);background:var(--card);padding:22px}
+.section-panel{display:none}.section-panel.is-active{display:block}
+
+/* section headings */
+.sh{font-size:16px;font-weight:700;color:var(--primary);border-left:3px solid var(--primary);padding-left:11px;margin-bottom:18px}
+.sub{font-size:13px;font-weight:700;color:var(--primary);margin:20px 0 8px}
+
+/* form fields */
+.ff{display:flex;flex-direction:column;gap:5px}
+.lbl{font-size:12px;font-weight:500;color:var(--fg)}.lbl .req{color:var(--destructive);margin-left:1px}
+.hint{font-size:11px;color:var(--grey);font-style:italic}
+.inp,select{width:100%;border:1px solid var(--input);border-radius:var(--r);padding:7px 11px;font-size:13px;font-family:inherit;color:var(--fg);background:var(--card);outline:none;transition:border-color .15s,box-shadow .15s;appearance:auto}
+.inp:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 2px rgba(26,71,49,.12)}
+.inp:disabled,.inp[readonly],select:disabled{background:var(--secondary);color:var(--muted);cursor:not-allowed}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+
+/* capacity row */
+.cap-row{display:flex;align-items:center;gap:12px}
+.cap-row .inp{width:130px}
+.ir{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer}
+.ir input{accent-color:var(--accent)}
+
+/* purpose cards */
+.purp-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.purp-opt{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;cursor:pointer;transition:border-color .15s,background .15s}
+.purp-opt:hover{border-color:var(--accent)}
+.purp-opt.sel{border-color:var(--accent);background:rgba(232,134,10,.05)}
+.purp-opt input{accent-color:var(--accent);flex-shrink:0}
+.purp-opt span{font-size:13px;font-weight:500}
+
+/* upload rows */
+.uplist{display:flex;flex-direction:column;gap:8px}
+.uprow{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;background:var(--card)}
+.uprow-icon{color:var(--primary);font-size:16px;flex-shrink:0}
+.uprow-meta{flex:1;min-width:0}
+.uprow-name{font-size:13px;font-weight:500}
+.uprow-req{color:var(--destructive);font-size:11px}
+.uprow-done{font-size:11px;color:var(--success);margin-top:1px}
+.uprow-pending{font-size:11px;color:var(--muted)}
+.uprow-size{font-size:11px;color:var(--muted)}
+.btn-upload{flex-shrink:0;border:2px solid var(--primary);background:transparent;color:var(--primary);font-size:11px;font-weight:700;padding:5px 12px;border-radius:var(--r);cursor:pointer;font-family:inherit;transition:background .15s,color .15s;white-space:nowrap}
+.btn-upload:hover{background:var(--primary);color:#fff}
+
+/* inline radios */
+.rads{display:flex;gap:20px;flex-wrap:wrap}
+.rad{display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer}
+.rad input{accent-color:var(--primary)}
+
+/* alerts */
+.alert{display:flex;gap:9px;border:1px solid;border-radius:var(--r);padding:10px 12px;font-size:12px;align-items:flex-start;margin-bottom:14px}
+.alert-warn{border-color:var(--warning);background:rgba(255,193,7,.1)}
+.alert-info{border-color:rgba(13,110,253,.3);background:rgba(13,110,253,.05)}
+.alert-danger{border-color:rgba(220,53,69,.4);background:rgba(220,53,69,.05)}
+.alert .ai{flex-shrink:0;margin-top:1px}
+
+/* declaration */
+.decl-box{border:1px solid var(--border);border-radius:var(--r);background:var(--secondary);padding:14px;font-size:13px;line-height:1.7}
+.decl-note{border-left:4px solid var(--info);background:rgba(13,110,253,.05);padding:9px 12px;font-size:12px;margin-top:12px;border-radius:0 var(--r) var(--r) 0}
+.decl-note strong{color:var(--info)}
+.cbrow{display:flex;align-items:flex-start;gap:9px;font-size:13px;margin-top:14px}
+.cbrow input{margin-top:2px;accent-color:var(--primary);flex-shrink:0}
+
+/* preview */
+.prev-wrap{position:relative}
+.prev-scroll{max-height:52vh;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);padding:18px}
+.prev-sec{margin-bottom:18px}
+.prev-sec-title{font-size:12px;font-weight:700;color:var(--primary);border-left:3px solid var(--primary);padding-left:8px;margin-bottom:8px}
+.prev-row{display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(198,198,198,.4);padding:5px 0;font-size:12px}
+.prev-row dt{color:var(--muted)}.prev-row dd{font-weight:500;text-align:right}
+.prev-fade{pointer-events:none;position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(to top,#fff,transparent)}
+.prev-confirm{margin-top:14px;border:1px solid var(--border);border-radius:var(--r);background:rgba(235,234,234,.6);padding:16px}
+.prev-ok{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--success)}
+
+/* fee */
+.fee-card{border:1px solid var(--accent);background:rgba(232,134,10,.05);border-radius:var(--r);padding:14px}
+.fee-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.fee-rows{margin-top:8px;font-size:13px}
+.fee-row{display:flex;justify-content:space-between;padding:2px 0}
+.fee-total{font-weight:700;color:var(--accent);border-top:1px solid rgba(232,134,10,.3);padding-top:4px;margin-top:3px}
+.fee-table{width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:18px}
+.fee-table th{text-align:left;padding:7px 12px;background:var(--secondary);font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.fee-table td{padding:7px 12px}
+.fee-table tr:nth-child(even) td{background:rgba(235,234,234,.5)}
+.readout{border:1px solid var(--border);background:var(--secondary);border-radius:var(--r);padding:11px}
+.readout-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.readout-val{font-size:15px;font-weight:700;margin-top:3px}
+.demo-box{margin-top:20px;border:2px dashed rgba(255,193,7,.5);background:rgba(255,193,7,.04);border-radius:var(--r);padding:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.demo-title{font-size:12px;font-weight:700}.demo-desc{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* buttons */
+.btn{border-radius:var(--r);font-family:inherit;font-size:13px;font-weight:700;padding:8px 18px;cursor:pointer;transition:background .14s,opacity .14s;border:none;display:inline-flex;align-items:center;gap:5px;line-height:1}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover:not(:disabled){background:#153d29}
+.btn-outline{background:var(--card);color:var(--fg);border:1px solid var(--border)}.btn-outline:hover:not(:disabled){background:var(--secondary)}
+.btn-accent-outline{background:transparent;color:var(--accent);border:2px solid var(--accent)}.btn-accent-outline:hover:not(:disabled){background:var(--accent);color:#fff}
+.btn-warn-outline{background:rgba(255,193,7,.1);color:#856404;border:2px solid var(--warning);font-size:12px}.btn-warn-outline:hover:not(:disabled){background:var(--warning)}
+
+/* nav */
+.form-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:14px;margin-top:28px;gap:10px;flex-wrap:wrap}
+.form-nav-right{display:flex;gap:8px}
+
+/* success */
+.success-wrap{max-width:480px;margin:0 auto;text-align:center;border:1px solid var(--border);border-radius:var(--r);background:var(--card);padding:40px}
+.succ-icon{font-size:60px;line-height:1;margin-bottom:14px}
+.succ-title{font-size:20px;font-weight:700;color:var(--primary)}
+.succ-sub{font-size:12px;color:var(--muted);margin-top:10px}
+.succ-ack{font-size:26px;font-weight:700;color:var(--accent);letter-spacing:.04em;margin-top:4px}
+.succ-txn{font-size:11px;color:var(--muted);font-family:monospace}
+.succ-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+.mt2{margin-top:8px}.mt3{margin-top:12px}.mt4{margin-top:16px}.mt5{margin-top:20px}.mt6{margin-top:24px}
+.hidden{display:none!important}
+.info-pill{font-size:11px;color:var(--info);margin-top:6px}
+.dist-note{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* aadhaar warning badge */
+.aadhaar-warn{display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(255,193,7,.5);background:rgba(255,193,7,.1);padding:3px 8px;border-radius:var(--r);font-size:11px;font-weight:500;color:#856404;margin-top:4px}
+
+/* custom doc row */
+.custom-doc-row{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:var(--r);padding:8px 12px;background:var(--card)}
+.cd-id{flex-shrink:0;border-radius:var(--r);background:var(--secondary);font-family:monospace;font-size:10px;color:var(--muted);padding:2px 6px}
+.cd-label-inp{flex:1;border:1px solid var(--input);border-radius:var(--r);padding:5px 9px;font-size:12px;font-family:inherit;outline:none}
+.cd-label-inp:focus{border-color:var(--primary)}
+.btn-remove{background:none;border:none;cursor:pointer;color:var(--destructive);padding:4px;border-radius:4px;font-size:14px;display:flex;align-items:center}
+.btn-remove:hover{background:rgba(220,53,69,.08)}
+.btn-add-doc{display:inline-flex;align-items:center;gap:6px;border:1px dashed rgba(26,71,49,.45);background:transparent;color:var(--primary);font-size:12px;font-weight:700;padding:7px 14px;border-radius:var(--r);cursor:pointer;font-family:inherit}
+.btn-add-doc:hover{background:rgba(26,71,49,.06)}
+
+@media(max-width:768px){.layout{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.g3{grid-template-columns:1fr}}
+@media print{.topbar,.sidebar,.form-nav,.demo-box,.autosave{display:none!important}.layout{display:block}.card{border:none;padding:0}.prev-scroll{max-height:none;overflow:visible}.prev-fade{display:none}}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="#">Dashboard</a>
+  <span class="sep">›</span>
+  <span>New Project Application</span>
+</nav>
+
+<!-- SUCCESS SCREEN (shown after payment) -->
+<div id="success-screen" class="page hidden">
+  <div class="success-wrap">
+    <div class="succ-icon">✅</div>
+    <div class="succ-title" id="succ-title">Payment Successful</div>
+    <div class="succ-sub">Your Acknowledgement Number</div>
+    <div class="succ-ack" id="succ-ack"></div>
+    <div class="succ-txn" id="succ-txn"></div>
+    <div class="succ-note">Confirmation sent via SMS and Email. Apply for Clearances will unlock after BREDA approves your application.</div>
+    <button class="btn btn-primary mt4" onclick="location.reload()">← Back to Dashboard</button>
+  </div>
+</div>
+
+<!-- MAIN FORM -->
+<div id="main-form" class="page">
+  <div class="page-header">
+    <h1 class="page-title">New Project Application</h1>
+    <div class="autosave" id="autosave-badge"><span></span> <span id="autosave-text">Auto-saved · 10:42 AM</span></div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <ol class="step-ol" id="step-ol"></ol>
+      <div class="sidebar-note"><strong>Note:</strong> Clearances from individual departments are applied for in a separate step, after BREDA approves this application.</div>
+    </aside>
+
+    <!-- CONTENT CARD -->
+    <section class="card" id="content-card">
+
+      <!-- STEP 0: Project Capacity & Purpose -->
+      <div class="section-panel is-active" id="panel-step0">
+        <div class="sh">Project Capacity &amp; Purpose</div>
+        <div class="ff">
+          <label class="lbl">Plant Capacity <span class="req">*</span></label>
+          <div class="cap-row">
+            <input class="inp" type="number" id="cap-value" placeholder="e.g. 500" oninput="onCapChange()">
+            <label class="ir"><input type="radio" name="unit" value="kW" id="unit-kw" checked onchange="onCapChange()"> kW (AC)</label>
+            <label class="ir"><input type="radio" name="unit" value="MW" id="unit-mw" onchange="onCapChange()"> MW (AC)</label>
+          </div>
+          <div class="info-pill hidden" id="cap-rule"></div>
+        </div>
+
+        <div class="mt5">
+          <p class="lbl">Purpose of Grid Connected RE Project <span class="req">*</span></p>
+          <div class="purp-list" id="purp-list"></div>
+          <input class="inp mt2 hidden" id="purpose-other-inp" type="text" placeholder="Specify purpose">
+        </div>
+      </div><!-- /step0 -->
+
+      <!-- SECTION A: General Profile -->
+      <div class="section-panel" id="panel-A">
+        <div class="sh">Section A — General Profile of Applicant</div>
+        <div class="g2">
+          <div class="ff"><label class="lbl">Name of Applicant <span class="req">*</span></label><input class="inp" value="Rajesh Kumar Sharma" disabled></div>
+          <div class="ff"><label class="lbl">Type of Applicant <span class="req">*</span></label><input class="inp" value="Pvt. Ltd." disabled></div>
+        </div>
+
+        <div class="sub">Communication Address</div>
+        <div class="g2 mt2">
+          <div class="ff"><label class="lbl">Street / House No. <span class="req">*</span></label><input class="inp" id="comm-street" value="12, Gandhi Marg, Block B"></div>
+          <div class="ff"><label class="lbl">Village <span class="req">*</span></label><select id="comm-village"><option value="Phulwari" selected>Phulwari</option></select></div>
+          <div class="ff"><label class="lbl">City</label><input class="inp" id="comm-city" value="Patna" placeholder="Optional"></div>
+          <div class="ff"><label class="lbl">District <span class="req">*</span></label><select id="comm-district"></select></div>
+          <div class="ff"><label class="lbl">Block <span class="req">*</span></label><select id="comm-block"></select></div>
+          <div class="ff"><label class="lbl">Panchayat <span class="req">*</span></label><select id="comm-panchayat"></select></div>
+          <div class="ff"><label class="lbl">Pin Code <span class="req">*</span></label><input class="inp" id="comm-pin" value="800006" maxlength="6"></div>
+        </div>
+
+        <div class="sub" style="display:flex;align-items:center;justify-content:space-between">
+          <span>Project Address</span>
+          <label class="ir" style="font-weight:400;font-size:12px"><input type="checkbox" id="same-addr" onchange="onSameAddr(this)"> Same as Communication Address <small style="color:var(--muted)">(copies once; editable after)</small></label>
+        </div>
+        <div class="g2 mt2">
+          <div class="ff"><label class="lbl">Street / House No. <span class="req">*</span></label><input class="inp" id="proj-street" placeholder="House / plot no., street"></div>
+          <div class="ff"><label class="lbl">Village <span class="req">*</span></label><select id="proj-village"></select></div>
+          <div class="ff"><label class="lbl">City</label><input class="inp" id="proj-city" placeholder="Optional"></div>
+          <div class="ff"><label class="lbl">District <span class="req">*</span></label><select id="proj-district"></select></div>
+          <div class="ff"><label class="lbl">Block <span class="req">*</span></label><select id="proj-block"></select></div>
+          <div class="ff"><label class="lbl">Panchayat <span class="req">*</span></label><select id="proj-panchayat"></select></div>
+          <div class="ff"><label class="lbl">Pin Code <span class="req">*</span></label><input class="inp" id="proj-pin" placeholder="6-digit PIN" maxlength="6"></div>
+          <div class="ff"><label class="lbl">Latitude <span class="req">*</span></label><input class="inp" id="proj-lat" placeholder="e.g. 25.6127"></div>
+          <div class="ff"><label class="lbl">Longitude <span class="req">*</span></label><input class="inp" id="proj-lng" placeholder="e.g. 85.1376"></div>
+        </div>
+
+        <div class="sub">Contact &amp; Identity</div>
+        <div class="g2 mt2">
+          <div class="ff"><label class="lbl">Mobile No. <span class="req">*</span></label><input class="inp" value="+91 98765 43210" readonly></div>
+          <div class="ff"><label class="lbl">E-mail <span class="req">*</span></label><input class="inp" value="rajesh.sharma@solarenergy.in" readonly></div>
+          <div class="ff"><label class="lbl">Alternate Mobile No.</label><input class="inp" id="alt-mobile" placeholder="Optional" maxlength="10"></div>
+          <div class="ff"><label class="lbl">Alternate Email</label><input class="inp" id="alt-email" type="email" placeholder="Optional"></div>
+          <div class="ff"><label class="lbl">PAN Number <span class="req">*</span></label><input class="inp" id="pan-num" placeholder="ABCDE1234F" oninput="this.value=this.value.toUpperCase();triggerAutosave()"></div>
+          <div class="ff">
+            <label class="lbl">Aadhaar Number <span class="req">*</span></label>
+            <input class="inp" id="aadhaar-num" placeholder="XXXX XXXX XXXX" inputmode="numeric" maxlength="12" oninput="this.value=this.value.replace(/\D/g,'');triggerAutosave()">
+            <div class="aadhaar-warn">⚠ Integration pending: Aadhaar must be tokenised via Aadhaar Vault; raw number is not persisted.</div>
+          </div>
+          <div class="ff"><label class="lbl">GST Number <span class="hint">(Mandatory if applicable)</span></label><input class="inp" id="gst-num" placeholder="22ABCDE1234F1Z5" oninput="this.value=this.value.toUpperCase();rebuildDocList();triggerAutosave()"></div>
+        </div>
+      </div><!-- /A -->
+
+      <!-- SECTION B: Technical & Financial -->
+      <div class="section-panel" id="panel-B">
+        <div class="sh">Section B — Technical and Financial Details</div>
+        <div class="g2">
+          <div class="ff">
+            <label class="lbl">Type of Power Plant <span class="req">*</span></label>
+            <select id="plant-kind" onchange="onPlantKindChange()">
+              <option value="">Select</option>
+              <option>Solar</option>
+              <option>Non-Solar</option>
+            </select>
+          </div>
+          <div class="ff" id="subtype-wrap" style="display:none">
+            <label class="lbl">Sub-type <span class="req">*</span></label>
+            <select id="subtype"><option value="">Select</option></select>
+          </div>
+        </div>
+        <div class="rads mt3" id="storage-row" style="display:none">
+          <label class="rad"><input type="radio" name="storage" value="0" checked> Without Storage</label>
+          <label class="rad"><input type="radio" name="storage" value="1"> With Storage</label>
+        </div>
+
+        <div class="g3 mt4">
+          <div class="ff">
+            <label class="lbl">Name of concerned DISCOM <span class="req">*</span></label>
+            <select id="discom" onchange="onDiscomChange()">
+              <option value="">Select</option>
+              <option>NBPDCL</option>
+              <option>SBPDCL</option>
+            </select>
+          </div>
+          <div class="ff">
+            <label class="lbl" id="station-lbl">Nearest PSS <span class="req">*</span></label>
+            <select id="station" disabled>
+              <option value="">Select DISCOM first</option>
+            </select>
+            <div class="hint" id="station-hint">Auto: &lt; 10 MW → PSS</div>
+          </div>
+          <div class="ff">
+            <label class="lbl">Distance (km) <span class="req">*</span></label>
+            <input class="inp" id="station-dist" type="number" placeholder="e.g. 2.5" oninput="onDistChange()">
+            <div class="dist-note hidden" id="dist-m"></div>
+          </div>
+        </div>
+
+        <div class="ff mt4">
+          <label class="lbl">Type of Power Evacuation <span class="req">*</span></label>
+          <div class="rads">
+            <label class="rad"><input type="radio" name="evac" value="LILO" checked> LILO</label>
+            <label class="rad"><input type="radio" name="evac" value="Direct"> Direct Evacuation</label>
+            <label class="rad"><input type="radio" name="evac" value="Other" onchange="document.getElementById('evac-other').classList.toggle('hidden',this.value!='Other')"> Other</label>
+          </div>
+          <input class="inp mt2 hidden" id="evac-other" placeholder="Specify">
+        </div>
+
+        <div class="g2 mt4">
+          <div class="ff"><label class="lbl">Proposed Date of Commissioning <span class="req">*</span></label><input class="inp" type="date" id="cod-date"></div>
+          <div class="ff"><label class="lbl">Approximate Project Cost (₹) <span class="req">*</span></label><input class="inp" type="number" id="proj-cost" placeholder="e.g. 5000000"></div>
+        </div>
+
+        <div class="sub">EPC Contractor / Developer</div>
+        <div class="g2">
+          <div class="ff"><label class="lbl">Name <span class="req">*</span></label><input class="inp" id="epc-name"></div>
+          <div class="ff"><label class="lbl">Address <span class="req">*</span></label><input class="inp" id="epc-addr"></div>
+          <div class="ff"><label class="lbl">Contact Person <span class="req">*</span></label><input class="inp" id="epc-contact"></div>
+          <div class="ff"><label class="lbl">Mobile No. <span class="req">*</span></label><input class="inp" id="epc-mobile" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')"></div>
+          <div class="ff"><label class="lbl">E-mail <span class="req">*</span></label><input class="inp" id="epc-email" type="email"></div>
+        </div>
+      </div><!-- /B -->
+
+      <!-- SECTION C: Land -->
+      <div class="section-panel" id="panel-C">
+        <div class="sh">Section C — Land Availability</div>
+        <div class="ff">
+          <label class="lbl">Type of Area Ownership Document <span class="req">*</span></label>
+          <select id="ownership" onchange="onOwnershipChange()">
+            <option value="">Select</option>
+            <option>Copy of House Tax Bill</option>
+            <option>Property Card</option>
+            <option>Rent / lease agreement or NOC of Society in case of flat / multi-storied apartments</option>
+            <option>Building Use (BU) permission</option>
+          </select>
+        </div>
+        <div class="mt3 hidden" id="ownership-upload-wrap">
+          <div class="ff"><label class="lbl">Upload self-attested copy (max 5 MB) <span class="req">*</span></label>
+            <div class="uprow" id="ownership-uprow">
+              <span class="uprow-icon">📄</span>
+              <div class="uprow-meta"><div class="uprow-name" id="own-file-name">PDF / DOC / image</div></div>
+              <label class="btn-upload">📎 Upload<input type="file" hidden accept=".pdf,.doc,.docx,image/*" onchange="onOwnerFile(this)"></label>
+            </div>
+          </div>
+        </div>
+        <div class="ff mt4">
+          <label class="lbl">Land Category <span class="req">*</span></label>
+          <div class="rads">
+            <label class="rad"><input type="radio" name="land-cat" value="Private" checked> Private</label>
+            <label class="rad"><input type="radio" name="land-cat" value="Government"> Government</label>
+          </div>
+        </div>
+        <div class="ff mt4">
+          <label class="lbl">Land / Rooftop Area (acres) <span class="req">*</span></label>
+          <input class="inp" type="number" id="land-area" style="width:160px" placeholder="e.g. 5.0">
+        </div>
+      </div><!-- /C -->
+
+      <!-- SECTION D: Documents -->
+      <div class="section-panel" id="panel-D">
+        <div class="sh">Section D — Documents Upload</div>
+        <p class="hint mb2" style="margin-bottom:12px">File size limits: DPR up to 25 MB · Documents up to 5 MB · Scanned images up to 2 MB</p>
+        <div class="uplist" id="doc-list"></div>
+
+        <div class="sub">Custom Documents (Optional)</div>
+        <p class="hint" style="margin-bottom:10px">Add any additional document with a label of your choice. Each up to 5 MB.</p>
+        <div class="uplist" id="custom-doc-list"></div>
+        <button class="btn-add-doc mt2" onclick="addCustomDoc()">+ Add another document</button>
+      </div><!-- /D -->
+
+      <!-- SECTION E: Declaration -->
+      <div class="section-panel" id="panel-E">
+        <div class="sh">Section E — Declaration</div>
+        <div class="alert alert-warn hidden" id="e-lock-alert">
+          <span class="ai">🔒</span>
+          <p>Please complete all form sections (Step 0 through Section D) before proceeding to declaration &amp; payment.</p>
+        </div>
+        <div class="decl-box">
+          <p>I <strong>Rajesh Kumar Sharma</strong> (authorized representative of M/s. <strong>Rajesh Kumar Sharma</strong>) declare that the information filled in the application form is true and correct to the best of my knowledge and BREDA is not responsible for providing land, power evacuation and water supply facility, or for the operation &amp; maintenance of the plant. BREDA is absolved from any loss that may occur on account of failure of the substation/transmission line and/or non-performance of any system of the project. I fully understand that this registration process does not provide any extra claim/benefit other than prevailing RE Policy for any assistance.</p>
+          <div class="decl-note"><strong>Note*:</strong> I understand that I am responsible for selecting all clearances applicable to my project. Non-selection of any required clearance may delay commissioning, incentives, or statutory compliance. BREDA will facilitate processing of only the clearances selected and submitted through this application.</div>
+        </div>
+        <label class="cbrow"><input type="checkbox" id="declared-cb" onchange="triggerAutosave()"> I confirm the above declaration is true and correct.</label>
+        <div class="mt5">
+          <button class="btn btn-primary" id="btn-to-preview" onclick="goToPreview()" disabled>Review &amp; Proceed to Preview →</button>
+        </div>
+      </div><!-- /E -->
+
+      <!-- PREVIEW -->
+      <div class="section-panel" id="panel-Preview">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div class="sh" style="margin-bottom:0">Preview Application</div>
+          <button class="btn btn-accent-outline" onclick="window.print()" style="font-size:12px;padding:6px 12px">🖨 Print</button>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Review all details carefully. Once you confirm, Section F (payment) will unlock.</p>
+        <div class="prev-wrap">
+          <div class="prev-scroll" id="preview-content"></div>
+          <div class="prev-fade"></div>
+        </div>
+        <div class="prev-confirm" id="prev-confirm-box">
+          <div class="prev-ok hidden" id="prev-ok-msg">✅ Application reviewed and confirmed. Proceed to Section F to pay.</div>
+          <label class="cbrow" id="prev-cb-row"><input type="checkbox" id="preview-cb" onchange="onPreviewConfirm(this)"> <span>I have reviewed all the information above and confirm it is correct. I understand the registration fee is <strong>non-refundable</strong>.</span></label>
+          <p class="hint mt2" id="prev-hint-text">Ticking this box will unlock Section F (payment).</p>
+        </div>
+      </div><!-- /Preview -->
+
+      <!-- SECTION F: Registration Fees -->
+      <div class="section-panel" id="panel-F">
+        <div class="sh">Section F — Registration Fees Submission</div>
+        <div class="alert alert-warn hidden" id="f-lock-alert">
+          <span class="ai">🔒</span>
+          <p id="f-lock-msg">Review and confirm your application in the Preview section before payment.</p>
+        </div>
+
+        <div class="g2 mb4" style="margin-bottom:18px">
+          <div class="readout"><div class="readout-lbl">Plant Capacity</div><div class="readout-val" id="f-cap-display">— kW</div></div>
+          <div class="fee-card">
+            <div class="fee-lbl">Registration Fee</div>
+            <div class="fee-rows">
+              <div class="fee-row"><span style="color:var(--muted)">Processing fee</span><span id="f-base">₹ 0</span></div>
+              <div class="fee-row"><span style="color:var(--muted)">GST @ 18%</span><span id="f-gst">₹ 0</span></div>
+              <div class="fee-row fee-total"><span>Total payable</span><span id="f-total">₹ 0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-danger" style="margin-bottom:18px">
+          <span class="ai">🔒</span>
+          <p><strong style="color:var(--destructive)">Non-refundable:</strong> the registration/processing fee is non-refundable. If the application is rejected at any stage after payment, no refund is issued. The application cannot be withdrawn once the fee is paid.</p>
+        </div>
+
+        <table class="fee-table">
+          <thead><tr><th>Capacity</th><th>Processing Fee</th></tr></thead>
+          <tbody>
+            <tr><td>&lt; 10 KW</td><td class="fw">₹ 1,000/-</td></tr>
+            <tr><td>≥ 10 KW &lt; 100 KW</td><td class="fw">₹ 2,000/-</td></tr>
+            <tr><td>≥ 100 KW &lt; 500 KW</td><td class="fw">₹ 5,000/-</td></tr>
+            <tr><td>≥ 500 KW &lt; 1000 KW</td><td class="fw">₹ 10,000/-</td></tr>
+            <tr><td>1 MW and above</td><td class="fw">₹ 50,000/- per MW (max ₹ 5 Lakh)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="ff">
+          <label class="lbl">Payment Method <span class="req">*</span></label>
+          <div class="rads">
+            <label class="rad"><input type="radio" name="pay-method" value="online" checked onchange="onPayMethodChange()"> Online Payment (GRAS / e-Treasury)</label>
+            <label class="rad"><input type="radio" name="pay-method" value="offline" onchange="onPayMethodChange()"> Offline (DD / Cheque)</label>
+          </div>
+        </div>
+
+        <div class="mt4" id="online-pay-wrap">
+          <button class="btn btn-primary" id="btn-pay-online" onclick="doPayOnline()" style="font-size:14px;padding:10px 24px">Pay <span id="pay-btn-amt">₹ 0</span> Now</button>
+        </div>
+
+        <div class="mt4 hidden" id="offline-pay-wrap">
+          <div class="ff" style="max-width:340px">
+            <label class="lbl">DD / Cheque Number <span class="req">*</span></label>
+            <input class="inp" id="offline-ref" placeholder="e.g. 004521">
+            <div class="hint">Pay by Demand Draft or cheque at the bank, then enter its number here for Finance verification.</div>
+          </div>
+          <button class="btn btn-primary mt3" id="btn-pay-offline" onclick="doPayOffline()">Submit DD / Cheque Number</button>
+          <p class="hint mt2">Finance will verify your payment. The Acknowledgement Number is generated only after successful verification.</p>
+        </div>
+
+        <div class="demo-box">
+          <div><div class="demo-title">Demo shortcut</div><div class="demo-desc">Skip validations &amp; payment gateway — submit the application instantly for client demonstration.</div></div>
+          <button class="btn btn-warn-outline" onclick="doDemo()">Mark as Paid (Demo) →</button>
+        </div>
+      </div><!-- /F -->
+
+      <!-- NAV -->
+      <div class="form-nav">
+        <button class="btn btn-outline" id="btn-prev" onclick="navStep(-1)">← Previous</button>
+        <div class="form-nav-right">
+          <button class="btn btn-outline" onclick="saveDraft()">Save as Draft</button>
+          <button class="btn btn-primary" id="btn-next" onclick="navStep(1)">Next →</button>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<script>
+// ───── DATA ─────
+const STEPS = [
+  {id:'step0', label:'Project Capacity & Purpose'},
+  {id:'A',     label:'Section A — General Profile'},
+  {id:'B',     label:'Section B — Technical & Financial'},
+  {id:'C',     label:'Section C — Land Availability'},
+  {id:'D',     label:'Section D — Documents Upload'},
+  {id:'E',     label:'Section E — Declaration',    sub:'Locked until D is complete'},
+  {id:'Preview',label:'Preview Application',       sub:'Locked until E is complete'},
+  {id:'F',     label:'Section F — Registration Fees', sub:'Locked until Preview is confirmed'},
+];
+
+const PURPOSES = [
+  'Captive / Individual / Domestic Use',
+  'Open Access',
+  'Third Party Sale',
+  'Power Purchase Agreement with DISCOM',
+  'Other as mentioned in RE Policy',
+];
+const DISTRICTS = ['Patna','Gaya','Bhagalpur','Muzaffarpur','Darbhanga','Purnia','Begusarai','Nalanda','Vaishali','Saran','Rohtas','Samastipur'];
+const VILLAGES  = ['Bhikhampur','Manjhaul','Naubatpur','Bihta','Phulwari','Danapur','Maner','Punpun','Masaurhi','Paliganj','Barh','Mokama','Bakhtiyarpur','Khusrupur','Fatuha'];
+const BLOCKS    = ['Patna Sadar','Bihta','Mushahari','Gaya Town','Manpur','Sasaram'];
+const PANCH     = ['Patna','Bihta','Mushahari','Gaya','Manpur'];
+const PSS = {
+  NBPDCL:['Muzaffarpur PSS-I','Darbhanga PSS-II','Begusarai GSS','Purnia PSS-III','Saharsa PSS'],
+  SBPDCL:['Patna Boring Road PSS','Patliputra PSS','Gaya GSS','Bhagalpur PSS','Rohtas PSS-II'],
+};
+const SOLAR_SUB    = ['Rooftop','Ground Mounted','Floating','Canal bank/top','Others'];
+const NONSOLAR_SUB = ['Bio','Wind','Waste to Energy','Geothermal','Hydro','Others'];
+const BASE_DOCS = [
+  {key:'DPR',   label:'Detailed Project Report (DPR)',                               limit:25, req:true},
+  {key:'PAN',   label:'PAN Card',                                                    limit:5,  req:true},
+  {key:'FIRM',  label:"Firm's Registration Certificate / Identity Document",         limit:5,  req:true},
+  {key:'STARTUP',label:'Startup India / Udyam / NSIC / Industry Dept. Certificate', limit:5,  req:true},
+  {key:'BALANCE',label:'Audited Balance Sheet — at least one year (if applicable)', limit:5,  req:false},
+  {key:'ITR',   label:'Income Tax Return Certificate — at least one year',           limit:5,  req:true},
+];
+
+// ───── STATE ─────
+let activeStep = 'step0';
+let previewConfirmed = false;
+let completedIds = new Set();
+let uploadedDocs = {};      // key → filename
+let customDocs   = [];      // [{id,label,file}]
+let ownershipFile = null;
+let autosaveTimer = null;
+
+// ───── INIT ─────
+document.addEventListener('DOMContentLoaded', () => {
+  buildSidebar();
+  buildPurposeList();
+  buildSelects();
+  buildDocList();
+  updateFeeDisplay();
+  updateSidebar();
+  updateNavBtns();
+});
+
+function buildSidebar() {
+  const ol = document.getElementById('step-ol');
+  ol.innerHTML = '';
+  STEPS.forEach((s, i) => {
+    const li = document.createElement('li');
+    li.className = 'step-item';
+    const isDone   = completedIds.has(s.id);
+    const isActive = s.id === activeStep;
+    const connector = i < STEPS.length - 1
+      ? `<div class="step-connector${isDone?' is-done':''}"></div>` : '';
+    li.innerHTML = `
+      <button class="step-btn${isActive?' is-active':''}${isDone?' is-done':''}" onclick="goToStep('${s.id}')">
+        <div class="step-num-col">
+          <div class="step-bubble${isActive?' is-active':''}${isDone?' is-done':''}">${isDone?'✓':(i+1)}</div>
+          ${connector}
+        </div>
+        <div class="step-text">
+          <div class="step-label">${s.label}</div>
+          ${s.sub ? `<div class="step-sub">${s.sub}</div>` : ''}
+        </div>
+      </button>`;
+    ol.appendChild(li);
+  });
+}
+
+function buildPurposeList() {
+  const list = document.getElementById('purp-list');
+  list.innerHTML = '';
+  PURPOSES.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'purp-opt';
+    div.dataset.v = p;
+    div.innerHTML = `<input type="radio" name="purpose" value="${p}"><span>${p}</span>`;
+    div.onclick = () => selectPurpose(p, div);
+    list.appendChild(div);
+  });
+}
+
+function buildSelects() {
+  ['comm-district','proj-district'].forEach(id => {
+    const s = document.getElementById(id);
+    s.innerHTML = '<option value="">Select</option>';
+    DISTRICTS.forEach(d => s.innerHTML += `<option${d==='Patna'?' selected':''}>${d}</option>`);
+  });
+  ['comm-village','proj-village'].forEach(id => {
+    const s = document.getElementById(id);
+    s.innerHTML = '<option value="">Select</option>';
+    VILLAGES.forEach(v => s.innerHTML += `<option${v==='Phulwari'?' selected':''}>${v}</option>`);
+  });
+  ['comm-block','proj-block'].forEach(id => {
+    const s = document.getElementById(id);
+    s.innerHTML = '<option value="">Select</option>';
+    BLOCKS.forEach(v => s.innerHTML += `<option${v==='Patna Sadar'?' selected':''}>${v}</option>`);
+  });
+  ['comm-panchayat','proj-panchayat'].forEach(id => {
+    const s = document.getElementById(id);
+    s.innerHTML = '<option value="">Select</option>';
+    PANCH.forEach(v => s.innerHTML += `<option${v==='Patna'?' selected':''}>${v}</option>`);
+  });
+}
+
+function buildDocList() {
+  const gst = document.getElementById('gst-num')?.value || '';
+  const purp = document.querySelector('input[name="purpose"]:checked')?.value || '';
+  let docs = [...BASE_DOCS];
+  if (gst) docs.splice(4, 0, {key:'GST', label:'GST Certificate', limit:5, req:true});
+  if (purp === 'Power Purchase Agreement with DISCOM')
+    docs.push({key:'PPA', label:'Power Purchase Agreement (PPA)', limit:5, req:false});
+
+  const list = document.getElementById('doc-list');
+  list.innerHTML = '';
+  docs.forEach(k => {
+    const f = uploadedDocs[k.key];
+    const row = document.createElement('div');
+    row.className = 'uprow';
+    row.id = `docrow-${k.key}`;
+    row.innerHTML = `
+      <span class="uprow-icon">📄</span>
+      <div class="uprow-meta">
+        <div class="uprow-name">${k.label}${k.req ? '<span class="uprow-req"> *</span>':''} <span class="uprow-size">(max ${k.limit} MB)</span></div>
+        <div class="${f?'uprow-done':'uprow-pending'}">${f?('✓ '+f):'Not uploaded'}</div>
+      </div>
+      ${f
+        ? `<button class="btn-remove" onclick="clearDoc('${k.key}')" title="Remove">✕</button>`
+        : `<label class="btn-upload">📎 Upload<input type="file" hidden onchange="onDocFile(this,'${k.key}',${k.limit})"></label>`
+      }`;
+    list.appendChild(row);
+  });
+}
+
+function rebuildDocList() { buildDocList(); }
+
+// ───── STEP NAVIGATION ─────
+function goToStep(id) {
+  activeStep = id;
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('is-active'));
+  document.getElementById('panel-' + id).classList.add('is-active');
+  if (id === 'Preview') renderPreview();
+  if (id === 'F') updateFeeDisplay();
+  if (id === 'E') checkELock();
+  updateSidebar();
+  updateNavBtns();
+  document.getElementById('content-card').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function navStep(dir) {
+  const idx = STEPS.findIndex(s => s.id === activeStep);
+  const next = STEPS[idx + dir];
+  if (next) goToStep(next.id);
+}
+
+function updateNavBtns() {
+  const idx = STEPS.findIndex(s => s.id === activeStep);
+  document.getElementById('btn-prev').disabled = idx === 0;
+  document.getElementById('btn-next').disabled = idx === STEPS.length - 1;
+}
+
+function updateSidebar() { buildSidebar(); }
+
+// ───── CAPACITY / FEE ─────
+function getCapacityKW() {
+  const v = parseFloat(document.getElementById('cap-value').value) || 0;
+  const unit = document.querySelector('input[name="unit"]:checked')?.value || 'kW';
+  return unit === 'MW' ? v * 1000 : v;
+}
+function calcFee(kw) {
+  if (kw < 10)   return 1000;
+  if (kw < 100)  return 2000;
+  if (kw < 500)  return 5000;
+  if (kw < 1000) return 10000;
+  return Math.min(Math.round((kw/1000) * 50000), 500000);
+}
+function onCapChange() {
+  const kw = getCapacityKW();
+  const pill = document.getElementById('cap-rule');
+  if (kw > 0) {
+    pill.classList.remove('hidden');
+    const isHigh = kw >= 10000;
+    pill.textContent = `Auto-rule: ${kw} kW → ${isHigh?'Grid Sub-Station (GSS)':'Power Sub-Station (PSS)'} integration · Fee slab applies.`;
+    // update station label/hint
+    const lbl = document.getElementById('station-lbl');
+    if (lbl) lbl.innerHTML = (isHigh?'Nearest GSS':'Nearest PSS') + ' <span class="req">*</span>';
+    const hint = document.getElementById('station-hint');
+    if (hint) hint.textContent = `Auto: ${isHigh?'≥':'<'} 10 MW → ${isHigh?'GSS':'PSS'}`;
+  } else {
+    pill.classList.add('hidden');
+  }
+  updateFeeDisplay();
+  triggerAutosave();
+}
+function updateFeeDisplay() {
+  const kw = getCapacityKW();
+  const cap = document.getElementById('cap-value')?.value || '';
+  const unit = document.querySelector('input[name="unit"]:checked')?.value || 'kW';
+  const base = calcFee(kw);
+  const gst  = Math.round(base * 0.18);
+  const total= base + gst;
+  const fmt = n => '₹ ' + n.toLocaleString('en-IN');
+  document.getElementById('f-base').textContent  = fmt(base);
+  document.getElementById('f-gst').textContent   = fmt(gst);
+  document.getElementById('f-total').textContent = fmt(total);
+  document.getElementById('f-cap-display').textContent = cap ? `${cap} ${unit}` : '— kW';
+  document.getElementById('pay-btn-amt').textContent = fmt(total);
+}
+
+// ───── PURPOSE ─────
+function selectPurpose(v, el) {
+  document.querySelectorAll('.purp-opt').forEach(d => d.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('input').checked = true;
+  const otherInp = document.getElementById('purpose-other-inp');
+  otherInp.classList.toggle('hidden', v !== 'Other as mentioned in RE Policy');
+  rebuildDocList();
+  triggerAutosave();
+}
+
+// ───── ADDRESS COPY ─────
+function onSameAddr(cb) {
+  if (!cb.checked) return;
+  ['street','village','city','block','district','pin','panchayat'].forEach(f => {
+    const src = document.getElementById('comm-'+f);
+    const dst = document.getElementById('proj-'+f);
+    if (src && dst) dst.value = src.value;
+  });
+}
+
+// ───── PLANT KIND ─────
+function onPlantKindChange() {
+  const v = document.getElementById('plant-kind').value;
+  const stWrap = document.getElementById('subtype-wrap');
+  const stSel  = document.getElementById('subtype');
+  const storRow= document.getElementById('storage-row');
+  if (!v) { stWrap.style.display='none'; storRow.style.display='none'; return; }
+  stWrap.style.display = '';
+  stSel.innerHTML = '<option value="">Select</option>';
+  (v === 'Solar' ? SOLAR_SUB : NONSOLAR_SUB).forEach(s => stSel.innerHTML += `<option>${s}</option>`);
+  storRow.style.display = v === 'Solar' ? '' : 'none';
+}
+
+// ───── DISCOM ─────
+function onDiscomChange() {
+  const v = document.getElementById('discom').value;
+  const st = document.getElementById('station');
+  if (!v) { st.innerHTML = '<option>Select DISCOM first</option>'; st.disabled=true; return; }
+  st.disabled = false;
+  st.innerHTML = '<option value="">Select</option>';
+  (PSS[v]||[]).forEach(s => st.innerHTML += `<option>${s}</option>`);
+  triggerAutosave();
+}
+
+// ───── DISTANCE ─────
+function onDistChange() {
+  const v = parseFloat(document.getElementById('station-dist').value)||0;
+  const note = document.getElementById('dist-m');
+  if (v > 0) { note.classList.remove('hidden'); note.textContent = `= ${v*1000} metres`; }
+  else note.classList.add('hidden');
+}
+
+// ───── OWNERSHIP ─────
+function onOwnershipChange() {
+  const v = document.getElementById('ownership').value;
+  document.getElementById('ownership-upload-wrap').classList.toggle('hidden', !v);
+}
+function onOwnerFile(inp) {
+  const f = inp.files[0];
+  if (!f) return;
+  if (f.size > 5*1024*1024) { alert('File exceeds 5 MB limit'); inp.value=''; return; }
+  ownershipFile = f.name;
+  document.getElementById('own-file-name').textContent = '✓ ' + f.name;
+  document.getElementById('own-file-name').style.color = 'var(--success)';
+  triggerAutosave();
+}
+
+// ───── DOCS ─────
+function onDocFile(inp, key, limitMB) {
+  const f = inp.files[0];
+  if (!f) return;
+  if (f.size > limitMB*1024*1024) { alert(`File exceeds ${limitMB} MB limit`); inp.value=''; return; }
+  uploadedDocs[key] = f.name;
+  buildDocList();
+  triggerAutosave();
+}
+function clearDoc(key) {
+  delete uploadedDocs[key];
+  buildDocList();
+}
+
+// ───── CUSTOM DOCS ─────
+let cdCounter = 0;
+function addCustomDoc() {
+  cdCounter++;
+  const id = 'cd-' + cdCounter;
+  customDocs.push({id, label:'', file:null});
+  renderCustomDocs();
+}
+function renderCustomDocs() {
+  const list = document.getElementById('custom-doc-list');
+  list.innerHTML = '';
+  customDocs.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'custom-doc-row';
+    row.innerHTML = `
+      <span class="cd-id" title="System document ID">${c.id}</span>
+      <input class="cd-label-inp" value="${c.label}" placeholder="Document label (e.g. Land NOC)" oninput="updateCdLabel('${c.id}',this.value)">
+      ${c.file
+        ? `<span style="font-size:12px;color:var(--success);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px">✓ ${c.file}</span>`
+        : `<label class="btn-upload" style="font-size:11px">📎 Upload<input type="file" hidden onchange="onCdFile(this,'${c.id}')"></label>`
+      }
+      <button class="btn-remove" onclick="removeCd('${c.id}')">✕</button>`;
+    list.appendChild(row);
+  });
+}
+function updateCdLabel(id, v) { const c = customDocs.find(x=>x.id===id); if(c) c.label=v; }
+function onCdFile(inp, id) {
+  const f = inp.files[0]; if(!f) return;
+  if (f.size > 5*1024*1024) { alert('File exceeds 5 MB limit'); return; }
+  const c = customDocs.find(x=>x.id===id); if(c) c.file=f.name;
+  renderCustomDocs();
+}
+function removeCd(id) { customDocs = customDocs.filter(c=>c.id!==id); renderCustomDocs(); }
+
+// ───── SECTION E ─────
+function checkELock() {
+  document.getElementById('e-lock-alert').classList.add('hidden');
+  document.getElementById('declared-cb').addEventListener('change', () => {
+    document.getElementById('btn-to-preview').disabled = !document.getElementById('declared-cb').checked;
+  });
+}
+function goToPreview() {
+  if (!document.getElementById('declared-cb').checked) return;
+  completedIds.add('E');
+  goToStep('Preview');
+}
+
+// ───── PREVIEW ─────
+function renderPreview() {
+  const capV   = document.getElementById('cap-value').value || '—';
+  const unitV  = document.querySelector('input[name="unit"]:checked')?.value||'kW';
+  const purp   = document.querySelector('input[name="purpose"]:checked')?.value||'—';
+  const purpOth= document.getElementById('purpose-other-inp').value;
+  const kw     = getCapacityKW();
+  const base   = calcFee(kw);
+  const gst    = Math.round(base*0.18);
+  const total  = base + gst;
+  const fmt    = n => '₹ ' + n.toLocaleString('en-IN');
+
+  const plantKind = document.getElementById('plant-kind').value||'—';
+  const subtype   = document.getElementById('subtype').value||'—';
+  const storage   = document.querySelector('input[name="storage"]:checked')?.value==='1';
+  const discom    = document.getElementById('discom').value||'—';
+  const isHigh    = kw >= 10000;
+  const stName    = document.getElementById('station').value||'—';
+  const stDist    = document.getElementById('station-dist').value||'—';
+  const evac      = document.querySelector('input[name="evac"]:checked')?.value||'—';
+  const evacOth   = document.getElementById('evac-other').value;
+  const cod       = document.getElementById('cod-date').value||'—';
+  const cost      = document.getElementById('proj-cost').value;
+  const epcName   = document.getElementById('epc-name').value||'—';
+  const epcCtct   = document.getElementById('epc-contact').value||'—';
+  const epcMob    = document.getElementById('epc-mobile').value||'—';
+  const own       = document.getElementById('ownership').value||'—';
+  const lcat      = document.querySelector('input[name="land-cat"]:checked')?.value||'Private';
+  const larea     = document.getElementById('land-area').value||'—';
+  const pan       = document.getElementById('pan-num').value||'—';
+  const aadhaar   = document.getElementById('aadhaar-num').value;
+  const gstN      = document.getElementById('gst-num').value||'—';
+  const cStr      = document.getElementById('comm-street').value||'—';
+  const cVil      = document.getElementById('comm-village').value||'—';
+  const cDis      = document.getElementById('comm-district').value||'—';
+  const cPin      = document.getElementById('comm-pin').value||'—';
+  const pStr      = document.getElementById('proj-street').value||'—';
+  const pVil      = document.getElementById('proj-village').value||'—';
+  const pDis      = document.getElementById('proj-district').value||'—';
+  const pPin      = document.getElementById('proj-pin').value||'—';
+  const pLat      = document.getElementById('proj-lat').value||'—';
+  const pLng      = document.getElementById('proj-lng').value||'—';
+  const declared  = document.getElementById('declared-cb').checked;
+
+  // build doc keys same as buildDocList
+  let docs = [...BASE_DOCS];
+  if (gstN !== '—') docs.splice(4,0,{key:'GST',label:'GST Certificate',req:true});
+  if (purp === 'Power Purchase Agreement with DISCOM') docs.push({key:'PPA',label:'Power Purchase Agreement (PPA)',req:false});
+
+  function sec(title, rows) {
+    return `<div class="prev-sec">
+      <div class="prev-sec-title">${title}</div>
+      <dl>${rows.map(([l,v])=>`<div class="prev-row"><dt>${l}</dt><dd>${v||'—'}</dd></div>`).join('')}</dl>
+    </div>`;
+  }
+
+  document.getElementById('preview-content').innerHTML =
+    sec('Step 0 — Capacity & Purpose',[
+      ['Plant Capacity', `${capV} ${unitV}`],
+      ['Purpose', purp==='Other as mentioned in RE Policy'?`Other — ${purpOth}`:purp],
+    ]) +
+    sec('Section A — General Profile',[
+      ['Applicant','Rajesh Kumar Sharma'],
+      ['Type','Pvt. Ltd.'],
+      ['Communication Address',`${cStr}, ${cVil}, ${cDis} — ${cPin}`],
+      ['Project Address',`${pStr}, ${pVil}, ${pDis} — ${pPin}`],
+      ['Lat / Long', pLat&&pLng ? `${pLat}, ${pLng}` : '—'],
+      ['Mobile / Email','+91 98765 43210 · rajesh.sharma@solarenergy.in'],
+      ['PAN', pan],
+      ['Aadhaar', aadhaar ? `XXXX XXXX ${aadhaar.slice(-4)}` : '—'],
+      ['GST', gstN],
+    ]) +
+    sec('Section B — Technical & Financial',[
+      ['Power Plant', plantKind !== '—' ? `${plantKind}${subtype&&subtype!=='—'?' — '+subtype:''}${plantKind==='Solar'?(' ('+  (storage?'With':'Without')+' Storage)'):''}` : '—'],
+      ['DISCOM', discom],
+      [isHigh?'Nearest GSS':'Nearest PSS', stName],
+      ['Distance', stDist !== '—' ? `${stDist} km` : '—'],
+      ['Evacuation', evac==='Other'?`Other — ${evacOth}`:evac],
+      ['Proposed COD', cod],
+      ['Project Cost', cost ? '₹ '+Number(cost).toLocaleString('en-IN') : '—'],
+      ['EPC Contractor', epcName !== '—' ? `${epcName} · ${epcCtct} · ${epcMob}` : '—'],
+    ]) +
+    sec('Section C — Land Availability',[
+      ['Ownership Document', own],
+      ['Uploaded copy', ownershipFile || '—'],
+      ['Land Category', lcat],
+      ['Area', larea !== '—' ? `${larea} acres` : '—'],
+    ]) +
+    sec('Section D — Documents',
+      docs.map(k => [`${k.label}${k.req?' *':''}`, uploadedDocs[k.key] || 'Not uploaded'])
+        .concat(customDocs.map(c => [c.label||c.id, c.file||'Not uploaded']))
+    ) +
+    sec('Section E — Declaration',[
+      ['Declaration confirmed', declared ? 'Yes ✓' : 'No'],
+    ]) +
+    sec('Registration Fee',[
+      ['Processing fee', fmt(base)],
+      ['GST @ 18%', fmt(gst)],
+      ['Total payable', `<strong style="color:var(--accent)">${fmt(total)}</strong>`],
+    ]);
+}
+
+function onPreviewConfirm(cb) {
+  if (!cb.checked) return;
+  previewConfirmed = true;
+  completedIds.add('Preview');
+  document.getElementById('prev-cb-row').classList.add('hidden');
+  document.getElementById('prev-hint-text').classList.add('hidden');
+  document.getElementById('prev-ok-msg').classList.remove('hidden');
+  updateSidebar();
+  setTimeout(() => goToStep('F'), 600);
+}
+
+// ───── PAY METHOD ─────
+function onPayMethodChange() {
+  const v = document.querySelector('input[name="pay-method"]:checked')?.value;
+  document.getElementById('online-pay-wrap').classList.toggle('hidden', v !== 'online');
+  document.getElementById('offline-pay-wrap').classList.toggle('hidden', v !== 'offline');
+}
+
+// ───── PAYMENT ─────
+function doPayOnline() {
+  const kw = getCapacityKW();
+  const base = calcFee(kw), gst = Math.round(base*.18), total = base+gst;
+  const ack = genAck();
+  const txn = 'TXN' + Date.now().toString().slice(-10);
+  showSuccess(ack, txn, total, 'online');
+}
+function doPayOffline() {
+  const ref = document.getElementById('offline-ref').value.trim();
+  if (!ref) { alert('Enter the DD / cheque number'); return; }
+  showSuccess(null, null, null, 'offline');
+}
+function doDemo() {
+  const kw = getCapacityKW();
+  const base = calcFee(kw), gst = Math.round(base*.18), total = base+gst;
+  const ack = genAck();
+  showSuccess(ack, 'DEMO-'+Date.now().toString().slice(-8), total, 'online');
+}
+function genAck() {
+  const year = new Date().getFullYear();
+  const seq  = String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+  return `Ack/${year}/${seq}`;
+}
+function showSuccess(ack, txn, total, method) {
+  document.getElementById('main-form').classList.add('hidden');
+  document.getElementById('success-screen').classList.remove('hidden');
+  if (method==='online') {
+    document.getElementById('succ-title').textContent = 'Payment Successful';
+    document.getElementById('succ-ack').textContent = ack || '';
+    document.getElementById('succ-txn').textContent = txn ? 'Transaction ID: ' + txn : '';
+  } else {
+    document.getElementById('succ-title').textContent = 'Receipt Submitted';
+    document.getElementById('succ-ack').textContent = '';
+    document.getElementById('succ-txn').textContent = 'Your DD/Cheque has been submitted. Finance will verify your payment.';
+  }
+}
+
+// ───── DRAFT ─────
+function saveDraft() {
+  triggerAutosave();
+  const now = new Date().toLocaleTimeString();
+  document.getElementById('autosave-text').textContent = `Draft saved · ${now}`;
+}
+function triggerAutosave() {
+  clearTimeout(autosaveTimer);
+  document.getElementById('autosave-text').textContent = 'Auto-saving…';
+  autosaveTimer = setTimeout(() => {
+    const now = new Date().toLocaleTimeString();
+    document.getElementById('autosave-text').textContent = `Auto-saved · ${now}`;
+  }, 900);
+}
+// wire autosave to all inputs
+document.addEventListener('input', triggerAutosave);
+document.addEventListener('change', triggerAutosave);
+</script>
+</body>
+</html>

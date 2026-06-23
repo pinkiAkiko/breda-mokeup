@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}input{font-family:inherit;}a{text-decoration:none;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
+      </div>
+    </div>
+
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        New Project Application
+      </a>
+      <a href="#" style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+        My Applications
+      </a>
+      <a href="Payments.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+        Payments
+      </a>
+      <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        Help &amp; Grievance
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">My Applications</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e9b5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;">RK</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Home / My Applications</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0;color:#0f2319;line-height:1.1;">My Applications</h1>
+        <button style="display:flex;align-items:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:12px 20px;font-size:14px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          New Project Application
+        </button>
+      </div>
+    </div>
+
+    <!-- Controls: tabs + search -->
+    <div style="padding:13px 28px;background:#fff;border-bottom:1px solid #e3e9e6;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+          <button onClick="{{t.onClick}}" style="background:{{t.bg}};color:{{t.fg}};border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;box-shadow:{{t.shadow}};white-space:nowrap;">{{t.label}}<sc-if value="{{t.showBadge}}" hint-placeholder-val="{{false}}"><span style="background:{{t.badgeBg}};color:{{t.badgeFg}};border-radius:999px;font-size:11px;padding:1px 6px;margin-left:6px;">{{t.count}}</span></sc-if></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e6;border-radius:9px;padding:7px 12px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e9e97" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input placeholder="Search by project, file no…" style="border:none;outline:none;font-size:13px;color:#1c2530;width:200px;background:transparent;">
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div style="display:flex;gap:0;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+        <div style="flex:1;padding:13px 24px;border-right:1px solid #eef1ef;display:flex;align-items:center;gap:14px;">
+          <span style="width:4px;align-self:stretch;border-radius:2px;background:{{s.color}};flex:none;"></span>
+          <div>
+            <div style="font-size:24px;font-weight:700;color:#0f2319;line-height:1;">{{s.value}}</div>
+            <div style="font-size:11.5px;color:#8e9e97;margin-top:4px;white-space:nowrap;">{{s.label}}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- Table -->
+    <div style="padding:20px 28px 48px;">
+      <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(15,35,25,.05);">
+
+        <!-- Column headers -->
+        <div style="display:grid;grid-template-columns:1.5fr 2.1fr .75fr .85fr 1.5fr 1.4fr;gap:0;padding:11px 18px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-bottom:1px solid #e3e9e6;">
+          <div>ID / FILE NO.</div>
+          <div>PROJECT</div>
+          <div>CAPACITY</div>
+          <div>DISCOM</div>
+          <div>STATUS</div>
+          <div style="text-align:right;">ACTIONS</div>
+        </div>
+
+        <sc-for list="{{rows}}" as="row" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:1.5fr 2.1fr .75fr .85fr 1.5fr 1.4fr;gap:0;align-items:center;background:{{row.rowBg}};border-bottom:1px solid #eef1ef;border-left:3px solid {{row.accent}};padding:13px 18px;">
+
+            <div style="font-size:13px;font-weight:600;color:#1c2530;font-variant-numeric:tabular-nums;padding-right:10px;">{{row.id}}</div>
+
+            <div style="font-size:14px;font-weight:600;color:#0f2319;padding-right:14px;">{{row.project}}</div>
+
+            <div style="font-size:13.5px;color:#1c2530;">{{row.capacity}}</div>
+            <div style="font-size:13.5px;color:#46524b;">{{row.discom}}</div>
+
+            <div>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 11px;background:{{row.statusBg}};border:1px solid {{row.statusBd}};color:{{row.statusFg}};">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{row.dot}};flex:none;"></span>
+                {{row.status}}
+              </span>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">
+              <sc-for list="{{row.actions}}" as="act" hint-placeholder-count="1">
+                <a href="{{act.href}}" style="display:inline-flex;align-items:center;gap:5px;color:{{act.fg}};font-size:13px;font-weight:{{act.weight}};text-decoration:none;white-space:nowrap;">
+                  {{act.label}}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </sc-for>
+            </div>
+
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 4px 0;">
+        <span style="font-size:12.5px;color:#8e9e97;">Showing {{count}} of {{total}} applications</span>
+      </div>
+
+      <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
+        <div style="text-align:center;padding:60px 24px;color:#8e9e97;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c9cdc7" stroke-width="1.5" style="margin:0 auto 14px;display:block;"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+          <div style="font-size:15px;font-weight:600;color:#5b6b62;margin-bottom:6px;">No applications in this view</div>
+          <div style="font-size:13px;">Try switching to All above.</div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;action&quot;,&quot;progress&quot;,&quot;completed&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;compactRows&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { activeTab: props.defaultTab || 'all' };
+  }
+  setTab(t){ this.setState({ activeTab:t }); }
+
+  renderVals(){
+    const REVIEW = 'BREDA Review Page.dc.html';
+    const TRACK  = 'Application Track.dc.html';
+
+    // status definitions ---------------------------------------------------
+    const amber  = { bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', dot:'#c2740f', accent:'#c2740f' };
+    const blue   = { bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' };
+    const slate  = { bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#6b7c72', accent:'#9aa9a1' };
+    const green  = { bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', dot:'#1e9b5f', accent:'#1e9b5f' };
+    const red    = { bg:'#fdf0f0', bd:'#f8d0cc', fg:'#b3261e', dot:'#b3261e', accent:'#b3261e' };
+
+    const track   = { label:'Track', href:TRACK, fg:'#8e9e97', weight:500 };
+    const respond = { label:'Respond to Query', href:REVIEW, fg:'#e05c1a', weight:600 };
+
+    const STATUS = {
+      draft:          { label:'Draft',                        tone:slate, cat:'action',   actions:[{ label:'Continue', href:'New Project Application.dc.html', fg:'#1e9b5f', weight:600 }] },
+      breda_query:    { label:'BREDA Query Raised',           tone:amber, cat:'action',   actions:[respond, track] },
+      dept_query:     { label:'Department Query Raised',      tone:amber, cat:'action',   actions:[respond, track] },
+      breda_approved: { label:'BREDA Approved',               tone:green, cat:'action',   actions:[{ label:'Apply for Clearances', href:'Apply for Clearances.dc.html', fg:'#1e9b5f', weight:600 }, track] },
+      cod_rejected:   { label:'COD Rejected',                 tone:red,   cat:'action',   actions:[{ label:'Re-upload COD', href:'Commissioning.dc.html#cod_rejected', fg:'#e05c1a', weight:600 }, track] },
+      awaiting_cod:   { label:'Awaiting COD',                 tone:slate, cat:'action',   actions:[{ label:'Submit COD', href:'Commissioning.dc.html', fg:'#1e9b5f', weight:600 }, track] },
+      submitted:      { label:'Submitted to BREDA',           tone:blue,  cat:'progress', actions:[track] },
+      resubmitted:    { label:'Resubmitted to BREDA',         tone:blue,  cat:'progress', actions:[track] },
+      payment_pending:{ label:'Payment Verification Pending', tone:amber, cat:'progress', actions:[track] },
+      approved:       { label:'Approved',                     tone:green, cat:'completed', actions:[track] },
+      rejected:       { label:'Rejected',                     tone:red,   cat:'completed', actions:[track] }
+    };
+
+    // data -----------------------------------------------------------------
+    const ALL = [
+      { id:'BREDA/RE/2025/04201', project:'Rajeev Rooftop Solar 8kW',     capacity:'8 kW',   discom:'SBPDCL', statusKey:'approved' },
+      { id:'PRJ-1003',            project:'Rajeev — Solar Pump 5HP',       capacity:'4 kW',   discom:'SBPDCL', statusKey:'draft' },
+      { id:'BREDA/RE/2025/04231', project:'Rajeev Hybrid Storage 15 kW',  capacity:'15 kW',  discom:'SBPDCL', statusKey:'breda_query' },
+      { id:'BREDA/RE/2026/04250', project:'Rajeev Industrial Solar 250 kW',capacity:'250 kW', discom:'SBPDCL', statusKey:'breda_approved' },
+      { id:'PRJ-1008',            project:'Rajeev Wind-Solar Hybrid 10 kW',capacity:'10 kW',  discom:'SBPDCL', statusKey:'draft' },
+      { id:'PRJ-1009',            project:'Rajeev Agri Solar Pump 3HP',    capacity:'3 kW',   discom:'NBPDCL', statusKey:'payment_pending' },
+      { id:'BREDA/RE/2026/04261', project:'Rajeev Floating Solar 30 kW',   capacity:'30 kW',  discom:'SBPDCL', statusKey:'submitted' },
+      { id:'BREDA/RE/2026/04265', project:'Rajeev Canal-Bank Solar 100 kW',capacity:'100 kW', discom:'NBPDCL', statusKey:'resubmitted' },
+      { id:'BREDA/RE/2026/04270', project:'Rajeev Biomass Gasifier 75 kW', capacity:'75 kW',  discom:'SBPDCL', statusKey:'dept_query' },
+      { id:'BREDA/RE/2025/03990', project:'Rajeev Ground Mount 1 MW',      capacity:'1 MW',   discom:'SBPDCL', statusKey:'rejected' },
+      { id:'BREDA/RE/2026/04243', project:'Rajeev Commercial Rooftop 40 kW',capacity:'40 kW', discom:'SBPDCL', statusKey:'cod_rejected' },
+      { id:'BREDA/RE/2026/04277', project:'Rajeev Commissioning Demo 50 kW',capacity:'50 kW', discom:'SBPDCL', statusKey:'awaiting_cod' }
+    ];
+
+    const tab = this.state.activeTab;
+    const filtered = tab==='all' ? ALL : ALL.filter(r => STATUS[r.statusKey].cat === tab);
+
+    const rows = filtered.map(r => {
+      const s = STATUS[r.statusKey];
+      return {
+        ...r,
+        status:s.label, statusBg:s.tone.bg, statusBd:s.tone.bd, statusFg:s.tone.fg, dot:s.tone.dot,
+        accent:s.tone.accent, actions:s.actions,
+        rowBg: (s.cat==='action' && s.tone===amber) ? '#fffdf9' : '#fff'
+      };
+    });
+
+    const countCat = c => ALL.filter(r => STATUS[r.statusKey].cat === c).length;
+    const actionCount = countCat('action');
+    const progressCount = countCat('progress');
+    const approvedCount = ALL.filter(r => r.statusKey==='approved').length;
+
+    const tabDefs = [
+      { key:'all',       label:'All',           showBadge:false },
+      { key:'action',    label:'Action Needed', showBadge:true, count:actionCount, badgeBg:'#e05c1a', badgeFg:'#fff' },
+      { key:'progress',  label:'In Progress',   showBadge:false },
+      { key:'completed', label:'Completed',     showBadge:false }
+    ];
+    const tabs = tabDefs.map(t => ({
+      ...t,
+      bg: t.key===tab ? '#fff' : 'transparent',
+      fg: t.key===tab ? '#0f2319' : '#5b6b62',
+      shadow: t.key===tab ? '0 1px 3px rgba(0,0,0,.1)' : 'none',
+      onClick: () => this.setTab(t.key)
+    }));
+
+    const stats = [
+      { value: ALL.length,    label:'Total submitted', color:'#5b6b62' },
+      { value: actionCount,   label:'Action needed',   color:'#c2740f' },
+      { value: progressCount, label:'In progress',     color:'#1d6fb8' },
+      { value: approvedCount, label:'Approved',        color:'#1e9b5f' }
+    ];
+
+    return { tabs, stats, rows, count:rows.length, total:ALL.length, isEmpty: rows.length===0 };
+  }
+}
+</script>
+</body>
+</html>

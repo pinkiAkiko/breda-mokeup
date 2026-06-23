@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef1ef;}
+  button{font-family:inherit;cursor:pointer;}
+  textarea,input{font-family:inherit;}
+  a{text-decoration:none;}
+  @keyframes drawerIn{from{transform:translateX(100%);}to{transform:translateX(0);}}
+  @keyframes scrimIn{from{opacity:0;}to{opacity:1;}}
+</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">{{sidebarLabel}}</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </div>
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        {{sidebarNavLabel}}
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;">{{notifBadge}}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </div>
+    </nav>
+    <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.07);">
+      <div style="font-size:12px;color:#7d9a8a;">Signed in as</div>
+      <div style="font-size:13.5px;font-weight:600;color:#fff;margin-top:2px;">{{signinName}}</div>
+      <div style="font-size:11.5px;color:#7d9a8a;margin-top:1px;">{{signinSub}}</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Municipal NOC Review</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">DEMO ROLE</span>
+        <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+          <button onclick="{{setOfficer}}" style="background:{{officerRoleBg}};color:{{officerRoleFg}};border:none;border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:600;">Dept. Officer</button>
+          <button onclick="{{setApplicant}}" style="background:{{applicantRoleBg}};color:{{applicantRoleFg}};border:none;border-radius:7px;padding:6px 12px;font-size:12.5px;font-weight:600;">Applicant</button>
+        </div>
+        <span style="font-size:12px;color:#6b7c72;font-weight:500;">DEMO PROJECT</span>
+        <div style="display:flex;align-items:center;gap:1px;background:#f0f4f2;border-radius:8px;padding:3px;">
+          <button onclick="{{setPatna}}" style="background:{{patnaTabBg}};color:{{patnaTabColor}};border:none;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Patna · Fresh</button>
+          <button onclick="{{setGaya}}" style="background:{{gayaTabBg}};color:{{gayaTabColor}};border:none;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Gaya · Query</button>
+          <button onclick="{{setResponded}}" style="background:{{respondedTabBg}};color:{{respondedTabColor}};border:none;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Gaya · Multi-round</button>
+        </div>
+        <div style="position:relative;width:36px;height:36px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">{{notifBadge}}</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:{{avatarBg}};color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">{{avatarInitials}}</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">{{crumb}}</div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;">
+        <div>
+          <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0 0 5px;color:#0f2319;line-height:1.1;">{{project.name}}</h1>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:#6b7c72;">{{project.ack}} · {{project.cap}} · {{project.applicant}}</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;background:{{slaChipBg}};border:1px solid {{slaChipBd}};color:{{slaChipFg}};">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              {{slaLabel}}
+            </span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex:none;">
+          <sc-if value="{{showSendBtn}}" hint-placeholder-val="{{false}}">
+            <button onclick="{{onSendQueries}}" style="display:flex;align-items:center;gap:8px;background:#e05c1a;color:#fff;border:none;border-radius:9px;padding:10px 17px;font-size:13.5px;font-weight:600;white-space:nowrap;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+              {{sendBtnLabel}}
+            </button>
+          </sc-if>
+          <a href="Dept Officer Entry Point.dc.html" style="font-size:13px;color:#5b6b62;display:flex;align-items:center;gap:6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to queue
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Officer hint bar -->
+    <sc-if value="{{showOfficerHint}}" hint-placeholder-val="{{true}}">
+      <div style="display:flex;align-items:center;gap:9px;padding:9px 28px;background:#f6f8f7;border-bottom:1px solid #e3e9e6;font-size:12.5px;color:#5b6b62;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#e0922a;flex:none;"></span>
+        <span style="text-wrap:pretty;">Click 💬 on any field to raise a query — drafts until you hit Send. Every past round lives behind “View history”.</span>
+      </div>
+    </sc-if>
+
+    <!-- Applicant notice bar -->
+    <sc-if value="{{showApplicantNotice}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 28px;background:#fffaf5;border-bottom:1px solid #f0d6ac;">
+        <div style="display:flex;align-items:center;gap:11px;">
+          <span style="width:9px;height:9px;border-radius:50%;background:#e0922a;flex:none;"></span>
+          <span style="font-size:13.5px;color:#92400e;">{{applicantNoticeTxt}}</span>
+        </div>
+        <span style="font-size:12px;color:#b08a55;">Received {{project.receivedOn}}</span>
+      </div>
+    </sc-if>
+
+    <!-- Applicant resubmitted banner -->
+    <sc-if value="{{showResubmittedBanner}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;align-items:center;gap:12px;padding:13px 28px;background:#f0f8f4;border-bottom:1px solid #b8e0cc;">
+        <div style="width:24px;height:24px;border-radius:50%;background:#1e9b5f;display:flex;align-items:center;justify-content:center;flex:none;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span style="font-size:13.5px;font-weight:600;color:#145c3a;">Response submitted. Municipal Corporation will review and update status.</span>
+      </div>
+    </sc-if>
+
+    <!-- Body -->
+    <div style="display:flex;gap:20px;padding:16px 28px 32px;align-items:flex-start;">
+
+      <!-- DOCUMENT -->
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;">
+
+        <sc-for list="{{doc}}" as="sec" hint-placeholder-count="4">
+          <div data-sec-id="{{sec.id}}">
+
+            <sc-if value="{{sec.collapsed}}" hint-placeholder-val="{{false}}">
+              <div style="display:flex;align-items:center;justify-content:space-between;background:#f6f8f7;border:1px solid #e3e9e6;border-radius:11px;padding:9px 18px;">
+                <span style="font-size:14px;font-weight:600;color:#6b7c72;">{{sec.title}}</span>
+                <span style="font-size:12px;color:#a0aaa4;">{{sec.count}} fields · context only</span>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{sec.expanded}}" hint-placeholder-val="{{true}}">
+              <div style="border:1px solid {{sec.headerBd}};border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 16px;background:{{sec.headerBg}};border-bottom:1px solid {{sec.headerBd}};">
+                  <span style="font-size:14px;font-weight:700;color:#0f2319;">{{sec.title}}</span>
+                  <sc-if value="{{sec.badgeShow}}" hint-placeholder-val="{{false}}">
+                    <span style="font-size:11px;font-weight:600;border-radius:999px;padding:3px 10px;background:{{sec.badge.bg}};border:1px solid {{sec.badge.bd}};color:{{sec.badge.fg}};">{{sec.badge.text}}</span>
+                  </sc-if>
+                  <sc-if value="{{sec.showPlain}}" hint-placeholder-val="{{false}}">
+                    <span style="font-size:12px;color:#8e9e97;">{{sec.statusPlain}}</span>
+                  </sc-if>
+                </div>
+
+                <sc-for list="{{sec.fields}}" as="f" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:{{f.cols}};align-items:center;border-top:1px solid #eef1ef;border-left:3px solid {{f.left}};background:{{f.bg}};">
+                    <!-- label -->
+                    <div style="padding:5px 16px;font-size:13.5px;color:#5b6b62;border-right:1px solid #eef1ef;align-self:stretch;display:flex;align-items:center;">{{f.label}}</div>
+                    <!-- value + chip -->
+                    <div style="padding:5px 16px;display:flex;flex-direction:column;justify-content:center;gap:3px;">
+                      <span style="font-size:13.5px;color:#1c2530;">{{f.displayValue}}</span>
+                      <sc-if value="{{f.showBelow}}" hint-placeholder-val="{{false}}">
+                      <div style="display:flex;align-items:center;gap:8px;">
+                        <sc-if value="{{f.badgeShow}}" hint-placeholder-val="{{false}}">
+                          <span style="font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;background:{{f.badge.bg}};border:1px solid {{f.badge.bd}};color:{{f.badge.fg}};white-space:nowrap;">{{f.badge.text}}</span>
+                        </sc-if>
+                        <sc-if value="{{f.showMeta}}" hint-placeholder-val="{{false}}">
+                          <span style="font-size:11.5px;color:#8e9e97;">{{f.metaLine}}</span>
+                        </sc-if>
+                      </div>
+                      </sc-if>
+                    </div>
+                    <!-- action -->
+                    <sc-if value="{{f.renderActionCell}}" hint-placeholder-val="{{false}}">
+                    <div style="padding:5px 16px;border-left:1px solid #eef1ef;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;gap:10px;">
+                      <sc-if value="{{f.showChatIcon}}" hint-placeholder-val="{{false}}">
+                        <div onclick="{{f.onOpenDrawer}}" title="Raise query" style="cursor:pointer;font-size:16px;line-height:1;">💬</div>
+                      </sc-if>
+                      <sc-if value="{{f.showActionLink}}" hint-placeholder-val="{{false}}">
+                        <div onclick="{{f.onOpenDrawer}}" style="cursor:pointer;font-size:12.5px;font-weight:600;color:{{f.actionFg}};white-space:nowrap;display:flex;align-items:center;gap:4px;">
+                          {{f.actionLabel}}
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </div>
+                      </sc-if>
+                    </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+          </div>
+        </sc-for>
+
+        <!-- Applicant sticky submit bar -->
+        <sc-if value="{{showSubmitBar}}" hint-placeholder-val="{{false}}">
+          <div style="position:sticky;bottom:16px;margin-top:6px;background:#fff;border:1px solid #e3e9e6;border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(15,35,25,.12);">
+            <div>
+              <div style="font-size:14px;font-weight:700;color:#0f2319;">{{submitBarLine}}</div>
+              <div style="font-size:12px;color:#8e9e97;margin-top:2px;">Respond to all queries before submitting.</div>
+            </div>
+            <button onclick="{{onResubmit}}" style="display:flex;align-items:center;gap:8px;background:{{submitBg}};color:#fff;border:none;border-radius:9px;padding:11px 20px;font-size:14px;font-weight:600;cursor:{{submitCursor}};">
+              Submit Response
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </sc-if>
+
+      </div>
+
+      <!-- RIGHT RAIL -->
+      <aside style="width:272px;flex:none;position:sticky;top:76px;display:flex;flex-direction:column;gap:14px;">
+
+        <!-- SLA -->
+        <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:12px;">SLA STATUS</div>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
+            <span style="font-size:24px;font-weight:700;color:{{slaColor}};">{{slaRemaining}}</span>
+            <span style="font-size:13px;color:#6b7c72;">days remaining</span>
+          </div>
+          <div style="height:6px;background:#e3e9e6;border-radius:999px;overflow:hidden;margin-bottom:8px;">
+            <div style="height:100%;width:{{slaPct}}%;background:{{slaColor}};border-radius:999px;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11.5px;color:#8e9e97;">
+            <span>Rcvd {{project.receivedOn}}</span>
+            <span>SLA: {{project.slaTotal}} days</span>
+          </div>
+          <sc-if value="{{project.slaPaused}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;align-items:center;gap:6px;margin-top:10px;padding:8px 10px;background:#f6f8f7;border-radius:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7c72" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              <span style="font-size:12px;color:#6b7c72;font-weight:500;">Timer paused — query out</span>
+            </div>
+          </sc-if>
+        </div>
+
+        <!-- Officer decision card -->
+        <sc-if value="{{isOfficer}}" hint-placeholder-val="{{true}}">
+          <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:12px;">DECISION</div>
+            <sc-if value="{{hasDraftQueries}}" hint-placeholder-val="{{false}}">
+              <div style="background:#fff7ee;border:1px solid #fde8c5;border-radius:9px;padding:12px;margin-bottom:12px;">
+                <div style="font-size:12.5px;font-weight:600;color:#92400e;margin-bottom:4px;">{{draftCount}} unsent {{draftCountLabel}}</div>
+                <div style="font-size:12px;color:#b45309;line-height:1.4;">Send to applicant before deciding.</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{hasPendingSentQueries}}" hint-placeholder-val="{{false}}">
+              <div style="background:#f6f8f7;border:1px solid #dce5e0;border-radius:9px;padding:12px;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#c2740f;flex:none;"></div>
+                  <span style="font-size:12.5px;font-weight:600;color:#46524b;">Awaiting applicant response</span>
+                </div>
+                <div style="font-size:12px;color:#6b7c72;line-height:1.4;">Decision paused until applicant responds.</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{showDecidePanel}}" hint-placeholder-val="{{true}}">
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <button onclick="{{onStartApprove}}" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px;font-size:13.5px;font-weight:600;width:100%;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+                  Approve NOC
+                </button>
+                <button onclick="{{onStartReject}}" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:#b3261e;border:1px solid #f0c8c6;border-radius:9px;padding:10px;font-size:13.5px;font-weight:600;width:100%;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  Reject
+                </button>
+              </div>
+            </sc-if>
+            <sc-if value="{{showApproveConfirm}}" hint-placeholder-val="{{false}}">
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#0f2319;margin-bottom:6px;">Confirm approval?</div>
+                <div style="font-size:12.5px;color:#6b7c72;line-height:1.4;margin-bottom:14px;">This grants the Municipal NOC. Cannot be undone.</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <button onclick="{{onConfirmApprove}}" style="background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px;font-size:13.5px;font-weight:600;width:100%;">Confirm Approval</button>
+                  <button onclick="{{onCancelDecision}}" style="background:#fff;color:#46524b;border:1px solid #dce5e0;border-radius:9px;padding:10px;font-size:13px;font-weight:600;width:100%;">Cancel</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{showRejectForm}}" hint-placeholder-val="{{false}}">
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#0f2319;margin-bottom:6px;">Reason for rejection</div>
+                <textarea onChange="{{onRejectReasonChange}}" value="{{rejectReason}}" placeholder="State grounds for denial…" style="width:100%;min-height:72px;border:1px solid #dce5e0;border-radius:8px;padding:10px 12px;font-size:13px;color:#1c2530;resize:vertical;outline:none;margin-bottom:10px;"></textarea>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <button onclick="{{onConfirmReject}}" style="background:#b3261e;color:#fff;border:none;border-radius:9px;padding:11px;font-size:13.5px;font-weight:600;width:100%;">Confirm Rejection</button>
+                  <button onclick="{{onCancelDecision}}" style="background:#fff;color:#46524b;border:1px solid #dce5e0;border-radius:9px;padding:10px;font-size:13px;font-weight:600;width:100%;">Cancel</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{isApproved}}" hint-placeholder-val="{{false}}">
+              <div style="text-align:center;padding:6px 0;">
+                <div style="width:44px;height:44px;border-radius:50%;background:#e7f4ec;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="#1e9b5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#1e7a4d;margin-bottom:4px;">NOC Approved</div>
+                <div style="font-size:12px;color:#6b7c72;">Applicant notified. Clearance closed.</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{isRejected}}" hint-placeholder-val="{{false}}">
+              <div style="text-align:center;padding:6px 0;">
+                <div style="width:44px;height:44px;border-radius:50%;background:#fdf0f0;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="#b3261e" stroke-width="2.5" stroke-linecap="round"/></svg>
+                </div>
+                <div style="font-size:14px;font-weight:700;color:#b3261e;margin-bottom:4px;">NOC Rejected</div>
+                <div style="background:#fdf0f0;border:1px solid #f0c8c6;border-radius:8px;padding:10px;margin-top:8px;text-align:left;">
+                  <div style="font-size:11px;color:#8e9e97;margin-bottom:3px;">REASON</div>
+                  <div style="font-size:12.5px;color:#7a2020;line-height:1.4;">{{rejectReason}}</div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- Applicant summary -->
+        <sc-if value="{{isApplicant}}" hint-placeholder-val="{{false}}">
+          <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:12px;">TO RESPOND</div>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;margin-bottom:13px;">
+              <div style="display:flex;justify-content:space-between;"><span style="color:#6b7c72;">Pending</span><span style="font-weight:700;color:#b45309;">{{appPending}}</span></div>
+              <div style="display:flex;justify-content:space-between;"><span style="color:#6b7c72;">Responded</span><span style="font-weight:700;color:#1e9b5f;">{{appResponded}}</span></div>
+            </div>
+            <div style="font-size:12px;color:#8e9e97;line-height:1.45;border-top:1px solid #eef1ef;padding-top:12px;">Respond to all queries then submit to Municipal Corporation.</div>
+          </div>
+        </sc-if>
+
+        <!-- Jump nav -->
+        <div style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;padding:14px;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:10px;">JUMP TO</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <sc-for list="{{rail}}" as="r" hint-placeholder-count="3">
+              <div onclick="{{r.onClick}}" style="display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;font-size:13px;color:#3e4e45;cursor:pointer;background:{{r.bg}};">
+                <span style="width:8px;height:8px;border-radius:50%;flex:none;background:{{r.dot}};"></span>
+                {{r.label}}
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===== HISTORY / ACTION DRAWER ===== -->
+  <sc-if value="{{drawer.open}}" hint-placeholder-val="{{false}}">
+    <div style="position:fixed;inset:0;z-index:60;">
+      <!-- scrim -->
+      <div onclick="{{drawer.onClose}}" style="position:absolute;inset:0;background:rgba(15,35,25,.32);animation:scrimIn .15s ease;"></div>
+      <!-- panel -->
+      <aside style="position:absolute;top:0;right:0;height:100%;width:418px;max-width:92vw;background:#fff;box-shadow:-8px 0 28px rgba(15,35,25,.18);display:flex;flex-direction:column;">
+
+        <!-- Drawer header -->
+        <div style="padding:18px 20px 16px;border-bottom:1px solid #e3e9e6;flex:none;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+            <div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:4px;">{{drawer.kicker}}</div>
+              <div style="font-size:16px;font-weight:700;color:#0f2319;line-height:1.2;">{{drawer.label}}</div>
+            </div>
+            <div onclick="{{drawer.onClose}}" style="width:30px;height:30px;border-radius:8px;background:#f3f6f4;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5b6b62" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </div>
+          </div>
+          <!-- current state strip -->
+          <div style="display:flex;align-items:center;gap:9px;margin-top:13px;padding:10px 12px;background:{{drawer.curBg}};border:1px solid {{drawer.curBd}};border-radius:9px;">
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.4px;color:#8e9e97;margin-bottom:2px;">CURRENT · v{{drawer.version}}</div>
+              <div style="font-size:13px;font-weight:600;color:#1c2530;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{drawer.currentValue}}</div>
+            </div>
+            <span style="flex:none;font-size:11px;font-weight:600;border-radius:999px;padding:3px 10px;background:{{drawer.statusChipBg}};border:1px solid {{drawer.statusChipBd}};color:{{drawer.statusChipFg}};white-space:nowrap;">{{drawer.statusText}}</span>
+          </div>
+        </div>
+
+        <!-- Drawer body (scroll) -->
+        <div style="flex:1;overflow-y:auto;padding:18px 20px 24px;">
+
+          <!-- OFFICER: compose new query -->
+          <sc-if value="{{drawer.showComposer}}" hint-placeholder-val="{{false}}">
+            <div style="border:1px solid #f0d6ac;border-radius:11px;overflow:hidden;margin-bottom:20px;">
+              <div style="padding:10px 14px;background:#fffaf5;border-bottom:1px solid #f0d6ac;font-size:12px;font-weight:700;color:#92400e;">{{drawer.composerTitle}}</div>
+              <div style="padding:13px 14px;">
+                <textarea onChange="{{drawer.onComposerInput}}" value="{{drawer.composerValue}}" placeholder="Describe what the applicant must clarify or correct…" style="width:100%;min-height:78px;border:1px solid #dce5e0;border-radius:8px;padding:10px 12px;font-size:13px;color:#1c2530;resize:vertical;outline:none;"></textarea>
+                <div style="display:flex;gap:8px;margin-top:10px;">
+                  <button onclick="{{drawer.onSendNow}}" style="display:flex;align-items:center;gap:6px;background:#e05c1a;border:none;color:#fff;border-radius:8px;padding:9px 15px;font-size:12.5px;font-weight:600;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+                    Send now
+                  </button>
+                  <button onclick="{{drawer.onSaveDraft}}" style="background:#fff;border:1px solid #dce5e0;color:#46524b;border-radius:8px;padding:9px 14px;font-size:12.5px;font-weight:600;">Save as draft</button>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- OFFICER: draft awaiting send -->
+          <sc-if value="{{drawer.showDraftNote}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:#fff7ee;border:1px solid #fde8c5;border-radius:10px;margin-bottom:20px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#e0922a;flex:none;margin-top:4px;"></span>
+              <div style="flex:1;">
+                <div style="font-size:12.5px;font-weight:600;color:#92400e;margin-bottom:2px;">Draft query — not sent yet</div>
+                <div style="font-size:12.5px;color:#46524b;line-height:1.5;margin-bottom:8px;">{{drawer.draftText}}</div>
+                <button onclick="{{drawer.onRemoveDraft}}" style="background:#fff;border:1px solid #dce5e0;color:#6b7c72;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:600;">Remove draft</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- OFFICER: awaiting response note -->
+          <sc-if value="{{drawer.showAwaitingNote}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;align-items:center;gap:9px;padding:12px 14px;background:#f6f8f7;border:1px solid #dce5e0;border-radius:10px;margin-bottom:20px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#c2740f;flex:none;"></span>
+              <span style="font-size:12.5px;color:#46524b;font-weight:500;">Awaiting applicant response · SLA timer paused</span>
+            </div>
+          </sc-if>
+
+          <!-- APPLICANT: response form -->
+          <sc-if value="{{drawer.showResponseForm}}" hint-placeholder-val="{{false}}">
+            <div style="border:1px solid #f0d6ac;border-radius:11px;overflow:hidden;margin-bottom:20px;">
+              <div style="padding:11px 14px;background:#fef3e3;border-bottom:1px solid #f0d6ac;">
+                <div style="font-size:11.5px;font-weight:700;color:#92400e;margin-bottom:4px;">Open query — respond below</div>
+                <div style="font-size:13px;color:#1c2530;line-height:1.5;">{{drawer.openQueryText}}</div>
+              </div>
+              <div style="padding:13px 14px;display:flex;flex-direction:column;gap:11px;">
+                <sc-if value="{{drawer.isDoc}}" hint-placeholder-val="{{false}}">
+                  <div>
+                    <div style="font-size:10.5px;font-weight:600;letter-spacing:.5px;color:#8e9e97;margin-bottom:5px;">RE-UPLOAD DOCUMENT</div>
+                    <div onclick="{{drawer.onPickFile}}" style="border:1.5px dashed #e0922a;border-radius:8px;padding:15px;text-align:center;font-size:12.5px;color:#b45309;background:#fffaf5;cursor:pointer;">⬆ Drop revised file or click to upload</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{drawer.isTextField}}" hint-placeholder-val="{{false}}">
+                  <div>
+                    <div style="font-size:10.5px;font-weight:600;letter-spacing:.5px;color:#8e9e97;margin-bottom:5px;">CORRECT THIS FIELD</div>
+                    <input onChange="{{drawer.onCorrValue}}" value="{{drawer.corrValue}}" placeholder="{{drawer.currentValue}}" style="width:100%;border:1px solid #e0922a;border-radius:8px;padding:9px 12px;font-size:13.5px;color:#1c2530;outline:none;">
+                  </div>
+                </sc-if>
+                <div>
+                  <div style="font-size:10.5px;font-weight:600;letter-spacing:.5px;color:#8e9e97;margin-bottom:4px;">NOTE (optional)</div>
+                  <textarea onChange="{{drawer.onCorrNote}}" value="{{drawer.corrNote}}" placeholder="Explain the correction…" style="width:100%;min-height:46px;border:1px solid #dce5e0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;resize:vertical;outline:none;"></textarea>
+                </div>
+                <button onclick="{{drawer.onSaveResp}}" style="display:flex;align-items:center;justify-content:center;gap:7px;background:#e05c1a;border:none;color:#fff;border-radius:8px;padding:10px;font-size:13px;font-weight:600;width:100%;">Save response</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- TIMELINE -->
+          <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:14px;">REVISION HISTORY</div>
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{drawer.timeline}}" as="ev" hint-placeholder-count="3">
+              <div style="display:flex;gap:13px;">
+                <!-- rail -->
+                <div style="display:flex;flex-direction:column;align-items:center;flex:none;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:{{ev.iconBg}};display:flex;align-items:center;justify-content:center;flex:none;">{{ev.icon}}</div>
+                  <sc-if value="{{ev.showLine}}" hint-placeholder-val="{{true}}">
+                    <div style="width:2px;flex:1;background:#eef1ef;margin:3px 0;min-height:14px;"></div>
+                  </sc-if>
+                </div>
+                <!-- content -->
+                <div style="flex:1;min-width:0;padding-bottom:18px;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#1c2530;">{{ev.title}}</span>
+                    <sc-if value="{{ev.hasVersion}}" hint-placeholder-val="{{false}}">
+                      <span style="flex:none;font-size:10.5px;font-weight:700;color:#5b6b62;background:#eef1ef;border-radius:5px;padding:2px 7px;">{{ev.versionLabel}}</span>
+                    </sc-if>
+                  </div>
+                  <div style="font-size:11.5px;color:#8e9e97;margin-top:2px;">{{ev.date}} · {{ev.actor}}</div>
+                  <sc-if value="{{ev.hasDetail}}" hint-placeholder-val="{{false}}">
+                    <div style="margin-top:7px;padding:9px 12px;background:{{ev.detailBg}};border:1px solid {{ev.detailBd}};border-radius:8px;font-size:12.5px;color:#3e4e45;line-height:1.5;">{{ev.detail}}</div>
+                  </sc-if>
+                  <sc-if value="{{ev.hasNote}}" hint-placeholder-val="{{false}}">
+                    <div style="margin-top:6px;font-size:12px;color:#6b7c72;font-style:italic;">Note: &ldquo;{{ev.note}}&rdquo;</div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 1440},
+  &quot;scenario&quot;: {
+    &quot;editor&quot;: &quot;enum&quot;,
+    &quot;options&quot;: [&quot;pending&quot;, &quot;query_raised&quot;, &quot;responded&quot;],
+    &quot;default&quot;: &quot;pending&quot;,
+    &quot;tsType&quot;: &quot;'pending'|'query_raised'|'responded'&quot;
+  }
+}">
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const sc = (props && props.scenario) || 'pending';
+    this.state = {
+      activeScenario: null,
+      role: 'officer',
+      drawerField: null,
+      events:     this._initEvents(sc),
+      composer:   {},
+      correction: {},
+      decision:   null,
+      rejectReason: '',
+      resubmitted: false,
+    };
+  }
+
+  // Per-field event log. Base submission is implicit (field.value/date = v1).
+  _initEvents(sc) {
+    if (sc === 'query_raised') {
+      return { land_deed: [
+        { type:'query', sent:true, text:'Ownership document for land parcel No. 14/A is missing. Please upload the registered sale deed or lease agreement.', date:'18 Jun 2026' },
+      ] };
+    }
+    if (sc === 'responded') {
+      // Two full query↔revert rounds — demonstrates the timeline scaling
+      return { land_deed: [
+        { type:'query',    sent:true, text:'Uploaded sale deed shows the wrong page — page 2 of 4 is missing. Please re-upload the complete registered deed.', date:'12 Jun 2026' },
+        { type:'response', file:'📎 sale_deed_14A_v2.pdf', note:'Re-uploaded with all four pages of the registered deed.', date:'14 Jun 2026' },
+        { type:'query',    sent:true, text:'Registration stamp on page 4 is not legible. Please provide a clearer scan.', date:'16 Jun 2026' },
+        { type:'response', file:'📎 sale_deed_14A_revised.pdf', note:'Re-scanned at 600 dpi — stamp is now clearly visible.', date:'18 Jun 2026' },
+      ] };
+    }
+    return {};
+  }
+
+  _setScenario(sc) {
+    this.setState({ activeScenario: sc, drawerField: null, events: this._initEvents(sc), composer: {}, correction: {}, decision: null, rejectReason: '', resubmitted: false });
+  }
+
+  openDrawer(id)  { this.setState({ drawerField: id }); }
+  closeDrawer()   { this.setState({ drawerField: null }); }
+
+  onComposer(id, v) { this.setState(s => ({ composer: { ...s.composer, [id]: v } })); }
+  addQuery(id, sent) {
+    const text = (this.state.composer[id] || '').trim();
+    if (!text) return;
+    this.setState(s => ({
+      events: { ...s.events, [id]: [ ...(s.events[id]||[]), { type:'query', sent, text, date:'21 Jun 2026' } ] },
+      composer: { ...s.composer, [id]: '' },
+    }));
+  }
+  removeLastDraft(id) {
+    this.setState(s => {
+      const arr = [ ...(s.events[id]||[]) ];
+      for (let i = arr.length - 1; i >= 0; i--) { if (arr[i].type==='query' && !arr[i].sent) { arr.splice(i,1); break; } }
+      return { events: { ...s.events, [id]: arr } };
+    });
+  }
+  sendAllDrafts() {
+    this.setState(s => {
+      const ev = {};
+      for (const [id, arr] of Object.entries(s.events)) ev[id] = arr.map(e => e.type==='query' && !e.sent ? { ...e, sent:true } : e);
+      return { events: ev };
+    });
+  }
+  onCorrValue(id, v) { this.setState(s => ({ correction: { ...s.correction, [id]: { ...(s.correction[id]||{}), value: v } } })); }
+  onCorrNote(id, v)  { this.setState(s => ({ correction: { ...s.correction, [id]: { ...(s.correction[id]||{}), note: v } } })); }
+  saveResponse(id, isDoc) {
+    const c = this.state.correction[id] || {};
+    const val = c.value || (isDoc ? '📎 revised_document.pdf' : '(updated value)');
+    this.setState(s => ({
+      events: { ...s.events, [id]: [ ...(s.events[id]||[]), { type:'response', file: isDoc ? val : null, value: isDoc ? null : val, note: c.note || '', date:'21 Jun 2026' } ] },
+      correction: { ...s.correction, [id]: {} },
+      drawerField: null,
+    }));
+  }
+  resubmit() {
+    if (this._allApplicantDone()) this.setState({ resubmitted: true });
+  }
+  _allApplicantDone() {
+    const E = this.state.events;
+    const ids = Object.keys(E).filter(id => (E[id]||[]).some(e => e.type==='query' && e.sent));
+    return ids.length > 0 && ids.every(id => { const arr = E[id]; return arr[arr.length-1].type === 'response'; });
+  }
+
+  // Derive per-field state from its event log
+  _fieldState(f, E, isOfficer) {
+    const arr = E[f.id] || [];
+    const queries   = arr.filter(e => e.type==='query');
+    const responses = arr.filter(e => e.type==='response');
+    const last = arr[arr.length-1];
+    const hasDraft     = arr.some(e => e.type==='query' && !e.sent);
+    const pendingSent  = last && last.type==='query' && last.sent;
+    const hasResponse  = responses.length > 0;
+    const version = 1 + responses.length;
+    const currentValue = hasResponse
+      ? (responses[responses.length-1].file || responses[responses.length-1].value)
+      : f.value;
+    const hasHistory = arr.length > 0;
+    return { arr, queries, responses, last, hasDraft, pendingSent, hasResponse, version, currentValue, hasHistory,
+             queryCount: queries.filter(q=>q.sent).length };
+  }
+
+  renderVals() {
+    const sc          = this.state.activeScenario ?? (this.props.scenario ?? 'pending');
+    const isGaya      = sc === 'query_raised' || sc === 'responded';
+    const role        = this.state.role;
+    const isOfficer   = role === 'officer';
+    const isApplicant = !isOfficer;
+
+    const E    = this.state.events;
+    const COMP = this.state.composer;
+    const CORR = this.state.correction;
+    const dec  = this.state.decision;
+
+    // SLA: paused only while a query is out and unanswered
+    const anyPendingSent = Object.keys(E).some(id => { const a=E[id]||[]; const l=a[a.length-1]; return l && l.type==='query' && l.sent; });
+    const project = isGaya
+      ? { name:'Ground-Mounted Solar — Gaya', cap:'5 MW', ack:'Ack/2025/009', applicant:'Bihar Solar Pvt. Ltd.', slaUsed:8, slaTotal:21, slaPaused:anyPendingSent, receivedOn:'10 Jun 2026' }
+      : { name:'Solar Rooftop — Patna',        cap:'500 kW', ack:'Ack/2025/014', applicant:'Rajesh Kumar',         slaUsed:2, slaTotal:21, slaPaused:anyPendingSent, receivedOn:'19 Jun 2026' };
+
+    let draftCount = 0;
+    Object.values(E).forEach(arr => arr.forEach(e => { if (e.type==='query' && !e.sent) draftCount++; }));
+
+    const slaRemaining = project.slaTotal - project.slaUsed;
+    const slaPct   = Math.round((slaRemaining/project.slaTotal)*100);
+    const slaColor = project.slaPaused ? '#6b7c72' : (slaPct>50 ? '#1e9b5f' : slaPct>25 ? '#c2740f' : '#b3261e');
+    const slaLabel = project.slaPaused ? 'Paused · Day '+project.slaUsed+'/'+project.slaTotal : slaRemaining+' days left (Day '+project.slaUsed+'/'+project.slaTotal+')';
+    const slaChipBg = project.slaPaused ? '#f6f8f7' : (slaPct>50 ? '#e7f4ec' : '#fef3e3');
+    const slaChipBd = project.slaPaused ? '#dce5e0' : (slaPct>50 ? '#bfe3cd' : '#f0d6ac');
+    const slaChipFg = project.slaPaused ? '#46524b' : (slaPct>50 ? '#1e7a4d' : '#92400e');
+
+    const decDone = dec === 'approved' || dec === 'rejected';
+
+    const mk = (f) => {
+      const st = this._fieldState(f, E, isOfficer);
+      const isDoc = f.kind === 'doc';
+      const isTextField = f.kind === 'field';
+
+      let left = 'transparent', bg = '#ffffff';
+      let badge = { text:'', bg:'', bd:'', fg:'' }, badgeShow = false;
+      let showChatIcon = false, showActionLink = false, actionLabel = '', actionFg = '#1e9b5f';
+      let metaLine = '', showMeta = false;
+
+      if (isOfficer) {
+        if (st.hasDraft)         { left='#e0922a'; bg='#fffbf0'; badge={text:'Draft query',bg:'#fff3cd',bd:'#fde68a',fg:'#92400e'}; badgeShow=true; }
+        else if (st.pendingSent) { left='#8e9e97'; bg='#f8faf9'; badge={text:'Awaiting response',bg:'#f6f8f7',bd:'#dce5e0',fg:'#46524b'}; badgeShow=true; }
+        else if (st.hasResponse) { left='#1e9b5f'; bg='#f8fdf9'; badge={text:'Response received',bg:'#e7f4ec',bd:'#bfe3cd',fg:'#1e7a4d'}; badgeShow=true; }
+
+        if (st.hasHistory) {
+          showActionLink = true;
+          actionLabel = 'View history';
+          actionFg = '#5b6b62';
+          metaLine = st.hasResponse
+            ? 'Revised · rev. '+st.version
+            : (st.queryCount>1 ? st.queryCount+' queries raised' : 'Query raised');
+          showMeta = true;
+        } else if (!decDone) {
+          showChatIcon = true;
+        }
+      } else { // applicant
+        if (st.pendingSent)      { left='#e0922a'; bg='#fffaf5'; badge={text:'⚠ Respond here',bg:'#fef3e3',bd:'#f0d6ac',fg:'#92400e'}; badgeShow=true; showActionLink=true; actionLabel='Respond'; actionFg='#e05c1a'; }
+        else if (st.hasResponse) { left='#1e9b5f'; bg='#f8fdf9'; badge={text:'✓ Responded',bg:'#e7f4ec',bd:'#bfe3cd',fg:'#1e7a4d'}; badgeShow=true; showActionLink=true; actionLabel='View history'; actionFg='#5b6b62'; metaLine='Revised · rev. '+st.version; showMeta=true; }
+      }
+
+      const showAction = showChatIcon || showActionLink;
+      const cols = showAction ? '1.3fr 1.5fr 150px' : '1.3fr 1fr';
+
+      return {
+        ...f, isDoc, isTextField, cols, left, bg, showAction,
+        displayValue: st.currentValue,
+        badge, badgeShow, metaLine, showMeta, showBelow: (badgeShow || showMeta),
+        showChatIcon, showActionLink, actionLabel, actionFg,
+        onOpenDrawer: () => this.openDrawer(f.id),
+        _st: st,
+      };
+    };
+
+    const rawSections = [
+      { id:'overview', title:'Project Overview', collapsed:true, count:4, fields:[] },
+      {
+        id:'location', title:'Site Location & Address',
+        fields: isGaya
+          ? [ { id:'village',kind:'field',label:'Village / Ward',      value:'Bodh Gaya, Ward No. 7' },
+              { id:'district',kind:'field',label:'District',           value:'Gaya'                  },
+              { id:'khasra', kind:'field',label:'Survey / Khasra No.', value:'14/A, 14/B'            },
+              { id:'area',   kind:'field',label:'Total Land Area',     value:'12.5 acres'            } ]
+          : [ { id:'village',kind:'field',label:'Village / Ward',      value:'Boring Road, Ward No. 12' },
+              { id:'district',kind:'field',label:'District',           value:'Patna'                    },
+              { id:'khasra', kind:'field',label:'Survey / Khasra No.', value:'221/B'                    },
+              { id:'area',   kind:'field',label:'Roof Area',           value:'2,400 sq ft'              } ],
+      },
+      {
+        id:'ownership', title:'Land Ownership & Documents',
+        fields: isGaya
+          ? [ { id:'own_type',  kind:'field',label:'Ownership Type',          value:'Owned (Freehold)'         },
+              { id:'land_deed', kind:'doc',  label:'Land Ownership Document', value:'📎 sale_deed_14A.pdf', date:'Uploaded 10 Jun 2026' },
+              { id:'reg_no',    kind:'field',label:'Registration No.',        value:'Gaya/Reg/2019/04521'      },
+              { id:'owner_name',kind:'field',label:'Owner Name',              value:'Bihar Solar Pvt. Ltd.'    } ]
+          : [ { id:'own_type',  kind:'field',label:'Ownership Type',          value:'Owned'                    },
+              { id:'land_deed', kind:'doc',  label:'Property / Ownership Deed',value:'📎 property_deed.pdf', date:'Uploaded 19 Jun 2026' },
+              { id:'owner_name',kind:'field',label:'Owner Name',              value:'Rajesh Kumar'             } ],
+      },
+      {
+        id:'compliance', title:'Municipal Compliance',
+        fields: isGaya
+          ? [ { id:'building_plan',kind:'doc',  label:'Approved Building Plan',  value:'📎 building_plan.pdf', date:'Uploaded 10 Jun 2026' },
+              { id:'site_plan',    kind:'doc',  label:'Site Plan',               value:'📎 site_plan_v2.pdf',  date:'Uploaded 10 Jun 2026' },
+              { id:'road_width',   kind:'field',label:'Approach Road Width',     value:'6 metres (adequate)'   },
+              { id:'land_use',     kind:'field',label:'Land Use Classification', value:'Agricultural — Permissible' } ]
+          : [ { id:'building_plan',kind:'doc',  label:'Structural Certificate',  value:'📎 structural_cert.pdf', date:'Uploaded 19 Jun 2026' },
+              { id:'site_plan',    kind:'doc',  label:'Site Plan',               value:'📎 site_plan.pdf',       date:'Uploaded 19 Jun 2026' },
+              { id:'land_use',     kind:'field',label:'Building Type',           value:'Residential — Rooftop'   } ],
+      },
+    ];
+
+    const doc = rawSections.map(sec => {
+      if (sec.collapsed) return { id:sec.id, title:sec.title, collapsed:true, expanded:false, count:sec.count, fields:[], headerBg:'#f6f8f7', headerBd:'#e3e9e6', badge:{text:'',bg:'',bd:'',fg:''}, badgeShow:false, showPlain:false, statusPlain:'', _q:0 };
+      const fields = sec.fields.map(mk);
+      const secAction = fields.some(f => f.showAction);
+      fields.forEach(f => { f.cols = secAction ? '1.3fr 1.5fr 150px' : '1.3fr 1fr'; f.renderActionCell = secAction; });
+      const qn = fields.filter(f => f._st.hasHistory).length;
+      const amber = isOfficer
+        ? fields.some(f => f._st.hasDraft || f._st.pendingSent)
+        : fields.some(f => f._st.pendingSent);
+      const qShow = qn > 0;
+      return {
+        id:sec.id, title:sec.title, collapsed:false, expanded:true, count:0, fields,
+        headerBg:  amber ? '#fffaf5' : '#f6f8f7',
+        headerBd:  amber ? '#f0d6ac' : '#e3e9e6',
+        badge:     qShow ? { text:qn+(qn>1?' query threads':' query thread'), bg: amber?'#fef3e3':'#eef5ff', bd: amber?'#f0d6ac':'#c9dff2', fg: amber?'#92400e':'#1a5a96' } : { text:'',bg:'',bd:'',fg:'' },
+        badgeShow: qShow, showPlain: !qShow, statusPlain:'Clear', _q: qn,
+      };
+    });
+
+    const rail = doc.filter(s => !s.collapsed).map(sec => ({
+      label: sec.title,
+      dot:   sec._q>0 ? '#e0922a' : '#c9cdc7',
+      bg:    sec._q>0 ? '#fff7ee' : 'transparent',
+      onClick: () => { const el=document.querySelector('[data-sec-id="'+sec.id+'"]'); if(el) window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'}); },
+    }));
+
+    // Applicant counts
+    const sentIds   = Object.keys(E).filter(id => (E[id]||[]).some(e=>e.type==='query'&&e.sent));
+    const appPending   = sentIds.filter(id => { const a=E[id]; return a[a.length-1].type==='query'; }).length;
+    const appResponded = sentIds.length - appPending;
+    const allAppDone   = sentIds.length>0 && appPending===0;
+
+    const hasDraftQueries = draftCount>0;
+    const hasPendingSentQueries = anyPendingSent;
+    const isApproved=dec==='approved', isRejected=dec==='rejected', isApproving=dec==='approving', isRejecting=dec==='rejecting';
+    const decisionDone = isApproved || isRejected;
+    const canDecide = !hasDraftQueries && !hasPendingSentQueries && !decisionDone;
+    const showDecidePanel = canDecide && !isApproving && !isRejecting;
+
+    // ===== DRAWER =====
+    let drawer = { open:false, timeline:[] };
+    const did = this.state.drawerField;
+    if (did) {
+      // find field def + state
+      let fdef=null, sec=null;
+      for (const s of rawSections) { if (s.collapsed) continue; const ff=s.fields.find(x=>x.id===did); if(ff){fdef=ff;sec=s;break;} }
+      if (fdef) {
+        const st = this._fieldState(fdef, E, isOfficer);
+        const isDoc = fdef.kind==='doc';
+        // build chronological timeline: base submission + events
+        const evs = [];
+        evs.push({ kind:'submitted', date: (fdef.date||'').replace('Uploaded ','') || project.receivedOn, file: isDoc? fdef.value : null, value: isDoc? null : fdef.value, version:1 });
+        let v=1;
+        st.arr.forEach(e=>{
+          if (e.type==='query') evs.push({ kind: e.sent?'query':'draft', date:e.date, text:e.text });
+          else { v++; evs.push({ kind:'response', date:e.date, file:e.file, value:e.value, note:e.note, version:v }); }
+        });
+        // newest first
+        const timeline = evs.slice().reverse().map((e,i)=>{
+          const isLast = i === evs.length-1; // last displayed = oldest
+          let icon='•', iconBg='#eef1ef', title='', actor='', detail='', detailBg='', detailBd='', note='', hasDetail=false, hasNote=false, hasVersion=false, versionLabel='';
+          if (e.kind==='submitted') { icon='📄'; iconBg='#eef5ff'; title='Original submission'; actor=project.applicant; if(e.file||e.value){detail=e.file||e.value;hasDetail=true;detailBg='#f6f8f7';detailBd='#e3e9e6';} hasVersion=true; versionLabel='v1'; }
+          else if (e.kind==='query') { icon='💬'; iconBg='#fef3e3'; title='Municipal Corp. raised query'; actor='Officer A.K. Singh'; detail=e.text; hasDetail=true; detailBg='#fffaf5'; detailBd='#f0d6ac'; }
+          else if (e.kind==='draft') { icon='✏️'; iconBg='#fff3cd'; title='Draft query (not sent)'; actor='You'; detail=e.text; hasDetail=true; detailBg='#fff7ee'; detailBd='#fde8c5'; }
+          else if (e.kind==='response') { icon='↩️'; iconBg='#e7f4ec'; title='Applicant resubmitted'; actor=project.applicant; detail=e.file||e.value; hasDetail=true; detailBg='#f4faf6'; detailBd='#bfe3cd'; if(e.note){note=e.note;hasNote=true;} hasVersion=true; versionLabel='v'+e.version; }
+          return { icon, iconBg, title, actor, date:e.date, detail, hasDetail, detailBg, detailBd, note, hasNote, hasVersion, versionLabel, showLine: !isLast };
+        });
+
+        // status chip for drawer header
+        let statusText='Clear', sChipBg='#f6f8f7', sChipBd='#e3e9e6', sChipFg='#46524b';
+        if (st.hasDraft)        { statusText='Draft query';       sChipBg='#fff3cd'; sChipBd='#fde68a'; sChipFg='#92400e'; }
+        else if (st.pendingSent){ statusText='Awaiting response'; sChipBg='#fef3e3'; sChipBd='#f0d6ac'; sChipFg='#92400e'; }
+        else if (st.hasResponse){ statusText='Response received'; sChipBg='#e7f4ec'; sChipBd='#bfe3cd'; sChipFg='#1e7a4d'; }
+
+        const lastDraft = [...st.arr].reverse().find(e=>e.type==='query'&&!e.sent);
+        const openQuery = st.pendingSent ? st.last : null;
+        const corr = CORR[did] || {};
+
+        drawer = {
+          open:true,
+          kicker: sec.title,
+          label: fdef.label,
+          version: st.version,
+          currentValue: st.currentValue,
+          curBg: st.hasResponse?'#f4faf6':'#f8faf9', curBd: st.hasResponse?'#bfe3cd':'#e3e9e6',
+          statusText, statusChipBg:sChipBg, statusChipBd:sChipBd, statusChipFg:sChipFg,
+          isDoc, isTextField: !isDoc,
+          // officer composer — can raise when not awaiting & not decided & no current draft
+          showComposer: isOfficer && !st.pendingSent && !st.hasDraft && !decisionDone,
+          composerTitle: st.hasHistory ? 'Raise another query on this field' : 'Raise a query on this field',
+          composerValue: COMP[did] || '',
+          onComposerInput:(e)=>this.onComposer(did, e.target.value),
+          onSendNow:  ()=>this.addQuery(did, true),
+          onSaveDraft:()=>this.addQuery(did, false),
+          showDraftNote: isOfficer && st.hasDraft,
+          draftText: lastDraft ? lastDraft.text : '',
+          onRemoveDraft: ()=>this.removeLastDraft(did),
+          showAwaitingNote: isOfficer && st.pendingSent,
+          // applicant response form
+          showResponseForm: isApplicant && st.pendingSent && !this.state.resubmitted,
+          openQueryText: openQuery ? openQuery.text : '',
+          corrValue: corr.value || '',
+          corrNote:  corr.note  || '',
+          onCorrValue:(e)=>this.onCorrValue(did, e.target.value),
+          onCorrNote: (e)=>this.onCorrNote(did, e.target.value),
+          onSaveResp: ()=>this.saveResponse(did, isDoc),
+          onPickFile: ()=>this.saveResponse(did, isDoc),
+          timeline,
+          onClose: ()=>this.closeDrawer(),
+        };
+      }
+    }
+
+    const tab = (a)=>({bg:a?'#fff':'transparent',color:a?'#0f2319':'#6b7c72'});
+    const tP=tab(sc==='pending'), tG=tab(sc==='query_raised'), tR=tab(sc==='responded');
+    const roleTab=(a)=>({bg:a?'#fff':'transparent',fg:a?'#0f2319':'#5b6b62'});
+    const rO=roleTab(isOfficer), rA=roleTab(isApplicant);
+
+    return {
+      isOfficer, isApplicant,
+      setOfficer:   ()=>this.setState({role:'officer', drawerField:null}),
+      setApplicant: ()=>this.setState({role:'applicant', drawerField:null}),
+      officerRoleBg:rO.bg, officerRoleFg:rO.fg, applicantRoleBg:rA.bg, applicantRoleFg:rA.fg,
+      setPatna:    ()=>this._setScenario('pending'),
+      setGaya:     ()=>this._setScenario('query_raised'),
+      setResponded:()=>this._setScenario('responded'),
+      patnaTabBg:tP.bg, patnaTabColor:tP.color, gayaTabBg:tG.bg, gayaTabColor:tG.color, respondedTabBg:tR.bg, respondedTabColor:tR.color,
+      sidebarLabel:    isOfficer?'Dept. Officer Console':'Applicant Portal',
+      sidebarNavLabel: isOfficer?'My Clearances':'My Applications',
+      notifBadge:      isOfficer?'3':'4',
+      signinName:      isOfficer?'Officer A.K. Singh':'Rajesh Kumar',
+      signinSub:       isOfficer?'Municipal Corp. · Gaya District':'Applicant · Patna',
+      avatarBg:        isOfficer?'#1e5c3a':'#1e9b5f',
+      avatarInitials:  isOfficer?'AS':'RK',
+      crumb: isOfficer?'Officer Console / My Clearances / Review':'Home / My Applications / Track',
+      project, slaLabel, slaColor, slaRemaining, slaPct, slaChipBg, slaChipBd, slaChipFg,
+      showSendBtn: isOfficer && draftCount>0,
+      sendBtnLabel:'Send '+draftCount+(draftCount===1?' query':' queries')+' to applicant',
+      draftCount, draftCountLabel: draftCount===1?'query':'queries',
+      showOfficerHint:       isOfficer && !decisionDone,
+      showApplicantNotice:   isApplicant && sentIds.length>0 && !this.state.resubmitted,
+      applicantNoticeTxt:    'Municipal Corporation raised queries on '+sentIds.length+(sentIds.length===1?' field':' fields')+'. Open each to respond.',
+      showResubmittedBanner: isApplicant && this.state.resubmitted,
+      doc, rail,
+      hasDraftQueries, hasPendingSentQueries,
+      showDecidePanel, showApproveConfirm:isApproving, showRejectForm:isRejecting,
+      isApproved, isRejected, rejectReason: this.state.rejectReason||'',
+      onSendQueries:        ()=>this.sendAllDrafts(),
+      onStartApprove:       ()=>this.setState({decision:'approving'}),
+      onStartReject:        ()=>this.setState({decision:'rejecting'}),
+      onCancelDecision:     ()=>this.setState({decision:null, rejectReason:''}),
+      onConfirmApprove:     ()=>this.setState({decision:'approved'}),
+      onRejectReasonChange: (e)=>this.setState({rejectReason:e.target.value}),
+      onConfirmReject:      ()=>{ if((this.state.rejectReason||'').trim()) this.setState({decision:'rejected'}); },
+      appPending, appResponded,
+      showSubmitBar: isApplicant && sentIds.length>0 && !this.state.resubmitted,
+      submitBarLine: appResponded+' of '+sentIds.length+(sentIds.length===1?' query':' queries')+' responded',
+      submitBg:      allAppDone?'#1e9b5f':'#c9cdc7',
+      submitCursor:  allAppDone?'pointer':'not-allowed',
+      onResubmit:    ()=>this.resubmit(),
+      drawer,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

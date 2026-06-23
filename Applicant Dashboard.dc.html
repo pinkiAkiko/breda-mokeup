@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#eef1ef;}
+  button{font-family:inherit;cursor:pointer;}
+  a{text-decoration:none;}
+</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:20px 18px 18px;display:flex;align-items:center;gap:11px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;display:block;">
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Applicant Portal</div>
+      </div>
+    </div>
+
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </div>
+      <a href="New Project Application.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;" style-hover="background:rgba(255,255,255,.07);color:#fff;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        New Project Application
+      </a>
+      <a href="My Applications.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;" style-hover="background:rgba(255,255,255,.07);color:#fff;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+        My Applications
+      </a>
+      <a href="Payments.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+        Payments
+      </a>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <span style="display:flex;align-items:center;gap:11px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          Notifications
+        </span>
+        <span style="background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px;">4</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+        Help &amp; Grievance
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar: page title + role switcher + bell + avatar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Dashboard</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <div style="position:relative;width:38px;height:38px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1e9b5f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;">RK</div>
+      </div>
+    </div>
+
+    <!-- Page header: breadcrumb + welcome + CTA -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Home / Dashboard</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:24px;font-weight:700;margin:0;color:#0f2319;line-height:1.1;">Welcome back, Rajesh Kumar</h1>
+        <a href="New Project Application.dc.html" style="display:flex;align-items:center;gap:8px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:12px 20px;font-size:14px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12);text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Start New Application
+        </a>
+      </div>
+    </div>
+
+    <main id="main" style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
+
+      <!-- KPI STAT CARDS -->
+      <section style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+          <div style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;padding:18px 20px;box-shadow:0 1px 3px rgba(15,35,25,.04);padding-top:{{kpiPad}};padding-bottom:{{kpiPad}};">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <span style="font-size:13px;color:#6b7c72;font-weight:500;">{{s.l}}</span>
+              <span style="width:10px;height:10px;border-radius:50%;background:{{s.dot}};"></span>
+            </div>
+            <div style="font-size:36px;font-weight:700;color:#0f2319;line-height:1;">{{s.v}}</div>
+            <div style="font-size:12px;color:#8e9e97;margin-top:6px;">{{s.sub}}</div>
+          </div>
+        </sc-for>
+      </section>
+
+      <sc-if value="{{showActionPanel}}" hint-placeholder-val="{{true}}">
+      <!-- ACTION REQUIRED PANEL -->
+      <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 20px;background:#fffaf5;border-bottom:1px solid #f0d6ac;">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+            <span style="font-size:15px;font-weight:700;color:#0f2319;">Action Required</span>
+            <span style="background:#fef3e3;color:#92400e;font-size:11px;font-weight:600;border-radius:999px;padding:2px 9px;border:1px solid #f0d6ac;">3 pending</span>
+          </div>
+          <a href="My Applications.dc.html" style="font-size:12.5px;color:#8e9e97;">View all notifications &rarr;</a>
+        </div>
+        <sc-for list="{{alerts}}" as="a" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:16px;padding:12px 20px;border-top:1px solid #f3f6f4;border-left:4px solid {{a.bar}};">
+            <div style="width:12px;height:12px;border-radius:50%;flex:none;background:{{a.dot}};"></div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:14.5px;font-weight:600;color:#1c2530;">{{a.title}}</div>
+              <div style="font-size:13px;color:#6b7c72;margin-top:3px;">{{a.desc}}</div>
+            </div>
+            <div style="font-size:12px;color:#8e9e97;white-space:nowrap;margin-right:8px;">{{a.age}}</div>
+            <a href="{{a.href}}" style="flex:none;background:{{a.btnBg}};color:{{a.btnFg}};border:1.5px solid {{a.btnBd}};border-radius:8px;padding:9px 16px;font-size:13px;font-weight:600;text-decoration:none;">{{a.cta}}</a>
+          </div>
+        </sc-for>
+      </section>
+      </sc-if>
+
+      <!-- APPLICATIONS TABLE -->
+      <section style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,35,25,.04);">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid #edf1ee;">
+          <h2 style="font-size:15px;font-weight:700;margin:0;color:#0f2319;">Your Applications</h2>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #dce5e0;border-radius:8px;padding:7px 12px;color:#8e9e97;font-size:13px;width:220px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              Search file or project&hellip;
+            </div>
+            <button style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #dce5e0;border-radius:8px;padding:8px 14px;font-size:13px;color:#46524b;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18M7 12h10M11 19h2"/></svg>
+              All statuses
+            </button>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:2.8fr 1fr 1.6fr 2.8fr 0.85fr 0.5fr;gap:12px;padding:10px 20px;background:#f8faf9;font-size:11px;font-weight:600;color:#8e9e97;letter-spacing:.5px;border-bottom:1px solid #edf1ee;">
+          <span>PROJECT</span><span>CAPACITY</span><span>STATUS</span><span>NEXT ACTION</span><span>UPDATED</span><span></span>
+        </div>
+        <sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:2.8fr 1fr 1.6fr 2.8fr 0.85fr 0.5fr;gap:12px;align-items:center;padding:13px 20px;border-top:1px solid #f3f6f4;">
+            <div style="min-width:0;">
+              <div style="font-size:14.5px;font-weight:600;color:#1c2530;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{p.title}}</div>
+              <div style="font-size:12px;color:#8e9e97;margin-top:2px;">{{p.type}} &middot; {{p.ack}}</div>
+            </div>
+            <div style="font-size:14px;color:#3e4e45;font-weight:500;">{{p.cap}}</div>
+            <div>
+              <span style="display:inline-flex;align-items:center;gap:7px;background:{{p.pillBg}};border:1px solid {{p.pillBd}};color:{{p.pillFg}};border-radius:999px;padding:4px 11px;font-size:12px;font-weight:600;white-space:nowrap;">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{p.dot}};flex:none;"></span>{{p.status}}
+              </span>
+            </div>
+            <div style="min-width:0;">
+              <div style="font-size:13px;color:#3e4e45;line-height:1.35;">{{p.next}}</div>
+              <a href="{{p.ctaHref}}" style="display:inline-flex;align-items:center;gap:3px;font-size:12.5px;font-weight:600;color:{{p.ctaColor}};margin-top:4px;">{{p.ctaLabel}} &rarr;</a>
+            </div>
+            <div style="font-size:12px;color:#8e9e97;">{{p.updated}}</div>
+            <div style="text-align:right;">
+              <button style="width:32px;height:32px;border:1px solid #dce5e0;border-radius:8px;background:#fff;color:#8e9e97;display:inline-flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg>
+              </button>
+            </div>
+          </div>
+        </sc-for>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-top:1px solid #edf1ee;background:#f8faf9;">
+          <span style="font-size:12.5px;color:#8e9e97;">Showing 3 of 3 applications</span>
+          <a href="My Applications.dc.html" style="font-size:13px;font-weight:600;color:#1e9b5f;">View all &rarr;</a>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;kpiPadY&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:4,&quot;max&quot;:28,&quot;step&quot;:1},&quot;showActionPanel&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const tones = {
+      attention: { pillBg:'#fef3e3', pillBd:'#f0d6ac', pillFg:'#92400e', dot:'#c2740f', ctaColor:'#b45309' },
+      progress:  { pillBg:'#e6f0f9', pillBd:'#c9dff2', pillFg:'#1a5a96', dot:'#1d6fb8', ctaColor:'#1a5a96' },
+      wait:      { pillBg:'#edf1ee', pillBd:'#d6dfd8', pillFg:'#4b5f53', dot:'#6b7c72', ctaColor:'#46524b' },
+    };
+    const projects = [
+      { title:'Solar Rooftop — Patna',         type:'Rooftop Solar',     cap:'500 kW', ack:'Ack/2025/014', status:'BREDA Query Raised',    tone:'attention', next:'2 fields flagged — review clock paused until you respond.', ctaLabel:'Respond to query', updated:'2 hrs ago', ctaHref:'Review Page.dc.html' },
+      { title:'Ground-Mounted Solar — Gaya',   type:'Ground Solar',      cap:'5 MW',   ack:'Ack/2025/009', status:'Under Dept. Review',    tone:'progress',  next:'3 of 6 clearances approved · Grid Connectivity SLA 8 days left.', ctaLabel:'Track clearances', updated:'1 day ago', ctaHref:'Application Track.dc.html' },
+      { title:'Solar + Storage — Bhagalpur',   type:'Solar with Storage',cap:'12 MW',  ack:'Pending',      status:'Payment Verification', tone:'wait',      next:'DD copy uploaded — awaiting Finance Officer verification.', ctaLabel:'View payment status', updated:'3 days ago', ctaHref:'Application Track.dc.html' },
+    ].map(p => ({ ...p, ...tones[p.tone] }));
+
+    const stats = [
+      { v:'3', l:'Total Projects',   sub:'2 active · 1 in verification', dot:'#1d6fb8' },
+      { v:'2', l:'Under Review',     sub:'BREDA & dept. clearances',    dot:'#1d6fb8' },
+      { v:'0', l:'Approved',         sub:'No approvals yet',            dot:'#c9cdc7' },
+      { v:'1', l:'Payment Pending',  sub:'Finance verification pending', dot:'#c2740f' },
+    ];
+
+    const alerts = [
+      { title:'Respond to BREDA query — Ack/2025/014', desc:'Solar Rooftop, Patna · 2 fields flagged by reviewing officer. Reply to resume the 15-day review clock.', cta:'Respond now', age:'2 hrs ago', bar:'#c2740f', dot:'#c2740f', btnBg:'#fff8f2', btnFg:'#b45309', btnBd:'#f0d6ac', href:'Review Page.dc.html' },
+      { title:'Department query — Ack/2025/009', desc:'Ground Solar, Gaya · 1 dept. query raised — respond to resume clearance review.', cta:'Respond now', age:'1 day ago', bar:'#c2740f', dot:'#c2740f', btnBg:'#fff8f2', btnFg:'#b45309', btnBd:'#f0d6ac', href:'Review Page.dc.html' },
+      { title:'Payment under Finance verification',    desc:'Solar + Storage, Bhagalpur · Demand Draft copy uploaded. Waiting for Finance Officer to verify.', cta:'View status', age:'3 days ago', bar:'#6b7c72', dot:'#6b7c72', btnBg:'#fff', btnFg:'#3e4e45', btnBd:'#dce5e0', href:'Application Track.dc.html' },
+    ];
+
+    const kpiPad = (this.props.kpiPadY ?? 12) + 'px';
+    const showActionPanel = this.props.showActionPanel ?? true;
+    return { projects, stats, alerts, kpiPad, showActionPanel };
+  }
+}
+</script>
+</body>
+</html>
