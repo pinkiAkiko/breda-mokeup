@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — BREDA SWCS</title>
+  <meta name="description" content="Create a BREDA SWCS applicant account to register renewable energy projects in Bihar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:      #1a4731;
+      --primary-fg:   #ffffff;
+      --accent:       #e8860a;
+      --accent-fg:    #ffffff;
+      --secondary:    #ebeaea;
+      --background:   #ffffff;
+      --foreground:   #150202;
+      --card:         #ffffff;
+      --muted-fg:     #606060;
+      --border:       #c6c6c6;
+      --ring:         #1a4731;
+      --success:      #198754;
+      --success-fg:   #ffffff;
+      --destructive:  #dc3545;
+    }
+
+    html { font-family: 'Noto Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.5; }
+    body { background: var(--secondary); color: var(--foreground); min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; }
+    select, input { font-family: inherit; }
+
+    /* ── UTILITY BAR ───────────────────────────── */
+    .utility-bar { background: var(--primary); color: var(--primary-fg); font-size: 12px; }
+    .utility-bar-inner { max-width: 1280px; margin: 0 auto; padding: 6px 16px; display: flex; align-items: center; justify-content: space-between; }
+    .utility-left { display: flex; align-items: center; gap: 16px; }
+    .utility-brand { font-weight: 600; }
+    .utility-phone { display: flex; align-items: center; gap: 6px; }
+    .utility-right { display: flex; align-items: center; gap: 12px; }
+    .lang-toggle { display: flex; align-items: center; gap: 4px; }
+    .lang-toggle button { color: var(--primary-fg); font-size: 12px; border: none; background: transparent; cursor: pointer; opacity: .85; }
+    .lang-toggle button:hover { opacity: 1; text-decoration: underline; }
+    .a11y-btns { display: flex; align-items: center; gap: 3px; }
+    .a11y-btns button { color: var(--primary-fg); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; cursor: pointer; font-weight: 700; opacity: .8; }
+    .a11y-btns button:hover { background: rgba(255,255,255,.15); opacity: 1; }
+
+    /* ── SITE HEADER ───────────────────────────── */
+    .site-header { position: sticky; top: 0; z-index: 40; border-bottom: 1px solid var(--border); background: var(--background); }
+    .site-header-inner { max-width: 1280px; margin: 0 auto; padding: 12px 16px 0; }
+    .header-top { display: flex; align-items: center; gap: 24px; }
+    .logo-link { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .logo-link img { height: 56px; width: 56px; object-fit: contain; }
+    .logo-text-name { font-size: 14px; font-weight: 700; color: var(--primary); line-height: 1.2; }
+    .logo-text-sub { font-size: 11px; color: var(--muted-fg); line-height: 1.3; margin-top: 1px; }
+    .search-wrap { flex: 1; max-width: 512px; margin-left: auto; position: relative; }
+    .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted-fg); }
+    .search-wrap input { width: 100%; border: 1px solid var(--border); border-radius: 6px; background: var(--card); padding: 8px 12px 8px 36px; font-size: 14px; color: var(--foreground); outline: none; }
+    .search-wrap input:focus { border-color: var(--ring); box-shadow: 0 0 0 2px rgba(26,71,49,.12); }
+    .primary-nav { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 2px; border-top: 1px solid var(--border); padding-top: 8px; }
+    .nav-link { padding: 6px 12px; border-radius: 5px; font-size: 14px; font-weight: 500; color: var(--foreground); transition: background .12s, color .12s; }
+    .nav-link:hover, .nav-link.active { background: var(--secondary); color: var(--primary); font-weight: 600; }
+
+    /* ── MAIN CONTENT ──────────────────────────── */
+    main { flex: 1; padding: 48px 16px; }
+
+    .reg-card {
+      max-width: 672px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 32px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+
+    .reg-title { font-size: 24px; font-weight: 700; color: var(--primary); }
+
+    /* ── STEPPER ───────────────────────────────── */
+    .stepper { margin-top: 16px; display: flex; align-items: center; gap: 8px; }
+
+    .step-dot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .step-circle.active   { background: var(--accent); color: var(--accent-fg); }
+    .step-circle.complete { background: var(--success); color: var(--success-fg); }
+    .step-circle.idle     { border: 2px solid var(--border); color: var(--muted-fg); }
+
+    .step-label { font-size: 14px; color: var(--muted-fg); }
+    .step-label.active { font-weight: 700; color: var(--foreground); }
+
+    .step-line { flex: 1; height: 2px; background: var(--border); }
+
+    /* ── FORM FIELDS ───────────────────────────── */
+    .form-section { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .field-group { display: flex; flex-direction: column; gap: 4px; }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    .field-label .req { color: var(--destructive); margin-left: 2px; }
+
+    .field-hint { font-size: 12px; color: var(--muted-fg); }
+
+    .field-err { font-size: 12px; color: var(--destructive); margin-top: 2px; }
+
+    .field-input,
+    .field-select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--foreground);
+      background: var(--background);
+      outline: none;
+    }
+
+    .field-input:focus, .field-select:focus {
+      border-color: var(--ring);
+      box-shadow: 0 0 0 2px rgba(26,71,49,.12);
+    }
+
+    .field-select { background: var(--card); cursor: pointer; }
+
+    .mobile-row { display: flex; gap: 8px; }
+
+    .mobile-prefix {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      background: var(--secondary);
+      padding: 0 12px;
+      font-size: 14px;
+      color: var(--muted-fg);
+      white-space: nowrap;
+    }
+
+    .mobile-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-radius: 0 6px 6px 0;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--foreground);
+      outline: none;
+      background: var(--background);
+    }
+
+    .mobile-input:focus { border-color: var(--ring); box-shadow: 0 0 0 2px rgba(26,71,49,.12); }
+
+    .otp-row { display: flex; gap: 8px; align-items: stretch; }
+    .otp-row .field-input { flex: 1; letter-spacing: .2em; }
+
+    .btn-otp {
+      border: 2px solid var(--primary);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: transparent;
+      white-space: nowrap;
+      transition: background .12s, color .12s;
+    }
+
+    .btn-otp:hover { background: var(--primary); color: var(--primary-fg); }
+
+    .otp-verify-field {
+      margin-top: 8px;
+      display: none;
+    }
+
+    .otp-verify-field.visible { display: block; }
+
+    .otp-sent-note {
+      font-size: 12px;
+      color: var(--success);
+      margin-top: 4px;
+      display: none;
+    }
+
+    .otp-sent-note.visible { display: block; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── FORM ACTIONS ──────────────────────────── */
+    .form-actions { display: flex; justify-content: flex-end; padding-top: 8px; gap: 12px; }
+
+    .btn-back {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--foreground);
+      background: var(--background);
+      transition: background .12s;
+    }
+
+    .btn-back:hover { background: var(--secondary); }
+
+    .btn-primary {
+      border: none;
+      border-radius: 6px;
+      padding: 8px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-fg);
+      background: var(--primary);
+      transition: opacity .12s;
+    }
+
+    .btn-primary:hover { opacity: .88; }
+
+    /* ── ERROR TOAST ───────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #1e2a24;
+      color: #fff;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      z-index: 9999;
+      transition: transform .25s;
+      white-space: nowrap;
+    }
+
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.error { background: var(--destructive); }
+    #toast.success { background: var(--success); }
+
+    /* ── SUCCESS SCREEN ────────────────────────── */
+    #success-screen {
+      display: none;
+      max-width: 512px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 48px 32px;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+
+    #success-screen svg { margin: 0 auto; }
+
+    .success-title { margin-top: 16px; font-size: 24px; font-weight: 700; color: var(--primary); }
+
+    .success-sub { margin-top: 8px; font-size: 14px; color: var(--muted-fg); }
+
+    .success-uid { margin-top: 8px; font-size: 20px; font-weight: 700; letter-spacing: .04em; color: var(--accent); word-break: break-all; }
+
+    .success-note { margin-top: 16px; font-size: 12px; color: var(--muted-fg); }
+
+    .btn-login-go {
+      display: inline-block;
+      margin-top: 24px;
+      border-radius: 6px;
+      background: var(--primary);
+      color: var(--primary-fg);
+      padding: 10px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity .12s;
+    }
+
+    .btn-login-go:hover { opacity: .88; }
+
+    /* ── FOOTER ────────────────────────────────── */
+    .site-footer { background: var(--primary); color: var(--primary-fg); }
+    .footer-inner { max-width: 1280px; margin: 0 auto; padding: 40px 16px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+    .footer-org { font-size: 15px; font-weight: 700; }
+    .footer-desc { margin-top: 8px; font-size: 14px; opacity: .9; line-height: 1.6; }
+    .footer-col-title { font-weight: 600; margin-bottom: 8px; }
+    .footer-contact { font-size: 14px; line-height: 1.8; opacity: .9; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; list-style: none; }
+    .footer-links a { font-size: 14px; opacity: .9; }
+    .footer-links a:hover { opacity: 1; text-decoration: underline; }
+    .social-row { display: flex; gap: 8px; margin-top: 12px; }
+    .social-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.4); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--primary-fg); opacity: .8; }
+    .social-btn:hover { opacity: 1; background: rgba(255,255,255,.1); }
+    .footer-bottom { margin-top: 32px; border-top: 1px solid rgba(255,255,255,.2); padding-top: 16px; font-size: 12px; opacity: .8; }
+
+    @media (max-width: 640px) {
+      .reg-card { padding: 24px 16px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .utility-phone { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- UTILITY BAR -->
+  <div class="utility-bar">
+    <div class="utility-bar-inner">
+      <div class="utility-left">
+        <span class="utility-brand">Govt. of Bihar | Energy Department</span>
+        <span style="opacity:.4" aria-hidden>·</span>
+        <span class="utility-phone">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6 19.79 19.79 0 0 1 1.61 5 2 2 0 0 1 3.6 2.87h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.5a16 16 0 0 0 6 6l1-1.07a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17l.19-.08Z"/></svg>
+          Toll Free: 1800-345-6204
+        </span>
+      </div>
+      <div class="utility-right">
+        <div class="lang-toggle">
+          <button>EN</button>
+          <span aria-hidden style="opacity:.4">|</span>
+          <button>हि</button>
+        </div>
+        <div class="a11y-btns">
+          <button title="Increase text size" style="font-size:13px;">A+</button>
+          <button title="Decrease text size" style="font-size:11px;">A−</button>
+          <button title="High contrast">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE HEADER -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="header-top">
+        <a href="index.html" class="logo-link">
+          <img src="uploads/pasted-1781946364812-0.png" alt="BREDA SWCS">
+          <div>
+            <div class="logo-text-name">BREDA SWCS</div>
+            <div class="logo-text-sub">Bihar Renewable Energy<br>Development Agency</div>
+          </div>
+        </a>
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" placeholder="Search schemes, services, applications...">
+        </div>
+      </div>
+      <nav class="primary-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="#" class="nav-link">RE Policy 2025</a>
+        <a href="#" class="nav-link">Services</a>
+        <a href="#" class="nav-link">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="main-content">
+
+    <!-- REGISTRATION CARD -->
+    <div class="reg-card" id="reg-card">
+      <h1 class="reg-title">Applicant Registration</h1>
+
+      <!-- Stepper -->
+      <div class="stepper" id="stepper">
+        <div class="step-dot">
+          <div class="step-circle active" id="dot1">1</div>
+          <span class="step-label active" id="lbl1">Basic Details</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-dot">
+          <div class="step-circle idle" id="dot2">2</div>
+          <span class="step-label" id="lbl2">Communication Address</span>
+        </div>
+      </div>
+
+      <!-- ─── STEP 1 ─── -->
+      <div id="step1" class="form-section">
+
+        <div class="field-group">
+          <label class="field-label" for="fullname">Full Name <span class="req">*</span></label>
+          <input class="field-input" id="fullname" type="text" placeholder="As per official documents">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="apptype">Applicant Type <span class="req">*</span></label>
+          <select class="field-select" id="apptype" onchange="toggleOtherType(this)">
+            <option>Individual</option>
+            <option>Proprietary Firm</option>
+            <option>Partnership</option>
+            <option>Public Ltd.</option>
+            <option>Pvt. Ltd.</option>
+            <option>Other</option>
+          </select>
+          <input class="field-input" id="apptype-other" type="text" placeholder="Specify applicant type" style="margin-top:8px;display:none;">
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="mobile">Mobile Number <span class="req">*</span></label>
+          <div class="otp-row">
+            <div class="mobile-row" style="flex:1;">
+              <span class="mobile-prefix">+91</span>
+              <input class="mobile-input" id="mobile" type="tel" maxlength="10" placeholder="10-digit number" oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)">
+            </div>
+            <button class="btn-otp" onclick="sendOtp('mobile')">Send OTP</button>
+          </div>
+          <div id="mobile-otp-wrap" class="otp-verify-field">
+            <input class="field-input" id="mobile-otp" type="tel" maxlength="6" placeholder="Enter 6-digit OTP" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)" style="letter-spacing:.2em;">
+          </div>
+          <div id="mobile-otp-note" class="otp-sent-note">OTP sent. Use <strong>123456</strong> for demo.</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="email">Email ID <span class="req">*</span></label>
+          <div class="otp-row">
+            <input class="field-input" id="email" type="email" placeholder="This will be your User ID" style="flex:1;">
+            <button class="btn-otp" onclick="sendOtp('email')">Send OTP</button>
+          </div>
+          <div id="email-otp-wrap" class="otp-verify-field">
+            <input class="field-input" id="email-otp" type="tel" maxlength="6" placeholder="Enter 6-digit OTP" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)" style="letter-spacing:.2em;margin-top:8px;">
+          </div>
+          <div id="email-otp-note" class="otp-sent-note">OTP sent. Use <strong>123456</strong> for demo.</div>
+          <div class="field-hint" style="margin-top:4px;">Your email address will be your permanent User ID</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="password">Password <span class="req">*</span></label>
+          <input class="field-input" id="password" type="password" placeholder="Minimum 6 characters">
+          <div class="field-hint">Minimum 6 characters</div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="confirm-pwd">Re-enter Password <span class="req">*</span></label>
+          <input class="field-input" id="confirm-pwd" type="password" oninput="checkPwdMatch()" placeholder="Repeat password">
+          <div class="field-err" id="pwd-err" style="display:none;">Passwords do not match</div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-primary" onclick="goStep2()">Next →</button>
+        </div>
+      </div>
+
+      <!-- ─── STEP 2 ─── -->
+      <div id="step2" class="form-section" style="display:none;">
+
+        <div class="field-group">
+          <label class="field-label" for="street">Street / House No. <span class="req">*</span></label>
+          <input class="field-input" id="street" type="text" placeholder="Building name, street, locality">
+        </div>
+
+        <div class="grid-2">
+
+          <div class="field-group">
+            <label class="field-label" for="village">Village <span class="req">*</span></label>
+            <select class="field-select" id="village">
+              <option value="">Select</option>
+              <option>Bhikhampur</option>
+              <option>Manjhaul</option>
+              <option>Naubatpur</option>
+              <option>Bihta</option>
+              <option>Phulwari</option>
+              <option>Danapur</option>
+              <option>Maner</option>
+              <option>Punpun</option>
+              <option>Masaurhi</option>
+              <option>Paliganj</option>
+              <option>Barh</option>
+              <option>Mokama</option>
+              <option>Bakhtiyarpur</option>
+              <option>Khusrupur</option>
+              <option>Fatuha</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="city">City</label>
+            <input class="field-input" id="city" type="text" placeholder="Optional">
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="district">District <span class="req">*</span></label>
+            <select class="field-select" id="district">
+              <option value="">Select</option>
+              <option>Patna</option>
+              <option>Gaya</option>
+              <option>Bhagalpur</option>
+              <option>Muzaffarpur</option>
+              <option>Darbhanga</option>
+              <option>Purnia</option>
+              <option>Begusarai</option>
+              <option>Nalanda</option>
+              <option>Vaishali</option>
+              <option>Saran</option>
+              <option>Rohtas</option>
+              <option>Samastipur</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="block">Block <span class="req">*</span></label>
+            <select class="field-select" id="block">
+              <option value="">Select</option>
+              <option>Patna Sadar</option>
+              <option>Bihta</option>
+              <option>Mushahari</option>
+              <option>Gaya Town</option>
+              <option>Manpur</option>
+              <option>Sasaram</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="panchayat">Panchayat <span class="req">*</span></label>
+            <select class="field-select" id="panchayat">
+              <option value="">Select</option>
+              <option>Patna</option>
+              <option>Bihta</option>
+              <option>Mushahari</option>
+              <option>Gaya</option>
+              <option>Manpur</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="pin">Pin Code <span class="req">*</span></label>
+            <input class="field-input" id="pin" type="tel" maxlength="6" placeholder="6-digit PIN" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-back" onclick="goStep1()">← Back</button>
+          <button class="btn-primary" onclick="submitReg()">Submit Registration</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div id="success-screen">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#198754" stroke-width="1.5">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+      <div class="success-title">Registration Successful</div>
+      <div class="success-sub">Your BREDA SWCS User ID is</div>
+      <div class="success-uid" id="success-uid"></div>
+      <div class="success-note" id="success-note"></div>
+      <a href="login.html" class="btn-login-go">Proceed to Login</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-org">Bihar Renewable Energy Development Agency</div>
+          <p class="footer-desc">This is the official portal of Bihar Renewable Energy Development Agency (BREDA), a Government Organization under the Energy Department, Government of Bihar.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <div class="footer-contact">
+            2nd Floor, Vidhyut Bhawan,<br>
+            Building No. II, Bailey Road,<br>
+            Patna – 800021<br>
+            Email: breda@breda.in<br>
+            Toll Free: 1800-345-6204
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="#">Website Policy</a></li>
+            <li><a href="#">Sitemap</a></li>
+            <li><a href="#">Related Links</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Feedback</a></li>
+            <li><a href="#">Last Updated On</a></li>
+          </ul>
+          <div class="social-row">
+            <a href="#" class="social-btn" aria-label="Facebook">f</a>
+            <a href="#" class="social-btn" aria-label="Twitter">t</a>
+            <a href="#" class="social-btn" aria-label="LinkedIn">in</a>
+            <a href="#" class="social-btn" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">© BREDA. All rights reserved. | Last Updated On: 05 Jun 2026</div>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <script>
+    let toastTimer;
+
+    function showToast(msg, type = 'default') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'show ' + (type === 'error' ? 'error' : type === 'success' ? 'success' : '');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { t.className = ''; }, 3000);
+    }
+
+    function toggleOtherType(sel) {
+      document.getElementById('apptype-other').style.display =
+        sel.value === 'Other' ? 'block' : 'none';
+    }
+
+    function sendOtp(channel) {
+      if (channel === 'mobile') {
+        const m = document.getElementById('mobile').value;
+        if (m.length !== 10) { showToast('Enter a valid 10-digit mobile number', 'error'); return; }
+        document.getElementById('mobile-otp-wrap').classList.add('visible');
+        document.getElementById('mobile-otp-note').classList.add('visible');
+        showToast('Mobile OTP sent (use 123456)', 'success');
+      } else {
+        const e = document.getElementById('email').value;
+        if (!e.includes('@') || !e.includes('.')) { showToast('Enter a valid email address', 'error'); return; }
+        document.getElementById('email-otp-wrap').classList.add('visible');
+        document.getElementById('email-otp-note').classList.add('visible');
+        showToast('Email OTP sent (use 123456)', 'success');
+      }
+    }
+
+    function checkPwdMatch() {
+      const p = document.getElementById('password').value;
+      const c = document.getElementById('confirm-pwd').value;
+      const err = document.getElementById('pwd-err');
+      if (c && p !== c) {
+        err.style.display = 'block';
+      } else {
+        err.style.display = 'none';
+      }
+    }
+
+    function goStep2() {
+      const name   = document.getElementById('fullname').value.trim();
+      const mobile = document.getElementById('mobile').value;
+      const email  = document.getElementById('email').value.trim();
+      const pwd    = document.getElementById('password').value;
+      const cpwd   = document.getElementById('confirm-pwd').value;
+      const mOtp   = document.getElementById('mobile-otp').value;
+      const eOtp   = document.getElementById('email-otp').value;
+      const apptype = document.getElementById('apptype').value;
+      const other   = document.getElementById('apptype-other').value.trim();
+
+      if (!name)              { showToast('Full Name is required', 'error'); return; }
+      if (mobile.length !== 10){ showToast('Enter a valid 10-digit mobile number', 'error'); return; }
+      if (!email.includes('@')){ showToast('Enter a valid email address', 'error'); return; }
+      if (pwd.length < 6)     { showToast('Password must be at least 6 characters', 'error'); return; }
+      if (pwd !== cpwd)       { showToast('Passwords do not match', 'error'); return; }
+      if (apptype === 'Other' && !other) { showToast('Please specify the applicant type', 'error'); return; }
+      if (mOtp.length !== 6)  { showToast('Verify mobile OTP (use 123456)', 'error'); return; }
+      if (eOtp.length !== 6)  { showToast('Verify email OTP (use 123456)', 'error'); return; }
+
+      // Switch to step 2
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'flex';
+
+      document.getElementById('dot1').className = 'step-circle complete';
+      document.getElementById('dot1').textContent = '✓';
+      document.getElementById('lbl1').className = 'step-label';
+
+      document.getElementById('dot2').className = 'step-circle active';
+      document.getElementById('lbl2').className = 'step-label active';
+    }
+
+    function goStep1() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'flex';
+
+      document.getElementById('dot1').className = 'step-circle active';
+      document.getElementById('dot1').textContent = '1';
+      document.getElementById('lbl1').className = 'step-label active';
+
+      document.getElementById('dot2').className = 'step-circle idle';
+      document.getElementById('lbl2').className = 'step-label';
+    }
+
+    function submitReg() {
+      const street    = document.getElementById('street').value.trim();
+      const village   = document.getElementById('village').value;
+      const district  = document.getElementById('district').value;
+      const block     = document.getElementById('block').value;
+      const panchayat = document.getElementById('panchayat').value;
+      const pin       = document.getElementById('pin').value;
+
+      if (!street)    { showToast('Street / House No. is required', 'error'); return; }
+      if (!village)   { showToast('Village is required', 'error'); return; }
+      if (!district)  { showToast('District is required', 'error'); return; }
+      if (!block)     { showToast('Block is required', 'error'); return; }
+      if (!panchayat) { showToast('Panchayat is required', 'error'); return; }
+      if (pin.length !== 6) { showToast('Enter a valid 6-digit PIN code', 'error'); return; }
+
+      const email  = document.getElementById('email').value.trim();
+      const mobile = document.getElementById('mobile').value;
+
+      // Show success
+      document.getElementById('reg-card').style.display = 'none';
+      const sc = document.getElementById('success-screen');
+      sc.style.display = 'block';
+      document.getElementById('success-uid').textContent = email;
+      document.getElementById('success-note').textContent =
+        'Sent via SMS to +91 ' + mobile + ' and Email to ' + email;
+    }
+  </script>
+
+</body>
+</html>
