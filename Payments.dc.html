@@ -280,11 +280,17 @@ class Component extends DCLogic {
       actionFg: p.tone === amber ? '#e05c1a' : p.tone === slate ? '#1e9b5f' : '#1e9b5f',
     }));
 
+    const parseAmt = s => parseInt(s.replace(/[₹,]/g, ''), 10) || 0;
+    const fmtINR   = n => '₹' + n.toLocaleString('en-IN');
+
     const appVerified = payRows.filter(p => p.status === 'Verified').length;
     const appPending  = payRows.filter(p => p.status === 'Verification Pending').length;
+    const totalVerifiedAmt = payRows.filter(p => p.status === 'Verified').reduce((s, p) => s + parseAmt(p.amount), 0);
+    const totalPendingAmt  = payRows.filter(p => p.status === 'Verification Pending').reduce((s, p) => s + parseAmt(p.amount), 0);
+
     const applicantStats = [
-      { value: String(appVerified), label:'Projects verified',    accent:'#1e9b5f' },
-      { value: String(appPending),  label:'Pending verification', accent:'#c2740f' },
+      { value: fmtINR(totalVerifiedAmt),   label:'Total verified',       accent:'#1e9b5f' },
+      { value: fmtINR(totalPendingAmt),    label:'Pending verification', accent:'#c2740f' },
     ];
 
     // ===== FINANCE: verification queue =====
