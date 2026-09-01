@@ -95,7 +95,21 @@
           </sc-if>
           <div style="font-size:11px;color:#8e9e97;font-family:monospace;margin-top:6px;">{{ txnText }}</div>
           <div style="font-size:12.5px;color:#5b6b62;margin-top:14px;line-height:1.6;">{{ succNote }}</div>
-          <button onClick="{{ onBackDash }}" style="margin-top:20px;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:700;">← Back to Dashboard</button>
+
+          <sc-if value="{{ showReviewDemo }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:18px;border:2px dashed rgba(245,158,11,.5);background:rgba(245,158,11,.05);border-radius:10px;padding:12px;text-align:left;">
+              <div style="font-size:11.5px;font-weight:700;">Demo shortcut</div>
+              <div style="font-size:11px;color:#8e9e97;margin-top:2px;">Skip the wait for BREDA's document review.</div>
+              <button onClick="{{ onCompleteReview }}" style="margin-top:8px;background:rgba(245,158,11,.12);color:#92400e;border:2px solid #f59e0b;border-radius:9px;padding:8px 16px;font-size:12px;font-weight:700;width:100%;">Simulate: BREDA completes document review (Demo) →</button>
+            </div>
+          </sc-if>
+
+          <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
+            <button onClick="{{ onBackDash }}" style="background:{{ backDashBg }};color:{{ backDashFg }};border:1px solid #cdd6d0;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:700;">← Back to Dashboard</button>
+            <sc-if value="{{ showAck }}" hint-placeholder-val="{{ false }}">
+              <a href="Apply for Clearances.dc.html" style="display:inline-flex;align-items:center;background:#1e9b5f;color:#fff;border:none;border-radius:9px;padding:11px 22px;font-size:13px;font-weight:700;">Apply for Clearances →</a>
+            </sc-if>
+          </div>
         </div>
       </div>
     </sc-if>
@@ -155,14 +169,10 @@
           </div>
           <div style="margin-top:20px;">
             <p style="font-size:12px;font-weight:500;color:#1c2530;margin:0 0 8px;">Purpose of Grid Connected RE Project <span style="color:#dc3545;">*</span></p>
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <sc-for list="{{ purposes }}" as="p" hint-placeholder-count="5">
-                <div onClick="{{ p.onClick }}" style="display:flex;align-items:center;gap:10px;border:1px solid {{ p.border }};background:{{ p.bg }};border-radius:8px;padding:10px 12px;cursor:pointer;">
-                  <input type="radio" name="purpose" checked="{{ p.selected }}" readOnly="{{ true }}" style="accent-color:#c2740f;flex:none;">
-                  <span style="font-size:13px;font-weight:500;">{{ p.label }}</span>
-                </div>
-              </sc-for>
-            </div>
+            <select value="{{ purposeValue }}" onChange="{{ onPurposeSelect }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
+              <sc-for list="{{ purposeOptions }}" as="o" hint-placeholder-count="6"><option value="{{ o.v }}">{{ o.t }}</option></sc-for>
+            </select>
+            <div style="font-size:11px;color:#8e9e97;font-style:italic;margin-top:5px;">This list (Open Access, PPA, Third Party, etc.) is maintained by BREDA Admin, who can add or edit purpose options.</div>
             <sc-if value="{{ showPurposeOther }}" hint-placeholder-val="{{ false }}">
               <input value="{{ purposeOther }}" onChange="{{ onPurposeOther }}" placeholder="Specify purpose" style="margin-top:8px;width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
             </sc-if>
@@ -222,7 +232,7 @@
             <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Alternate Email</label><input value="{{ altEmail }}" onChange="{{ onAltEmail }}" placeholder="Optional" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
             <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">PAN Number <span style="color:#dc3545;">*</span></label><input value="{{ pan }}" onChange="{{ onPan }}" placeholder="ABCDE1234F" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;text-transform:uppercase;"></div>
             <div style="display:flex;flex-direction:column;gap:5px;">
-              <label style="font-size:12px;font-weight:500;color:#1c2530;">Aadhaar Number <span style="color:#dc3545;">*</span></label>
+              <label style="font-size:12px;font-weight:500;color:#1c2530;">Aadhaar Number <span style="font-size:11px;color:#8e8e8e;font-style:italic;">(Optional)</span></label>
               <input value="{{ aadhaar }}" onChange="{{ onAadhaar }}" placeholder="XXXX XXXX XXXX" inputmode="numeric" maxlength="12" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;">
               <div style="display:inline-flex;align-items:flex-start;gap:5px;border:1px solid #f0d6ac;background:#fef3e3;padding:4px 8px;border-radius:6px;font-size:10.5px;font-weight:500;color:#92400e;line-height:1.4;margin-top:2px;">⚠ Integration pending: Aadhaar must be tokenised via Aadhaar Vault; raw number is not persisted.</div>
             </div>
@@ -232,7 +242,7 @@
 
         <!-- SECTION B -->
         <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
-          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section B — Technical and Financial Details</div>
+          <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:18px;">Section B — Technical Details</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
             <div style="display:flex;flex-direction:column;gap:5px;">
               <label style="font-size:12px;font-weight:500;color:#1c2530;">Type of Power Plant <span style="color:#dc3545;">*</span></label>
@@ -289,10 +299,7 @@
             </sc-if>
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
-            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Proposed Date of Commissioning <span style="color:#dc3545;">*</span></label><input type="date" value="{{ cod }}" onChange="{{ onCod }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
-            <div style="display:flex;flex-direction:column;gap:5px;"><label style="font-size:12px;font-weight:500;color:#1c2530;">Approximate Project Cost (₹) <span style="color:#dc3545;">*</span></label><input type="number" value="{{ cost }}" onChange="{{ onCost }}" placeholder="e.g. 5000000" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
-          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:16px;max-width:calc(50% - 7px);"><label style="font-size:12px;font-weight:500;color:#1c2530;">Proposed Date of Commissioning <span style="color:#dc3545;">*</span></label><input type="date" value="{{ cod }}" onChange="{{ onCod }}" style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 11px;font-size:13px;color:#1c2530;background:#fff;outline:none;"></div>
 
           <div style="font-size:13px;font-weight:700;color:#1e9b5f;margin:20px 0 8px;">EPC Contractor / Developer</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
@@ -318,13 +325,8 @@
             </select>
           </div>
           <sc-if value="{{ showOwnUpload }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:14px;display:flex;flex-direction:column;gap:5px;">
-              <label style="font-size:12px;font-weight:500;color:#1c2530;">Upload self-attested copy (max 5 MB) <span style="color:#dc3545;">*</span></label>
-              <div style="display:flex;align-items:center;gap:10px;border:1px solid #cdd6d0;border-radius:8px;padding:10px 12px;">
-                <span style="color:#1e9b5f;font-size:16px;flex:none;">📄</span>
-                <div style="flex:1;min-width:0;font-size:13px;font-weight:500;color:{{ ownFileColor }};">{{ ownFileName }}</div>
-                <label style="flex:none;border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;">📎 Upload<input type="file" style="display:none;" accept=".pdf,.doc,.docx,image/*" onChange="{{ onOwnerFile }}"></label>
-              </div>
+            <div style="margin-top:14px;display:flex;align-items:flex-start;gap:8px;border:1px solid #c9dff2;border-left:3px solid #1d6fb8;background:#e6f0f9;border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.6;color:#1c2530;">
+              <strong style="color:#1a5a96;">Note:</strong> Upload the self-attested copy of this document as "Land Ownership Document" in Section D — Documents Upload.
             </div>
           </sc-if>
           <div style="display:flex;flex-direction:column;gap:5px;margin-top:16px;">
@@ -343,20 +345,21 @@
         <!-- SECTION D -->
         <sc-if value="{{ isD }}" hint-placeholder-val="{{ false }}">
           <div style="font-family:'IBM Plex Serif',serif;font-size:17px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;margin-bottom:14px;">Section D — Documents Upload</div>
-          <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:0 0 14px;">File size limits: DPR up to 25 MB · Documents up to 5 MB · Scanned images up to 2 MB</p>
+          <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:0 0 6px;">Accepted formats: DPR — PDF only · All other documents — PDF, JPG or JPEG. File size limits: DPR up to 25 MB · Documents up to 5 MB.</p>
+          <p style="font-size:11px;color:#8e8e8e;font-style:italic;margin:0 0 14px;">Resolution / image clarity of every uploaded document is checked automatically by the system.</p>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <sc-for list="{{ docRows }}" as="d" hint-placeholder-count="6">
+            <sc-for list="{{ docRows }}" as="d" hint-placeholder-count="7">
               <div style="display:flex;align-items:center;gap:10px;border:1px solid #cdd6d0;border-radius:8px;padding:10px 12px;">
                 <span style="color:#1e9b5f;font-size:16px;flex:none;">📄</span>
                 <div style="flex:1;min-width:0;">
-                  <div style="font-size:13px;font-weight:500;color:#1c2530;">{{ d.label }}<sc-if value="{{ d.req }}" hint-placeholder-val="{{ false }}"><span style="color:#dc3545;"> *</span></sc-if> <span style="font-size:11px;color:#8e9e97;">(max {{ d.limit }} MB)</span></div>
+                  <div style="font-size:13px;font-weight:500;color:#1c2530;">{{ d.label }}<sc-if value="{{ d.req }}" hint-placeholder-val="{{ false }}"><span style="color:#dc3545;"> *</span></sc-if> <span style="font-size:11px;color:#8e9e97;">({{ d.formatLabel }} · max {{ d.limit }} MB)</span></div>
                   <div style="font-size:11px;color:{{ d.statusColor }};margin-top:1px;">{{ d.statusText }}</div>
                 </div>
                 <sc-if value="{{ d.uploaded }}" hint-placeholder-val="{{ false }}">
                   <button onClick="{{ d.onRemove }}" style="background:none;border:none;cursor:pointer;color:#dc3545;padding:4px;border-radius:4px;font-size:14px;">✕</button>
                 </sc-if>
                 <sc-if value="{{ d.notUploaded }}" hint-placeholder-val="{{ true }}">
-                  <label style="flex:none;border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;">📎 Upload<input type="file" style="display:none;" onChange="{{ d.onUpload }}"></label>
+                  <label style="flex:none;border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;white-space:nowrap;">📎 Upload<input type="file" style="display:none;" accept="{{ d.accept }}" onChange="{{ d.onUpload }}"></label>
                 </sc-if>
               </div>
             </sc-for>
@@ -370,7 +373,7 @@
                 <span style="flex:none;border-radius:6px;background:#eef1ef;font-family:monospace;font-size:10px;color:#8e9e97;padding:2px 6px;">{{ c.id }}</span>
                 <input value="{{ c.label }}" onChange="{{ c.onLabel }}" placeholder="Document label (e.g. Land NOC)" style="flex:1;border:1px solid #cdd6d0;border-radius:6px;padding:5px 9px;font-size:12px;color:#1c2530;outline:none;">
                 <sc-if value="{{ c.hasFile }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#1e7a4d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">✓ {{ c.file }}</span></sc-if>
-                <sc-if value="{{ c.noFile }}" hint-placeholder-val="{{ true }}"><label style="border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;">📎 Upload<input type="file" style="display:none;" onChange="{{ c.onFile }}"></label></sc-if>
+                <sc-if value="{{ c.noFile }}" hint-placeholder-val="{{ true }}"><label style="border:2px solid #1e9b5f;background:transparent;color:#1e9b5f;font-size:11px;font-weight:700;padding:4px 10px;border-radius:8px;cursor:pointer;">📎 Upload<input type="file" style="display:none;" accept=".pdf,.jpg,.jpeg" onChange="{{ c.onFile }}"></label></sc-if>
                 <button onClick="{{ c.onRemove }}" style="background:none;border:none;cursor:pointer;color:#dc3545;padding:4px;font-size:14px;">✕</button>
               </div>
             </sc-for>
@@ -427,6 +430,21 @@
             <div style="display:flex;gap:9px;border:1px solid #f0d6ac;background:#fef3e3;border-radius:8px;padding:10px 12px;font-size:12px;align-items:flex-start;margin-bottom:14px;color:#92400e;"><span>🔒</span><p style="margin:0;">Review and confirm your application in the Preview section before payment.</p></div>
           </sc-if>
 
+          <sc-if value="{{ showVerifyWait }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:10px;border:1px solid #c9dff2;background:#e6f0f9;border-radius:10px;padding:14px 16px;align-items:flex-start;margin-bottom:14px;">
+              <span style="font-size:16px;">⏳</span>
+              <div>
+                <p style="margin:0;font-size:13px;font-weight:600;color:#1a5a96;">Application submitted — awaiting BREDA document verification</p>
+                <p style="margin:6px 0 0;font-size:12.5px;color:#1c2530;line-height:1.6;">The Registration Fee is submitted once BREDA starts verifying your uploaded documents. You'll be notified — and this section will unlock — when that begins.</p>
+              </div>
+            </div>
+            <div style="border:2px dashed rgba(245,158,11,.5);background:rgba(245,158,11,.05);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;">
+              <div><div style="font-size:12px;font-weight:700;">Demo shortcut</div><div style="font-size:11px;color:#8e9e97;margin-top:2px;">Skip the wait for BREDA to start document verification.</div></div>
+              <button onClick="{{ onStartVerification }}" style="background:rgba(245,158,11,.12);color:#92400e;border:2px solid #f59e0b;border-radius:9px;padding:8px 16px;font-size:12px;font-weight:700;">Simulate: BREDA starts document verification (Demo) →</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showFeeForm }}" hint-placeholder-val="{{ true }}">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
             <div style="border:1px solid #e3e9e6;background:#f6f8f7;border-radius:10px;padding:12px;">
               <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#5c6b62;font-weight:600;">Plant Capacity</div>
@@ -484,6 +502,7 @@
             <div><div style="font-size:12px;font-weight:700;">Demo shortcut</div><div style="font-size:11px;color:#8e9e97;margin-top:2px;">Skip validations &amp; payment gateway — submit the application instantly for client demonstration.</div></div>
             <button onClick="{{ doDemo }}" style="background:rgba(245,158,11,.12);color:#92400e;border:2px solid #f59e0b;border-radius:9px;padding:8px 16px;font-size:12px;font-weight:700;">Mark as Paid (Demo) →</button>
           </div>
+          </sc-if>
         </sc-if>
 
         <!-- NAV -->
@@ -513,12 +532,13 @@ class Component extends DCLogic {
       sameAddr:false,
       projStreet:'', projVillage:'', projCity:'', projDistrict:'', projBlock:'', projPanchayat:'', projPin:'', projLat:'', projLng:'',
       altMobile:'', altEmail:'', pan:'', aadhaar:'', gst:'',
-      plantKind:'', subtype:'', storage:'0', discom:'', station:'', stationDist:'', evac:'LILO', evacOther:'', cod:'', cost:'',
+      plantKind:'', subtype:'', storage:'0', discom:'', station:'', stationDist:'', evac:'LILO', evacOther:'', cod:'',
       epcName:'', epcAddr:'', epcContact:'', epcMobile:'', epcEmail:'',
-      ownership:'', ownershipFile:null, landCat:'Private', landArea:'',
+      ownership:'', landCat:'Private', landArea:'',
       uploadedDocs:{}, customDocs:[], cdCounter:0,
       declared:false, previewConfirmed:false,
       payMethod:'online', offlineRef:'',
+      verificationStarted:false, reviewComplete:false,
       successMethod:'', ack:'', txn:'',
       autosaveText:'Auto-saved · 10:42 AM'
     };
@@ -529,7 +549,7 @@ class Component extends DCLogic {
   steps(){ return [
     {id:'step0', label:'Project Capacity & Purpose'},
     {id:'A', label:'Section A — General Profile'},
-    {id:'B', label:'Section B — Technical & Financial'},
+    {id:'B', label:'Section B — Technical Details'},
     {id:'C', label:'Section C — Land Availability'},
     {id:'D', label:'Section D — Documents Upload'},
     {id:'E', label:'Section E — Declaration', sub:'Locked until D is complete'},
@@ -551,7 +571,6 @@ class Component extends DCLogic {
 
   goToStep(id){ this.setState({ activeStep:id }); }
   navStep(dir){ const s=this.steps(); const i=s.findIndex(x=>x.id===this.state.activeStep); const n=s[i+dir]; if(n) this.goToStep(n.id); }
-  selectPurpose(v){ this.upd({ purpose:v }); }
   onSameAddr(e){
     if(!e.target.checked){ this.setState({ sameAddr:false }); return; }
     const s=this.state;
@@ -559,7 +578,6 @@ class Component extends DCLogic {
   }
   onDocFile(key, limit, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>limit*1024*1024){ alert('File exceeds '+limit+' MB limit'); e.target.value=''; return; } this.setState(st=>({ uploadedDocs:{...st.uploadedDocs, [key]:f.name} })); this.autosave(); }
   clearDoc(key){ this.setState(st=>{ const d={...st.uploadedDocs}; delete d[key]; return { uploadedDocs:d }; }); }
-  onOwnerFile(e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>5*1024*1024){ alert('File exceeds 5 MB limit'); e.target.value=''; return; } this.upd({ ownershipFile:f.name }); }
   addCustomDoc(){ this.setState(st=>{ const n=st.cdCounter+1; return { cdCounter:n, customDocs:[...st.customDocs, {id:'cd-'+n, label:'', file:null}] }; }); }
   updateCdLabel(id, v){ this.setState(st=>({ customDocs: st.customDocs.map(c=> c.id===id ? {...c, label:v} : c) })); }
   onCdFile(id, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>5*1024*1024){ alert('File exceeds 5 MB limit'); return; } this.setState(st=>({ customDocs: st.customDocs.map(c=> c.id===id ? {...c, file:f.name} : c) })); }
@@ -567,11 +585,13 @@ class Component extends DCLogic {
   goToPreview(){ if(!this.state.declared) return; this.setState(st=>({ completed:{...st.completed, E:true}, activeStep:'Preview' })); }
   onPreviewConfirm(e){ if(!e.target.checked) return; this.setState(st=>({ previewConfirmed:true, completed:{...st.completed, Preview:true} })); setTimeout(()=> this.goToStep('F'), 500); }
   genAck(){ const seq=String(Math.floor(Math.random()*9000)+1000); return 'Ack/2026/'+seq; }
-  showSuccess(method, ack, txn){ this.setState({ screen:'success', successMethod:method, ack:ack||'', txn:txn||'' }); }
-  doPayOnline(){ this.showSuccess('online', this.genAck(), 'TXN'+Date.now().toString().slice(-10)); }
-  doPayOffline(){ if(!this.state.offlineRef.trim()){ alert('Enter the DD / cheque number'); return; } this.showSuccess('offline', null, null); }
-  doDemo(){ this.showSuccess('online', this.genAck(), 'DEMO-'+Date.now().toString().slice(-8)); }
-  resetForm(){ this.setState({ screen:'form', activeStep:'step0' }); }
+  showSuccess(method, txn){ this.setState({ screen:'success', successMethod:method, txn:txn||'' }); }
+  onStartVerification(){ this.setState({ verificationStarted:true }); }
+  onCompleteReview(){ this.setState({ reviewComplete:true, ack:this.genAck() }); }
+  doPayOnline(){ this.showSuccess('online', 'TXN'+Date.now().toString().slice(-10)); }
+  doPayOffline(){ if(!this.state.offlineRef.trim()){ alert('Enter the DD / cheque number'); return; } this.showSuccess('offline', null); }
+  doDemo(){ this.showSuccess('online', 'DEMO-'+Date.now().toString().slice(-8)); }
+  resetForm(){ this.setState({ screen:'form', activeStep:'step0', verificationStarted:false, reviewComplete:false, ack:'', txn:'' }); }
   saveDraft(){ this.setState({ autosaveText:'Draft saved · ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) }); }
 
   renderVals(){
@@ -622,12 +642,7 @@ class Component extends DCLogic {
     // step 0
     const kw = this.capacityKW();
     const isHigh = kw>=10000;
-    const purposes = PURPOSES.map(p=>({
-      label:p, selected:S.purpose===p,
-      border: S.purpose===p ? '#c2740f' : '#cdd6d0',
-      bg: S.purpose===p ? 'rgba(194,116,15,.06)' : '#fff',
-      onClick: ()=> this.selectPurpose(p)
-    }));
+    const purposeOptions = opts(PURPOSES);
 
     // section A field arrays
     const tf = (k, label, required, placeholder, maxlength) => ({ k, label, required:!!required, placeholder:placeholder||'', maxlength:maxlength||100, isText:true, isSelect:false, value:S[k], onChange:this.field(k) });
@@ -658,13 +673,25 @@ class Component extends DCLogic {
     const feeGst = Math.round(feeBase*0.18);
     const feeTotal = feeBase + feeGst;
 
-    // documents (dynamic: GST cert if GST entered, PPA if PPA purpose)
-    let docs = [...BASE_DOCS];
-    if(S.gst) docs.splice(4, 0, {key:'GST', label:'GST Certificate', limit:5, req:true});
-    if(S.purpose==='Power Purchase Agreement with DISCOM') docs.push({key:'PPA', label:'Power Purchase Agreement (PPA)', limit:5, req:false});
+    // documents (dynamic: Land ownership doc once selected, GST cert if GST entered, PPA if PPA purpose)
+    const docs = [
+      BASE_DOCS[0], // DPR
+      ...(S.ownership ? [{key:'LAND', label:'Land Ownership Document — '+S.ownership, limit:5, req:true}] : []),
+      BASE_DOCS[1], BASE_DOCS[2], BASE_DOCS[3], // PAN, FIRM, STARTUP
+      ...(S.gst ? [{key:'GST', label:'GST Certificate', limit:5, req:true}] : []),
+      BASE_DOCS[4], BASE_DOCS[5], // BALANCE, ITR
+      ...(S.purpose==='Power Purchase Agreement with DISCOM' ? [{key:'PPA', label:'Power Purchase Agreement (PPA)', limit:5, req:false}] : []),
+    ];
     const docRows = docs.map(d=>{
       const file = S.uploadedDocs[d.key];
-      return { ...d, file, uploaded:!!file, statusText: file ? ('✓ '+file) : 'Not uploaded', onUpload:(e)=>this.onDocFile(d.key, d.limit, e), onRemove:()=>this.clearDoc(d.key) };
+      const isPdfOnly = d.key==='DPR';
+      return {
+        ...d, file, uploaded:!!file,
+        accept: isPdfOnly ? '.pdf' : '.pdf,.jpg,.jpeg',
+        formatLabel: isPdfOnly ? 'PDF' : 'PDF, JPG or JPEG',
+        statusText: file ? ('✓ '+file+' · Resolution check passed (auto)') : 'Not uploaded',
+        onUpload:(e)=>this.onDocFile(d.key, d.limit, e), onRemove:()=>this.clearDoc(d.key)
+      };
     });
 
     // preview sections
@@ -694,12 +721,10 @@ class Component extends DCLogic {
         ['Distance', S.stationDist ? (S.stationDist+' km') : '—'],
         ['Evacuation', S.evac==='Other' ? ('Other — '+S.evacOther) : S.evac],
         ['Proposed COD', S.cod],
-        ['Project Cost', S.cost ? ('₹ '+Number(S.cost).toLocaleString('en-IN')) : '—'],
         ['EPC Contractor', S.epcName ? (S.epcName+' · '+(S.epcContact||'—')+' · '+(S.epcMobile||'—')) : '—']
       ]),
       sec('Section C — Land Availability', [
         ['Ownership Document', S.ownership],
-        ['Uploaded copy', S.ownershipFile],
         ['Land Category', S.landCat],
         ['Area', S.landArea ? (S.landArea+' acres') : '—']
       ]),
@@ -721,10 +746,13 @@ class Component extends DCLogic {
     const nextDisabled = idx===order.length-1;
 
     // success
-    const succTitle = S.successMethod==='offline' ? 'Receipt Submitted' : 'Payment Successful';
-    const succNote = S.successMethod==='offline'
-      ? 'Your DD / Cheque has been submitted. Finance will verify your payment; the Acknowledgement Number is generated after successful verification.'
-      : 'Confirmation sent via SMS and Email. Apply for Clearances will unlock after BREDA approves your application.';
+    const succTitle = S.reviewComplete ? 'Application Acknowledged'
+      : (S.successMethod==='offline' ? 'Receipt Submitted' : 'Registration Fee Received');
+    const succNote = S.reviewComplete
+      ? 'BREDA has completed reviewing your documents and issued your Acknowledgement Number. You may now apply for clearances from other departments.'
+      : (S.successMethod==='offline'
+        ? 'Your DD / Cheque has been submitted. Once Finance verifies the payment and BREDA completes reviewing your documents, your Acknowledgement Number will be issued.'
+        : 'Payment received. BREDA will now review your submitted documents; your Acknowledgement Number will be issued once the review is complete.');
 
     return {
       isForm: S.screen==='form', isSuccess: S.screen==='success',
@@ -741,7 +769,7 @@ class Component extends DCLogic {
       onUnitKw:()=>this.upd({unit:'kW'}), onUnitMw:()=>this.upd({unit:'MW'}),
       showCapRule: kw>0,
       capRuleText: 'Auto-rule: ' + kw + ' kW → ' + (isHigh?'Grid Sub-Station (GSS)':'Power Sub-Station (PSS)') + ' integration · Fee slab applies.',
-      purposes,
+      purposeOptions, purposeValue:S.purpose, onPurposeSelect:this.field('purpose'),
       showPurposeOther: S.purpose==='Other as mentioned in RE Policy',
       purposeOther:S.purposeOther, onPurposeOther:this.field('purposeOther'),
 
@@ -776,7 +804,6 @@ class Component extends DCLogic {
       onEvacLILO:()=>this.upd({evac:'LILO'}), onEvacDirect:()=>this.upd({evac:'Direct'}), onEvacOther:()=>this.upd({evac:'Other'}),
       evacOther:S.evacOther, onEvacOtherText:this.field('evacOther'),
       cod:S.cod, onCod:this.field('cod'),
-      cost:S.cost, onCost:this.field('cost'),
       epcName:S.epcName, onEpcName:this.field('epcName'),
       epcAddr:S.epcAddr, onEpcAddr:this.field('epcAddr'),
       epcContact:S.epcContact, onEpcContact:this.field('epcContact'),
@@ -786,9 +813,6 @@ class Component extends DCLogic {
       // section C
       ownership:S.ownership, onOwnership:this.field('ownership'),
       showOwnUpload: !!S.ownership,
-      ownFileName: S.ownershipFile ? ('✓ ' + S.ownershipFile) : 'PDF / DOC / image',
-      ownFileColor: S.ownershipFile ? '#1e7a4d' : '#1c2530',
-      onOwnerFile:(e)=>this.onOwnerFile(e),
       landPrivate:S.landCat==='Private', landGovt:S.landCat==='Government',
       onLandPrivate:()=>this.upd({landCat:'Private'}), onLandGovt:()=>this.upd({landCat:'Government'}),
       landArea:S.landArea, onLandArea:this.field('landArea'),
@@ -811,6 +835,9 @@ class Component extends DCLogic {
 
       // section F
       showFLock: !S.previewConfirmed,
+      showVerifyWait: S.previewConfirmed && !S.verificationStarted,
+      showFeeForm: S.previewConfirmed && S.verificationStarted,
+      onStartVerification:()=>this.onStartVerification(),
       capDisplay: S.capValue ? (S.capValue + ' ' + S.unit) : '— kW',
       feeBase:this.fmt(feeBase), feeGst:this.fmt(feeGst), feeTotal:this.fmt(feeTotal),
       payOnline:S.payMethod==='online', payOffline:S.payMethod==='offline',
@@ -827,9 +854,13 @@ class Component extends DCLogic {
       onSaveDraft:()=>this.saveDraft(),
 
       // success
-      succTitle, showAck: S.successMethod==='online' && !!S.ack, ack:S.ack,
+      succTitle, showAck: S.reviewComplete && !!S.ack, ack:S.ack,
+      showReviewDemo: !S.reviewComplete,
+      onCompleteReview:()=>this.onCompleteReview(),
       txnText: S.txn ? ('Transaction ID: ' + S.txn) : '',
-      succNote, onBackDash:()=>this.resetForm()
+      succNote, onBackDash:()=>this.resetForm(),
+      backDashBg: S.reviewComplete ? '#fff' : '#1e9b5f',
+      backDashFg: S.reviewComplete ? '#1c2530' : '#fff'
     };
   }
 }

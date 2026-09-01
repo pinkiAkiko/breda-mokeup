@@ -27,6 +27,7 @@
       --ring:             #1a4731;
       --success:          #198754;
       --info:             #0d6efd;
+      --destructive:      #dc3545;
     }
 
     html { font-family: 'Noto Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.5; }
@@ -372,6 +373,117 @@
     }
 
     .login-track:hover { color: var(--primary); }
+
+    .login-forgot {
+      display: block;
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted-fg);
+      margin-top: -4px;
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .login-forgot:hover { color: var(--primary); text-decoration: underline; }
+
+    /* ── FORGOT PASSWORD MODAL ───────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(21,2,2,.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--card);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .modal-title { font-size: 18px; font-weight: 700; color: var(--primary); }
+
+    .modal-close {
+      font-size: 22px;
+      line-height: 1;
+      color: var(--muted-fg);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .modal-close:hover { background: var(--secondary); color: var(--foreground); }
+
+    .modal-sub { font-size: 13px; color: var(--muted-fg); margin-top: 6px; line-height: 1.5; }
+
+    .modal-field-group { display: flex; flex-direction: column; gap: 4px; margin-top: 14px; }
+
+    .modal-field-group label { font-size: 13px; font-weight: 500; }
+
+    .modal-field-group input {
+      width: 100%;
+      border: 1px solid var(--input);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--foreground);
+      outline: none;
+      background: var(--background);
+    }
+
+    .modal-field-group input:focus { border-color: var(--ring); box-shadow: 0 0 0 2px rgba(26,71,49,.12); }
+
+    .modal-hint { font-size: 11.5px; color: var(--muted-fg); }
+
+    .modal-err { font-size: 12px; color: var(--destructive); display: none; }
+
+    .modal-err.show { display: block; }
+
+    .modal-otp-row { display: flex; gap: 8px; }
+    .modal-otp-row input { flex: 1; }
+
+    .modal-otp-note { font-size: 12px; color: var(--success); display: none; margin-top: 4px; }
+    .modal-otp-note.show { display: block; }
+
+    .btn-otp-inline {
+      flex: none;
+      border: 2px solid var(--primary);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      background: transparent;
+      white-space: nowrap;
+      transition: background .12s, color .12s;
+    }
+
+    .btn-otp-inline:hover { background: var(--primary); color: var(--primary-fg); }
+
+    .modal-success { text-align: center; padding: 8px 0; }
+    .modal-success svg { margin: 0 auto 12px; }
+    .modal-success-title { font-size: 17px; font-weight: 700; color: var(--primary); }
+    .modal-success-sub { font-size: 13px; color: var(--muted-fg); margin-top: 6px; }
 
     /* ── ANNOUNCEMENT TICKER ─────────────────────────── */
     .ticker {
@@ -843,6 +955,7 @@
               <label for="pwd">Password</label>
               <input type="password" id="pwd" placeholder="••••••••">
             </div>
+            <button type="button" class="login-forgot" onclick="openForgotPwd()">Forgot password?</button>
             <a href="Applicant Dashboard.dc.html" class="btn-login">Login</a>
             <button type="button" class="login-otp">Login with OTP</button>
             <div class="login-divider">
@@ -1096,6 +1209,73 @@
 
   </main>
 
+  <!-- ═══════════════ FORGOT PASSWORD MODAL ══════════ -->
+  <div class="modal-overlay" id="fp-overlay" onclick="if(event.target===this) closeForgotPwd()">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="fp-title">
+
+      <!-- STEP 1: identify -->
+      <div id="fp-step1">
+        <div class="modal-head">
+          <div class="modal-title" id="fp-title">Reset Password</div>
+          <button type="button" class="modal-close" onclick="closeForgotPwd()" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-sub">Enter your registered mobile number or email. We'll send an OTP to verify it's you.</div>
+        <div class="modal-field-group">
+          <label for="fp-identifier">Mobile / Email</label>
+          <input type="text" id="fp-identifier" placeholder="Enter mobile number or email">
+          <div class="modal-err" id="fp-identifier-err">Enter a valid registered mobile number or email</div>
+        </div>
+        <button type="button" class="btn-login" style="margin-top:16px;" onclick="fpSendOtp()">Send OTP</button>
+      </div>
+
+      <!-- STEP 2: OTP + new password -->
+      <div id="fp-step2" style="display:none;">
+        <div class="modal-head">
+          <div class="modal-title">Verify &amp; Reset</div>
+          <button type="button" class="modal-close" onclick="closeForgotPwd()" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-sub">Enter the OTP sent to <strong id="fp-sent-to"></strong>, then set a new password.</div>
+
+        <div class="modal-field-group">
+          <label for="fp-otp">OTP</label>
+          <div class="modal-otp-row">
+            <input type="tel" id="fp-otp" maxlength="6" placeholder="Enter 6-digit OTP" style="letter-spacing:.2em;" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+            <button type="button" class="btn-otp-inline" onclick="fpSendOtp(true)">Resend</button>
+          </div>
+          <div class="modal-otp-note show">OTP sent. Use <strong>123456</strong> for demo.</div>
+        </div>
+
+        <div class="modal-field-group">
+          <label for="fp-newpwd">New Password</label>
+          <input type="password" id="fp-newpwd" placeholder="Minimum 8 characters" oninput="fpCheckPwd()">
+          <div class="modal-hint">Minimum 8 characters, with at least one uppercase letter, one lowercase letter, one number and one special character.</div>
+        </div>
+
+        <div class="modal-field-group">
+          <label for="fp-confirmpwd">Confirm New Password</label>
+          <input type="password" id="fp-confirmpwd" placeholder="Repeat new password" oninput="fpCheckPwd()">
+          <div class="modal-err" id="fp-pwd-err">Passwords do not match, or do not meet the complexity rule above</div>
+        </div>
+
+        <button type="button" class="btn-login" style="margin-top:16px;" onclick="fpResetPwd()">Reset Password</button>
+      </div>
+
+      <!-- STEP 3: success -->
+      <div id="fp-step3" style="display:none;">
+        <div class="modal-success">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#198754" stroke-width="1.5">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <div class="modal-success-title">Password Reset Successful</div>
+          <div class="modal-success-sub">You can now log in with your new password.</div>
+          <button type="button" class="btn-login" style="margin-top:20px;" onclick="closeForgotPwd()">Back to Login</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ═══════════════ FOOTER ════════════════════════ -->
   <footer class="site-footer">
     <div class="footer-inner">
@@ -1137,6 +1317,62 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    function isStrongPwd(p) {
+      return p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p) && /[^A-Za-z0-9]/.test(p);
+    }
+
+    function openForgotPwd() {
+      document.getElementById('fp-overlay').classList.add('open');
+      document.getElementById('fp-step1').style.display = 'block';
+      document.getElementById('fp-step2').style.display = 'none';
+      document.getElementById('fp-step3').style.display = 'none';
+      document.getElementById('fp-identifier').value = '';
+      document.getElementById('fp-identifier-err').classList.remove('show');
+    }
+
+    function closeForgotPwd() {
+      document.getElementById('fp-overlay').classList.remove('open');
+    }
+
+    function fpSendOtp(isResend) {
+      const id = document.getElementById('fp-identifier').value.trim() || document.getElementById('fp-sent-to').textContent;
+      const err = document.getElementById('fp-identifier-err');
+      if (!isResend) {
+        const valid = (id.replace(/\D/g,'').length === 10) || (id.includes('@') && id.includes('.'));
+        if (!valid) { err.classList.add('show'); return; }
+        err.classList.remove('show');
+        document.getElementById('fp-sent-to').textContent = id;
+        document.getElementById('fp-step1').style.display = 'none';
+        document.getElementById('fp-step2').style.display = 'block';
+      }
+    }
+
+    function fpCheckPwd() {
+      const p = document.getElementById('fp-newpwd').value;
+      const c = document.getElementById('fp-confirmpwd').value;
+      const err = document.getElementById('fp-pwd-err');
+      if (c && (p !== c || !isStrongPwd(p))) {
+        err.classList.add('show');
+      } else {
+        err.classList.remove('show');
+      }
+    }
+
+    function fpResetPwd() {
+      const otp = document.getElementById('fp-otp').value;
+      const p = document.getElementById('fp-newpwd').value;
+      const c = document.getElementById('fp-confirmpwd').value;
+      const err = document.getElementById('fp-pwd-err');
+
+      if (otp.length !== 6) { alert('Enter the 6-digit OTP (use 123456 for demo)'); return; }
+      if (!isStrongPwd(p) || p !== c) { err.classList.add('show'); return; }
+
+      document.getElementById('fp-step2').style.display = 'none';
+      document.getElementById('fp-step3').style.display = 'block';
+    }
+  </script>
 
 </body>
 </html>

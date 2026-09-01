@@ -452,8 +452,9 @@
 
         <div class="field-group">
           <label class="field-label" for="password">Password <span class="req">*</span></label>
-          <input class="field-input" id="password" type="password" placeholder="Minimum 6 characters">
-          <div class="field-hint">Minimum 6 characters</div>
+          <input class="field-input" id="password" type="password" placeholder="Minimum 8 characters" oninput="checkPwdMatch()">
+          <div class="field-hint">Minimum 8 characters, with at least one uppercase letter, one lowercase letter, one number and one special character (e.g. <code>@#$%</code>).</div>
+          <div class="field-err" id="pwd-strength-err" style="display:none;">Password must be at least 8 characters and include uppercase, lowercase, number and special character</div>
         </div>
 
         <div class="field-group">
@@ -478,82 +479,18 @@
         <div class="grid-2">
 
           <div class="field-group">
-            <label class="field-label" for="village">Village <span class="req">*</span></label>
-            <select class="field-select" id="village">
-              <option value="">Select</option>
-              <option>Bhikhampur</option>
-              <option>Manjhaul</option>
-              <option>Naubatpur</option>
-              <option>Bihta</option>
-              <option>Phulwari</option>
-              <option>Danapur</option>
-              <option>Maner</option>
-              <option>Punpun</option>
-              <option>Masaurhi</option>
-              <option>Paliganj</option>
-              <option>Barh</option>
-              <option>Mokama</option>
-              <option>Bakhtiyarpur</option>
-              <option>Khusrupur</option>
-              <option>Fatuha</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="city">City</label>
+            <label class="field-label" for="city">City / Town</label>
             <input class="field-input" id="city" type="text" placeholder="Optional">
           </div>
 
           <div class="field-group">
-            <label class="field-label" for="district">District <span class="req">*</span></label>
-            <select class="field-select" id="district">
-              <option value="">Select</option>
-              <option>Patna</option>
-              <option>Gaya</option>
-              <option>Bhagalpur</option>
-              <option>Muzaffarpur</option>
-              <option>Darbhanga</option>
-              <option>Purnia</option>
-              <option>Begusarai</option>
-              <option>Nalanda</option>
-              <option>Vaishali</option>
-              <option>Saran</option>
-              <option>Rohtas</option>
-              <option>Samastipur</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="block">Block <span class="req">*</span></label>
-            <select class="field-select" id="block">
-              <option value="">Select</option>
-              <option>Patna Sadar</option>
-              <option>Bihta</option>
-              <option>Mushahari</option>
-              <option>Gaya Town</option>
-              <option>Manpur</option>
-              <option>Sasaram</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="panchayat">Panchayat <span class="req">*</span></label>
-            <select class="field-select" id="panchayat">
-              <option value="">Select</option>
-              <option>Patna</option>
-              <option>Bihta</option>
-              <option>Mushahari</option>
-              <option>Gaya</option>
-              <option>Manpur</option>
-            </select>
-          </div>
-
-          <div class="field-group">
-            <label class="field-label" for="pin">Pin Code <span class="req">*</span></label>
-            <input class="field-input" id="pin" type="tel" maxlength="6" placeholder="6-digit PIN" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6)">
+            <label class="field-label" for="state">State</label>
+            <input class="field-input" id="state" type="text" value="Bihar" readonly style="background:var(--secondary);color:var(--muted-fg);">
           </div>
 
         </div>
+
+        <div class="field-hint" style="margin-top:-8px;">Full project-site address (village / district / block / panchayat / PIN) is captured later in the New Project Application form.</div>
 
         <div class="form-actions">
           <button class="btn-back" onclick="goStep1()">← Back</button>
@@ -652,10 +589,18 @@
       }
     }
 
+    function isStrongPwd(p) {
+      return p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p) && /[^A-Za-z0-9]/.test(p);
+    }
+
     function checkPwdMatch() {
       const p = document.getElementById('password').value;
       const c = document.getElementById('confirm-pwd').value;
       const err = document.getElementById('pwd-err');
+      const strengthErr = document.getElementById('pwd-strength-err');
+
+      strengthErr.style.display = (p && !isStrongPwd(p)) ? 'block' : 'none';
+
       if (c && p !== c) {
         err.style.display = 'block';
       } else {
@@ -677,7 +622,7 @@
       if (!name)              { showToast('Full Name is required', 'error'); return; }
       if (mobile.length !== 10){ showToast('Enter a valid 10-digit mobile number', 'error'); return; }
       if (!email.includes('@')){ showToast('Enter a valid email address', 'error'); return; }
-      if (pwd.length < 6)     { showToast('Password must be at least 6 characters', 'error'); return; }
+      if (!isStrongPwd(pwd))  { showToast('Password must be at least 8 characters and include uppercase, lowercase, number and special character', 'error'); return; }
       if (pwd !== cpwd)       { showToast('Passwords do not match', 'error'); return; }
       if (apptype === 'Other' && !other) { showToast('Please specify the applicant type', 'error'); return; }
       if (mOtp.length !== 6)  { showToast('Verify mobile OTP (use 123456)', 'error'); return; }
@@ -708,19 +653,9 @@
     }
 
     function submitReg() {
-      const street    = document.getElementById('street').value.trim();
-      const village   = document.getElementById('village').value;
-      const district  = document.getElementById('district').value;
-      const block     = document.getElementById('block').value;
-      const panchayat = document.getElementById('panchayat').value;
-      const pin       = document.getElementById('pin').value;
+      const street = document.getElementById('street').value.trim();
 
-      if (!street)    { showToast('Street / House No. is required', 'error'); return; }
-      if (!village)   { showToast('Village is required', 'error'); return; }
-      if (!district)  { showToast('District is required', 'error'); return; }
-      if (!block)     { showToast('Block is required', 'error'); return; }
-      if (!panchayat) { showToast('Panchayat is required', 'error'); return; }
-      if (pin.length !== 6) { showToast('Enter a valid 6-digit PIN code', 'error'); return; }
+      if (!street) { showToast('Street / House No. is required', 'error'); return; }
 
       const email  = document.getElementById('email').value.trim();
       const mobile = document.getElementById('mobile').value;

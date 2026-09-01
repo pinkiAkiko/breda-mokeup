@@ -306,6 +306,424 @@
                         </div>
                         <sc-if value="{{ s.checked }}" hint-placeholder-val="{{ false }}">
                           <div style="padding:0 18px 18px 52px;">
+                            <!-- ===== STATUTORY FORM (in-row, tabbed) ===== -->
+                            <sc-if value="{{ s.hasForm }}" hint-placeholder-val="{{ false }}">
+                              <div
+                                style="border:1px solid {{ s.formBd }};background:#fff;border-radius:10px;overflow:hidden;margin-bottom:14px;">
+
+                                <div
+                                  style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 15px;background:{{ s.formHeadBg }};flex-wrap:wrap;">
+                                  <div style="min-width:0;flex:1;">
+                                    <div
+                                      style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#c2740f;text-transform:uppercase;">
+                                      {{ s.formRef }}</div>
+                                    <div
+                                      style="font-size:14px;font-weight:700;color:#0f2319;margin-top:2px;line-height:1.3;">
+                                      {{ s.formTitle }}</div>
+                                    <div style="font-size:11.5px;color:#6b7c72;margin-top:3px;line-height:1.55;">{{
+                                      s.formSub }}</div>
+                                  </div>
+                                  <div style="flex:none;display:flex;align-items:center;gap:10px;">
+                                    <span
+                                      style="font-size:11px;font-weight:700;border-radius:999px;padding:4px 11px;background:{{ s.formPillBg }};border:1px solid {{ s.formPillBd }};color:{{ s.formPillFg }};white-space:nowrap;">{{
+                                      s.formStatusText }}</span>
+                                    <button onClick="{{ s.onToggleForm }}"
+                                      style="background:#fff;border:1px solid #cdd6d0;border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:700;color:#1c2530;white-space:nowrap;">{{
+                                      s.formToggleLabel }}</button>
+                                  </div>
+                                </div>
+
+                                <sc-if value="{{ s.formOpen }}" hint-placeholder-val="{{ true }}">
+
+                                  <!-- tab strip -->
+                                  <div
+                                    style="display:flex;flex-wrap:wrap;gap:3px;padding:11px 13px 0;background:#f6f8f7;border-top:1px solid #e8edea;border-bottom:1px solid #e3e9e6;">
+                                    <sc-for list="{{ s.tabs }}" as="t" hint-placeholder-count="9">
+                                      <button onClick="{{ t.onClick }}"
+                                        style="flex:none;display:flex;align-items:center;gap:7px;border:1px solid {{ t.bd }};border-bottom:1px solid {{ t.bbd }};background:{{ t.bg }};color:{{ t.fg }};font-weight:{{ t.fw }};font-size:12px;padding:8px 13px;border-radius:8px 8px 0 0;margin-bottom:-1px;white-space:nowrap;">
+{{ t.label }}
+                                      </button>
+                                    </sc-for>
+                                  </div>
+
+                                  <div style="padding:17px 16px 16px;">
+
+                                    <div
+                                      style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+                                      <div
+                                        style="font-family:'IBM Plex Serif',serif;font-size:15.5px;font-weight:700;color:#0f2319;border-left:3px solid #1e9b5f;padding-left:11px;line-height:1.35;">
+                                        {{ s.sectionTitle }}</div>
+                                      <span
+                                        style="flex:none;font-family:monospace;font-size:10.5px;font-weight:600;color:#8e9e97;border:1px solid #e3e9e6;border-radius:6px;padding:3px 8px;background:#f6f8f7;">{{
+                                        s.sectionRef }}</span>
+                                    </div>
+                                    <sc-if value="{{ s.showSectionSub }}" hint-placeholder-val="{{ true }}">
+                                      <div style="font-size:11.5px;color:#6b7c72;margin:7px 0 0 14px;line-height:1.6;">
+                                        {{ s.sectionSub }}</div>
+                                    </sc-if>
+                                    <div style="height:16px;"></div>
+
+                                    <!-- ===== GENERIC SECTION RENDERER ===== -->
+                                    <sc-for list="{{ s.groups }}" as="g" hint-placeholder-count="3">
+                                      <div style="margin-bottom:{{ g.gap }};">
+
+                                        <sc-if value="{{ g.isHead }}" hint-placeholder-val="{{ false }}">
+                                          <div
+                                            style="display:flex;align-items:baseline;gap:8px;font-size:12.5px;font-weight:700;color:#1e9b5f;">
+                                            <sc-if value="{{ g.hasNo }}" hint-placeholder-val="{{ true }}"><span
+                                                style="font-family:monospace;font-size:11px;color:#8e9e97;font-weight:600;flex:none;">{{
+                                                g.no }}</span></sc-if>
+                                            <span>{{ g.title }}</span>
+                                          </div>
+                                          <sc-if value="{{ g.hasSub }}" hint-placeholder-val="{{ false }}">
+                                            <div
+                                              style="font-size:11.5px;color:#8e9e97;font-style:italic;margin-top:3px;line-height:1.55;">
+                                              {{ g.sub }}</div>
+                                          </sc-if>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isNote }}" hint-placeholder-val="{{ false }}">
+                                          <div
+                                            style="display:flex;gap:9px;border:1px solid {{ g.noteBd }};border-left:3px solid {{ g.noteAccent }};background:{{ g.noteBg }};border-radius:9px;padding:11px 13px;font-size:11.5px;line-height:1.7;color:#1c2530;">
+                                            <span style="flex:none;font-weight:700;color:{{ g.noteAccent }};">{{
+                                              g.noteLabel }}</span>
+                                            <span>{{ g.title }}</span>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isFields }}" hint-placeholder-val="{{ true }}">
+                                          <div style="display:grid;grid-template-columns:{{ g.cols }};gap:13px;">
+                                            <sc-for list="{{ g.fields }}" as="f" hint-placeholder-count="4">
+                                              <div
+                                                style="display:flex;flex-direction:column;gap:5px;grid-column:{{ f.span }};">
+                                                <label
+                                                  style="display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:500;color:#1c2530;line-height:1.4;flex-wrap:wrap;">
+                                                  <sc-if value="{{ f.hasNo }}" hint-placeholder-val="{{ false }}"><span
+                                                      style="font-family:monospace;font-size:10.5px;color:#9aa9a1;font-weight:600;flex:none;">{{
+                                                      f.no }}</span></sc-if>
+                                                  <span>{{ f.label }}</span>
+                                                  <sc-if value="{{ f.required }}" hint-placeholder-val="{{ false }}">
+                                                    <span style="color:#dc3545;">*</span>
+                                                  </sc-if>
+                                                </label>
+                                                <sc-if value="{{ f.isSelect }}" hint-placeholder-val="{{ false }}">
+                                                  <select value="{{ f.value }}" onChange="{{ f.onChange }}"
+                                                    style="width:100%;border:1px solid {{ f.bd }};border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1c2530;background:{{ f.bg }};outline:none;">
+                                                    <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="4">
+                                                      <option value="{{ o.v }}">{{ o.t }}</option>
+                                                    </sc-for>
+                                                  </select>
+                                                </sc-if>
+                                                <sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}">
+                                                  <textarea value="{{ f.value }}" onChange="{{ f.onChange }}"
+                                                    placeholder="{{ f.placeholder }}" rows="{{ f.rows }}"
+                                                    style="width:100%;border:1px solid {{ f.bd }};border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1c2530;background:{{ f.bg }};outline:none;resize:vertical;font-family:inherit;line-height:1.6;"></textarea>
+                                                </sc-if>
+                                                <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                                                  <input type="{{ f.type }}" value="{{ f.value }}"
+                                                    onChange="{{ f.onChange }}" placeholder="{{ f.placeholder }}"
+                                                    readOnly="{{ f.readOnly }}"
+                                                    style="width:100%;border:1px solid {{ f.bd }};border-radius:8px;padding:8px 10px;font-size:12.5px;color:{{ f.fg }};background:{{ f.bg }};outline:none;">
+                                                </sc-if>
+                                                <sc-if value="{{ f.hasHint }}" hint-placeholder-val="{{ false }}">
+                                                  <div style="font-size:10.5px;color:{{ f.hintColor }};line-height:1.6;">
+                                                    {{ f.hint }}</div>
+                                                </sc-if>
+                                              </div>
+                                            </sc-for>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isRadio }}" hint-placeholder-val="{{ false }}">
+                                          <div style="display:flex;flex-direction:column;gap:7px;">
+                                            <label style="font-size:11.5px;font-weight:500;color:#1c2530;">{{ g.title }}
+                                              <span style="color:#dc3545;">*</span></label>
+                                            <div style="display:flex;gap:18px;flex-wrap:wrap;">
+                                              <sc-for list="{{ g.radios }}" as="r" hint-placeholder-count="2">
+                                                <label
+                                                  style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;color:#1c2530;"><input
+                                                    type="radio" name="{{ g.name }}" checked="{{ r.checked }}"
+                                                    onChange="{{ r.onChange }}" style="accent-color:#1e9b5f;"> {{ r.label
+                                                  }}</label>
+                                              </sc-for>
+                                            </div>
+                                            <sc-if value="{{ g.hasSub }}" hint-placeholder-val="{{ false }}">
+                                              <div
+                                                style="font-size:10.5px;color:#8e9e97;font-style:italic;line-height:1.6;">
+                                                {{ g.sub }}</div>
+                                            </sc-if>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isUnits }}" hint-placeholder-val="{{ false }}">
+                                          <div style="border:1px solid #e3e9e6;border-radius:10px;overflow:hidden;">
+                                            <sc-for list="{{ g.rows }}" as="u" hint-placeholder-count="2">
+                                              <div
+                                                style="border-bottom:1px solid #eef1ef;padding:12px 14px;background:#fff;">
+                                                <div
+                                                  style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;">
+                                                  <span style="font-size:11.5px;font-weight:700;color:#0f2319;">{{
+                                                    u.title }}</span>
+                                                  <button onClick="{{ u.onRemove }}"
+                                                    style="background:none;border:none;font-size:11px;font-weight:600;color:#b4453a;padding:0;">Remove</button>
+                                                </div>
+                                                <div style="display:grid;grid-template-columns:{{ g.cols }};gap:11px;">
+                                                  <sc-for list="{{ u.fields }}" as="f" hint-placeholder-count="3">
+                                                    <div style="display:flex;flex-direction:column;gap:4px;">
+                                                      <label style="font-size:11px;font-weight:500;color:#5b6b62;">{{
+                                                        f.label }}</label>
+                                                      <input type="{{ f.type }}" value="{{ f.value }}"
+                                                        onChange="{{ f.onChange }}" placeholder="{{ f.placeholder }}"
+                                                        style="width:100%;border:1px solid #cdd6d0;border-radius:7px;padding:6px 9px;font-size:12.5px;color:#1c2530;background:#fff;outline:none;">
+                                                    </div>
+                                                  </sc-for>
+                                                </div>
+                                              </div>
+                                            </sc-for>
+                                            <sc-if value="{{ g.isEmpty }}" hint-placeholder-val="{{ false }}">
+                                              <div
+                                                style="padding:16px;text-align:center;font-size:11.5px;color:#8e9e97;font-style:italic;">
+                                                {{ g.emptyText }}</div>
+                                            </sc-if>
+                                            <div style="padding:9px 14px;background:#f6f8f7;">
+                                              <button onClick="{{ g.onAdd }}"
+                                                style="background:none;border:none;font-size:12px;font-weight:700;color:#1e9b5f;padding:0;">+
+                                                {{ g.addLabel }}</button>
+                                            </div>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isActs }}" hint-placeholder-val="{{ false }}">
+                                          <div style="display:flex;flex-direction:column;gap:9px;">
+                                            <sc-for list="{{ g.rows }}" as="a" hint-placeholder-count="4">
+                                              <div
+                                                style="border:1px solid #e3e9e6;border-left:3px solid {{ a.accent }};border-radius:9px;padding:12px 14px;background:{{ a.bg }};">
+                                                <div
+                                                  style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                                                  <div
+                                                    style="display:flex;align-items:baseline;gap:8px;min-width:180px;flex:1;">
+                                                    <span
+                                                      style="font-family:monospace;font-size:10.5px;color:#9aa9a1;font-weight:600;flex:none;">{{
+                                                      a.no }}</span>
+                                                    <span
+                                                      style="font-size:12.5px;font-weight:600;color:#1c2530;line-height:1.5;">{{
+                                                      a.name }}</span>
+                                                  </div>
+                                                  <select value="{{ a.status }}" onChange="{{ a.onStatus }}"
+                                                    style="flex:none;width:168px;border:1px solid {{ a.selBd }};border-radius:8px;padding:6px 9px;font-size:12px;font-weight:600;color:{{ a.selFg }};background:{{ a.selBg }};outline:none;">
+                                                    <sc-for list="{{ a.options }}" as="o" hint-placeholder-count="4">
+                                                      <option value="{{ o.v }}">{{ o.t }}</option>
+                                                    </sc-for>
+                                                  </select>
+                                                </div>
+                                                <sc-if value="{{ a.expanded }}" hint-placeholder-val="{{ true }}">
+                                                  <div
+                                                    style="margin-top:10px;display:grid;grid-template-columns:1fr 210px;gap:11px;align-items:start;">
+                                                    <textarea value="{{ a.desc }}" onChange="{{ a.onDesc }}"
+                                                      placeholder="{{ a.placeholder }}" rows="2"
+                                                      style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 10px;font-size:12px;color:#1c2530;background:#fff;outline:none;resize:vertical;font-family:inherit;line-height:1.6;"></textarea>
+                                                    <div>
+                                                      <label
+                                                        style="display:flex;align-items:center;justify-content:center;gap:7px;border:2px solid {{ a.upBd }};color:{{ a.upFg }};background:#fff;border-radius:8px;padding:8px 11px;font-size:11.5px;font-weight:700;cursor:pointer;">
+                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                          stroke="currentColor" stroke-width="2.2" style="flex:none;">
+                                                          <path d="M12 16V4M7 9l5-5 5 5"></path>
+                                                          <path d="M5 20h14"></path>
+                                                        </svg>
+                                                        {{ a.upLabel }}
+                                                        <input type="file" onChange="{{ a.onFile }}"
+                                                          style="display:none;">
+                                                      </label>
+                                                      <sc-if value="{{ a.hasFile }}" hint-placeholder-val="{{ false }}">
+                                                        <div
+                                                          style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;font-size:10.5px;color:#1e7a4d;">
+                                                          <span
+                                                            style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{
+                                                            a.file }}</span>
+                                                          <button onClick="{{ a.onClear }}"
+                                                            style="background:none;border:none;color:#b4453a;font-size:10.5px;font-weight:600;padding:0;flex:none;">Remove</button>
+                                                        </div>
+                                                      </sc-if>
+                                                    </div>
+                                                  </div>
+                                                </sc-if>
+                                              </div>
+                                            </sc-for>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isDocs }}" hint-placeholder-val="{{ false }}">
+                                          <div style="border:1px solid #e3e9e6;border-radius:10px;overflow:hidden;">
+                                            <sc-for list="{{ g.rows }}" as="d" hint-placeholder-count="5">
+                                              <div
+                                                style="display:flex;align-items:center;justify-content:space-between;gap:13px;padding:11px 14px;border-bottom:1px solid #eef1ef;background:{{ d.bg }};flex-wrap:wrap;">
+                                                <div
+                                                  style="display:flex;align-items:baseline;gap:8px;min-width:0;flex:1;">
+                                                  <span
+                                                    style="font-family:monospace;font-size:10.5px;color:#9aa9a1;font-weight:600;flex:none;">{{
+                                                    d.no }}</span>
+                                                  <div style="min-width:0;">
+                                                    <div
+                                                      style="font-size:12.5px;font-weight:600;color:#1c2530;line-height:1.5;">
+                                                      {{ d.label }}<sc-if value="{{ d.required }}"
+                                                        hint-placeholder-val="{{ true }}"><span
+                                                          style="color:#dc3545;"> *</span></sc-if></div>
+                                                    <div
+                                                      style="font-size:10.5px;color:#8e9e97;margin-top:3px;line-height:1.6;">
+                                                      {{ d.note }}</div>
+                                                  </div>
+                                                </div>
+                                                <div style="flex:none;display:flex;align-items:center;gap:10px;">
+                                                  <sc-if value="{{ d.hasFile }}" hint-placeholder-val="{{ false }}">
+                                                    <span
+                                                      style="font-size:11px;color:#1e7a4d;font-weight:600;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">&#10003;
+                                                      {{ d.file }}</span>
+                                                    <button onClick="{{ d.onClear }}"
+                                                      style="background:none;border:none;color:#b4453a;font-size:11px;font-weight:600;padding:0;">Remove</button>
+                                                  </sc-if>
+                                                  <sc-if value="{{ d.noFile }}" hint-placeholder-val="{{ true }}">
+                                                    <label
+                                                      style="display:inline-flex;align-items:center;gap:7px;border:2px solid {{ d.upBd }};color:{{ d.upFg }};background:#fff;border-radius:8px;padding:7px 12px;font-size:11.5px;font-weight:700;cursor:pointer;">
+                                                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="2.2" style="flex:none;">
+                                                        <path d="M12 16V4M7 9l5-5 5 5"></path>
+                                                        <path d="M5 20h14"></path>
+                                                      </svg>
+                                                      Upload
+                                                      <input type="file" onChange="{{ d.onFile }}" style="display:none;">
+                                                    </label>
+                                                  </sc-if>
+                                                </div>
+                                              </div>
+                                            </sc-for>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isTable }}" hint-placeholder-val="{{ false }}">
+                                          <div
+                                            style="border:1px solid #e3e9e6;border-radius:10px;overflow-x:auto;">
+                                            <div
+                                              style="display:grid;grid-template-columns:{{ g.cols }};min-width:{{ g.minWidth }};">
+                                              <sc-for list="{{ g.head }}" as="h" hint-placeholder-count="4">
+                                                <div
+                                                  style="padding:9px 11px;background:#f6f8f7;border-bottom:1px solid #e3e9e6;font-size:10px;font-weight:700;color:#5b6b62;text-transform:uppercase;letter-spacing:.05em;text-align:{{ h.align }};">
+                                                  {{ h.t }}</div>
+                                              </sc-for>
+                                              <sc-for list="{{ g.cells }}" as="c" hint-placeholder-count="12">
+                                                <div
+                                                  style="padding:{{ c.pad }};border-bottom:1px solid #eef1ef;background:{{ c.bg }};display:flex;align-items:center;gap:7px;">
+                                                  <sc-if value="{{ c.isLabel }}" hint-placeholder-val="{{ true }}">
+                                                    <span
+                                                      style="font-family:monospace;font-size:10px;color:#9aa9a1;font-weight:600;flex:none;">{{
+                                                      c.no }}</span>
+                                                    <span style="font-size:12px;color:#1c2530;line-height:1.55;flex:1;">{{
+                                                      c.t }}</span>
+                                                    <sc-if value="{{ c.hasSym }}" hint-placeholder-val="{{ false }}">
+                                                      <span
+                                                        style="flex:none;font-family:monospace;font-size:11px;font-weight:700;color:#1a5a96;background:#e6f0f9;border:1px solid #c9dff2;border-radius:5px;padding:1px 6px;">{{
+                                                        c.sym }}</span>
+                                                    </sc-if>
+                                                  </sc-if>
+                                                  <sc-if value="{{ c.isInput }}" hint-placeholder-val="{{ false }}">
+                                                    <input value="{{ c.value }}" onChange="{{ c.onChange }}"
+                                                      placeholder="{{ c.placeholder }}"
+                                                      style="width:100%;border:1px solid #cdd6d0;border-radius:7px;padding:6px 9px;font-size:12px;color:#1c2530;background:#fff;outline:none;">
+                                                  </sc-if>
+                                                </div>
+                                              </sc-for>
+                                            </div>
+                                          </div>
+                                        </sc-if>
+
+                                        <sc-if value="{{ g.isUndertaking }}" hint-placeholder-val="{{ false }}">
+                                          <div
+                                            style="border:1px solid {{ g.uBd }};background:{{ g.uBg }};border-radius:10px;padding:14px 16px;">
+                                            <label
+                                              style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+                                              <input type="checkbox" checked="{{ g.checked }}"
+                                                onChange="{{ g.onToggle }}"
+                                                style="accent-color:#1e9b5f;margin-top:3px;flex:none;width:15px;height:15px;">
+                                              <span style="font-size:12px;line-height:1.8;color:#1c2530;">{{ g.title
+                                                }}</span>
+                                            </label>
+                                            <sc-if value="{{ g.hasList }}" hint-placeholder-val="{{ false }}">
+                                              <div
+                                                style="margin:10px 0 0 25px;display:flex;flex-direction:column;gap:7px;">
+                                                <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3">
+                                                  <div
+                                                    style="display:flex;gap:9px;font-size:11.5px;line-height:1.75;color:#1c2530;">
+                                                    <span
+                                                      style="flex:none;font-family:monospace;color:#8e9e97;font-weight:600;">{{
+                                                      i.no }}</span>
+                                                    <span>{{ i.t }}</span>
+                                                  </div>
+                                                </sc-for>
+                                              </div>
+                                            </sc-if>
+                                          </div>
+                                        </sc-if>
+
+                                      </div>
+                                    </sc-for>
+
+                                    <!-- sign-off -->
+                                    <sc-if value="{{ s.showSignOff }}" hint-placeholder-val="{{ false }}">
+                                      <div style="border-top:1px dashed #cdd6d0;padding-top:17px;margin-top:2px;">
+                                        <div
+                                          style="font-size:12.5px;font-weight:700;color:#1e9b5f;margin-bottom:10px;">
+                                          Signature block</div>
+                                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;">
+                                          <sc-for list="{{ s.signFields }}" as="f" hint-placeholder-count="3">
+                                            <div style="display:flex;flex-direction:column;gap:5px;">
+                                              <label style="font-size:11.5px;font-weight:500;color:#1c2530;">{{ f.label
+                                                }} <span style="color:#dc3545;">*</span></label>
+                                              <input type="{{ f.type }}" value="{{ f.value }}"
+                                                onChange="{{ f.onChange }}"
+                                                style="width:100%;border:1px solid #cdd6d0;border-radius:8px;padding:8px 10px;font-size:12.5px;color:#1c2530;background:#fff;outline:none;">
+                                            </div>
+                                          </sc-for>
+                                        </div>
+                                      </div>
+                                    </sc-if>
+
+                                    <!-- completion gate on the preview tab -->
+                                    <sc-if value="{{ s.showFormConfirm }}" hint-placeholder-val="{{ false }}">
+                                      <div
+                                        style="border:2px solid {{ s.confirmBd }};background:{{ s.confirmBg }};border-radius:10px;padding:14px 16px;">
+                                        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+                                          <input type="checkbox" checked="{{ s.formConfirmed }}"
+                                            onChange="{{ s.onFormConfirm }}"
+                                            style="accent-color:#c2740f;margin-top:3px;flex:none;width:15px;height:15px;">
+                                          <span style="font-size:12px;line-height:1.8;color:#1c2530;">{{ s.confirmText
+                                            }}</span>
+                                        </label>
+                                      </div>
+                                    </sc-if>
+
+                                    <!-- section nav -->
+                                    <div
+                                      style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e3e9e6;padding-top:14px;margin-top:20px;gap:10px;flex-wrap:wrap;">
+                                      <button onClick="{{ s.onPrevSection }}" disabled="{{ s.prevDisabled }}"
+                                        style="border-radius:8px;font-size:12.5px;font-weight:600;padding:8px 16px;background:#fff;color:{{ s.prevColor }};border:1px solid #cdd6d0;opacity:{{ s.prevOpacity }};">&larr;
+                                        Previous section</button>
+                                      <div style="display:flex;gap:8px;align-items:center;">
+                                        <sc-if value="{{ s.showPrint }}" hint-placeholder-val="{{ false }}">
+                                          <button onClick="{{ s.onPrintForm }}"
+                                            style="border-radius:8px;font-size:12.5px;font-weight:600;padding:8px 16px;background:#fff;color:#1c2530;border:1px solid #cdd6d0;">Print
+                                            / Save as PDF</button>
+                                        </sc-if>
+                                        <button onClick="{{ s.onNextSection }}" disabled="{{ s.nextDisabled }}"
+                                          style="border-radius:8px;font-size:12.5px;font-weight:700;padding:8px 16px;background:#1e9b5f;color:#fff;border:none;opacity:{{ s.nextOpacity }};">{{
+                                          s.nextLabel }}</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </sc-if>
+                              </div>
+                            </sc-if>
+
+                            <sc-if value="{{ s.showFeeCard }}" hint-placeholder-val="{{ true }}">
                             <div
                               style="border:1px solid #c8d8cf;background:#fff;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;">
                               <div>
@@ -360,6 +778,7 @@
                                 </div>
                               </div>
                             </div>
+                            </sc-if>
                           </div>
                         </sc-if>
                       </div>
@@ -379,6 +798,8 @@
                   days</span></sc-if><sc-if value="{{ showProofWarn }}" hint-placeholder-val="{{ false }}">
                 <div style="font-size:11.5px;color:#b75000;margin-top:2px;">⚠ Upload fee payment proof (or receipt no.)
                   for all selected clearances to submit.</div>
+              </sc-if><sc-if value="{{ showFormWarn }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:11.5px;color:#b75000;margin-top:2px;">⚠ {{ formWarnText }}</div>
               </sc-if></div>
             <div style="display:flex;align-items:center;gap:10px;">
               <button onClick="{{ onCancel }}"
@@ -399,10 +820,18 @@
   </x-dc>
   <script type="text/x-dc" data-dc-script
     data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440},&quot;showHowItWorks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;highlightSelected&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;compactRows&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+// ============================================================================
+//  Apply for Departmental Clearances
+//  Statutory forms are filled in-place, inside the clearance row, as tabs:
+//   · BSPTCL Grid Connectivity            → FORMAT-2 (grant of connectivity)
+//   · BSPTCL Final Grid Connectivity Appr. → FORMAT-4 (connection agreement)
+//  A clearance with a form can only be submitted once its form is complete.
+// ============================================================================
+
 const DEPARTMENTS = [
   { label:'BSPTCL', name:'Bihar State Power Transmission Company Limited (BSPTCL / STU)', services:[
-    { id:'bsptcl-grid', name:'Grid Connectivity', sla:30, authority:'DISCOMs / BSPTCL' },
-    { id:'bsptcl-final', name:'Final Grid Connectivity Approval', sla:120, authority:'BSPTCL' },
+    { id:'bsptcl-grid', name:'Grid Connectivity', sla:30, authority:'DISCOMs / BSPTCL', form:'F2', noFee:true },
+    { id:'bsptcl-final', name:'Final Grid Connectivity Approval', sla:120, authority:'BSPTCL', form:'F4', noFee:true },
   ]},
   { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
     { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
@@ -412,10 +841,10 @@ const DEPARTMENTS = [
   ]},
   { label:'EIO', name:'Electrical Inspector Office', services:[
     { id:'eio-plan', name:'Plan Approval', sla:4, authority:'Electrical Inspector Office' },
-    { id:'eio-charge', name:'Charging Permission', sla:10, authority:'Electrical Inspector Office' },
+    { id:'eio-charge', name:'Charging Permission', sla:10, authority:'Electrical Inspector Office', form:'WCR', noFee:true },
   ]},
   { label:'PHED', name:'Public Health Engineering Department', services:[
-    { id:'phed-noc', name:'NOC for Canal / Reservoir / Pond', sla:75, authority:'Water Resource Dept. / PHED' },
+    { id:'phed-noc', name:'NOC for Canal / Reservoir / Pond', sla:75, authority:'Water Resource Dept. / PHED', form:'WR', noFee:true },
   ]},
   { label:'BSPCB', name:'Bihar State Pollution Control Board (BSPCB)', services:[
     { id:'bspcb-poll', name:'Pollution Clearance', sla:15, authority:'BSPCB' },
@@ -427,17 +856,1174 @@ const DEPARTMENTS = [
 
 const ALL_SERVICES = DEPARTMENTS.flatMap(d => d.services.map(s => ({ ...s, abbr:d.label })));
 
+// ---------------------------------------------------------------- statutory
+const STATUS_OPTS = [
+  { v:'generator',             t:'Generator (other than captive)' },
+  { v:'captive_generator',     t:'Captive generator' },
+  { v:'distribution_licensee', t:'Distribution licensee' },
+  { v:'captive_user',          t:'Captive user' },
+  { v:'oa_consumer',           t:'Open access consumer' }
+];
+
+const PRIME_MOVERS = [
+  'Solar PV (inverter based) — other', 'Wind turbine', 'Hydro turbine',
+  'Steam turbine (coal)', 'Steam turbine (lignite)', 'Steam turbine (multi-fuel)',
+  'Gas turbine', 'Diesel engine', 'Other (specify in remarks)'
+];
+
+const ACTS_GEN = [
+  'Site identification and land acquisition', 'Environmental clearance', 'Forest clearance',
+  'Fuel arrangements', 'Water linkage',
+  'Order for supply of plant and machinery or award of EPC contract',
+  'Dedicated transmission line', 'Useful life of generating station', 'Commissioning schedule',
+  'Commercial arrangement(s) for purchase of electricity',
+  'Information specific to captive generating plant',
+  'Information specific to plant generating non-firm power',
+  'Other clearances', 'Any other relevant information required by STU'
+];
+const ACTS_LINE = [
+  'Site identification and land acquisition', 'Environmental clearance', 'Forest clearance',
+  'Order for supply of plant and machinery or award of EPC contract',
+  'Useful life of premises (commercial or industrial establishment) of captive user or open access consumer',
+  'Commissioning schedule', 'Other clearances', 'Any other relevant information required by STU'
+];
+
+const ACT_STATES = [
+  { v:'',     t:'Select status',   accent:'#cdd6d0', bg:'#fff',    selBg:'#fff',    selBd:'#cdd6d0', selFg:'#6b7c72' },
+  { v:'done', t:'Completed',       accent:'#1e9b5f', bg:'#f7fcf9', selBg:'#e7f4ec', selBd:'#bfe3cd', selFg:'#1e7a4d' },
+  { v:'prog', t:'In progress',     accent:'#1d6fb8', bg:'#f8fbfe', selBg:'#e6f0f9', selBd:'#c9dff2', selFg:'#1a5a96' },
+  { v:'na',   t:'Not applicable',  accent:'#6b7c72', bg:'#fafbfa', selBg:'#eef1ef', selBd:'#dce3df', selFg:'#6b7c72' },
+  { v:'todo', t:'Not yet started', accent:'#c2740f', bg:'#fffcf7', selBg:'#fef3e3', selBd:'#f0d6ac', selFg:'#92400e' }
+];
+
+const ENCLOSURES = [
+  { key:'e1', label:'Non-refundable application fees', note:'Demand draft, or the payment slip in case of payment through RTGS.', req:true },
+  { key:'e2', label:'Documents in support of the information submitted under clause 3', note:'Including all project related preparatory activities declared in Section E.', req:true },
+  { key:'e3', label:'Documents in support of the information submitted under clause 4', note:'Read with this format — mention the details in the covering letter.', req:true },
+  { key:'e4', label:'Documents in support of existing connectivity with Intra-STS', note:'Detailed description of the electricity systems with single line diagrams. Required only for an existing user of the Intra-STS.', req:true, onlyIfExisting:true },
+  { key:'e5', label:'Any other document', note:'Optional — copy to others as considered necessary.', req:false }
+];
+
+// Annexure-II — acceptable IEEE standard excitation models in PSS/E
+const EXC_MODELS = [
+  'ESAC1A — 1992 IEEE type AC1A', 'ESAC2A — 1992 IEEE type AC2A', 'ESAC3A — 1992 IEEE type AC3A',
+  'ESAC4A — 1992 IEEE type AC4A', 'ESAC5A — 1992 IEEE type AC5A', 'ESAC6A — 1992 IEEE type AC6A',
+  'ESAC8B — Basler DECS model', 'ESDC1A — 1992 IEEE type DC1A', 'ESDC2A — 1992 IEEE type DC2A',
+  'ESST1A — 1992 IEEE type ST1A', 'ESST2A — 1992 IEEE type ST2A', 'ESST3A — 1992 IEEE type ST3A',
+  'EXAC1 — 1981 IEEE type AC1', 'EXAC1A — Modified type AC1', 'EXAC2 — 1981 IEEE type AC2',
+  'EXAC3 — 1981 IEEE type AC3', 'EXAC4 — 1981 IEEE type AC4', 'EXBAS — Basler static voltage regulator',
+  'EXDC2 — 1981 IEEE type DC2', 'EXELI — Static PI transformer fed', 'EXPIC1 — Proportional / integral',
+  'EXST1 — 1981 IEEE type ST1', 'EXST2 — 1981 IEEE type ST2', 'EXST2A — Modified 1981 IEEE type ST2',
+  'EXST3 — 1981 IEEE type ST3', 'IEEET1 — 1968 IEEE type 1', 'IEEET2 — 1968 IEEE type 2',
+  'IEEET3 — 1968 IEEE type 3', 'IEEET4 — 1968 IEEE type 4', 'IEEET5 — Modified 1968 IEEE type 4',
+  'IEEEX1 — 1979 IEEE type 1 / 1981 DC1', 'IEEEX2 — 1979 IEEE type 2', 'IEEEX3 — 1979 IEEE type 3',
+  'IEEEX4 — 1979 IEEE type 4 / DC3 / DC3A', 'IEET1A — Modified 1968 IEEE type 1',
+  'IEET1B — Modified 1968 IEEE type 1', 'IEET5A — Modified 1968 IEEE type 4',
+  'IEEX2A — 1979 IEEE type 2A', 'SCRX — Bus or solid fed SCR bridge', 'SEXS — Simplified excitation system'
+];
+
+const SCH4_ROWS = [
+  'Unit rating (MVA)',
+  'Normal max. continuous generation capacity at normal operating temperature (MW)',
+  'Normal max. continuous export capacity at normal operating temperature (MW)',
+  'Maximum (peaking) generating capacity at min. ambient air temperature (MW)',
+  'Maximum (peaking) export capacity at min. ambient air temperature (MW)',
+  'Minimum continuous generating capacity (MW)', 'Minimum export generating capacity (MW)',
+  'Normal maximum lagging MVAR at rated MW output', 'Normal maximum leading MVAR at rated MW output'
+];
+const SCH5_ROWS = [
+  ['Direct axis transient reactance (unsaturated)', 'Xd′'],
+  ['Sub-transient reactance (unsaturated)', 'Xd″'],
+  ['Synchronous reactance', 'Xs'],
+  ['Zero phase sequence reactance', 'X0'],
+  ['Negative phase sequence reactance', 'X2']
+];
+const SCH6_ROWS = [
+  ['Direct axis positive phase sequence synchronous reactance', 'Xd'],
+  ['Quadrature axis positive phase sequence synchronous reactance', 'Xq'],
+  ['Direct axis transient reactance (unsaturated)', 'Xd′'],
+  ['Quadrature axis transient reactance (unsaturated)', 'Xq′'],
+  ['Sub-transient reactance (unsaturated)', 'Xd″'],
+  ['Armature leakage reactance', 'Xl'],
+  ['Direct axis transient open circuit time constant (secs)', 'Tdo′'],
+  ['Direct axis sub-transient open circuit time constant (secs)', 'Tdo″'],
+  ['Quadrature axis transient open circuit time constant (secs)', 'Tqo′'],
+  ['Quadrature axis sub-transient open circuit time constant (secs)', 'Tqo″'],
+  ['Inertia of complete turbo generator (MWs/MVA)', 'H']
+];
+const SCH7_ROWS = [
+  'Transformer positive sequence resistance (R1 %)', 'Transformer positive sequence reactance (X1 %)',
+  'Transformer zero sequence resistance (R0 %)', 'Transformer zero sequence reactance (X0 %)',
+  'Transformer vector group', 'Nature of tap changer (on load / off load)', 'Number of steps and step size'
+];
+const SCH8_ROWS = [
+  'Transformer vector group',
+  'Positive sequence resistance (R1HL1 %) between HV / LV1', 'Positive sequence reactance (X1HL1 %) between HV / LV1',
+  'Zero sequence resistance (R0HL1 %) between HV / LV1', 'Zero sequence reactance (X0HL1 %) between HV / LV1',
+  'Positive sequence resistance (R1HL2 %) between HV / LV2', 'Positive sequence reactance (X1HL2 %) between HV / LV2',
+  'Zero sequence resistance (R0HL2 %) between HV / LV2', 'Zero sequence reactance (X0HL2 %) between HV / LV2',
+  'Positive sequence resistance (R1L1L2 %) between LV1 / LV2', 'Positive sequence reactance (X1L1L2 %) between LV1 / LV2',
+  'Zero sequence resistance (R0L1L2 %) between LV1 / LV2', 'Zero sequence reactance (X0L1L2 %) between LV1 / LV2',
+  'Positive sequence resistance (R1HL1//L2 %) between HV / (LV1 + LV2)',
+  'Positive sequence reactance (X1HL1//L2 %) between HV / (LV1 + LV2)',
+  'Zero sequence resistance (R0HL1//L2 %) between HV / (LV1 + LV2)',
+  'Zero sequence reactance (X0HL1//L2 %) between HV / (LV1 + LV2)'
+];
+
+const BIHAR_DISTRICTS = ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Darbhanga', 'Purnia',
+  'Begusarai', 'Nalanda', 'Vaishali', 'Saran', 'Rohtas', 'Samastipur', 'Nawada', 'Aurangabad'];
+
+const YESNO = ['', 'Yes', 'No'].map(v => ({ v, t:v || 'Select' }));
+const PROVIDED = ['', 'Provided', 'Not provided'].map(v => ({ v, t:v || 'Select' }));
+
+const FORM_META = {
+  F2:{ ref:'BSPTCL / STU · FORMAT-2', title:'Application for Grant of Connectivity',
+    sub:'The statutory format filed with STU under the BERC Connectivity Regulations.',
+    confirm:'I confirm that the entries above are true and correct, that the application fee is non-refundable, and that the signed and sealed hard copy of this FORMAT-2 will reach STU along with the listed enclosures.' },
+  F4:{ ref:'BSPTCL / STU · FORMAT-4', title:'Additional Information for Signing the Connection Agreement',
+    sub:'Furnished after the FORMAT-3 connectivity offer; submitting it is the unconditional acceptance of that offer.',
+    confirm:'I confirm that the data furnished above pertain to the connection sought for the Intra-STS, that furnishing this format constitutes unconditional acceptance of the connectivity offer, and that the signed and sealed hard copy will reach STU.' },
+  WCR:{ ref:'Electrical Inspector · Work Completion', title:'Solar PV Power — Work Completion Report & Certificate',
+    sub:'Submitted once installation is complete, so the Electrical Inspector can inspect and permit charging. Includes the Work Completion Certificate signed by the licensed electrical contractor.',
+    confirm:'I certify that the SRTPV / solar power plant system has been installed and inspected in compliance with the Electricity Act 2003 and the Indian Electricity Rules 1956 (Rule 47A), that the equipment used complies with the technical and safety standards, and that the installation is ready for inspection / energization.' },
+  WR:{ ref:'Water Resources Dept. · NOC', title:'Application for NOC — Canal / Reservoir / Pond',
+    sub:'Identifies the water body the project crosses, abuts or draws from, for the no-objection of the Department of Water Resources.',
+    confirm:'I confirm that the district, project location and water body details given above are true and correct, and that the project will not obstruct or damage the canal, reservoir or pond identified.' }
+};
+
+// values carried over from the BREDA application, shared by both formats
+const CARRIED = {
+  appName:'M/s. Rajeev Industrial Solar Pvt. Ltd.',
+  addrCorr:'Plot 14, Industrial Area, Patliputra, Patna, Bihar — 800013',
+  pcName:'Rajeev Kumar', pcDesig:'Managing Director',
+  pcMobile:'9876543210', pcEmail:'rajeev.kumar@industrialsolar.in',
+  signPlace:'Patna', signName:'Rajeev Kumar', signDesig:'Managing Director'
+};
+
+function newForm(kind){
+  const base = {
+    open:true, tab:'T', confirmed:false, done:false, uc:1,
+    lists:{ existUnits:[], addUnits:[{ id:'u1' }], loadRows:[] },
+    acts:{}, files:{},
+    flags:{ existingConn:'no', dedLine:'no', oaReq:'yes', oaExtent:'full',
+            und1:false, und2:false, und3:false, sitePlanOk:false, cert:false, excChoice:'annexure',
+            manualAutoSwitch:'yes', wcrCert:false, wccCert:false, wrDeclared:false },
+    vals:{}
+  };
+  if(kind === 'F2'){
+    base.vals = Object.assign({}, CARRIED, {
+      status:'generator', addrReg:'',
+      pcLandline:'0612-2234567', pcFax:'',
+      acName:'', acDesig:'', acLandline:'', acFax:'', acMobile:'', acEmail:'',
+      capMW:'0.25', voltage:'', connDate:'',
+      ss1Name:'Patliputra GSS', ss1Volt:'220 / 132 kV', ss1Owner:'BSPTCL', ss1Dist:'3.6',
+      ss2Name:'Karbigahiya S/S', ss2Volt:'132 / 33 kV', ss2Owner:'BSPTCL', ss2Dist:'6.4',
+      genName:'Rajeev Industrial Solar 250 kW', genNewExisting:'New',
+      genOwner:'M/s. Rajeev Industrial Solar Pvt. Ltd.', genCEA:'No',
+      locVillage:'Patliputra', locDistrict:'Patna', locState:'Bihar', locLat:'25.6120', locLng:'85.0980',
+      primeMover:'Solar PV (inverter based) — other', genVolt:'', stepVolt:'',
+      feeBank:'', feeType:'Demand Draft', feeNo:'', feeDate:'', feeAmt:'', oaName:''
+    });
+  } else if(kind === 'WCR'){
+    base.vals = Object.assign({}, CARRIED, {
+      toLine1:'The Electrical Inspector',
+      toLine2:'Office of the Electrical Inspector, Government of Bihar',
+      toLine3:'Vidyut Bhawan, Bailey Road, Patna — 800001',
+      subjectRO:'Submission of work completion Report',
+      refLetterNo:'', refLetterDate:'',
+      mMake:'', mType:'', mEachKWp:'', mCount:'', mSerials:'',
+      iMake:'', iType:'', iCapacity:'', iCount:'', iSerials:'',
+      dcCableMake:'', dcCableSize:'', acWireMake:'', acWireSize:'',
+      dcbMake:'', dcbSerial:'', dcbSpd:'', dcbMcb:'',
+      acbMake:'', acbSerial:'', acbSpd:'', acbMcb:'',
+      earthResistance:'', earthFlatSize:'',
+      earthModules:'', earthInverter:'', earthLightning:'',
+      cautionPanels:'', cautionInverters:'', cautionDb:'',
+      inspectionDate:'',
+      applicantSignName:'Rajeev Kumar',
+      installerFirm:'', installerSupervisor:'', installerContractor:'',
+      wccInstallation:'Rajeev Industrial Solar 250 kW', wccOwner:'M/s. Rajeev Industrial Solar Pvt. Ltd.',
+      wccEquipment:'', wccTests:'', wccContractor:'', wccSupervisor:'',
+      wccSignContractor:'', wccSignOwner:'Rajeev Kumar'
+    });
+  } else if(kind === 'WR'){
+    base.vals = Object.assign({}, CARRIED, {
+      projectName:'Rajeev Industrial Solar 250 kW', projectCap:'250 kW',
+      district:'Patna', projectLocation:'Plot 14, Industrial Area, Patliputra, Patna',
+      waterBody:'', riverName:'', canalName:'', distanceToBody:''
+    });
+  } else {
+    base.vals = Object.assign({}, CARRIED, {
+      submittedBy:'applicant', status:'generator',
+      intimationNo:'BSPTCL/STU/CONN-OFFER/2026/0117', intimationDate:'2026-08-14',
+      pcPhone:'0612-2234567', pcFax:'',
+      acName:'', acDesig:'', acPhone:'', acFax:'', acEmail:'',
+      completion:'', plantType:'Solar PV (inverter based)',
+      maxExport:'0.25', maxImport:'', houseLoad:'', regime:'',
+      gatewayType:'', dataPorts:'', protocol:'', media:'', iface:'', capacity:'',
+      curveDrawing:'', magCurve:'assume', magS10:'', magS12:'', excModel:'',
+      otherInfo:'', enclList:''
+    });
+  }
+  return base;
+}
+
 class Component extends DCLogic {
-  state = { screen:'form', selected:{}, docs:{} };
+  constructor(props){
+    super(props);
+    const forms = {};
+    ALL_SERVICES.forEach(s => { if(s.form) forms[s.id] = newForm(s.form); });
+    this.state = { screen:'form', selected:{}, docs:{}, forms };
+    this._cur = null;
+  }
 
-  toggle(id){ this.setState(st => { const s={...st.selected}; if(s[id]) delete s[id]; else s[id]=true; return { selected:s }; }); }
-  setDoc(id, patch){ this.setState(st => ({ docs:{ ...st.docs, [id]:{ ...(st.docs[id]||{}), ...patch } } })); }
-  onFile(id, field, max, e){ const f=e.target.files && e.target.files[0]; if(!f) return; if(f.size>max*1024*1024){ alert('File exceeds '+max+' MB limit'); e.target.value=''; return; } this.setDoc(id, { [field]:f.name }); }
-  proofReady(id){ const d=this.state.docs[id]||{}; return !!(d.proof || (d.receipt && d.receipt.trim())); }
-  cancel(){ this.setState({ selected:{}, docs:{} }); }
-  submit(){ const ids=Object.keys(this.state.selected); if(ids.length===0) return; if(!ids.every(id=>this.proofReady(id))) return; this.setState({ screen:'success' }); }
-  backDash(){ this.setState({ screen:'form', selected:{}, docs:{} }); }
+  // ------------------------------------------------------- clearance rows
+  toggle(id){ this.setState(st => { const s = { ...st.selected }; if(s[id]) delete s[id]; else s[id] = true; return { selected:s }; }); }
+  setDoc(id, patch){ this.setState(st => ({ docs:{ ...st.docs, [id]:{ ...(st.docs[id] || {}), ...patch } } })); }
+  onFile(id, field, max, e){
+    const f = e.target.files && e.target.files[0]; if(!f) return;
+    if(f.size > max * 1024 * 1024){ alert('File exceeds ' + max + ' MB limit'); e.target.value = ''; return; }
+    this.setDoc(id, { [field]:f.name });
+  }
+  proofReady(id){ const d = this.state.docs[id] || {}; return !!(d.proof || (d.receipt && d.receipt.trim())); }
+  svcById(id){ return ALL_SERVICES.find(s => s.id === id); }
+  rowReady(id){
+    const s = this.svcById(id);
+    const proofOk = s.noFee ? true : this.proofReady(id);
+    const formOk = s.form ? this.fm(id).done : true;
+    return proofOk && formOk;
+  }
+  cancel(){
+    const forms = {}; ALL_SERVICES.forEach(s => { if(s.form) forms[s.id] = newForm(s.form); });
+    this.setState({ selected:{}, docs:{}, forms });
+  }
+  submit(){
+    const ids = Object.keys(this.state.selected);
+    if(ids.length === 0 || !ids.every(id => this.rowReady(id))) return;
+    this.setState({ screen:'success' });
+  }
+  backDash(){ this.cancel(); this.setState({ screen:'form' }); }
 
+  // ------------------------------------------------------------ form state
+  defaultForm(id){ const s = this.svcById(id); return newForm(s && s.form ? s.form : 'F2'); }
+  fm(id){ return this.state.forms[id] || this.defaultForm(id); }
+  _f(st, id){ return st.forms[id] || this.defaultForm(id); }
+  patchForm(id, patch){ this.setState(st => ({ forms:{ ...st.forms, [id]:{ ...this._f(st, id), ...patch } } })); }
+  fv(k){ const v = this.fm(this._cur).vals[k]; return v === undefined ? '' : v; }
+  fvOf(id, k){ const v = this.fm(id).vals[k]; return v === undefined ? '' : v; }
+  setV(id, k, v){ this.setState(st => { const f = this._f(st, id); return { forms:{ ...st.forms, [id]:{ ...f, vals:{ ...f.vals, [k]:v } } } }; }); }
+  onV(k, tr){ const id = this._cur; return (e) => { let v = e.target.value; if(tr) v = tr(v); this.setV(id, k, v); }; }
+  flag(k){ return this.fm(this._cur).flags[k]; }
+  setFlag(id, k, v){ this.setState(st => { const f = this._f(st, id); return { forms:{ ...st.forms, [id]:{ ...f, flags:{ ...f.flags, [k]:v } } } }; }); }
+  list(k){ return this.fm(this._cur).lists[k] || []; }
+  addRow(id, k){ this.setState(st => { const f = this._f(st, id); const n = f.uc + 1;
+    return { forms:{ ...st.forms, [id]:{ ...f, uc:n, lists:{ ...f.lists, [k]:[...f.lists[k], { id:'u' + n }] } } } }; }); }
+  removeRow(id, k, rid){ this.setState(st => { const f = this._f(st, id);
+    return { forms:{ ...st.forms, [id]:{ ...f, lists:{ ...f.lists, [k]:f.lists[k].filter(r => r.id !== rid) } } } }; }); }
+  setRow(id, k, rid, field, v){ this.setState(st => { const f = this._f(st, id);
+    return { forms:{ ...st.forms, [id]:{ ...f, lists:{ ...f.lists, [k]:f.lists[k].map(r => r.id === rid ? { ...r, [field]:v } : r) } } } }; }); }
+  setAct(id, key, patch){ this.setState(st => { const f = this._f(st, id);
+    return { forms:{ ...st.forms, [id]:{ ...f, acts:{ ...f.acts, [key]:{ ...(f.acts[key] || {}), ...patch } } } } }; }); }
+  setFormFile(id, key, name){ this.setState(st => { const f = this._f(st, id);
+    return { forms:{ ...st.forms, [id]:{ ...f, files:{ ...f.files, [key]:name } } } }; }); }
+  onFormFile(id, key, e){
+    const f = e.target.files && e.target.files[0]; if(!f) return;
+    if(f.size > 25 * 1024 * 1024){ alert('File exceeds the 25 MB limit'); e.target.value = ''; return; }
+    this.setFormFile(id, key, f.name);
+  }
+
+  // ------------------------------------------------------------- derived
+  status(){ return this.fv('status') || 'generator'; }
+  isGenStation(){ const s = this.status(); return s === 'generator' || s === 'captive_generator'; }
+  isCaptiveGen(){ return this.status() === 'captive_generator'; }
+  isDistLicensee(){ return this.status() === 'distribution_licensee'; }
+  isNonFirm(){ return /Solar|Wind/i.test(this.fv('primeMover')); }
+  isLicensee(){ return this.fv('submittedBy') === 'transmission_licensee'; }
+  isGenPlant(){ return !this.isLicensee() && this.isGenStation(); }
+  capMW(){ return parseFloat(this.fv('capMW')) || 0; }
+  suggestedKV(){ const m = this.capMW(); if(!m) return '';
+    if(m < 1) return '11 kV'; if(m < 10) return '33 kV'; if(m <= 50) return '132 kV';
+    if(m <= 250) return '220 kV'; return '400 kV'; }
+  enclosures(){ return ENCLOSURES.filter(e => !e.onlyIfExisting || this.flag('existingConn') === 'yes'); }
+  actList(){ return this.isGenStation() ? ACTS_GEN : ACTS_LINE; }
+  deadline(){
+    const raw = this.fv('intimationDate');
+    const d = raw ? new Date(raw) : null;
+    if(!d || isNaN(d.getTime())) return { text:'Enter the date of the connectivity offer to see the due date.', tone:'info', due:'' };
+    const due = new Date(d.getTime()); due.setMonth(due.getMonth() + 2);
+    const dueStr = due.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+    const days = Math.ceil((due - new Date()) / 86400000);
+    if(days < 0) return { text:'Due by ' + dueStr + ' — overdue by ' + Math.abs(days) + ' day(s); STU may require a fresh request for additional time.', tone:'warn', due:dueStr };
+    if(days <= 14) return { text:'Due by ' + dueStr + ' — ' + days + ' day(s) remaining.', tone:'warn', due:dueStr };
+    return { text:'Due by ' + dueStr + ' — ' + days + ' day(s) remaining, being two (2) months from the date of the connectivity offer.', tone:'info', due:dueStr };
+  }
+
+  // -------------------------------------------------------------- builders
+  G(o){
+    return Object.assign({
+      gap:'20px', isHead:false, isNote:false, isFields:false, isRadio:false, isUnits:false,
+      isActs:false, isDocs:false, isTable:false, isUndertaking:false,
+      hasNo:false, no:'', title:'', hasSub:false, sub:'',
+      noteBd:'#c9dff2', noteBg:'#e6f0f9', noteAccent:'#1a5a96', noteLabel:'Note:',
+      cols:'1fr 1fr', fields:[], radios:[], name:'r', rows:[], isEmpty:false, emptyText:'',
+      onAdd:()=>{}, addLabel:'Add row', head:[], cells:[], minWidth:'560px',
+      uBd:'#e3e9e6', uBg:'#f6f8f7', checked:false, onToggle:()=>{}, hasList:false, items:[]
+    }, o);
+  }
+  H(no, title, sub){ return this.G({ isHead:true, hasNo:!!no, no:no || '', title, hasSub:!!sub, sub:sub || '', gap:'10px' }); }
+  FLD(fields, cols){ return this.G({ isFields:true, fields, cols:cols || '1fr 1fr' }); }
+  NOTE(title, tone){
+    const T = {
+      info:{ noteBd:'#c9dff2', noteBg:'#e6f0f9', noteAccent:'#1a5a96', noteLabel:'Note:' },
+      warn:{ noteBd:'#f0d6ac', noteBg:'#fef3e3', noteAccent:'#92400e', noteLabel:'Important:' },
+      rule:{ noteBd:'#bfe3cd', noteBg:'#e7f4ec', noteAccent:'#1e7a4d', noteLabel:'Applies to you:' }
+    }[tone || 'info'];
+    return this.G(Object.assign({ isNote:true, title }, T));
+  }
+  RADIO(flagKey, title, opts, sub){
+    const id = this._cur, cur = this.flag(flagKey);
+    return this.G({ isRadio:true, name:id + '-' + flagKey, title, hasSub:!!sub, sub:sub || '',
+      radios:opts.map(o => ({ label:o.t, checked:cur === o.v, onChange:() => this.setFlag(id, flagKey, o.v) })) });
+  }
+  VRADIO(valKey, title, opts, sub){
+    const id = this._cur, cur = this.fv(valKey);
+    return this.G({ isRadio:true, name:id + '-' + valKey, title, hasSub:!!sub, sub:sub || '',
+      radios:opts.map(o => ({ label:o.t, checked:cur === o.v, onChange:() => this.setV(id, valKey, o.v) })) });
+  }
+  F(k, label, o){
+    o = o || {};
+    const isSelect = !!o.options, isArea = o.kind === 'area', ro = !!o.ro, auto = !!o.auto;
+    return {
+      key:k, label, no:o.no || '', hasNo:!!o.no, required:!o.opt && !ro, auto,
+      span:'span ' + (o.span || 1),
+      isSelect, isArea, isText:!isSelect && !isArea,
+      type:o.kind === 'num' ? 'number' : (o.kind === 'date' ? 'date' : 'text'),
+      rows:o.rows || 2,
+      options:(o.options || []).map(x => typeof x === 'string' ? { v:x, t:x } : x),
+      placeholder:o.ph || '', value:this.fv(k), onChange:this.onV(k, o.tr), readOnly:ro,
+      bg: ro ? '#eef1ef' : (auto ? '#f4faf6' : '#fff'),
+      fg: ro ? '#6b7c72' : '#1c2530',
+      bd: ro ? '#dce3df' : (auto ? '#bfe3cd' : '#cdd6d0'),
+      hasHint:!!o.hint, hint:o.hint || '',
+      hintColor:o.hintTone === 'info' ? '#1a5a96' : (o.hintTone === 'warn' ? '#b75000' : '#8e9e97')
+    };
+  }
+  RF(listKey, rid, k, label, o){
+    o = o || {}; const id = this._cur;
+    const row = (this.list(listKey).find(r => r.id === rid) || {});
+    return { label, type:o.kind === 'num' ? 'number' : (o.kind === 'date' ? 'date' : 'text'),
+      placeholder:o.ph || '', value:row[k] === undefined ? '' : row[k],
+      onChange:(e) => this.setRow(id, listKey, rid, k, e.target.value) };
+  }
+  UNITS(listKey, cols, addLabel, emptyText, titleFor, fieldsFor){
+    const id = this._cur;
+    const rows = this.list(listKey).map((r, i) => ({
+      title:titleFor(i), onRemove:() => this.removeRow(id, listKey, r.id), fields:fieldsFor(r.id, i) }));
+    return this.G({ isUnits:true, cols, rows, isEmpty:rows.length === 0, emptyText,
+      onAdd:() => this.addRow(id, listKey), addLabel });
+  }
+  ACTS(){
+    const id = this._cur, f = this.fm(id);
+    return this.G({ isActs:true, rows:this.actList().map((name, i) => {
+      const key = 'a' + (i + 1), a = f.acts[key] || {};
+      const st = ACT_STATES.find(s => s.v === (a.status || '')) || ACT_STATES[0];
+      return {
+        no:'E.' + (i + 1), name, accent:st.accent, bg:st.bg, selBg:st.selBg, selBd:st.selBd, selFg:st.selFg,
+        status:a.status || '', options:ACT_STATES.map(s => ({ v:s.v, t:s.t })),
+        onStatus:(e) => this.setAct(id, key, { status:e.target.value }),
+        expanded:!!a.status && a.status !== 'na',
+        desc:a.desc || '', onDesc:(e) => this.setAct(id, key, { desc:e.target.value }),
+        placeholder:'Concise description of the activity and its present status…',
+        upLabel:a.file ? 'Replace document' : 'Attach document',
+        upBd:a.file ? '#1e9b5f' : '#1e7a4d', upFg:'#1e7a4d',
+        onFile:(e) => { const fl = e.target.files && e.target.files[0]; if(!fl) return;
+          if(fl.size > 25 * 1024 * 1024){ alert('File exceeds the 25 MB limit'); e.target.value = ''; return; }
+          this.setAct(id, key, { file:fl.name }); },
+        hasFile:!!a.file, file:a.file || '', onClear:() => this.setAct(id, key, { file:null })
+      };
+    }) });
+  }
+  DOCS(list){
+    const id = this._cur, f = this.fm(id);
+    return this.G({ isDocs:true, rows:list.map((d, i) => {
+      const file = f.files[d.key];
+      return { no:d.no || (String(i + 1) + '.'), label:d.label, note:d.note, required:!!d.req,
+        bg:file ? '#f7fcf9' : '#fff', hasFile:!!file, noFile:!file, file:file || '',
+        upBd:d.req ? '#e05c1a' : '#1e7a4d', upFg:d.req ? '#e05c1a' : '#1e7a4d',
+        onFile:(e) => this.onFormFile(id, d.key, e), onClear:() => this.setFormFile(id, d.key, null) };
+    }) });
+  }
+  UND(flagKey, title, items){
+    const id = this._cur, on = !!this.flag(flagKey);
+    return this.G({ isUndertaking:true, title, checked:on,
+      onToggle:(e) => this.setFlag(id, flagKey, e.target.checked),
+      hasList:!!(items && items.length), items:items || [],
+      uBd:on ? '#bfe3cd' : '#e3e9e6', uBg:on ? '#f7fcf9' : '#f6f8f7' });
+  }
+  TBL(head, cols, minWidth, rows){
+    const cells = [];
+    rows.forEach((r, i) => {
+      const bg = i % 2 ? '#fbfcfb' : '#fff';
+      cells.push({ isLabel:true, isInput:false, no:r.no, t:r.label, hasSym:!!r.sym, sym:r.sym || '',
+        pad:'9px 11px', bg, value:'', onChange:()=>{}, placeholder:'' });
+      r.keys.forEach(k => cells.push({ isLabel:false, isInput:true, no:'', t:'', hasSym:false, sym:'',
+        pad:'6px 9px', bg, value:this.fv(k), onChange:this.onV(k), placeholder:r.ph || '' }));
+    });
+    return this.G({ isTable:true, head, cols, minWidth, cells });
+  }
+  simpleRows(list, prefix){ return list.map((label, i) => ({ no:String(i + 1), label, sym:'', keys:[prefix + (i + 1)], ph:'' })); }
+  symRows(list, prefix){ return list.map((r, i) => ({ no:String(i + 1), label:r[0], sym:r[1], keys:[prefix + (i + 1)], ph:'pu' })); }
+
+  // ============================================================ FORMAT-2
+  f2Tabs(){
+    return [
+      { id:'T', label:'Applicability', ref:'FORMAT-2', title:'Applicability & Status of the Applicant',
+        sub:'The statutory variant that applies to you follows from your status under clause 5. Pick it first — the rest of the form adapts.' },
+      { id:'A', label:'Applicant', ref:'FORMAT-2 · A', title:'A. Details of the Applicant', sub:'' },
+      { id:'B', label:'Connectivity', ref:'FORMAT-2 · B', title:'B. Details of Connectivity Requirement', sub:'' },
+      { id:'C', label:'Existing', ref:'FORMAT-2 · C', title:'C. Details of Existing Connectivity',
+        sub:'Not applicable to a distribution licensee.', skip:this.isDistLicensee() },
+      { id:'D', label:'Project', ref:'FORMAT-2 · D', title:'D. Details of Project (for which connectivity is sought)',
+        sub:'Enclose duly signed supporting documents as considered appropriate.' },
+      { id:'E', label:'Activities', ref:'FORMAT-2 · E', title:'E. Status of Project Related Activities',
+        sub:'Enclose duly signed supporting documents as per clause ' + (this.isGenStation() ? '3.1' : '3.2') + ' of the procedure.' },
+      { id:'F', label:'Fees', ref:'FORMAT-2 · F', title:'F. Details of Application Fees', sub:'' },
+      { id:'G', label:'Undertakings', ref:'FORMAT-2 · G', title:'G. Undertaking(s), Enclosures & Signature', sub:'' }
+    ].filter(t => !t.skip);
+  }
+
+  f2Groups(tab){
+    const gen = this.isGenStation();
+
+    if(tab === 'T') return [
+      this.H('', 'Application identification'),
+      this.FLD([ this.F('appNoRO', 'Application no.', { ro:true }), this.F('appDateRO', 'Date', { ro:true }) ]),
+      this.NOTE('The application number and date are self-generated by the applicant, as provided in FORMAT-2. The portal reserves the number above and stamps the date on submission.', 'info'),
+      this.H('A.5', 'Status of the applicant'),
+      this.FLD([ this.F('status', 'Status of the applicant', { options:STATUS_OPTS, span:2,
+        hint:'This decides which of the two FORMAT-2 variants applies, and which branch of Section D you complete.', hintTone:'info' }) ])
+    ];
+
+    if(tab === 'A') return [
+      this.H('A.1 – A.3', 'Applicant and addresses'),
+      this.FLD([
+        this.F('appName', gen ? 'Name of the applicant (generating company)' : 'Name of the applicant', { no:'1', auto:true, span:2 }),
+        this.F('addrReg', 'Address of registered office (if any)', { no:'2', kind:'area', opt:true, ph:'Leave blank if not applicable' }),
+        this.F('addrCorr', 'Address for correspondence', { no:'3', kind:'area', auto:true })
+      ]),
+      this.H('A.4 (a)', 'Prime contact person'),
+      this.FLD([
+        this.F('pcName', 'Name', { auto:true }), this.F('pcDesig', 'Designation'),
+        this.F('pcLandline', 'Phone — landline (with STD code)', { ph:'0612-XXXXXXX' }),
+        this.F('pcFax', 'Fax (with STD code)', { opt:true }),
+        this.F('pcMobile', 'Mobile', { tr:v => v.replace(/\D/g, ''), auto:true }),
+        this.F('pcEmail', 'E-mail', { auto:true })
+      ], '1fr 1fr 1fr'),
+      this.H('A.4 (b)', 'Alternate contact person'),
+      this.FLD([
+        this.F('acName', 'Name'), this.F('acDesig', 'Designation'),
+        this.F('acLandline', 'Phone — landline (with STD code)', { opt:true }),
+        this.F('acFax', 'Fax (with STD code)', { opt:true }),
+        this.F('acMobile', 'Mobile', { tr:v => v.replace(/\D/g, '') }),
+        this.F('acEmail', 'E-mail')
+      ], '1fr 1fr 1fr'),
+      this.H('A.5', 'Status of the applicant'),
+      this.FLD([ this.F('statusRO', 'Status of the applicant', { ro:true, span:2,
+        hint:'Set on the Applicability tab. Change it there if it is wrong — Sections D and E depend on it.' }) ])
+    ];
+
+    if(tab === 'B') return [
+      this.H('B.1', 'Connectivity sought'),
+      this.FLD([
+        this.F('capMW', 'Capacity (MW) for which connectivity is required', { kind:'num', auto:true }),
+        this.F('voltage', 'Voltage level (kV) at which connectivity is required',
+          { options:['', '11 kV', '33 kV', '132 kV', '220 kV', '400 kV', '765 kV'].map(v => ({ v, t:v || 'Select' })),
+            hint:this.suggestedKV() ? ('Indicative for ' + this.capMW() + ' MW: ' + this.suggestedKV() + '. STU may advise a different level in the connectivity offer.') : 'Enter the capacity to see the indicative voltage level.',
+            hintTone:'info' }),
+        this.F('connDate', 'Date from which connectivity is required', { kind:'date', hint:'Refer clause 5.2 of the procedure.' })
+      ], '1fr 1fr 1fr'),
+      this.H('B.2 (a)', 'Nearest sub-station — 1', 'Nearest 765 / 400 / 220 / 132 kV sub-station.'),
+      this.FLD([
+        this.F('ss1Name', 'Name of sub-station', { auto:true }),
+        this.F('ss1Volt', 'Voltage level(s) available (kV)', { auto:true }),
+        this.F('ss1Owner', 'Name of licensee (owner)', { auto:true }),
+        this.F('ss1Dist', 'Distance (km)', { kind:'num', auto:true })
+      ]),
+      this.H('B.2 (b)', 'Nearest sub-station — 2'),
+      this.FLD([
+        this.F('ss2Name', 'Name of sub-station'), this.F('ss2Volt', 'Voltage level(s) available (kV)'),
+        this.F('ss2Owner', 'Name of licensee (owner)'), this.F('ss2Dist', 'Distance (km)', { kind:'num' })
+      ])
+    ];
+
+    if(tab === 'C'){
+      const out = [ this.RADIO('existingConn', 'C.1 — Do you have existing connectivity with the Intra-STS?',
+        [{ v:'no', t:'No existing connectivity' }, { v:'yes', t:'Yes — existing connectivity' }],
+        'If yes, Enclosure 4 — the description of the electricity systems with single line diagrams — becomes mandatory in Section G.') ];
+      if(this.flag('existingConn') === 'yes'){
+        out.push(this.H('C.1', 'Existing connectivity'));
+        out.push(this.FLD([
+          this.F('ecDate', 'Date of connectivity', { kind:'date' }), this.F('ecCap', 'Capacity (MW)', { kind:'num' }),
+          this.F('ecSS', 'Name of 765 / 400 / 220 / 132 kV sub-station'), this.F('ecVolt', 'Voltage level (kV)'),
+          this.F('ecOwner', 'Name of licensee (owner)'), this.F('ecDist', 'Distance (km)', { kind:'num' })
+        ]));
+      } else {
+        out.push(this.NOTE('Section C will be submitted as “Nil”. Enclosure 4 is not required.', 'info'));
+      }
+      return out;
+    }
+
+    if(tab === 'D') return this.f2SectionD();
+
+    if(tab === 'E') return [
+      this.NOTE('For every activity record its present status, add a concise description of the work completed with regard to project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances required under law), and attach the duly signed supporting document.', 'info'),
+      this.ACTS()
+    ];
+
+    if(tab === 'F') return [
+      this.H('F.1', 'Non-refundable application fees'),
+      this.FLD([
+        this.F('feeBank', 'Name of bank & branch', { span:2, ph:'e.g. State Bank of India — Patliputra Branch' }),
+        this.F('feeType', 'Type of instrument', { options:['Demand Draft', 'RTGS', 'NEFT'] }),
+        this.F('feeNo', 'Instrument no. / UTR no.'),
+        this.F('feeDate', 'Date', { kind:'date' }),
+        this.F('feeAmt', 'Amount (Rs.)', { kind:'num', hint:'As prescribed in the BSPTCL schedule of charges read with the BERC Connectivity Regulations.' })
+      ]),
+      this.NOTE('This fee is the STU application fee under FORMAT-2 and is separate from the clearance-counter fee whose challan you upload below. It is non-refundable. Enclose the demand draft — or the payment slip, in case of payment through RTGS — as Enclosure 1 in Section G.', 'warn')
+    ];
+
+    if(tab === 'G'){
+      const out = [
+        this.UND('und1', 'I undertake that all the activities of project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances as required from time to time under the law) are completed. All the details given in support of specific actions taken for project preparatory activities, as given under “E” above, are true and correct and nothing material has been concealed thereof.'),
+        this.UND('und2', 'I further undertake that the technical standards for connectivity specified in the Central Electricity Authority (Technical Standards for Connectivity to the Grid) Regulations, 2007 have been complied with.'),
+        this.RADIO('oaReq', 'Application for grant of long term open access',
+          [{ v:'yes', t:'Required' }, { v:'no', t:'Not required' }],
+          'Pick the declaration that applies. Only the matching set of conditions is submitted with the format.')
+      ];
+      if(this.flag('oaReq') === 'yes'){
+        out.push(this.UND('und3', 'In case of requirement of making an application for grant of long term open access, I declare the following conditions:', [
+          { no:'(i)', t:'Existence of an agreement for sale or purchase of electricity, or for carrying electricity from the captive generating plant to its captive user(s).' },
+          { no:'(ii)', t:'Use of the transmission system to its full capacity or in phases (details below), as sought in the application for grant of connectivity.' },
+          { no:'(iii)', t:'The entity named below shall submit the application for grant of open access in accordance with the regulations specified by the Bihar Electricity Regulatory Commission, and subsequently will sign the BPTA / supplementary BPTA with STU.' }
+        ]));
+        out.push(this.FLD([ this.F('oaName', 'Name of the entity that will apply for open access', { span:2, ph:'The name referred to in condition (iii)' }) ]));
+        out.push(this.RADIO('oaExtent', 'Use of the transmission system',
+          [{ v:'full', t:'To its full capacity' }, { v:'phases', t:'In phases' }]));
+        if(this.flag('oaExtent') === 'phases'){
+          out.push(this.FLD([ this.F('oaPhases', 'Details of the phases', { kind:'area', rows:3, span:2, ph:'Phase-wise capacity and target dates' }) ]));
+        }
+      } else {
+        out.push(this.UND('und3', 'In case an application for open access is not required, I declare the following conditions:', [
+          { no:'(i)', t:'Intention for staying connected or synchronised with the Intra-STS only.' },
+          { no:'(ii)', t:'That no exchange of active power is intended with the grid, except for reactive power exchange chargeable at applicable rates.' },
+          { no:'(iii)', t:'An application for open access shall not be required under the regulations specified by the Bihar Electricity Regulatory Commission.' }
+        ]));
+      }
+      out.push(this.H('', 'Enclosures', 'Attach each enclosure below. Copy to others as considered necessary.'));
+      out.push(this.DOCS(this.enclosures()));
+      return out;
+    }
+
+    return [];
+  }
+
+  f2SectionD(){
+    if(this.isGenStation()){
+      const out = [
+        this.H('D.1 – D.4', 'Generating station'),
+        this.FLD([
+          this.F('genName', 'Name of generating station', { no:'1', auto:true }),
+          this.F('genNewExisting', 'Whether new or existing generating station', { no:'2', options:['New', 'Existing'] }),
+          this.F('genOwner', 'Entity which owns, operates and maintains', { no:'3', auto:true }),
+          this.F('genCEA', 'Is it an identified project of CEA', { no:'4', options:['Yes', 'No'] })
+        ]),
+        this.H('D.5', 'Geographical location of generating station'),
+        this.FLD([
+          this.F('locVillage', 'Nearest village / town', { auto:true }), this.F('locDistrict', 'District', { auto:true }),
+          this.F('locState', 'State', { ro:true }), this.F('locLat', 'Latitude', { auto:true }),
+          this.F('locLng', 'Longitude', { auto:true })
+        ], '1fr 1fr 1fr'),
+        this.H('D.6', 'Existing unit(s), if any', 'Unit-wise break-up of installed capacity and of re-rated capacity (MW).'),
+        this.UNITS('existUnits', '1fr 1fr 1fr', 'Add existing unit', 'No existing units — this is a new generating station.',
+          (i) => 'Existing unit ' + (i + 1),
+          (rid) => [ this.RF('existUnits', rid, 'name', 'Unit', { ph:'Unit-1' }),
+                     this.RF('existUnits', rid, 'cap', 'Installed capacity (MW)', { kind:'num' }),
+                     this.RF('existUnits', rid, 'rerated', 'Re-rated capacity (MW)', { kind:'num' }) ]),
+        this.H('D.7', 'Additional unit(s)', 'Unit-wise break-up of installed capacity (MW) and the dates of commercial operation.'),
+        this.UNITS('addUnits', '1fr 1fr 1fr 1fr', 'Add additional unit', 'Add at least one unit for which connectivity is sought.',
+          (i) => 'Additional unit ' + (i + 1),
+          (rid) => [ this.RF('addUnits', rid, 'name', 'Unit', { ph:'Unit-1' }),
+                     this.RF('addUnits', rid, 'cap', 'Installed capacity (MW)', { kind:'num' }),
+                     this.RF('addUnits', rid, 'cod', 'Original date of commercial operation', { kind:'date' }),
+                     this.RF('addUnits', rid, 'rcod', 'Revised date of commercial operation', { kind:'date' }) ]),
+        this.H('D.8 – D.10', 'Prime mover and voltages'),
+        this.FLD([
+          this.F('primeMover', 'Type of prime mover (fuel base)', { no:'8', options:PRIME_MOVERS, span:2 }),
+          this.F('genVolt', 'Generation voltage (kV)', { no:'9' }),
+          this.F('stepVolt', 'Step-up voltage (kV)', { no:'10' })
+        ]),
+        this.H('D.11', 'Existing dedicated transmission line'),
+        this.RADIO('dedLine', 'Is there an existing dedicated transmission line?', [{ v:'no', t:'No' }, { v:'yes', t:'Yes' }])
+      ];
+      if(this.flag('dedLine') === 'yes'){
+        out.push(this.FLD([
+          this.F('dlCkt', 'Single circuit or double circuit', { options:['Single circuit', 'Double circuit'] }),
+          this.F('dlVolt', 'Voltage level (kV)'), this.F('dlLen', 'Length (km)', { kind:'num' }),
+          this.F('dlCond', 'Conductor', { ph:'e.g. ACSR Panther' })
+        ]));
+      }
+      if(this.isCaptiveGen()){
+        out.push(this.H('D.12', 'Information specific to captive generating plant'));
+        out.push(this.FLD([
+          this.F('cgIdentified', 'Generating unit(s) identified for captive use', { kind:'area' }),
+          this.F('cgNotIdentified', 'Generating unit(s) not identified for captive use', { kind:'area', opt:true })
+        ]));
+      }
+      if(this.isNonFirm()){
+        out.push(this.H('D.13', 'Information specific to plant generating non-firm power'));
+        out.push(this.NOTE('Solar and wind generating stations are treated as plants generating non-firm power, so this block is required for the prime mover you selected.', 'rule'));
+        out.push(this.FLD([
+          this.F('poolName', 'Name of pooling station, if any', { opt:true }),
+          this.F('poolNewExisting', 'Whether new or existing pooling station', { options:['', 'New', 'Existing'].map(v => ({ v, t:v || 'Select' })), opt:true }),
+          this.F('poolVolt', 'Voltage level(s) available (kV)', { opt:true })
+        ], '1fr 1fr 1fr'));
+      }
+      out.push(this.H('D.14', 'Remarks', 'Any other detail in support of the project, including the prime mover if you selected “Other”.'));
+      out.push(this.FLD([ this.F('dRemarks', 'Remarks', { kind:'area', rows:3, span:2, opt:true }) ]));
+      return out;
+    }
+
+    if(this.isDistLicensee()) return [
+      this.H('D.1 – D.3', 'Sub-station'),
+      this.FLD([
+        this.F('ssName', 'Name of sub-station', { no:'1' }),
+        this.F('ssNewExisting', 'Whether existing or proposed sub-station', { no:'2', options:['', 'Existing', 'Proposed'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('ssVillage', 'Nearest village / town'), this.F('ssDistrict', 'District'),
+        this.F('ssLat', 'Latitude'), this.F('ssLng', 'Longitude')
+      ]),
+      this.H('D.4', 'Distribution transformation capacity (MVA)'),
+      this.FLD([
+        this.F('dtcExisting', 'Existing, if any', { kind:'area', opt:true, ph:'Voltage-ratio-wise break-up (kV)' }),
+        this.F('dtcAdditional', 'Additional', { kind:'area', ph:'Voltage-ratio-wise break-up (kV)' })
+      ]),
+      this.H('D.5', 'Electric line connecting the distribution sub-station with the Intra-STS'),
+      this.FLD([
+        this.F('elExName', 'Existing line — name', { opt:true }),
+        this.F('elExCkt', 'Existing — single or double circuit', { opt:true }),
+        this.F('elExVolt', 'Existing — voltage level (kV)', { opt:true }),
+        this.F('elExLen', 'Existing — length (km)', { kind:'num', opt:true }),
+        this.F('elExCond', 'Existing — conductor', { opt:true, span:2 }),
+        this.F('elPrName', 'Proposed line — name'), this.F('elPrCkt', 'Proposed — single or double circuit'),
+        this.F('elPrVolt', 'Proposed — voltage level (kV)'), this.F('elPrLen', 'Proposed — length (km)', { kind:'num' }),
+        this.F('elPrCond', 'Proposed — conductor', { span:2 })
+      ]),
+      this.H('D.6 – D.7', 'Load'),
+      this.FLD([
+        this.F('presentLoad', 'Present load of the sub-station (in case of an existing sub-station)', { opt:true, hint:'At 33 kV for 33 kV works.' }),
+        this.F('loadGrowth', 'Expected growth in load in subsequent five years', { kind:'area', rows:3, ph:'Year-wise' })
+      ]),
+      this.H('D.8', 'Other distribution sub-station(s) from where load will be released or transferred to the proposed sub-station'),
+      this.UNITS('loadRows', '1fr 1fr 1fr 1fr 1fr', 'Add sub-station', 'No load is being transferred from another sub-station.',
+        (i) => 'Sub-station ' + (i + 1),
+        (rid) => [ this.RF('loadRows', rid, 'name', 'Name of s/s'),
+                   this.RF('loadRows', rid, 'owner', 'Name of licensee (owner)'),
+                   this.RF('loadRows', rid, 'cap', 'Capacity (MVA)', { kind:'num' }),
+                   this.RF('loadRows', rid, 'load', 'Present load (Amp)', { kind:'num' }),
+                   this.RF('loadRows', rid, 'xfer', 'Load transferred (Amp)', { kind:'num' }) ]),
+      this.H('D.9', 'Existing grid / feeding primary sub-station'),
+      this.FLD([
+        this.F('gridName', 'Name of sub-station'), this.F('gridOwner', 'Name of licensee (owner)'),
+        this.F('gridCap', 'Transformation capacity (MVA)', { kind:'num', span:2 })
+      ]),
+      this.H('D.10', 'Commissioning schedule'),
+      this.FLD([
+        this.F('csStart', 'Date of start of construction', { kind:'date' }),
+        this.F('csCod', 'Original date of commercial operation', { kind:'date' }),
+        this.F('csRcod', 'Revised date of commercial operation, if any', { kind:'date', opt:true })
+      ], '1fr 1fr 1fr')
+    ];
+
+    const premises = this.status() === 'captive_user'
+      ? 'premises (i.e. industrial establishment)' : 'premises (i.e. industrial or commercial establishment)';
+    return [
+      this.H('D.1', 'Extent of use of transmission system'),
+      this.FLD([ this.F('demExisting', 'Existing demand'), this.F('demAdditional', 'Additional demand'),
+                 this.F('demTotal', 'Total demand to be met') ], '1fr 1fr 1fr'),
+      this.H('D.2 – D.3', 'Growth and assigned power'),
+      this.FLD([
+        this.F('demGrowth', 'Expected growth in demand in subsequent five years', { kind:'area', rows:3, ph:'Year-wise' }),
+        this.F('assignedMW', 'Maximum quantum (MW) of power assigned from its captive generating plant', { kind:'num' })
+      ]),
+      this.H('D.4', 'Back-up supply from the distribution licensee of its area'),
+      this.FLD([
+        this.F('backupName', 'Name of distribution licensee', { options:['', 'NBPDCL', 'SBPDCL'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('backupLoad', 'Contracted load'), this.F('backupDate', 'Date of contract', { kind:'date' })
+      ], '1fr 1fr 1fr'),
+      this.H('D.5', 'Commercial arrangement(s) for purchase of electricity from any source other than the local DISCOM'),
+      this.FLD([ this.F('suppName', 'Name of supplier', { opt:true }), this.F('suppLoad', 'Contracted load', { opt:true }),
+                 this.F('suppDur', 'Duration of contract', { opt:true }) ], '1fr 1fr 1fr'),
+      this.H('D.6', 'Geographical location of ' + premises),
+      this.FLD([ this.F('premVillage', 'Nearest village / town'), this.F('premDistrict', 'District'),
+                 this.F('premLat', 'Latitude'), this.F('premLng', 'Longitude') ])
+    ];
+  }
+
+  // ============================================================ FORMAT-4
+  f4Tabs(){
+    const lic = this.isLicensee(), gen = this.isGenPlant();
+    return [
+      { id:'T', label:'Applicability', ref:'FORMAT-4', title:'Applicability & the Connectivity Offer being accepted',
+        sub:'Submitting this format is deemed to be the unconditional acceptance of the connectivity offer issued in FORMAT-3.' },
+      { id:'A', label:'Applicant', ref:'FORMAT-4 · A',
+        title:lic ? 'A. Details of the Intra-State Transmission Licensee' : 'A. Details of the Applicant', sub:'' },
+      { id:'B', label:'Maps', ref:'FORMAT-4 · B', title:'B. Maps and Diagrams',
+        sub:'Schedules I to III. Site plans and single line diagrams are submitted in both hard and soft copy, in AutoCAD 2000 or above.' },
+      { id:'C', label:'Connection', ref:'FORMAT-4 · C / D',
+        title:lic ? 'C. Details of Connection — Intra-State Transmission Licensee'
+                  : (gen ? 'C. Details of Connection — Generating Plant'
+                         : 'D. Details of Connection — Distribution Licensee, Captive User and Open Access Consumer'), sub:'' },
+      { id:'E', label:'Communication', ref:'FORMAT-4 · E', title:'E. Details of Connection — Data and Voice Communication',
+        sub:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' },
+      { id:'S4', label:'Sch. IV', ref:'Schedule IV', title:'Schedule IV — Rating of Generating Units',
+        sub:'Add additional sheets if the number of units is more than three.', skip:!gen },
+      { id:'S5', label:'Sch. V', ref:'Schedule V', title:'Schedule V — Generator Data for Fault (Short Circuit Studies)',
+        sub:'All data to be provided on the pu machine MVA base.', skip:!gen },
+      { id:'S6', label:'Sch. VI', ref:'Schedule VI', title:'Schedule VI — Dynamic Simulation Data',
+        sub:'Generator data, open circuit magnetization curve and excitation data, on the pu machine MVA base.', skip:!gen },
+      { id:'S7', label:'Sch. VII', ref:'Schedule VII', title:'Schedule VII — Two Winding Transformer Data', sub:'', skip:!gen },
+      { id:'S8', label:'Sch. VIII', ref:'Schedule VIII', title:'Schedule VIII — Three Winding Transformer Data',
+        sub:'Complete only if a three winding transformer is used at the interconnection.', skip:!gen },      { id:'F', label:'Certification', ref:'FORMAT-4 · F', title:'F. Any Other Information, Certification & Signature',
+        sub:'To be filled in based on the information provided by STU.' }
+    ].filter(t => !t.skip);
+  }
+
+  f4Groups(tab){
+    const lic = this.isLicensee(), gen = this.isGenPlant();
+    const dl = this.deadline();
+
+    if(tab === 'T'){
+      const out = [
+        this.H('', 'Who is furnishing this format?'),
+        this.FLD([ this.F('submittedBy', 'This FORMAT-4 is submitted by', { span:2,
+          options:[{ v:'applicant', t:'The applicant (generator, distribution licensee, captive user or open access consumer)' },
+                   { v:'transmission_licensee', t:'The intra-State transmission licensee' }],
+          hint:'The two variants ask for different connection details in Section C.', hintTone:'info' }) ])
+      ];
+      if(!lic) out.push(this.FLD([ this.F('status', 'Status of the applicant company', { span:2, options:STATUS_OPTS,
+        hint:'A generating plant completes Section C and Schedules IV to VIII. A distribution licensee, captive user or open access consumer completes Section D instead.', hintTone:'info' }) ]));
+      out.push(this.H('A.2', 'Connectivity offer being accepted'));
+      out.push(this.FLD([
+        this.F('intimationNo', 'Connectivity intimation no. (FORMAT-3)', { auto:true }),
+        this.F('intimationDate', 'Date of the connectivity offer', { kind:'date', auto:true })
+      ]));
+      out.push(this.NOTE('Submission of the information on or with FORMAT-4 is deemed to be the unconditional acceptance of the connectivity offer. It must reach STU within two (2) months of the date of the offer, unless STU indicates otherwise. ' + dl.text, dl.tone));
+      return out;
+    }
+
+    if(tab === 'A') return [
+      this.H('A.1 – A.3', 'Applicant and correspondence'),
+      this.FLD([
+        this.F('appName', lic ? 'Name of the intra-State transmission licensee' : 'Name of the applicant', { no:'1', auto:true, span:2 }),
+        this.F('intimationNo', 'Connectivity intimation no.', { no:'2 (a)', auto:true }),
+        this.F('intimationDate', 'Date', { no:'2 (b)', kind:'date', auto:true }),
+        this.F('addrCorr', 'Address for correspondence', { no:'3', kind:'area', auto:true, span:2 })
+      ]),
+      this.H('A.4', 'Prime contact person'),
+      this.FLD([
+        this.F('pcName', 'Name', { auto:true }), this.F('pcDesig', 'Designation'),
+        this.F('pcPhone', 'Phone no. (with STD code)'), this.F('pcFax', 'FAX (with STD code)', { opt:true }),
+        this.F('pcEmail', 'E-mail', { auto:true, span:2 })
+      ]),
+      this.H('A.4', 'Alternate contact person'),
+      this.FLD([
+        this.F('acName', 'Name'), this.F('acDesig', 'Designation'),
+        this.F('acPhone', 'Phone no. (with STD code)'), this.F('acFax', 'FAX (with STD code)', { opt:true }),
+        this.F('acEmail', 'E-mail', { span:2 })
+      ]),
+      this.H('A.5 – A.6', lic ? 'Status and completion of the transmission system' : 'Status and completion of the project'),
+      this.FLD([
+        this.F('statusRO', lic ? 'Status of transmission licensee' : 'Status of applicant company', { ro:true }),
+        this.F('completion', lic ? 'Estimated time of completion of the transmission system' : 'Estimated time of completion of the project',
+          { ph:'e.g. 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below.' })
+      ]),
+      this.DOCS([{ key:'pert', no:'A.6', label:'PERT chart', note:'Mandatory enclosure with the estimated time of completion.', req:true }])
+    ];
+
+    if(tab === 'B'){
+      const siteItems = lic
+        ? [{ no:'(a)', t:'The proposed location of the connection point.' }, { no:'(b)', t:'Lines.' }, { no:'(c)', t:'Sub-stations.' }]
+        : [{ no:'(a)', t:'The proposed location of the connection point.' }, { no:'(b)', t:'Generators.' },
+           { no:'(c)', t:'Transformer.' }, { no:'(d)', t:'Site building.' }];
+      return [
+        this.DOCS([
+          { key:'sch1', no:'Sch. I', label:'Survey of India topo sheet', note:lic ? 'Clearly marking the location of the proposed sites.' : 'Clearly marking the location of the proposed site.', req:true },
+          { key:'sch2', no:'Sch. II', label:lic ? 'Site plans in appropriate scale' : 'Site plan in appropriate scale', note:'Both hard and soft copy, in AutoCAD 2000 or above version.', req:true },
+          { key:'sch3', no:'Sch. III', label:'Electrical Single Line Diagram (SLD)', note:lic ? 'Of the proposed transmission lines and sub-stations, detailing all significant items of the project.' : 'Of the proposed project or facility, detailing all significant items of plant.', req:true }
+        ]),
+        this.UND('sitePlanOk', 'I confirm that the site plan submitted as Schedule II indicates the following details:', siteItems)
+      ];
+    }
+
+    if(tab === 'C'){
+      if(lic) return [
+        this.H('C', 'Details of connection — intra-State transmission licensee'),
+        this.FLD([ this.F('licConn', 'Connection details as advised by STU', { kind:'area', rows:5, span:2, ph:'Record the details provided by STU' }) ])
+      ];
+      if(gen) return [
+        this.H('C.1 – C.6', 'Generating plant'),
+        this.FLD([
+          this.F('plantType', 'Type of generating plant (hydro, thermal, gas)', { no:'1',
+            options:['Solar PV (inverter based)', 'Wind', 'Hydro', 'Thermal', 'Gas', 'Other'], span:2 }),
+          this.F('maxExport', 'Maximum export capacity required (MW)', { no:'3', kind:'num' }),
+          this.F('maxImport', 'Maximum import capacity required (MVA)', { no:'4', kind:'num', hint:'The import capacity the site will require during start-up.' }),
+          this.F('houseLoad', 'Station house load during normal operating conditions (MW / MVAR)', { no:'5' }),
+          this.F('regime', 'Expected running regime', { no:'6', ph:'e.g. base load, peaking' })
+        ])
+      ];
+      const dlOnly = this.status() === 'distribution_licensee';
+      return [
+        this.H('D.1', 'Type of demand / load'),
+        this.FLD([ dlOnly
+          ? this.F('loadTypeDl', 'Urban / rural / industrial — distribution licensee', { span:2,
+              options:['', 'Urban', 'Rural', 'Industrial', 'Mixed'].map(v => ({ v, t:v || 'Select' })) })
+          : this.F('loadTypeInd', 'Industrial / commercial, including the type of industry', { span:2,
+              ph:'e.g. electric furnace, rolling mills, manufacturing, assembly line' }) ]),
+        this.H('D.2 – D.5', 'Demand and energy requirement'),
+        this.FLD([
+          this.F('peakDemand', 'Peak requirement of demand / load in MVA, MW and MVAR', { no:'2', span:2 }),
+          this.F('peakImport', 'Peak import required in MVA, MW and MVAR', { no:'3', span:2 }),
+          this.F('monthPeak', 'Month-wise peak import required in MVA, MW and MVAR', { no:'4', kind:'area', rows:3, span:2 }),
+          this.F('monthEnergy', 'Month-wise energy requirement in MUs', { no:'5', kind:'area', rows:3, span:2 })
+        ]),
+        this.H('D.6', 'Data for fault (short circuit studies)'),
+        this.FLD([ this.F('faultSingle', 'Single phase fault level'), this.F('faultThree', 'Three phase fault level') ])
+      ];
+    }
+
+    if(tab === 'E') return [
+      this.H('E.1 – E.3', 'Data and voice communication'),
+      this.FLD([
+        this.F('gatewayType', 'Type of data gateway', { no:'1',
+          options:['', 'Remote terminal unit (RTU)', 'Sub-station automation system gateway'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('dataPorts', 'Number of data ports', { kind:'num' }),
+        this.F('protocol', 'Data communication connectivity standard followed', { no:'2', span:2,
+          options:['', 'IEC 60870-5-101 (serial port)', 'IEC 60870-5-104 (ethernet)', 'Other — as advised by SLDC'].map(v => ({ v, t:v || 'Select' })),
+          hint:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' }),
+        this.F('media', 'Communication media', { no:'3', options:['', 'Fibre optics', 'PLCC', 'Other'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('iface', 'Interface', { options:['', 'RS 232C', 'G.703', 'As per mutual agreement'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('capacity', 'Capacity', { span:2, options:['', '1200 baud', '9.6 kbps', '64 kbps', 'As per mutual agreement'].map(v => ({ v, t:v || 'Select' })) })
+      ])
+    ];
+
+    if(tab === 'S4') return [
+      this.TBL([{ t:'Parameter', align:'left' }, { t:'Unit-1', align:'center' }, { t:'Unit-2', align:'center' }, { t:'Unit-3', align:'center' }],
+        'minmax(260px,2.2fr) 1fr 1fr 1fr', '720px',
+        SCH4_ROWS.map((label, i) => ({ no:String(i + 1), label, sym:'',
+          keys:['s4_' + (i + 1) + '_u1', 's4_' + (i + 1) + '_u2', 's4_' + (i + 1) + '_u3'], ph:'' }))),
+      this.FLD([ this.F('curveDrawing', 'Drawing no. of the capability diagram attachment', { span:2 }) ]),
+      this.DOCS([{ key:'curve', label:'Capability curve', note:'Attach the capability curve referred to by the drawing number above.', req:true }])
+    ];
+
+    if(tab === 'S5') return [
+      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+        'minmax(300px,2.4fr) 1fr', '600px', this.symRows(SCH5_ROWS, 's5_'))
+    ];
+
+    if(tab === 'S6'){
+      const out = [
+        this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+          'minmax(300px,2.4fr) 1fr', '600px', this.symRows(SCH6_ROWS, 's6_')),
+        this.H('Sch. VI · 12', 'Open circuit magnetization curve'),
+        this.VRADIO('magCurve', 'Open circuit magnetization curve',
+          [{ v:'drawing', t:'Provide the drawing number' }, { v:'assume', t:'Assume — BSPTCL to apply Annexure-I' }],
+          'If the curve is not available, BSPTCL shall assume the magnetic saturation characteristics as per Annexure-I.')
+      ];
+      if(this.fv('magCurve') === 'drawing'){
+        out.push(this.FLD([ this.F('magDrawing', 'Drawing number of the magnetization curve', { span:2 }) ]));
+      } else {
+        out.push(this.FLD([
+          this.F('magS10', 'Annexure-I — magnetic saturation data S(1.0)', { opt:true, ph:'Leave blank for BSPTCL to assume' }),
+          this.F('magS12', 'Annexure-I — magnetic saturation data S(1.2)', { opt:true, ph:'Leave blank for BSPTCL to assume' })
+        ]));
+      }
+      out.push(this.H('Sch. VI · Excitation', 'Excitation data'));
+      out.push(this.RADIO('excChoice', 'Excitation model',
+        [{ v:'model', t:'Submit the control block diagram (Annexure-II model)' }, { v:'annexure', t:'Assume the model given at Annexure-III (SEXS)' }],
+        'If the excitation data is not available at this stage, BSPTCL shall assume the exciter model given at Annexure-III.'));
+      if(this.flag('excChoice') === 'model'){
+        out.push(this.FLD([ this.F('excModel', 'IEEE standard excitation model (Annexure-II)', { span:2,
+          options:[{ v:'', t:'Select model' }].concat(EXC_MODELS.map(m => ({ v:m, t:m }))) }) ]));
+        out.push(this.DOCS([{ key:'exc', no:'Sch. VI', label:'Laplace domain control block diagram', note:'Specifying all time constants and gains of the excitation system.', req:true }]));
+      }
+      return out;
+    }
+
+    if(tab === 'S7') return [
+      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+        'minmax(300px,2.4fr) 1fr', '600px', this.simpleRows(SCH7_ROWS, 's7_'))
+    ];
+
+    if(tab === 'S8') return [
+      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+        'minmax(300px,2.4fr) 1fr', '600px', this.simpleRows(SCH8_ROWS, 's8_'))
+    ];
+
+    if(tab === 'F') return [
+      this.H('F', 'Any other information as considered necessary by STU',
+        lic ? 'The intra-State transmission licensee fills in the details based on the information provided by STU.'
+            : 'The applicant fills in the details based on the information provided by STU.'),
+      this.FLD([ this.F('otherInfo', 'Details', { kind:'area', rows:4, span:2, opt:true }) ]),
+      this.UND('cert', 'This is to certify that the data submitted above pertain to the connection sought for the Intra-STS. Further, any additional data sought for processing the ' + (lic ? 'connectivity' : 'application') + ' shall be furnished.'),
+      this.H('', 'Enclosures'),
+      this.FLD([ this.F('enclList', 'List of enclosures', { kind:'area', rows:3, span:2, opt:true, ph:'List the schedules and any other documents attached' }) ]),
+      this.DOCS([{ key:'encOther', no:'Encl.', label:'Any other enclosure', note:'Optional. Copy to others as considered necessary.', req:false }])
+    ];
+
+    return [];
+  }
+
+  // ======================= Work Completion Report (Electrical Inspector)
+  wcrTabs(){
+    return [
+      { id:'T', label:'Covering letter', ref:'WCR', title:'Submission of Work Completion Report',
+        sub:'To be submitted by the applicant to the Electrical Inspector once installation is complete.' },
+      { id:'A', label:'PV Module', ref:'WCR · A', title:'A. Solar PV Module', sub:'' },
+      { id:'B', label:'Inverter', ref:'WCR · B', title:'B. Inverter', sub:'' },
+      { id:'C', label:'Cables & boxes', ref:'WCR · C – F', title:'C – F. Cables, Wiring and Distribution Boxes', sub:'' },
+      { id:'G', label:'Earthing & signs', ref:'WCR · G – H', title:'G – H. Earthing and Caution Signs', sub:'' },
+      { id:'I', label:'Declaration', ref:'WCR · I – J', title:'I – J. Switching, Inspection Date & Declaration',
+        sub:'The SRTPV system has been installed and inspected in compliance with the Electricity Act 2003 and the Indian Electricity Rules 1956 (Rule 47A).' },
+      { id:'W', label:'Work Completion Certificate', ref:'WCC', title:'Work Completion Certificate',
+        sub:'Certifying that the apparatus or electric supply lines are placed in position, properly joined, duly completed and tested, and ready for inspection / energization.' }
+    ];
+  }
+
+  wcrGroups(tab){
+    if(tab === 'T') return [
+      this.H('', 'To', 'The addressee of the report — the Electrical Inspector having jurisdiction.'),
+      this.FLD([
+        this.F('toLine1', 'Line 1 — officer / designation', { span:2 }),
+        this.F('toLine2', 'Line 2 — office', { span:2 }),
+        this.F('toLine3', 'Line 3 — address', { span:2 })
+      ]),
+      this.H('', 'Subject and reference'),
+      this.FLD([
+        this.F('subjectRO', 'Sub.', { ro:true, span:2 }),
+        this.F('refLetterNo', 'Ref. — your letter no.', { opt:true }),
+        this.F('refLetterDate', 'Dated', { kind:'date', opt:true })
+      ]),
+      this.NOTE('With reference to the above, the work of installation of the SRTPV / solar power plant system is completed, and the following information is submitted for your kind needful.', 'info')
+    ];
+
+    if(tab === 'A') return [
+      this.H('A', 'Solar PV Module'),
+      this.FLD([
+        this.F('mMake', 'Make', { no:'1' }),
+        this.F('mType', 'Type of the module', { no:'2',
+          options:['', 'Mono-crystalline', 'Mono PERC', 'Poly-crystalline', 'Bifacial', 'Thin film', 'Other'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('mEachKWp', 'Capacity of each module in KWp', { no:'3', kind:'num', ph:'e.g. 0.545' }),
+        this.F('mCount', 'No. of modules', { no:'4', kind:'num' }),
+        this.F('mSerials', 'SL. No. of modules', { no:'5', kind:'area', rows:3, span:2,
+          ph:'List or range of module serial numbers' }),
+        this.F('mTotalRO', 'Total capacity in KWp', { no:'6', ro:true, span:2,
+          hint:'Calculated as capacity of each module × number of modules.', hintTone:'info' })
+      ])
+    ];
+
+    if(tab === 'B') return [
+      this.H('B', 'Inverter'),
+      this.FLD([
+        this.F('iMake', 'Make', { no:'1' }),
+        this.F('iType', 'Type', { no:'2',
+          options:['', 'String', 'Central', 'Micro', 'Hybrid', 'Other'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('iCapacity', 'Capacity in KW / KVA', { no:'3' }),
+        this.F('iCount', 'No. of inverters', { no:'4', kind:'num' }),
+        this.F('iSerials', 'SL. No.', { no:'5', kind:'area', rows:2, span:2 })
+      ])
+    ];
+
+    if(tab === 'C') return [
+      this.H('C', 'Cables: DC'),
+      this.FLD([ this.F('dcCableMake', 'Make', { no:'1' }), this.F('dcCableSize', 'Size & type', { no:'2' }) ]),
+      this.H('D', 'AC Wiring'),
+      this.FLD([ this.F('acWireMake', 'Make', { no:'1' }), this.F('acWireSize', 'Size & type', { no:'2' }) ]),
+      this.H('E', 'DC Distribution Box'),
+      this.FLD([
+        this.F('dcbMake', 'Make', { no:'1' }), this.F('dcbSerial', 'SL. No.', { no:'2' }),
+        this.F('dcbSpd', 'DC surge protection device', { no:'3' }),
+        this.F('dcbMcb', 'MCB / isolator quantity & capacity', { no:'4' })
+      ]),
+      this.H('F', 'AC Distribution Box'),
+      this.FLD([
+        this.F('acbMake', 'Make', { no:'1' }), this.F('acbSerial', 'SL. No.', { no:'2' }),
+        this.F('acbSpd', 'DC surge protection device', { no:'3', hint:'Reproduced as printed in the format.' }),
+        this.F('acbMcb', 'MCB / isolator quantity & capacity', { no:'4' })
+      ])
+    ];
+
+    if(tab === 'G'){
+      const r = parseFloat(this.fv('earthResistance'));
+      const bad = !isNaN(r) && r >= 5;
+      return [
+        this.H('G', 'Earthing'),
+        this.FLD([
+          this.F('earthResistance', 'Earth resistance (less than 5 ohms)', { no:'1', kind:'num', ph:'e.g. 2.4',
+            hint:bad ? 'Must be less than 5 ohms — the installation cannot be certified at ' + r + ' ohms.' : 'Measured value in ohms; the rule requires less than 5.',
+            hintTone:bad ? 'warn' : 'info' }),
+          this.F('earthFlatSize', 'Size of the earth flat', { no:'2', ph:'e.g. 25 × 3 mm GI flat' })
+        ]),
+        this.H('G.3', 'Three separate earthing points'),
+        this.FLD([
+          this.F('earthModules', 'Modules & DC surge arresters', { no:'1' }),
+          this.F('earthInverter', 'Inverter & AC surge arresters', { no:'2' }),
+          this.F('earthLightning', 'Lightening arresters', { no:'3' })
+        ], '1fr 1fr 1fr'),
+        this.H('H', 'Caution Signs'),
+        this.FLD([
+          this.F('cautionPanels', 'Panels', { no:'1', options:PROVIDED }),
+          this.F('cautionInverters', 'Inverters', { no:'2', options:PROVIDED }),
+          this.F('cautionDb', 'DC / AC distribution box', { no:'3', options:PROVIDED })
+        ], '1fr 1fr 1fr')
+      ];
+    }
+
+    if(tab === 'I') return [
+      this.RADIO('manualAutoSwitch', 'I. Provision of manual and automatic switch',
+        [{ v:'yes', t:'Yes' }, { v:'no', t:'No' }]),
+      this.H('J', 'Installation inspection date'),
+      this.FLD([ this.F('inspectionDate', 'Installation inspection date', { kind:'date' }) ]),
+      this.UND('wcrCert', 'The SRTPV system has been installed and inspected in compliance with the Electricity Act 2003 and the Indian Electricity Rules 1956 (Rule 47A). I certify that the above SRTPV system has been installed by me and the equipment used complies with the technical and safety standards.'),
+      this.H('', 'Applicant signature'),
+      this.FLD([ this.F('applicantSignName', 'Name', { span:2 }) ]),
+      this.H('', 'System installer — signature & seal'),
+      this.FLD([
+        this.F('installerFirm', 'Name of the firm'),
+        this.F('installerSupervisor', 'Electrical supervisor'),
+        this.F('installerContractor', 'Electrical contractor')
+      ], '1fr 1fr 1fr')
+    ];
+
+    if(tab === 'W') return [
+      this.NOTE('This is to certify that the following apparatus or electric supply lines are placed in position, properly joined, duly completed and tested, and ready for inspection / energization.', 'rule'),
+      this.FLD([
+        this.F('wccInstallation', 'Name of the installations', { no:'1', auto:true, span:2 }),
+        this.F('wccOwner', 'Name of the owner', { no:'2', auto:true, span:2 }),
+        this.F('wccEquipment', 'Details of the equipment / apparatus', { no:'3', kind:'area', rows:3, span:2 }),
+        this.F('wccTests', 'Detail of the tests conducted', { no:'4', kind:'area', rows:3, span:2 }),
+        this.F('wccContractor', 'Name & license details of the electrical contractor', { no:'5', kind:'area', rows:2, span:2 }),
+        this.F('wccSupervisor', 'Name & license details of the electrical supervisor', { no:'6', kind:'area', rows:2, span:2 })
+      ]),
+      this.UND('wccCert', 'The above work has been done as per the provisions of the Indian Electricity Rules 1956 and is carried out by the licensed electrical contractor under the direct supervision of the person holding a Certificate of Competency, and by persons holding a Work Permit.'),
+      this.H('', 'Signatures'),
+      this.FLD([
+        this.F('wccSignContractor', 'Signature of electrical contractor — name'),
+        this.F('wccSignOwner', 'Signature of owner — name')
+      ]),
+      this.DOCS([
+        { key:'wccSigned', no:'Encl.', label:'Signed & sealed Work Completion Certificate', note:'Scanned copy bearing the seal of the licensed electrical contractor.', req:true },
+        { key:'wcrTest', no:'Encl.', label:'Test reports', note:'Earth resistance, insulation resistance and polarity test reports.', req:false }
+      ])
+    ];
+
+    return [];
+  }
+
+  // =============================== NOC — Department of Water Resources
+  wrTabs(){
+    return [
+      { id:'A', label:'Project & site', ref:'WRD · NOC', title:'Project and Site Details',
+        sub:'The project for which the no-objection of the Department of Water Resources is sought.' },
+      { id:'B', label:'Water body', ref:'WRD · NOC', title:'Water Body for which Clearance is Required', sub:'' },
+      { id:'C', label:'Declaration', ref:'WRD · NOC', title:'Declaration, Enclosures & Signature', sub:'' }
+    ];
+  }
+
+  wrGroups(tab){
+    if(tab === 'A') return [
+      this.H('', 'Applicant and project'),
+      this.FLD([
+        this.F('appName', 'Name of the applicant', { auto:true, span:2 }),
+        this.F('projectName', 'Name of the project', { auto:true }),
+        this.F('projectCap', 'Capacity', { auto:true })
+      ]),
+      this.H('', 'Site'),
+      this.FLD([
+        this.F('district', 'District', { options:[{ v:'', t:'Select' }].concat(BIHAR_DISTRICTS.map(d => ({ v:d, t:d }))) }),
+        this.F('projectLocation', 'Project location', { kind:'area', rows:2, span:2,
+          ph:'Village / block / khasra or plot reference of the project site' })
+      ])
+    ];
+
+    if(tab === 'B'){
+      const body = this.fv('waterBody');
+      const isCanal = body === 'Canal', isRiver = body === 'River';
+      return [
+        this.FLD([
+          this.F('waterBody', 'Water body for which clearance is required', { span:2,
+            options:['', 'Canal', 'Reservoir', 'Pond', 'River'].map(v => ({ v, t:v || 'Select' })),
+            hint:'Determines which of the two names below is mandatory.', hintTone:'info' })
+        ]),
+        this.FLD([
+          this.F('riverName', 'Name of river', { opt:!isRiver,
+            hint:isRiver ? 'Mandatory — the clearance is sought for a river.' : 'The river the canal or water body draws from, if applicable.',
+            hintTone:isRiver ? 'info' : '' }),
+          this.F('canalName', 'Name of canal for which clearance is required', { opt:!isCanal,
+            hint:isCanal ? 'Mandatory — the clearance is sought for a canal.' : 'Leave blank if the clearance is not for a canal.',
+            hintTone:isCanal ? 'info' : '' })
+        ]),
+        this.FLD([
+          this.F('distanceToBody', 'Distance of the project boundary from the water body (m)', { kind:'num', opt:true })
+        ]),
+        this.NOTE('The Department of Water Resources issues the no-objection for projects that cross, abut or draw from a canal, reservoir, pond or river. Attach the site plan marking the water body and the project boundary in the next section.', 'info')
+      ];
+    }
+
+    if(tab === 'C') return [
+      this.UND('wrDeclared', 'I declare that the particulars given above are true and correct, that the project will not obstruct, encroach upon or damage the canal, reservoir, pond or river identified, and that I shall comply with any conditions imposed by the Department of Water Resources.'),
+      this.H('', 'Enclosures'),
+      this.DOCS([
+        { key:'wrPlan', no:'1.', label:'Site plan marking the water body and the project boundary', note:'Showing the distance from the canal, reservoir, pond or river.', req:true },
+        { key:'wrLand', no:'2.', label:'Land ownership / lease document', note:'For the project parcel adjoining the water body.', req:true },
+        { key:'wrOther', no:'3.', label:'Any other supporting document', note:'Optional.', req:false }
+      ])
+    ];
+
+    return [];
+  }
+
+  // ------------------------------------------------------------ dispatch
+  tabsFor(kind){
+    return kind === 'F2' ? this.f2Tabs() : kind === 'F4' ? this.f4Tabs()
+         : kind === 'WCR' ? this.wcrTabs() : this.wrTabs();
+  }
+  groupsForKind(kind, tab){
+    return kind === 'F2' ? this.f2Groups(tab) : kind === 'F4' ? this.f4Groups(tab)
+         : kind === 'WCR' ? this.wcrGroups(tab) : this.wrGroups(tab);
+  }
+  signTabFor(kind){ return kind === 'F2' ? 'G' : kind === 'F4' ? 'F' : kind === 'WR' ? 'C' : null; }
+
+  // ------------------------------------------------------- completeness
+  tabComplete(kind, tab){
+    const groups = this.groupsForKind(kind, tab);
+    let ok = true;
+    groups.forEach(g => {
+      if(g.isFields) g.fields.forEach(f => { if(f.required && String(f.value).trim() === '') ok = false; });
+      if(g.isDocs) g.rows.forEach(d => { if(d.required && !d.hasFile) ok = false; });
+      if(g.isUndertaking && !g.checked) ok = false;
+      if(g.isUnits && g.rows.length === 0 && !g.isOptionalList) { /* empty repeating lists are allowed */ }
+    });
+    // the generic signature block lives on the last data tab, where the format uses one
+    const signTab = this.signTabFor(kind);
+    if(signTab && tab === signTab){
+      ['signPlace', 'signName', 'signDesig'].forEach(k => { if(String(this.fv(k)).trim() === '') ok = false; });
+    }
+    return ok;
+  }
+  missingTabs(kind, tabs){
+    return tabs.filter(t => !this.tabComplete(kind, t.id)).map(t => t.label);
+  }
+
+  // ==========================================================================
   renderVals(){
     const S = this.state;
     const sel = S.selected;
@@ -446,72 +2032,158 @@ class Component extends DCLogic {
     const rowPad = compact ? '12px 18px' : '16px 18px';
 
     const departments = DEPARTMENTS.map(d => ({
-      label: d.label,
-      name: d.name,
-      countText: d.services.length + (d.services.length===1 ? ' service' : ' services'),
-      services: d.services.map(s => {
+      label:d.label, name:d.name,
+      countText:d.services.length + (d.services.length === 1 ? ' service' : ' services'),
+      services:d.services.map(s => {
         const checked = !!sel[s.id];
         const doc = S.docs[s.id] || {};
         const hasProof = !!(doc.proof || (doc.receipt && doc.receipt.trim()));
-        return {
-          name: s.name, sla: s.sla, authority: s.authority, checked,
-          onToggle: () => this.toggle(s.id),
-          rowPad,
-          rowBg: (checked && highlightSelected) ? '#f3faf6' : '#fff',
-          boxBorder: checked ? '#1e9b5f' : '#cdd6d0',
-          boxBg: checked ? '#1e9b5f' : '#fff',
-          // expansion
-          supportLabel: doc.support ? ('✓ ' + doc.support) : 'Upload supporting doc',
-          supportBorder: doc.support ? '#1e9b5f' : '#1e7a4d',
-          supportColor: '#1e7a4d',
-          proofLabel: doc.proof ? ('✓ ' + doc.proof) : 'Upload Payment Proof *',
-          proofBorder: hasProof ? '#1e9b5f' : '#e05c1a',
-          proofColor: hasProof ? '#1e7a4d' : '#e05c1a',
-          receipt: doc.receipt || '',
-          onSupport: (e) => this.onFile(s.id, 'support', 5, e),
-          onProof: (e) => this.onFile(s.id, 'proof', 5, e),
-          onReceipt: (e) => this.setDoc(s.id, { receipt: e.target.value }),
-          onChallan: () => alert('Challan PDF for ' + s.name + ' would download here (demo).')
+        const row = {
+          name:s.name, sla:s.sla, authority:s.authority, checked,
+          onToggle:() => this.toggle(s.id), rowPad,
+          rowBg:(checked && highlightSelected) ? '#f3faf6' : '#fff',
+          boxBorder:checked ? '#1e9b5f' : '#cdd6d0',
+          boxBg:checked ? '#1e9b5f' : '#fff',
+          supportLabel:doc.support ? ('✓ ' + doc.support) : 'Upload supporting doc',
+          supportBorder:doc.support ? '#1e9b5f' : '#1e7a4d', supportColor:'#1e7a4d',
+          proofLabel:doc.proof ? ('✓ ' + doc.proof) : 'Upload Payment Proof *',
+          proofBorder:hasProof ? '#1e9b5f' : '#e05c1a',
+          proofColor:hasProof ? '#1e7a4d' : '#e05c1a',
+          receipt:doc.receipt || '',
+          onSupport:(e) => this.onFile(s.id, 'support', 5, e),
+          onProof:(e) => this.onFile(s.id, 'proof', 5, e),
+          onReceipt:(e) => this.setDoc(s.id, { receipt:e.target.value }),
+          onChallan:() => alert('Challan PDF for ' + s.name + ' would download here (demo).'),
+          showFeeCard:!s.noFee,
+          hasForm:false
         };
+        if(s.form) Object.assign(row, this.formRow(s));
+        return row;
       })
     }));
 
     const selIds = Object.keys(sel);
     const count = selIds.length;
     const selectedSvcs = ALL_SERVICES.filter(s => sel[s.id]);
-    const maxSla = selectedSvcs.reduce((m,s) => Math.max(m, s.sla), 0);
-    const allProofs = count>0 && selIds.every(id => this.proofReady(id));
-    const canSubmit = count>0 && allProofs;
+    const maxSla = selectedSvcs.reduce((m, s) => Math.max(m, s.sla), 0);
+    const proofIds = selIds.filter(id => !this.svcById(id).noFee);
+    const allProofs = proofIds.every(id => this.proofReady(id));
+    const pendingForms = selectedSvcs.filter(s => s.form && !this.fm(s.id).done);
+    const canSubmit = count > 0 && allProofs && pendingForms.length === 0;
 
-    const submittedRows = selectedSvcs.map((s,i) => ({
-      name: s.name, abbr: s.abbr, sla: s.sla,
-      trackId: 'CLR/2026/' + String(4251 + i)
+    const submittedRows = selectedSvcs.map((s, i) => ({
+      name:s.name, abbr:s.abbr, sla:s.sla, trackId:'CLR/2026/' + String(4251 + i)
     }));
 
     return {
-      isForm: S.screen==='form',
-      isSuccess: S.screen==='success',
-
-      showHowItWorks: this.props.showHowItWorks ?? true,
+      isForm:S.screen === 'form', isSuccess:S.screen === 'success',
+      showHowItWorks:this.props.showHowItWorks ?? true,
       departments,
 
-      selectedCount: count,
-      hasSelection: count>0,
-      maxSla,
-      showProofWarn: count>0 && !allProofs,
-      submitDisabled: !canSubmit,
-      submitBg: canSubmit ? '#1e9b5f' : '#a9c6b7',
-      submitCursor: canSubmit ? 'pointer' : 'not-allowed',
-      onCancel: () => this.cancel(),
-      onSubmit: () => this.submit(),
+      selectedCount:count, hasSelection:count > 0, maxSla,
+      showProofWarn:proofIds.length > 0 && !allProofs,
+      showFormWarn:pendingForms.length > 0,
+      formWarnText:'Complete the statutory form for ' + pendingForms.map(s => s.name).join(', ') + ' before submitting.',
+      submitDisabled:!canSubmit,
+      submitBg:canSubmit ? '#1e9b5f' : '#a9c6b7',
+      submitCursor:canSubmit ? 'pointer' : 'not-allowed',
+      onCancel:() => this.cancel(), onSubmit:() => this.submit(),
 
-      submittedCount: count,
-      submittedRows,
-      onTrack: () => { window.location.href = 'Application Track.dc.html'; },
-      onBackDash: () => this.backDash()
+      submittedCount:count, submittedRows,
+      onTrack:() => { window.location.href = 'Application Track.dc.html'; },
+      onBackDash:() => this.backDash()
+    };
+  }
+
+  // builds every form-related value for one clearance row
+  formRow(s){
+    const id = s.id, kind = s.form;
+    this._cur = id;
+    const f = this.fm(id);
+
+    // read-only mirrors
+    f.vals.appNoRO = 'BSPTCL/CONN/2026/0417';
+    f.vals.appDateRO = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+    f.vals.statusRO = kind === 'F4' && this.isLicensee()
+      ? 'Intra-State transmission licensee'
+      : ((STATUS_OPTS.find(o => o.v === this.status()) || {}).t || '');
+    if(kind === 'WCR'){
+      const each = parseFloat(f.vals.mEachKWp) || 0, n = parseFloat(f.vals.mCount) || 0;
+      f.vals.mTotalRO = (each && n) ? String(Math.round(each * n * 1000) / 1000) : '';
+    }
+
+    const tabs = this.tabsFor(kind);
+    const ids = tabs.map(t => t.id);
+    const cur = ids.includes(f.tab) ? f.tab : ids[0];
+    const idx = Math.max(0, ids.indexOf(cur));
+    const t = tabs[idx] || tabs[0];
+    const missing = this.missingTabs(kind, tabs);
+    const allTabsDone = missing.length === 0;
+    const onLast = idx === ids.length - 1;
+    const signTab = this.signTabFor(kind);
+    const meta = FORM_META[kind];
+
+    const status = f.done ? { text:'Form complete', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', headBg:'#f3faf6', bdc:'#bfe3cd' }
+      : (allTabsDone ? { text:'Ready to complete', bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', headBg:'#f6f8f7', bdc:'#c8d8cf' }
+                     : { text:missing.length + ' section(s) pending', bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', headBg:'#fffcf7', bdc:'#f0d6ac' });
+
+    return {
+      hasForm:true,
+      formRef:meta.ref, formTitle:meta.title, formSub:meta.sub,
+      formOpen:f.open,
+      onToggleForm:() => this.patchForm(id, { open:!f.open }),
+      formToggleLabel:f.open ? 'Hide form' : (f.done ? 'Review form' : 'Open form'),
+      formStatusText:status.text, formPillBg:status.bg, formPillBd:status.bd, formPillFg:status.fg,
+      formHeadBg:status.headBg, formBd:status.bdc,
+
+      tabs:tabs.map((x, i) => {
+        const active = x.id === cur;
+        const done = this.tabComplete(kind, x.id);
+        return {
+          label:x.label, onClick:() => this.patchForm(id, { tab:x.id }),
+          bg:active ? '#fff' : '#eef1ef', bd:active ? '#e3e9e6' : 'transparent',
+          bbd:active ? '#fff' : '#e3e9e6',
+          fg:active ? '#0f2319' : '#5b6b62', fw:active ? '700' : '500',
+          done
+        };
+      }),
+
+      sectionTitle:t.title, sectionRef:t.ref,
+      showSectionSub:!!t.sub, sectionSub:t.sub,
+      groups:this.groupsForKind(kind, cur),
+
+      showSignOff:!!signTab && cur === signTab,
+      signFields:[
+        this.F('signPlace', 'Place'),
+        this.F('signName', 'Authorised signatory of the applicant'),
+        this.F('signDesig', 'Designation')
+      ].map(x => ({ label:x.label, type:x.type, value:x.value, onChange:x.onChange })),
+
+      showFormConfirm:onLast,
+      formConfirmed:f.confirmed,
+      onFormConfirm:(e) => this.patchForm(id, { confirmed:e.target.checked, done:e.target.checked && allTabsDone }),
+      confirmBd:f.confirmed ? '#bfe3cd' : '#f0d6ac',
+      confirmBg:f.confirmed ? '#f7fcf9' : '#fef3e3',
+      confirmText:meta.confirm,
+
+      showPrint:onLast,
+      onPrintForm:() => window.print(),
+
+      prevDisabled:idx === 0,
+      prevColor:idx === 0 ? '#9aa9a1' : '#1c2530',
+      prevOpacity:idx === 0 ? 0.5 : 1,
+      onPrevSection:() => { if(idx > 0) this.patchForm(id, { tab:ids[idx - 1] }); },
+      onNextSection:() => {
+        if(onLast){ if(allTabsDone && f.confirmed) this.patchForm(id, { done:true, open:false }); }
+        else this.patchForm(id, { tab:ids[idx + 1] });
+      },
+      nextLabel:onLast ? 'Mark form as complete →' : 'Next section →',
+      nextDisabled:onLast && !(allTabsDone && f.confirmed),
+      nextOpacity:(onLast && !(allTabsDone && f.confirmed)) ? 0.5 : 1
     };
   }
 }
+
 </script>
   <script>
     document.addEventListener('click', function (e) {
