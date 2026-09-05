@@ -341,7 +341,7 @@
                                     <sc-for list="{{ s.tabs }}" as="t" hint-placeholder-count="9">
                                       <button onClick="{{ t.onClick }}"
                                         style="flex:none;display:flex;align-items:center;gap:7px;border:1px solid {{ t.bd }};border-bottom:1px solid {{ t.bbd }};background:{{ t.bg }};color:{{ t.fg }};font-weight:{{ t.fw }};font-size:12px;padding:8px 13px;border-radius:8px 8px 0 0;margin-bottom:-1px;white-space:nowrap;">
-{{ t.label }}
+                                        {{ t.label }}
                                       </button>
                                     </sc-for>
                                   </div>
@@ -426,7 +426,8 @@
                                                     style="width:100%;border:1px solid {{ f.bd }};border-radius:8px;padding:8px 10px;font-size:12.5px;color:{{ f.fg }};background:{{ f.bg }};outline:none;">
                                                 </sc-if>
                                                 <sc-if value="{{ f.hasHint }}" hint-placeholder-val="{{ false }}">
-                                                  <div style="font-size:10.5px;color:{{ f.hintColor }};line-height:1.6;">
+                                                  <div
+                                                    style="font-size:10.5px;color:{{ f.hintColor }};line-height:1.6;">
                                                     {{ f.hint }}</div>
                                                 </sc-if>
                                               </div>
@@ -443,7 +444,8 @@
                                                 <label
                                                   style="display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;color:#1c2530;"><input
                                                     type="radio" name="{{ g.name }}" checked="{{ r.checked }}"
-                                                    onChange="{{ r.onChange }}" style="accent-color:#1e9b5f;"> {{ r.label
+                                                    onChange="{{ r.onChange }}" style="accent-color:#1e9b5f;"> {{
+                                                  r.label
                                                   }}</label>
                                               </sc-for>
                                             </div>
@@ -566,8 +568,8 @@
                                                     <div
                                                       style="font-size:12.5px;font-weight:600;color:#1c2530;line-height:1.5;">
                                                       {{ d.label }}<sc-if value="{{ d.required }}"
-                                                        hint-placeholder-val="{{ true }}"><span
-                                                          style="color:#dc3545;"> *</span></sc-if></div>
+                                                        hint-placeholder-val="{{ true }}"><span style="color:#dc3545;">
+                                                          *</span></sc-if></div>
                                                     <div
                                                       style="font-size:10.5px;color:#8e9e97;margin-top:3px;line-height:1.6;">
                                                       {{ d.note }}</div>
@@ -590,7 +592,8 @@
                                                         <path d="M5 20h14"></path>
                                                       </svg>
                                                       Upload
-                                                      <input type="file" onChange="{{ d.onFile }}" style="display:none;">
+                                                      <input type="file" onChange="{{ d.onFile }}"
+                                                        style="display:none;">
                                                     </label>
                                                   </sc-if>
                                                 </div>
@@ -600,8 +603,7 @@
                                         </sc-if>
 
                                         <sc-if value="{{ g.isTable }}" hint-placeholder-val="{{ false }}">
-                                          <div
-                                            style="border:1px solid #e3e9e6;border-radius:10px;overflow-x:auto;">
+                                          <div style="border:1px solid #e3e9e6;border-radius:10px;overflow-x:auto;">
                                             <div
                                               style="display:grid;grid-template-columns:{{ g.cols }};min-width:{{ g.minWidth }};">
                                               <sc-for list="{{ g.head }}" as="h" hint-placeholder-count="4">
@@ -616,7 +618,8 @@
                                                     <span
                                                       style="font-family:monospace;font-size:10px;color:#9aa9a1;font-weight:600;flex:none;">{{
                                                       c.no }}</span>
-                                                    <span style="font-size:12px;color:#1c2530;line-height:1.55;flex:1;">{{
+                                                    <span
+                                                      style="font-size:12px;color:#1c2530;line-height:1.55;flex:1;">{{
                                                       c.t }}</span>
                                                     <sc-if value="{{ c.hasSym }}" hint-placeholder-val="{{ false }}">
                                                       <span
@@ -629,6 +632,28 @@
                                                       placeholder="{{ c.placeholder }}"
                                                       style="width:100%;border:1px solid #cdd6d0;border-radius:7px;padding:6px 9px;font-size:12px;color:#1c2530;background:#fff;outline:none;">
                                                   </sc-if>
+                                                  <sc-if value="{{ c.isFile }}" hint-placeholder-val="{{ false }}">
+                                                    <sc-if value="{{ c.hasFile }}" hint-placeholder-val="{{ false }}">
+                                                      <span
+                                                        style="font-size:11px;color:#1e7a4d;font-weight:600;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">&#10003;
+                                                        {{ c.file }}</span>
+                                                      <button onClick="{{ c.onClear }}"
+                                                        style="background:none;border:none;color:#b4453a;font-size:11px;font-weight:600;padding:0;">Remove</button>
+                                                    </sc-if>
+                                                    <sc-if value="{{ c.noFile }}" hint-placeholder-val="{{ true }}">
+                                                      <label
+                                                        style="display:inline-flex;align-items:center;gap:6px;border:1.5px solid #1e7a4d;color:#1e7a4d;background:#fff;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">
+                                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                          stroke="currentColor" stroke-width="2.4" style="flex:none;">
+                                                          <path d="M12 16V4M7 9l5-5 5 5"></path>
+                                                          <path d="M5 20h14"></path>
+                                                        </svg>
+                                                        Upload
+                                                        <input type="file" onChange="{{ c.onFile }}"
+                                                          style="display:none;">
+                                                      </label>
+                                                    </sc-if>
+                                                  </sc-if>
                                                 </div>
                                               </sc-for>
                                             </div>
@@ -638,8 +663,7 @@
                                         <sc-if value="{{ g.isUndertaking }}" hint-placeholder-val="{{ false }}">
                                           <div
                                             style="border:1px solid {{ g.uBd }};background:{{ g.uBg }};border-radius:10px;padding:14px 16px;">
-                                            <label
-                                              style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+                                            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
                                               <input type="checkbox" checked="{{ g.checked }}"
                                                 onChange="{{ g.onToggle }}"
                                                 style="accent-color:#1e9b5f;margin-top:3px;flex:none;width:15px;height:15px;">
@@ -669,8 +693,7 @@
                                     <!-- sign-off -->
                                     <sc-if value="{{ s.showSignOff }}" hint-placeholder-val="{{ false }}">
                                       <div style="border-top:1px dashed #cdd6d0;padding-top:17px;margin-top:2px;">
-                                        <div
-                                          style="font-size:12.5px;font-weight:700;color:#1e9b5f;margin-bottom:10px;">
+                                        <div style="font-size:12.5px;font-weight:700;color:#1e9b5f;margin-bottom:10px;">
                                           Signature block</div>
                                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;">
                                           <sc-for list="{{ s.signFields }}" as="f" hint-placeholder-count="3">
@@ -724,60 +747,63 @@
                             </sc-if>
 
                             <sc-if value="{{ s.showFeeCard }}" hint-placeholder-val="{{ true }}">
-                            <div
-                              style="border:1px solid #c8d8cf;background:#fff;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;">
-                              <div>
-                                <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">Supporting
-                                  Document <span style="font-weight:500;color:#8e9e97;">(optional, max 5 MB)</span>
-                                </div>
-                                <label
-                                  style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.supportBorder }};color:{{ s.supportColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
-                                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.2" style="flex:none;">
-                                    <path d="M12 16V4M7 9l5-5 5 5"></path>
-                                    <path d="M5 20h14"></path>
-                                  </svg>
-                                  <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{
-                                    s.supportLabel }}</span>
-                                  <input type="file" style="display:none;" accept=".pdf,.doc,.docx,image/*"
-                                    onChange="{{ s.onSupport }}">
-                                </label>
-                              </div>
-                              <div>
-                                <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">Fee Payment
-                                  Proof <span style="font-weight:500;color:#b75000;">(required, offline challan)</span>
-                                </div>
-                                <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-                                  <button onClick="{{ s.onChallan }}"
-                                    style="display:inline-flex;align-items:center;gap:8px;border:1px solid #cdd6d0;background:#fff;color:#1c2530;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                      stroke-width="2.2">
-                                      <path d="M12 4v12M7 11l5 5 5-5"></path>
-                                      <path d="M5 20h14"></path>
-                                    </svg>
-                                    Download Challan
-                                  </button>
+                              <div
+                                style="border:1px solid #c8d8cf;background:#fff;border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:16px;">
+                                <div>
+                                  <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">
+                                    Supporting
+                                    Document <span style="font-weight:500;color:#8e9e97;">(optional, max 5 MB)</span>
+                                  </div>
                                   <label
-                                    style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.proofBorder }};color:{{ s.proofColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
+                                    style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.supportBorder }};color:{{ s.supportColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                       stroke-width="2.2" style="flex:none;">
                                       <path d="M12 16V4M7 9l5-5 5 5"></path>
                                       <path d="M5 20h14"></path>
                                     </svg>
                                     <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{
-                                      s.proofLabel }}</span>
-                                    <input type="file" style="display:none;" accept=".pdf,image/*"
-                                      onChange="{{ s.onProof }}">
+                                      s.supportLabel }}</span>
+                                    <input type="file" style="display:none;" accept=".pdf,.doc,.docx,image/*"
+                                      onChange="{{ s.onSupport }}">
                                   </label>
                                 </div>
-                                <div style="margin-top:11px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
-                                  <span style="font-size:12px;color:#6b7c72;">or enter receipt no.</span>
-                                  <input value="{{ s.receipt }}" onChange="{{ s.onReceipt }}"
-                                    placeholder="Challan / receipt number"
-                                    style="border:1px solid #cdd6d0;border-radius:7px;padding:6px 10px;font-size:12.5px;width:230px;max-width:100%;outline:none;background:#fff;color:#1c2530;">
+                                <div>
+                                  <div style="font-size:13px;font-weight:700;color:#1e7a4d;margin-bottom:8px;">Fee
+                                    Payment
+                                    Proof <span style="font-weight:500;color:#b75000;">(required, offline
+                                      challan)</span>
+                                  </div>
+                                  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                                    <button onClick="{{ s.onChallan }}"
+                                      style="display:inline-flex;align-items:center;gap:8px;border:1px solid #cdd6d0;background:#fff;color:#1c2530;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;">
+                                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2">
+                                        <path d="M12 4v12M7 11l5 5 5-5"></path>
+                                        <path d="M5 20h14"></path>
+                                      </svg>
+                                      Download Challan
+                                    </button>
+                                    <label
+                                      style="display:inline-flex;align-items:center;gap:8px;border:2px solid {{ s.proofBorder }};color:{{ s.proofColor }};background:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:700;cursor:pointer;max-width:100%;">
+                                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" style="flex:none;">
+                                        <path d="M12 16V4M7 9l5-5 5 5"></path>
+                                        <path d="M5 20h14"></path>
+                                      </svg>
+                                      <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{
+                                        s.proofLabel }}</span>
+                                      <input type="file" style="display:none;" accept=".pdf,image/*"
+                                        onChange="{{ s.onProof }}">
+                                    </label>
+                                  </div>
+                                  <div style="margin-top:11px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;">
+                                    <span style="font-size:12px;color:#6b7c72;">or enter receipt no.</span>
+                                    <input value="{{ s.receipt }}" onChange="{{ s.onReceipt }}"
+                                      placeholder="Challan / receipt number"
+                                      style="border:1px solid #cdd6d0;border-radius:7px;padding:6px 10px;font-size:12.5px;width:230px;max-width:100%;outline:none;background:#fff;color:#1c2530;">
+                                  </div>
                                 </div>
                               </div>
-                            </div>
                             </sc-if>
                           </div>
                         </sc-if>
@@ -868,24 +894,22 @@ const STATUS_OPTS = [
 const PRIME_MOVERS = [
   'Solar PV (inverter based) — other', 'Wind turbine', 'Hydro turbine',
   'Steam turbine (coal)', 'Steam turbine (lignite)', 'Steam turbine (multi-fuel)',
-  'Gas turbine', 'Diesel engine', 'Other (specify in remarks)'
+  'Hybrid', 'Other (specify in remarks)'
 ];
 
 const ACTS_GEN = [
   'Site identification and land acquisition', 'Environmental clearance', 'Forest clearance',
-  'Fuel arrangements', 'Water linkage',
+  'Water linkage',
   'Order for supply of plant and machinery or award of EPC contract',
-  'Dedicated transmission line', 'Useful life of generating station', 'Commissioning schedule',
+  'Dedicated transmission line', 'Commissioning schedule',
   'Commercial arrangement(s) for purchase of electricity',
   'Information specific to captive generating plant',
-  'Information specific to plant generating non-firm power',
-  'Other clearances', 'Any other relevant information required by STU'
+  'Information specific to plant generating non-firm power'
 ];
 const ACTS_LINE = [
   'Site identification and land acquisition', 'Environmental clearance', 'Forest clearance',
   'Order for supply of plant and machinery or award of EPC contract',
-  'Useful life of premises (commercial or industrial establishment) of captive user or open access consumer',
-  'Commissioning schedule', 'Other clearances', 'Any other relevant information required by STU'
+  'Commissioning schedule'
 ];
 
 const ACT_STATES = [
@@ -924,12 +948,7 @@ const EXC_MODELS = [
 
 const SCH4_ROWS = [
   'Unit rating (MVA)',
-  'Normal max. continuous generation capacity at normal operating temperature (MW)',
-  'Normal max. continuous export capacity at normal operating temperature (MW)',
-  'Maximum (peaking) generating capacity at min. ambient air temperature (MW)',
-  'Maximum (peaking) export capacity at min. ambient air temperature (MW)',
-  'Minimum continuous generating capacity (MW)', 'Minimum export generating capacity (MW)',
-  'Normal maximum lagging MVAR at rated MW output', 'Normal maximum leading MVAR at rated MW output'
+  'Minimum continuous generating capacity (MW)', 'Minimum export generating capacity (MW)'
 ];
 const SCH5_ROWS = [
   ['Direct axis transient reactance (unsaturated)', 'Xd′'],
@@ -1003,7 +1022,7 @@ const CARRIED = {
 function newForm(kind){
   const base = {
     open:true, tab:'T', confirmed:false, done:false, uc:1,
-    lists:{ existUnits:[], addUnits:[{ id:'u1' }], loadRows:[] },
+    lists:{ existUnits:[], addUnits:[{ id:'u1' }], loadRows:[], sch4Units:[{ id:'u1' }] },
     acts:{}, files:{},
     flags:{ existingConn:'no', dedLine:'no', oaReq:'yes', oaExtent:'full',
             und1:false, und2:false, und3:false, sitePlanOk:false, cert:false, excChoice:'annexure',
@@ -1012,7 +1031,7 @@ function newForm(kind){
   };
   if(kind === 'F2'){
     base.vals = Object.assign({}, CARRIED, {
-      status:'generator', addrReg:'',
+      status:'generator', generatorStatusDetail:'', addrReg:'',
       pcLandline:'0612-2234567', pcFax:'',
       acName:'', acDesig:'', acLandline:'', acFax:'', acMobile:'', acEmail:'',
       capMW:'0.25', voltage:'', connDate:'',
@@ -1021,7 +1040,8 @@ function newForm(kind){
       genName:'Rajeev Industrial Solar 250 kW', genNewExisting:'New',
       genOwner:'M/s. Rajeev Industrial Solar Pvt. Ltd.', genCEA:'No',
       locVillage:'Patliputra', locDistrict:'Patna', locState:'Bihar', locLat:'25.6120', locLng:'85.0980',
-      primeMover:'Solar PV (inverter based) — other', genVolt:'', stepVolt:'',
+      primeMover:'Solar PV (inverter based) — other', genVolt:'', stepVolt:'', usefulLife:'',
+      statusByApplicant:'', usefulLifePremises:'', otherClearances:'',
       feeBank:'', feeType:'Demand Draft', feeNo:'', feeDate:'', feeAmt:'', oaName:''
     });
   } else if(kind === 'WCR'){
@@ -1058,9 +1078,10 @@ function newForm(kind){
       intimationNo:'BSPTCL/STU/CONN-OFFER/2026/0117', intimationDate:'2026-08-14',
       pcPhone:'0612-2234567', pcFax:'',
       acName:'', acDesig:'', acPhone:'', acFax:'', acEmail:'',
-      completion:'', plantType:'Solar PV (inverter based)',
+      completion:'', plantType:'Solar PV (inverter based)', plantTypeOther:'',
       maxExport:'0.25', maxImport:'', houseLoad:'', regime:'',
-      gatewayType:'', dataPorts:'', protocol:'', media:'', iface:'', capacity:'',
+      dispatchAuthority:'', gatewayType:'', dataPorts:'', protocol:'', protocolOther:'',
+      media:'', mediaOther:'', iface:'', capacity:'',
       curveDrawing:'', magCurve:'assume', magS10:'', magS12:'', excModel:'',
       otherInfo:'', enclList:''
     });
@@ -1264,15 +1285,31 @@ class Component extends DCLogic {
     const cells = [];
     rows.forEach((r, i) => {
       const bg = i % 2 ? '#fbfcfb' : '#fff';
-      cells.push({ isLabel:true, isInput:false, no:r.no, t:r.label, hasSym:!!r.sym, sym:r.sym || '',
+      cells.push({ isLabel:true, isInput:false, isFile:false, no:r.no, t:r.label, hasSym:!!r.sym, sym:r.sym || '',
         pad:'9px 11px', bg, value:'', onChange:()=>{}, placeholder:'' });
-      r.keys.forEach(k => cells.push({ isLabel:false, isInput:true, no:'', t:'', hasSym:false, sym:'',
+      r.keys.forEach(k => cells.push({ isLabel:false, isInput:true, isFile:false, no:'', t:'', hasSym:false, sym:'',
         pad:'6px 9px', bg, value:this.fv(k), onChange:this.onV(k), placeholder:r.ph || '' }));
     });
     return this.G({ isTable:true, head, cols, minWidth, cells });
   }
+  FTBL(head, cols, minWidth, rows){
+    const id = this._cur, f = this.fm(id);
+    const cells = [];
+    rows.forEach((r, i) => {
+      const bg = i % 2 ? '#fbfcfb' : '#fff';
+      cells.push({ isLabel:true, isInput:false, isFile:false, no:r.no, t:r.label, hasSym:!!r.sym, sym:r.sym || '',
+        pad:'9px 11px', bg, value:'', onChange:()=>{}, placeholder:'' });
+      r.keys.forEach(k => {
+        const file = f.files[k];
+        cells.push({ isLabel:false, isInput:false, isFile:true, no:'', t:'', hasSym:false, sym:'', pad:'6px 9px', bg,
+          hasFile:!!file, noFile:!file, file:file || '',
+          onFile:(e) => this.onFormFile(id, k, e), onClear:() => this.setFormFile(id, k, null) });
+      });
+    });
+    return this.G({ isTable:true, head, cols, minWidth, cells });
+  }
   simpleRows(list, prefix){ return list.map((label, i) => ({ no:String(i + 1), label, sym:'', keys:[prefix + (i + 1)], ph:'' })); }
-  symRows(list, prefix){ return list.map((r, i) => ({ no:String(i + 1), label:r[0], sym:r[1], keys:[prefix + (i + 1)], ph:'pu' })); }
+  symRows(list, prefix){ return list.map((r, i) => ({ no:String(i + 1), label:r[0], sym:'', keys:[prefix + (i + 1)], ph:'pu' })); }
 
   // ============================================================ FORMAT-2
   f2Tabs(){
@@ -1295,14 +1332,21 @@ class Component extends DCLogic {
   f2Groups(tab){
     const gen = this.isGenStation();
 
-    if(tab === 'T') return [
-      this.H('', 'Application identification'),
-      this.FLD([ this.F('appNoRO', 'Application no.', { ro:true }), this.F('appDateRO', 'Date', { ro:true }) ]),
-      this.NOTE('The application number and date are self-generated by the applicant, as provided in FORMAT-2. The portal reserves the number above and stamps the date on submission.', 'info'),
-      this.H('A.5', 'Status of the applicant'),
-      this.FLD([ this.F('status', 'Status of the applicant', { options:STATUS_OPTS, span:2,
-        hint:'This decides which of the two FORMAT-2 variants applies, and which branch of Section D you complete.', hintTone:'info' }) ])
-    ];
+    if(tab === 'T'){
+      const out = [
+        this.H('', 'Application identification'),
+        this.FLD([ this.F('appNoRO', 'Application no.', { ro:true }), this.F('appDateRO', 'Date', { ro:true }) ]),
+        this.NOTE('The application number and date are self-generated by the applicant, as provided in FORMAT-2. The portal reserves the number above and stamps the date on submission.', 'info'),
+        this.H('A.5', 'Status of the applicant'),
+        this.FLD([ this.F('status', 'Status of the applicant', { options:STATUS_OPTS, span:2,
+          hint:'This decides which of the two FORMAT-2 variants applies, and which branch of Section D you complete.', hintTone:'info' }) ])
+      ];
+      if(this.status() === 'generator'){
+        out.push(this.FLD([ this.F('generatorStatusDetail', 'Specify status', { span:2,
+          ph:'e.g. independent power producer, merchant generator', opt:true }) ]));
+      }
+      return out;
+    }
 
     if(tab === 'A') return [
       this.H('A.1 – A.3', 'Applicant and addresses'),
@@ -1337,9 +1381,8 @@ class Component extends DCLogic {
       this.FLD([
         this.F('capMW', 'Capacity (MW) for which connectivity is required', { kind:'num', auto:true }),
         this.F('voltage', 'Voltage level (kV) at which connectivity is required',
-          { options:['', '11 kV', '33 kV', '132 kV', '220 kV', '400 kV', '765 kV'].map(v => ({ v, t:v || 'Select' })),
-            hint:this.suggestedKV() ? ('Indicative for ' + this.capMW() + ' MW: ' + this.suggestedKV() + '. STU may advise a different level in the connectivity offer.') : 'Enter the capacity to see the indicative voltage level.',
-            hintTone:'info' }),
+          { options:['', '33 kV', '132 kV', '220 kV', '400 kV', '765 kV'].map(v => ({ v, t:v || 'Select' })),
+            }),
         this.F('connDate', 'Date from which connectivity is required', { kind:'date', hint:'Refer clause 5.2 of the procedure.' })
       ], '1fr 1fr 1fr'),
       this.H('B.2 (a)', 'Nearest sub-station — 1', 'Nearest 765 / 400 / 220 / 132 kV sub-station.'),
@@ -1377,18 +1420,21 @@ class Component extends DCLogic {
 
     if(tab === 'E') return [
       this.NOTE('For every activity record its present status, add a concise description of the work completed with regard to project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances required under law), and attach the duly signed supporting document.', 'info'),
-      this.ACTS()
+      this.ACTS(),
+      this.H('', 'Other clearances', 'Any other clearance obtained or applied for, not covered above.'),
+      this.FLD([ this.F('otherClearances', 'Other clearances', { kind:'area', rows:3, span:2, opt:true }) ])
     ];
 
     if(tab === 'F') return [
       this.H('F.1', 'Non-refundable application fees'),
       this.FLD([
         this.F('feeBank', 'Name of bank & branch', { span:2, ph:'e.g. State Bank of India — Patliputra Branch' }),
-        this.F('feeType', 'Type of instrument', { options:['Demand Draft', 'RTGS', 'NEFT'] }),
+        this.F('feeType', 'Type of instrument', { options:['Demand Draft', 'RTGS', 'NEFT', 'Receipt', 'Voucher'] }),
         this.F('feeNo', 'Instrument no. / UTR no.'),
         this.F('feeDate', 'Date', { kind:'date' }),
         this.F('feeAmt', 'Amount (Rs.)', { kind:'num', hint:'As prescribed in the BSPTCL schedule of charges read with the BERC Connectivity Regulations.' })
       ]),
+      this.DOCS([{ key:'feeProof', no:'F.1', label:'Proof of payment', note:'Upload the demand draft, RTGS/NEFT payment slip, receipt or voucher.', req:true }]),
       this.NOTE('This fee is the STU application fee under FORMAT-2 and is separate from the clearance-counter fee whose challan you upload below. It is non-refundable. Enclose the demand draft — or the payment slip, in case of payment through RTGS — as Enclosure 1 in Section G.', 'warn')
     ];
 
@@ -1462,6 +1508,8 @@ class Component extends DCLogic {
           this.F('genVolt', 'Generation voltage (kV)', { no:'9' }),
           this.F('stepVolt', 'Step-up voltage (kV)', { no:'10' })
         ]),
+        this.H('D.10 (a)', 'Useful life'),
+        this.FLD([ this.F('usefulLife', 'Useful life of generating station', { span:2, ph:'e.g. 25 years' }) ]),
         this.H('D.11', 'Existing dedicated transmission line'),
         this.RADIO('dedLine', 'Is there an existing dedicated transmission line?', [{ v:'no', t:'No' }, { v:'yes', t:'Yes' }])
       ];
@@ -1474,6 +1522,10 @@ class Component extends DCLogic {
       }
       if(this.isCaptiveGen()){
         out.push(this.H('D.12', 'Information specific to captive generating plant'));
+        out.push(this.FLD([
+          this.F('statusByApplicant', 'Status by applicant', { options:['', 'Self', 'Third party'].map(v => ({ v, t:v || 'Select' })),
+            hint:'Whether the applicant itself, or a third party, holds captive status for this plant.' })
+        ]));
         out.push(this.FLD([
           this.F('cgIdentified', 'Generating unit(s) identified for captive use', { kind:'area' }),
           this.F('cgNotIdentified', 'Generating unit(s) not identified for captive use', { kind:'area', opt:true })
@@ -1564,7 +1616,9 @@ class Component extends DCLogic {
                  this.F('suppDur', 'Duration of contract', { opt:true }) ], '1fr 1fr 1fr'),
       this.H('D.6', 'Geographical location of ' + premises),
       this.FLD([ this.F('premVillage', 'Nearest village / town'), this.F('premDistrict', 'District'),
-                 this.F('premLat', 'Latitude'), this.F('premLng', 'Longitude') ])
+                 this.F('premLat', 'Latitude'), this.F('premLng', 'Longitude') ]),
+      this.H('D.7', 'Useful life'),
+      this.FLD([ this.F('usefulLifePremises', 'Useful life of ' + premises, { span:2, ph:'e.g. 25 years' }) ])
     ];
   }
 
@@ -1573,7 +1627,7 @@ class Component extends DCLogic {
     const lic = this.isLicensee(), gen = this.isGenPlant();
     return [
       { id:'T', label:'Applicability', ref:'FORMAT-4', title:'Applicability & the Connectivity Offer being accepted',
-        sub:'Submitting this format is deemed to be the unconditional acceptance of the connectivity offer issued in FORMAT-3.' },
+        sub:'' },
       { id:'A', label:'Applicant', ref:'FORMAT-4 · A',
         title:lic ? 'A. Details of the Intra-State Transmission Licensee' : 'A. Details of the Applicant', sub:'' },
       { id:'B', label:'Maps', ref:'FORMAT-4 · B', title:'B. Maps and Diagrams',
@@ -1585,7 +1639,7 @@ class Component extends DCLogic {
       { id:'E', label:'Communication', ref:'FORMAT-4 · E', title:'E. Details of Connection — Data and Voice Communication',
         sub:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' },
       { id:'S4', label:'Sch. IV', ref:'Schedule IV', title:'Schedule IV — Rating of Generating Units',
-        sub:'Add additional sheets if the number of units is more than three.', skip:!gen },
+        sub:'Add a unit for each generating unit.', skip:!gen },
       { id:'S5', label:'Sch. V', ref:'Schedule V', title:'Schedule V — Generator Data for Fault (Short Circuit Studies)',
         sub:'All data to be provided on the pu machine MVA base.', skip:!gen },
       { id:'S6', label:'Sch. VI', ref:'Schedule VI', title:'Schedule VI — Dynamic Simulation Data',
@@ -1669,17 +1723,25 @@ class Component extends DCLogic {
         this.H('C', 'Details of connection — intra-State transmission licensee'),
         this.FLD([ this.F('licConn', 'Connection details as advised by STU', { kind:'area', rows:5, span:2, ph:'Record the details provided by STU' }) ])
       ];
-      if(gen) return [
-        this.H('C.1 – C.6', 'Generating plant'),
-        this.FLD([
-          this.F('plantType', 'Type of generating plant (hydro, thermal, gas)', { no:'1',
-            options:['Solar PV (inverter based)', 'Wind', 'Hydro', 'Thermal', 'Gas', 'Other'], span:2 }),
+      if(gen){
+        const out = [
+          this.H('C.1 – C.6', 'Generating plant'),
+          this.FLD([
+            this.F('plantType', 'Type of generating plant', { no:'1',
+              options:['Solar PV (inverter based)', 'Wind', 'Hydro', 'Hybrid', 'Other'], span:2 })
+          ])
+        ];
+        if(this.fv('plantType') === 'Other'){
+          out.push(this.FLD([ this.F('plantTypeOther', 'Specify type of generating plant', { span:2 }) ]));
+        }
+        out.push(this.FLD([
           this.F('maxExport', 'Maximum export capacity required (MW)', { no:'3', kind:'num' }),
           this.F('maxImport', 'Maximum import capacity required (MVA)', { no:'4', kind:'num', hint:'The import capacity the site will require during start-up.' }),
           this.F('houseLoad', 'Station house load during normal operating conditions (MW / MVAR)', { no:'5' }),
           this.F('regime', 'Expected running regime', { no:'6', ph:'e.g. base load, peaking' })
-        ])
-      ];
+        ]));
+        return out;
+      }
       const dlOnly = this.status() === 'distribution_licensee';
       return [
         this.H('D.1', 'Type of demand / load'),
@@ -1700,38 +1762,52 @@ class Component extends DCLogic {
       ];
     }
 
-    if(tab === 'E') return [
-      this.H('E.1 – E.3', 'Data and voice communication'),
-      this.FLD([
-        this.F('gatewayType', 'Type of data gateway', { no:'1',
-          options:['', 'Remote terminal unit (RTU)', 'Sub-station automation system gateway'].map(v => ({ v, t:v || 'Select' })) }),
-        this.F('dataPorts', 'Number of data ports', { kind:'num' }),
-        this.F('protocol', 'Data communication connectivity standard followed', { no:'2', span:2,
-          options:['', 'IEC 60870-5-101 (serial port)', 'IEC 60870-5-104 (ethernet)', 'Other — as advised by SLDC'].map(v => ({ v, t:v || 'Select' })),
-          hint:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' }),
-        this.F('media', 'Communication media', { no:'3', options:['', 'Fibre optics', 'PLCC', 'Other'].map(v => ({ v, t:v || 'Select' })) }),
-        this.F('iface', 'Interface', { options:['', 'RS 232C', 'G.703', 'As per mutual agreement'].map(v => ({ v, t:v || 'Select' })) }),
-        this.F('capacity', 'Capacity', { span:2, options:['', '1200 baud', '9.6 kbps', '64 kbps', 'As per mutual agreement'].map(v => ({ v, t:v || 'Select' })) })
-      ])
-    ];
+    if(tab === 'E'){
+      const out = [
+        this.H('E.1 – E.3', 'Data and voice communication'),
+        this.FLD([
+          this.F('dispatchAuthority', 'Dispatch authority', { options:['', 'SLDC', 'RLDC'].map(v => ({ v, t:v || 'Select' })),
+            hint:'The load dispatch centre this connection interfaces with.' }),
+          this.F('gatewayType', 'Type of data gateway', { no:'1',
+            options:['', 'Remote terminal unit (RTU)', 'Sub-station automation system gateway'].map(v => ({ v, t:v || 'Select' })) }),
+          this.F('dataPorts', 'Number of data ports', { kind:'num' }),
+          this.F('protocol', 'Data communication connectivity standard followed', { no:'2', span:2,
+            options:['', 'IEC 60870-5-101 (serial port)', 'IEC 60870-5-104 (ethernet)', 'Other — as advised by SLDC'].map(v => ({ v, t:v || 'Select' })),
+            hint:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' })
+        ])
+      ];
+      if(this.fv('protocol') === 'Other — as advised by SLDC'){
+        out.push(this.FLD([ this.F('protocolOther', 'Specify the data communication connectivity standard', { span:2 }) ]));
+      }
+      out.push(this.FLD([
+        this.F('media', 'Communication media', { no:'3', options:['', 'Fibre optics', 'PLCC', 'Other'].map(v => ({ v, t:v || 'Select' })) })
+      ]));
+      if(this.fv('media') === 'Other'){
+        out.push(this.FLD([ this.F('mediaOther', 'Specify communication media', { span:2 }) ]));
+      }
+      out.push(this.FLD([
+        this.F('iface', 'Interface', { ph:'e.g. RS 232C, G.703, as per mutual agreement' }),
+        this.F('capacity', 'Capacity', { span:2, ph:'e.g. 1200 baud, 9.6 kbps, 64 kbps, as per mutual agreement' })
+      ]));
+      return out;
+    }
 
     if(tab === 'S4') return [
-      this.TBL([{ t:'Parameter', align:'left' }, { t:'Unit-1', align:'center' }, { t:'Unit-2', align:'center' }, { t:'Unit-3', align:'center' }],
-        'minmax(260px,2.2fr) 1fr 1fr 1fr', '720px',
-        SCH4_ROWS.map((label, i) => ({ no:String(i + 1), label, sym:'',
-          keys:['s4_' + (i + 1) + '_u1', 's4_' + (i + 1) + '_u2', 's4_' + (i + 1) + '_u3'], ph:'' }))),
+      this.UNITS('sch4Units', '1fr 1fr 1fr', 'Add unit', 'Add at least one generating unit.',
+        (i) => 'Unit ' + (i + 1),
+        (rid) => SCH4_ROWS.map((label, ri) => this.RF('sch4Units', rid, 'p' + (ri + 1), label))),
       this.FLD([ this.F('curveDrawing', 'Drawing no. of the capability diagram attachment', { span:2 }) ]),
       this.DOCS([{ key:'curve', label:'Capability curve', note:'Attach the capability curve referred to by the drawing number above.', req:true }])
     ];
 
     if(tab === 'S5') return [
-      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+      this.FTBL([{ t:'Parameter', align:'left' }, { t:'Upload', align:'left' }],
         'minmax(300px,2.4fr) 1fr', '600px', this.symRows(SCH5_ROWS, 's5_'))
     ];
 
     if(tab === 'S6'){
       const out = [
-        this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+        this.FTBL([{ t:'Parameter', align:'left' }, { t:'Upload', align:'left' }],
           'minmax(300px,2.4fr) 1fr', '600px', this.symRows(SCH6_ROWS, 's6_')),
         this.H('Sch. VI · 12', 'Open circuit magnetization curve'),
         this.VRADIO('magCurve', 'Open circuit magnetization curve',
@@ -1759,12 +1835,12 @@ class Component extends DCLogic {
     }
 
     if(tab === 'S7') return [
-      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+      this.FTBL([{ t:'Parameter', align:'left' }, { t:'Upload', align:'left' }],
         'minmax(300px,2.4fr) 1fr', '600px', this.simpleRows(SCH7_ROWS, 's7_'))
     ];
 
     if(tab === 'S8') return [
-      this.TBL([{ t:'Parameter', align:'left' }, { t:'Value', align:'left' }],
+      this.FTBL([{ t:'Parameter', align:'left' }, { t:'Upload', align:'left' }],
         'minmax(300px,2.4fr) 1fr', '600px', this.simpleRows(SCH8_ROWS, 's8_'))
     ];
 
