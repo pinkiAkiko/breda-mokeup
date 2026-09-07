@@ -693,8 +693,6 @@
                                     <!-- sign-off -->
                                     <sc-if value="{{ s.showSignOff }}" hint-placeholder-val="{{ false }}">
                                       <div style="border-top:1px dashed #cdd6d0;padding-top:17px;margin-top:2px;">
-                                        <div style="font-size:12.5px;font-weight:700;color:#1e9b5f;margin-bottom:10px;">
-                                          Signature block</div>
                                         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;">
                                           <sc-for list="{{ s.signFields }}" as="f" hint-placeholder-count="3">
                                             <div style="display:flex;flex-direction:column;gap:5px;">
@@ -851,6 +849,7 @@
 //  Statutory forms are filled in-place, inside the clearance row, as tabs:
 //   · BSPTCL Grid Connectivity            → FORMAT-2 (grant of connectivity)
 //   · BSPTCL Final Grid Connectivity Appr. → FORMAT-4 (connection agreement)
+//   · BSPTCL Connection Agreement (licensee) → FORMAT-4, the intra-State transmission licensee variant
 //  A clearance with a form can only be submitted once its form is complete.
 // ============================================================================
 
@@ -858,6 +857,8 @@ const DEPARTMENTS = [
   { label:'BSPTCL', name:'Bihar State Power Transmission Company Limited (BSPTCL / STU)', services:[
     { id:'bsptcl-grid', name:'Grid Connectivity', sla:30, authority:'DISCOMs / BSPTCL', form:'F2', noFee:true },
     { id:'bsptcl-final', name:'Final Grid Connectivity Approval', sla:120, authority:'BSPTCL', form:'F4', noFee:true },
+    { id:'bsptcl-final-lic', name:'Connection Agreement — Intra-State Transmission Licensee', sla:120,
+      authority:'BSPTCL / STU', form:'F4L', noFee:true },
   ]},
   { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
     { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
@@ -888,7 +889,8 @@ const STATUS_OPTS = [
   { v:'captive_generator',     t:'Captive generator' },
   { v:'distribution_licensee', t:'Distribution licensee' },
   { v:'captive_user',          t:'Captive user' },
-  { v:'oa_consumer',           t:'Open access consumer' }
+  { v:'oa_consumer',           t:'Open access consumer' },
+  { v:'third_party',           t:'Third party' }
 ];
 
 const PRIME_MOVERS = [
@@ -1002,6 +1004,9 @@ const FORM_META = {
   F4:{ ref:'BSPTCL / STU · FORMAT-4', title:'Additional Information for Signing the Connection Agreement',
     sub:'Furnished after the FORMAT-3 connectivity offer; submitting it is the unconditional acceptance of that offer.',
     confirm:'I confirm that the data furnished above pertain to the connection sought for the Intra-STS, that furnishing this format constitutes unconditional acceptance of the connectivity offer, and that the signed and sealed hard copy will reach STU.' },
+  F4L:{ ref:'BSPTCL / STU · FORMAT-4 (Licensee)', title:'Additional Information for Signing the Connection Agreement',
+    sub:'The variant applicable in case of grant of connectivity to the intra-State transmission licensee. Sections C, D and E are filled in by the licensee from the information provided by STU, and the generating-plant schedules do not apply.',
+    confirm:'I confirm that the data submitted above pertain to the connection sought for the Intra-STS, that any additional data sought by STU for processing the connectivity shall be furnished, and that the signed and sealed hard copy of this FORMAT-4 will reach STU along with the listed enclosures.' },
   WCR:{ ref:'Electrical Inspector · Work Completion', title:'Solar PV Power — Work Completion Report & Certificate',
     sub:'Submitted once installation is complete, so the Electrical Inspector can inspect and permit charging. Includes the Work Completion Certificate signed by the licensed electrical contractor.',
     confirm:'I certify that the SRTPV / solar power plant system has been installed and inspected in compliance with the Electricity Act 2003 and the Indian Electricity Rules 1956 (Rule 47A), that the equipment used complies with the technical and safety standards, and that the installation is ready for inspection / energization.' },
@@ -1031,7 +1036,7 @@ function newForm(kind){
   };
   if(kind === 'F2'){
     base.vals = Object.assign({}, CARRIED, {
-      status:'generator', generatorStatusDetail:'', addrReg:'',
+      status:'generator', generatorStatusDetail:'', distLicenseeType:'', addrReg:'',
       pcLandline:'0612-2234567', pcFax:'',
       acName:'', acDesig:'', acLandline:'', acFax:'', acMobile:'', acEmail:'',
       capMW:'0.25', voltage:'', connDate:'',
@@ -1040,7 +1045,7 @@ function newForm(kind){
       genName:'Rajeev Industrial Solar 250 kW', genNewExisting:'New',
       genOwner:'M/s. Rajeev Industrial Solar Pvt. Ltd.', genCEA:'No',
       locVillage:'Patliputra', locDistrict:'Patna', locState:'Bihar', locLat:'25.6120', locLng:'85.0980',
-      primeMover:'Solar PV (inverter based) — other', genVolt:'', stepVolt:'', usefulLife:'',
+      primeMover:'Solar PV (inverter based) — other', hybridSources:'', genVolt:'', stepVolt:'', usefulLife:'',
       statusByApplicant:'', usefulLifePremises:'', otherClearances:'',
       feeBank:'', feeType:'Demand Draft', feeNo:'', feeDate:'', feeAmt:'', oaName:''
     });
@@ -1066,15 +1071,27 @@ function newForm(kind){
       wccEquipment:'', wccTests:'', wccContractor:'', wccSupervisor:'',
       wccSignContractor:'', wccSignOwner:'Rajeev Kumar'
     });
+  } else if(kind === 'F4L'){
+    base.vals = {
+      appName:'', addrCorr:'',
+      intimationNo:'BSPTCL/STU/CONN-OFFER/2026/0117', intimationDate:'2026-08-14',
+      pcName:'', pcDesig:'', pcPhone:'', pcFax:'', pcEmail:'',
+      acName:'', acDesig:'', acPhone:'', acFax:'', acEmail:'',
+      completion:'',
+      licConnPoint:'', licConnVolt:'', licConn:'',
+      licCommDispatch:'', licCommMedia:'', licComm:'',
+      otherInfo:'', enclList:'',
+      signPlace:'Patna', signName:'', signDesig:''
+    };
   } else if(kind === 'WR'){
     base.vals = Object.assign({}, CARRIED, {
       projectName:'Rajeev Industrial Solar 250 kW', projectCap:'250 kW',
       district:'Patna', projectLocation:'Plot 14, Industrial Area, Patliputra, Patna',
-      waterBody:'', riverName:'', canalName:'', distanceToBody:''
+      waterBody:'', waterName:'', latitude:'', longitude:'', area:'', volumeUsed:'', landDetails:'', distanceToBody:''
     });
   } else {
     base.vals = Object.assign({}, CARRIED, {
-      submittedBy:'applicant', status:'generator',
+      submittedBy:'applicant', status:'generator', distLicenseeType:'',
       intimationNo:'BSPTCL/STU/CONN-OFFER/2026/0117', intimationDate:'2026-08-14',
       pcPhone:'0612-2234567', pcFax:'',
       acName:'', acDesig:'', acPhone:'', acFax:'', acEmail:'',
@@ -1345,6 +1362,10 @@ class Component extends DCLogic {
         out.push(this.FLD([ this.F('generatorStatusDetail', 'Specify status', { span:2,
           ph:'e.g. independent power producer, merchant generator', opt:true }) ]));
       }
+      if(this.status() === 'distribution_licensee'){
+        out.push(this.FLD([ this.F('distLicenseeType', 'Type of distribution licensee', { span:2,
+          options:['', 'NBPDCL', 'SBPDCL'].map(v => ({ v, t:v || 'Select' })) }) ]));
+      }
       return out;
     }
 
@@ -1429,7 +1450,7 @@ class Component extends DCLogic {
       this.H('F.1', 'Non-refundable application fees'),
       this.FLD([
         this.F('feeBank', 'Name of bank & branch', { span:2, ph:'e.g. State Bank of India — Patliputra Branch' }),
-        this.F('feeType', 'Type of instrument', { options:['Demand Draft', 'RTGS', 'NEFT', 'Receipt', 'Voucher'] }),
+        this.F('feeType', 'Type of instrument', { options:['Demand Draft', 'RTGS', 'NEFT', 'Receipt / Voucher'] }),
         this.F('feeNo', 'Instrument no. / UTR no.'),
         this.F('feeDate', 'Date', { kind:'date' }),
         this.F('feeAmt', 'Amount (Rs.)', { kind:'num', hint:'As prescribed in the BSPTCL schedule of charges read with the BERC Connectivity Regulations.' })
@@ -1504,7 +1525,13 @@ class Component extends DCLogic {
                      this.RF('addUnits', rid, 'rcod', 'Revised date of commercial operation', { kind:'date' }) ]),
         this.H('D.8 – D.10', 'Prime mover and voltages'),
         this.FLD([
-          this.F('primeMover', 'Type of prime mover (fuel base)', { no:'8', options:PRIME_MOVERS, span:2 }),
+          this.F('primeMover', 'Type of prime mover (fuel base)', { no:'8', options:PRIME_MOVERS, span:2 })
+        ]),
+        ...(this.fv('primeMover') === 'Hybrid' ? [this.FLD([
+          this.F('hybridSources', 'Type of renewable sources', { span:2,
+            ph:'e.g. Solar PV + Wind turbine' })
+        ])] : []),
+        this.FLD([
           this.F('genVolt', 'Generation voltage (kV)', { no:'9' }),
           this.F('stepVolt', 'Step-up voltage (kV)', { no:'10' })
         ]),
@@ -1665,9 +1692,11 @@ class Component extends DCLogic {
       ];
       if(!lic) out.push(this.FLD([ this.F('status', 'Status of the applicant company', { span:2, options:STATUS_OPTS,
         hint:'A generating plant completes Section C and Schedules IV to VIII. A distribution licensee, captive user or open access consumer completes Section D instead.', hintTone:'info' }) ]));
+      if(!lic && this.status() === 'distribution_licensee') out.push(this.FLD([ this.F('distLicenseeType', 'Type of distribution licensee', { span:2,
+        options:['', 'NBPDCL', 'SBPDCL'].map(v => ({ v, t:v || 'Select' })) }) ]));
       out.push(this.H('A.2', 'Connectivity offer being accepted'));
       out.push(this.FLD([
-        this.F('intimationNo', 'Connectivity intimation no. (FORMAT-3)', { auto:true }),
+        this.F('intimationNo', 'Connectivity intimation no.', { auto:true }),
         this.F('intimationDate', 'Date of the connectivity offer', { kind:'date', auto:true })
       ]));
       out.push(this.NOTE('Submission of the information on or with FORMAT-4 is deemed to be the unconditional acceptance of the connectivity offer. It must reach STU within two (2) months of the date of the offer, unless STU indicates otherwise. ' + dl.text, dl.tone));
@@ -1858,6 +1887,135 @@ class Component extends DCLogic {
     return [];
   }
 
+  // ================= FORMAT-4 — intra-State transmission licensee variant
+  // A separate statutory sample, kept apart from f4Tabs / f4Groups: the sections
+  // run A to E, there is no applicant-status branching, and Schedules IV to VIII
+  // (which describe a generating plant) do not apply.
+  f4lTabs(){
+    return [
+      { id:'T', label:'Applicability', ref:'FORMAT-4 (Licensee)',
+        title:'Applicability & the Connectivity Offer being accepted',
+        sub:'Applicable in case of grant of connectivity to the intra-State transmission licensee. To be submitted by the intra-State transmission licensee to STU.' },
+      { id:'A', label:'Licensee', ref:'FORMAT-4 (Licensee) · A',
+        title:'A. Details of the Applicant — Intra-State Transmission Licensee', sub:'' },
+      { id:'B', label:'Maps', ref:'FORMAT-4 (Licensee) · B', title:'B. Maps and Diagrams',
+        sub:'Schedules I to III. Site plans and single line diagrams are submitted in both hard and soft copy, in AutoCAD 2000 or above version.' },
+      { id:'C', label:'Connection', ref:'FORMAT-4 (Licensee) · C',
+        title:'C. Details of Connection — Intra-State Transmission Licensee',
+        sub:'To be filled in by the intra-State transmission licensee, in detail, based on the information provided by STU.' },
+      { id:'D', label:'Communication', ref:'FORMAT-4 (Licensee) · D',
+        title:'D. Details of Connection — Data and Voice Communication',
+        sub:'To be filled in by the intra-State transmission licensee, in detail, based on the information provided by STU.' },
+      { id:'E', label:'Certification', ref:'FORMAT-4 (Licensee) · E',
+        title:'E. Any Other Information, Certification & Signature',
+        sub:'To be filled in by the intra-State transmission licensee, in detail, based on the information provided by STU.' }
+    ];
+  }
+
+  f4lGroups(tab){
+    const dl = this.deadline();
+
+    if(tab === 'T') return [
+      this.NOTE('This is the variant of FORMAT-4 applicable in case of grant of connectivity to the intra-State transmission licensee. If connectivity was granted to a generator, distribution licensee, captive user or open access consumer, use the standard FORMAT-4 on the Final Grid Connectivity Approval row instead.', 'rule'),
+      this.H('A.2', 'Details of grant of connectivity'),
+      this.FLD([
+        this.F('intimationNo', 'Connectivity intimation no.', { no:'(a)', auto:true }),
+        this.F('intimationDate', 'Date of the connectivity offer', { no:'(b)', kind:'date', auto:true })
+      ]),
+      this.NOTE('Submission of the information on or with FORMAT-4 is deemed to be the unconditional acceptance of the connectivity offer. It must reach STU within two (2) months of the date of the offer, unless STU indicates otherwise. ' + dl.text, dl.tone)
+    ];
+
+    if(tab === 'A') return [
+      this.H('A.1 – A.3', 'Licensee and correspondence'),
+      this.FLD([
+        this.F('appName', 'Name of the intra-State transmission licensee', { no:'1', span:2,
+          ph:'e.g. Bihar State Power Transmission Company Ltd.' }),
+        this.F('intimationNo', 'Connectivity intimation no.', { no:'2 (a)', auto:true }),
+        this.F('intimationDate', 'Date', { no:'2 (b)', kind:'date', auto:true }),
+        this.F('addrCorr', 'Address for correspondence', { no:'3', kind:'area', span:2 })
+      ]),
+      this.H('A.4', 'Prime contact person'),
+      this.FLD([
+        this.F('pcName', 'Name'), this.F('pcDesig', 'Designation'),
+        this.F('pcPhone', 'Phone no. (with STD code)'), this.F('pcFax', 'FAX (with STD code)', { opt:true }),
+        this.F('pcEmail', 'E-mail', { span:2 })
+      ]),
+      this.H('A.4', 'Alternate contact person'),
+      this.FLD([
+        this.F('acName', 'Name'), this.F('acDesig', 'Designation'),
+        this.F('acPhone', 'Phone no. (with STD code)'), this.F('acFax', 'FAX (with STD code)', { opt:true }),
+        this.F('acEmail', 'E-mail', { span:2 })
+      ]),
+      this.H('A.5 – A.6', 'Status and completion of the transmission system'),
+      this.FLD([
+        this.F('statusRO', 'Status of transmission licensee', { no:'5', ro:true }),
+        this.F('completion', 'Estimated time of completion of the transmission system', { no:'6',
+          ph:'e.g. 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below.' })
+      ]),
+      this.DOCS([{ key:'pert', no:'A.6', label:'PERT chart',
+        note:'Mandatory enclosure with the estimated time of completion of the transmission system.', req:true }])
+    ];
+
+    if(tab === 'B') return [
+      this.DOCS([
+        { key:'sch1', no:'Sch. I', label:'Survey of India topo sheet',
+          note:'Clearly marking the location of the proposed sites.', req:true },
+        { key:'sch2', no:'Sch. II', label:'Site plans in appropriate scale',
+          note:'Both hard and soft copy, in AutoCAD 2000 or above version.', req:true },
+        { key:'sch3', no:'Sch. III', label:'Electrical Single Line Diagram (SLD)',
+          note:'Of the proposed transmission lines and sub-stations, detailing all significant items of the project. Both hard and soft copy, in AutoCAD 2000 or above version.', req:true }
+      ]),
+      this.UND('sitePlanOk', 'I confirm that the site plan submitted as Schedule II indicates the following details:',
+        [{ no:'(a)', t:'The proposed location of the connection point.' },
+         { no:'(b)', t:'Lines.' },
+         { no:'(c)', t:'Sub-stations.' }])
+    ];
+
+    if(tab === 'C') return [
+      this.NOTE('Intra-State transmission licensee to fill in the details, based on the information provided by STU.', 'info'),
+      this.H('C', 'Details of connection — intra-State transmission licensee'),
+      this.FLD([
+        this.F('licConnPoint', 'Proposed connection point / sub-station', { no:'1',
+          ph:'e.g. 220 kV Patliputra GSS — Bay 4' }),
+        this.F('licConnVolt', 'Voltage level of the connection', { no:'2',
+          options:['', '11 kV', '33 kV', '132 kV', '220 kV', '400 kV'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('licConn', 'Details of connection, as advised by STU', { no:'3', kind:'area', rows:6, span:2,
+          ph:'Line and bay configuration, transfer capacity, metering, protection and any other particulars advised by STU.' })
+      ]),
+      this.DOCS([{ key:'licConnDoc', no:'C', label:'STU communication on the connection details',
+        note:'The letter, e-mail or minutes of the meeting from STU on which the details above are based. Optional at this stage.', req:false }])
+    ];
+
+    if(tab === 'D') return [
+      this.NOTE('Intra-State transmission licensee to fill in the details, based on the information provided by STU.', 'info'),
+      this.H('D', 'Details of connection — data and voice communication'),
+      this.FLD([
+        this.F('licCommDispatch', 'Dispatch authority', { no:'1',
+          options:['', 'SLDC', 'RLDC'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('licCommMedia', 'Communication media', { no:'2',
+          options:['', 'Fibre optics', 'PLCC', 'As advised by STU / SLDC'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('licComm', 'Data and voice communication details, as advised by STU', { no:'3', kind:'area', rows:6, span:2,
+          ph:'Data gateway, communication standard, number of data ports, interface and capacity — as per the interface requirement and other guidelines made available by the RLDC / SLDC.' })
+      ]),
+      this.DOCS([{ key:'licCommDoc', no:'D', label:'RLDC / SLDC interface requirement or guideline',
+        note:'The interface requirement or guideline document the details above follow. Optional at this stage.', req:false }])
+    ];
+
+    if(tab === 'E') return [
+      this.H('E', 'Any other information as considered necessary by STU',
+        'The intra-State transmission licensee fills in the details based on the information provided by STU.'),
+      this.FLD([ this.F('otherInfo', 'Details', { kind:'area', rows:4, span:2, opt:true }) ]),
+      this.UND('cert', 'This is to certify that the above data submitted are pertaining to the connection sought for the Intra-STS. Further, any additional data sought for processing the connectivity shall be furnished.'),
+      this.H('', 'Enclosures'),
+      this.FLD([ this.F('enclList', 'List of enclosures', { kind:'area', rows:3, span:2, opt:true,
+        ph:'List the schedules and any other documents attached' }) ]),
+      this.DOCS([{ key:'encOther', no:'Encl.', label:'Any other enclosure',
+        note:'Optional. Copy to others as considered necessary.', req:false }])
+    ];
+
+    return [];
+  }
+
   // ======================= Work Completion Report (Electrical Inspector)
   wcrTabs(){
     return [
@@ -2009,8 +2167,9 @@ class Component extends DCLogic {
     return [
       { id:'A', label:'Project & site', ref:'WRD · NOC', title:'Project and Site Details',
         sub:'The project for which the no-objection of the Department of Water Resources is sought.' },
-      { id:'B', label:'Water body', ref:'WRD · NOC', title:'Water Body for which Clearance is Required', sub:'' },
-      { id:'C', label:'Declaration', ref:'WRD · NOC', title:'Declaration, Enclosures & Signature', sub:'' }
+      { id:'B', label:'Water body', ref:'WRD · NOC', title:'Type of water Body for which Clearance is Required', sub:'' },
+      { id:'D', label:'Enclosures', ref:'WRD · NOC', title:'Enclosures', sub:'' },
+      { id:'C', label:'Declaration', ref:'WRD · NOC', title:'Declaration & Signature', sub:'' }
     ];
   }
 
@@ -2031,36 +2190,39 @@ class Component extends DCLogic {
     ];
 
     if(tab === 'B'){
-      const body = this.fv('waterBody');
-      const isCanal = body === 'Canal', isRiver = body === 'River';
       return [
         this.FLD([
-          this.F('waterBody', 'Water body for which clearance is required', { span:2,
-            options:['', 'Canal', 'Reservoir', 'Pond', 'River'].map(v => ({ v, t:v || 'Select' })),
-            hint:'Determines which of the two names below is mandatory.', hintTone:'info' })
+          this.F('waterBody', 'Type of water body for which clearance is required', { span:2,
+            options:['', 'Canal', 'Reservoir', 'Pond', 'River', 'Ground Water', 'Land'].map(v => ({ v, t:v || 'Select' })) })
         ]),
         this.FLD([
-          this.F('riverName', 'Name of river', { opt:!isRiver,
-            hint:isRiver ? 'Mandatory — the clearance is sought for a river.' : 'The river the canal or water body draws from, if applicable.',
-            hintTone:isRiver ? 'info' : '' }),
-          this.F('canalName', 'Name of canal for which clearance is required', { opt:!isCanal,
-            hint:isCanal ? 'Mandatory — the clearance is sought for a canal.' : 'Leave blank if the clearance is not for a canal.',
-            hintTone:isCanal ? 'info' : '' })
+          this.F('waterName', 'Name of river/ canal/ reservoir/ pond', { span:2, opt:true })
         ]),
         this.FLD([
+          this.F('latitude', 'Latitude of water body', { opt:true }),
+          this.F('longitude', 'Longitude of water body', { opt:true })
+        ]),
+        this.FLD([
+          this.F('area', 'Area of land required', { opt:true })
+        ]),
+        this.FLD([
+          this.F('volumeUsed', 'Volume of water required', { opt:true }),
           this.F('distanceToBody', 'Distance of the project boundary from the water body (m)', { kind:'num', opt:true })
+        ]),
+        this.FLD([
+          this.F('landDetails', 'Land details', { span:2, kind:'area', rows:2, opt:true,
+            ph:'Khasra / plot number, area and location of the land for which clearance is required' })
         ]),
         this.NOTE('The Department of Water Resources issues the no-objection for projects that cross, abut or draw from a canal, reservoir, pond or river. Attach the site plan marking the water body and the project boundary in the next section.', 'info')
       ];
     }
 
-    if(tab === 'C') return [
-      this.UND('wrDeclared', 'I declare that the particulars given above are true and correct, that the project will not obstruct, encroach upon or damage the canal, reservoir, pond or river identified, and that I shall comply with any conditions imposed by the Department of Water Resources.'),
-      this.H('', 'Enclosures'),
+    if(tab === 'C') return [];
+
+    if(tab === 'D') return [
       this.DOCS([
         { key:'wrPlan', no:'1.', label:'Site plan marking the water body and the project boundary', note:'Showing the distance from the canal, reservoir, pond or river.', req:true },
-        { key:'wrLand', no:'2.', label:'Land ownership / lease document', note:'For the project parcel adjoining the water body.', req:true },
-        { key:'wrOther', no:'3.', label:'Any other supporting document', note:'Optional.', req:false }
+        { key:'wrOther', no:'2.', label:'Any other supporting document', note:'Optional.', req:false }
       ])
     ];
 
@@ -2070,13 +2232,17 @@ class Component extends DCLogic {
   // ------------------------------------------------------------ dispatch
   tabsFor(kind){
     return kind === 'F2' ? this.f2Tabs() : kind === 'F4' ? this.f4Tabs()
+         : kind === 'F4L' ? this.f4lTabs()
          : kind === 'WCR' ? this.wcrTabs() : this.wrTabs();
   }
   groupsForKind(kind, tab){
     return kind === 'F2' ? this.f2Groups(tab) : kind === 'F4' ? this.f4Groups(tab)
+         : kind === 'F4L' ? this.f4lGroups(tab)
          : kind === 'WCR' ? this.wcrGroups(tab) : this.wrGroups(tab);
   }
-  signTabFor(kind){ return kind === 'F2' ? 'G' : kind === 'F4' ? 'F' : kind === 'WR' ? 'C' : null; }
+  signTabFor(kind){
+    return kind === 'F2' ? 'G' : kind === 'F4' ? 'F' : kind === 'F4L' ? 'E' : kind === 'WR' ? 'C' : null;
+  }
 
   // ------------------------------------------------------- completeness
   tabComplete(kind, tab){
@@ -2180,7 +2346,7 @@ class Component extends DCLogic {
     // read-only mirrors
     f.vals.appNoRO = 'BSPTCL/CONN/2026/0417';
     f.vals.appDateRO = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-    f.vals.statusRO = kind === 'F4' && this.isLicensee()
+    f.vals.statusRO = (kind === 'F4L' || (kind === 'F4' && this.isLicensee()))
       ? 'Intra-State transmission licensee'
       : ((STATUS_OPTS.find(o => o.v === this.status()) || {}).t || '');
     if(kind === 'WCR'){
