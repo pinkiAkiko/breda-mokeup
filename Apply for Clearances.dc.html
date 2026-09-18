@@ -289,7 +289,7 @@
                     <sc-for list="{{ d.services }}" as="s" hint-placeholder-count="1">
                       <div style="border-top:1px solid #eef1ef;background:{{ s.rowBg }};">
                         <div onClick="{{ s.onToggle }}"
-                          style="display:flex;align-items:center;gap:14px;padding:{{ s.rowPad }};cursor:pointer;"
+                          style="display:flex;align-items:center;gap:14px;padding:{{ s.rowPad }};cursor:{{ s.rowCursor }};"
                           style-hover="background:#f1f5f3;">
                           <div
                             style="width:20px;height:20px;border-radius:4px;border:2px solid {{ s.boxBorder }};background:{{ s.boxBg }};display:flex;align-items:center;justify-content:center;flex:none;">
@@ -303,7 +303,16 @@
                             <div style="font-size:12px;color:#8e9e97;margin-top:3px;">SLA · {{ s.sla }} days · {{
                               s.authority }}</div>
                           </div>
+                          <sc-if value="{{ s.formAwaited }}" hint-placeholder-val="{{ false }}">
+                            <span style="flex:none;font-size:12px;font-weight:600;color:#8e9e97;white-space:nowrap;">Form
+                              awaited</span>
+                          </sc-if>
                         </div>
+                        <sc-if value="{{ s.formAwaited }}" hint-placeholder-val="{{ false }}">
+                          <div style="padding:0 18px 16px 52px;">
+                            <div style="font-size:12px;color:#8e9e97;line-height:1.6;">{{ s.formAwaitedNote }}</div>
+                          </div>
+                        </sc-if>
                         <sc-if value="{{ s.checked }}" hint-placeholder-val="{{ false }}">
                           <div style="padding:0 18px 18px 52px;">
                             <!-- ===== STATUTORY FORM (in-row, tabbed) ===== -->
@@ -575,15 +584,20 @@
                                                       {{ d.note }}</div>
                                                   </div>
                                                 </div>
-                                                <div style="flex:none;display:flex;align-items:center;gap:10px;">
-                                                  <sc-if value="{{ d.hasFile }}" hint-placeholder-val="{{ false }}">
-                                                    <span
-                                                      style="font-size:11px;color:#1e7a4d;font-weight:600;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">&#10003;
-                                                      {{ d.file }}</span>
-                                                    <button onClick="{{ d.onClear }}"
-                                                      style="background:none;border:none;color:#b4453a;font-size:11px;font-weight:600;padding:0;">Remove</button>
-                                                  </sc-if>
-                                                  <sc-if value="{{ d.noFile }}" hint-placeholder-val="{{ true }}">
+                                                <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:260px;">
+                                                  <sc-if value="{{ d.multi }}" hint-placeholder-val="{{ false }}">
+                                                    <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
+                                                      <sc-for list="{{ d.fileList }}" as="fl" hint-placeholder-count="2">
+                                                        <span
+                                                          style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#1e7a4d;font-weight:600;background:#f7fcf9;border:1px solid #bfe3cd;border-radius:6px;padding:3px 8px;max-width:230px;">
+                                                          <span
+                                                            style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{
+                                                            fl.name }}</span>
+                                                          <button onClick="{{ fl.onRemove }}"
+                                                            style="background:none;border:none;color:#b4453a;font-size:12px;font-weight:700;padding:0;line-height:1;">&#215;</button>
+                                                        </span>
+                                                      </sc-for>
+                                                    </div>
                                                     <label
                                                       style="display:inline-flex;align-items:center;gap:7px;border:2px solid {{ d.upBd }};color:{{ d.upFg }};background:#fff;border-radius:8px;padding:7px 12px;font-size:11.5px;font-weight:700;cursor:pointer;">
                                                       <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
@@ -591,10 +605,34 @@
                                                         <path d="M12 16V4M7 9l5-5 5 5"></path>
                                                         <path d="M5 20h14"></path>
                                                       </svg>
-                                                      Upload
-                                                      <input type="file" onChange="{{ d.onFile }}"
+                                                      Add document(s)
+                                                      <input type="file" multiple onChange="{{ d.onFile }}"
                                                         style="display:none;">
                                                     </label>
+                                                  </sc-if>
+                                                  <sc-if value="{{ d.single }}" hint-placeholder-val="{{ true }}">
+                                                    <div style="display:flex;align-items:center;gap:10px;">
+                                                      <sc-if value="{{ d.hasFile }}" hint-placeholder-val="{{ false }}">
+                                                        <span
+                                                          style="font-size:11px;color:#1e7a4d;font-weight:600;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">&#10003;
+                                                          {{ d.file }}</span>
+                                                        <button onClick="{{ d.onClear }}"
+                                                          style="background:none;border:none;color:#b4453a;font-size:11px;font-weight:600;padding:0;">Remove</button>
+                                                      </sc-if>
+                                                      <sc-if value="{{ d.noFile }}" hint-placeholder-val="{{ true }}">
+                                                        <label
+                                                          style="display:inline-flex;align-items:center;gap:7px;border:2px solid {{ d.upBd }};color:{{ d.upFg }};background:#fff;border-radius:8px;padding:7px 12px;font-size:11.5px;font-weight:700;cursor:pointer;">
+                                                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2.2" style="flex:none;">
+                                                            <path d="M12 16V4M7 9l5-5 5 5"></path>
+                                                            <path d="M5 20h14"></path>
+                                                          </svg>
+                                                          Upload
+                                                          <input type="file" onChange="{{ d.onFile }}"
+                                                            style="display:none;">
+                                                        </label>
+                                                      </sc-if>
+                                                    </div>
                                                   </sc-if>
                                                 </div>
                                               </div>
@@ -710,7 +748,7 @@
                                     <!-- completion gate on the preview tab -->
                                     <sc-if value="{{ s.showFormConfirm }}" hint-placeholder-val="{{ false }}">
                                       <div
-                                        style="border:2px solid {{ s.confirmBd }};background:{{ s.confirmBg }};border-radius:10px;padding:14px 16px;">
+                                        style="border:2px solid {{ s.confirmBd }};background:{{ s.confirmBg }};border-radius:10px;padding:14px 16px;margin-top:18px;">
                                         <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
                                           <input type="checkbox" checked="{{ s.formConfirmed }}"
                                             onChange="{{ s.onFormConfirm }}"
@@ -850,7 +888,10 @@
 //   · BSPTCL Grid Connectivity            → FORMAT-2 (grant of connectivity)
 //   · BSPTCL Final Grid Connectivity Appr. → FORMAT-4 (connection agreement)
 //   · BSPTCL Connection Agreement (licensee) → FORMAT-4, the intra-State transmission licensee variant
+//   · NBPDCL/SBPDCL Metering Specification Approval → MSA (meter type, phase supply, rating, multi-file upload)
 //  A clearance with a form can only be submitted once its form is complete.
+//  NBPDCL/SBPDCL services whose form the DISCOM hasn't supplied yet render a "Form awaited"
+//  placeholder (formAwaited:true) — the row is shown, but its checkbox is disabled.
 // ============================================================================
 
 const DEPARTMENTS = [
@@ -863,8 +904,14 @@ const DEPARTMENTS = [
   { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
     { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
   ]},
-  { label:'MRT', name:'NBPDCL / SBPDCL MRT', services:[
-    { id:'mrt-sem', name:'NOC for Special Energy Meter', sla:7, authority:'DISCOMs (MRT)' },
+  { label:'NBPDCL', name:'North Bihar Power Distribution Company Limited', services:[
+    { id:'nbpdcl-pss', name:'PSS Allocation', sla:30, authority:'DISCOMs (NBPDCL/SBPDCL)' },
+    { id:'nbpdcl-msa', name:'Metering Specification Approval', sla:13, authority:'DISCOMs (NBPDCL/SBPDCL)', form:'MSA', noFee:true },
+    { id:'nbpdcl-startup', name:'Startup Power Approval', sla:15, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
+    { id:'mrt-sem', name:'NOC for Special Energy Meter (MRT)', sla:7, authority:'DISCOMs (MRT)', formAwaited:true },
+    { id:'nbpdcl-sem-install', name:'Installation of SEM Meter', sla:7, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
+    { id:'nbpdcl-ptc', name:'Permission to Commission (PTC)', sla:7, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
+    { id:'nbpdcl-pcfo', name:'Project Commissioning by Field Office', sla:3, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
   ]},
   { label:'EIO', name:'Electrical Inspector Office', services:[
     { id:'eio-plan', name:'Plan Approval', sla:4, authority:'Electrical Inspector Office' },
@@ -927,7 +974,9 @@ const ENCLOSURES = [
   { key:'e2', label:'Documents in support of the information submitted under clause 3', note:'Including all project related preparatory activities declared in Section E.', req:true },
   { key:'e3', label:'Documents in support of the information submitted under clause 4', note:'Read with this format — mention the details in the covering letter.', req:true },
   { key:'e4', label:'Documents in support of existing connectivity with Intra-STS', note:'Detailed description of the electricity systems with single line diagrams. Required only for an existing user of the Intra-STS.', req:true, onlyIfExisting:true },
-  { key:'e5', label:'Any other document', note:'Optional — copy to others as considered necessary.', req:false }
+  { key:'e5', label:'Any other document', note:'Optional — copy to others as considered necessary.', req:false },
+  { key:'e6', label:'Applicant Authorization', note:'Authorization approved by the Board of Directors (BOD), CEO or Company Secretary.', req:true },
+  { key:'e7', label:'Notarized Affidavit', note:'Optional — notarized affidavit in support of the application.', req:false }
 ];
 
 // Annexure-II — acceptable IEEE standard excitation models in PSS/E
@@ -1012,7 +1061,10 @@ const FORM_META = {
     confirm:'I certify that the SRTPV / solar power plant system has been installed and inspected in compliance with the Electricity Act 2003 and the Indian Electricity Rules 1956 (Rule 47A), that the equipment used complies with the technical and safety standards, and that the installation is ready for inspection / energization.' },
   WR:{ ref:'Water Resources Dept. · NOC', title:'Application for NOC — Canal / Reservoir / Pond',
     sub:'Identifies the water body the project crosses, abuts or draws from, for the no-objection of the Department of Water Resources.',
-    confirm:'I confirm that the district, project location and water body details given above are true and correct, and that the project will not obstruct or damage the canal, reservoir or pond identified.' }
+    confirm:'I confirm that the district, project location and water body details given above are true and correct, and that the project will not obstruct or damage the canal, reservoir or pond identified.' },
+  MSA:{ ref:'NBPDCL / SBPDCL · Metering', title:'Metering Specification Approval',
+    sub:'Specification of the meter proposed for the connection, for approval by the DISCOM before installation.',
+    confirm:'I confirm that the metering specification given above is true and correct and matches the equipment proposed to be installed at site.' }
 };
 
 // values carried over from the BREDA application, shared by both formats
@@ -1088,6 +1140,12 @@ function newForm(kind){
       projectName:'Rajeev Industrial Solar 250 kW', projectCap:'250 kW',
       district:'Patna', projectLocation:'Plot 14, Industrial Area, Patliputra, Patna',
       waterBody:'', waterName:'', latitude:'', longitude:'', area:'', volumeUsed:'', landDetails:'', distanceToBody:''
+    });
+  } else if(kind === 'MSA'){
+    base.vals = Object.assign({}, CARRIED, {
+      projectName:'Rajeev Industrial Solar 250 kW', projectCap:'250 kW',
+      meterType:'', phaseSupply:'', meterRating:'',
+      signPlace:'Patna', signName:'', signDesig:''
     });
   } else {
     base.vals = Object.assign({}, CARRIED, {
@@ -1168,6 +1226,20 @@ class Component extends DCLogic {
     const f = e.target.files && e.target.files[0]; if(!f) return;
     if(f.size > 25 * 1024 * 1024){ alert('File exceeds the 25 MB limit'); e.target.value = ''; return; }
     this.setFormFile(id, key, f.name);
+  }
+  addFormFiles(id, key, e){
+    const files = e.target.files ? Array.from(e.target.files) : []; if(!files.length) return;
+    const oversize = files.find(f => f.size > 25 * 1024 * 1024);
+    if(oversize){ alert('File exceeds the 25 MB limit'); e.target.value = ''; return; }
+    this.setState(st => { const f = this._f(st, id);
+      const existing = f.files[key] || [];
+      return { forms:{ ...st.forms, [id]:{ ...f, files:{ ...f.files, [key]:existing.concat(files.map(x => x.name)) } } } }; });
+    e.target.value = '';
+  }
+  removeFormFile(id, key, idx){
+    this.setState(st => { const f = this._f(st, id);
+      const existing = f.files[key] || [];
+      return { forms:{ ...st.forms, [id]:{ ...f, files:{ ...f.files, [key]:existing.filter((_, i) => i !== idx) } } } }; });
   }
 
   // ------------------------------------------------------------- derived
@@ -1284,8 +1356,18 @@ class Component extends DCLogic {
   DOCS(list){
     const id = this._cur, f = this.fm(id);
     return this.G({ isDocs:true, rows:list.map((d, i) => {
+      if(d.multi){
+        const files = f.files[d.key] || [];
+        return { no:d.no || (String(i + 1) + '.'), label:d.label, note:d.note, required:!!d.req,
+          multi:true, single:false, bg:files.length ? '#f7fcf9' : '#fff',
+          hasFile:files.length > 0, noFile:files.length === 0,
+          fileList:files.map((name, fi) => ({ name, onRemove:() => this.removeFormFile(id, d.key, fi) })),
+          upBd:d.req ? '#e05c1a' : '#1e7a4d', upFg:d.req ? '#e05c1a' : '#1e7a4d',
+          onFile:(e) => this.addFormFiles(id, d.key, e) };
+      }
       const file = f.files[d.key];
       return { no:d.no || (String(i + 1) + '.'), label:d.label, note:d.note, required:!!d.req,
+        multi:false, single:true,
         bg:file ? '#f7fcf9' : '#fff', hasFile:!!file, noFile:!file, file:file || '',
         upBd:d.req ? '#e05c1a' : '#1e7a4d', upFg:d.req ? '#e05c1a' : '#1e7a4d',
         onFile:(e) => this.onFormFile(id, d.key, e), onClear:() => this.setFormFile(id, d.key, null) };
@@ -1339,7 +1421,7 @@ class Component extends DCLogic {
         sub:'Not applicable to a distribution licensee.', skip:this.isDistLicensee() },
       { id:'D', label:'Project', ref:'FORMAT-2 · D', title:'D. Details of Project (for which connectivity is sought)',
         sub:'Enclose duly signed supporting documents as considered appropriate.' },
-      { id:'E', label:'Activities', ref:'FORMAT-2 · E', title:'E. Status of Project Related Activities',
+      { id:'E', label:'Project Related Activities', ref:'FORMAT-2 · E', title:'E. Status of Project Related Activities',
         sub:'Enclose duly signed supporting documents as per clause ' + (this.isGenStation() ? '3.1' : '3.2') + ' of the procedure.' },
       { id:'F', label:'Fees', ref:'FORMAT-2 · F', title:'F. Details of Application Fees', sub:'' },
       { id:'G', label:'Undertakings', ref:'FORMAT-2 · G', title:'G. Undertaking(s), Enclosures & Signature', sub:'' }
@@ -1394,7 +1476,9 @@ class Component extends DCLogic {
       ], '1fr 1fr 1fr'),
       this.H('A.5', 'Status of the applicant'),
       this.FLD([ this.F('statusRO', 'Status of the applicant', { ro:true, span:2,
-        hint:'Set on the Applicability tab. Change it there if it is wrong — Sections D and E depend on it.' }) ])
+        hint:'Set on the Applicability tab. Change it there if it is wrong — Sections D and E depend on it.' }) ]),
+      this.H('', 'Proof of land'),
+      this.DOCS([{ key:'landProof', label:'Registered land document', note:'Registered sale deed, lease deed or other registered land title document for the project site.', req:true }])
     ];
 
     if(tab === 'B') return [
@@ -1442,8 +1526,12 @@ class Component extends DCLogic {
     if(tab === 'E') return [
       this.NOTE('For every activity record its present status, add a concise description of the work completed with regard to project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances required under law), and attach the duly signed supporting document.', 'info'),
       this.ACTS(),
-      this.H('', 'Other clearances', 'Any other clearance obtained or applied for, not covered above.'),
-      this.FLD([ this.F('otherClearances', 'Other clearances', { kind:'area', rows:3, span:2, opt:true }) ])
+      this.H('', 'SLDC registration', 'Upload the State Load Despatch Centre registration document, if obtained.'),
+      this.DOCS([{ key:'sldcReg', label:'SLDC Registration Document', note:'Optional at this stage.', req:false }]),
+      this.H('', 'Any other relevant information required by STU', 'Any other clearance obtained or applied for, not covered above.'),
+      this.FLD([ this.F('otherClearances', 'Any other relevant information required by STU', { kind:'area', rows:3, span:2, opt:true }) ]),
+      this.FLD([ this.F('additionalActivity', 'Additional activity / information', { kind:'area', rows:3, span:2, opt:true,
+        ph:'Add any further activity or information not covered above' }) ])
     ];
 
     if(tab === 'F') return [
@@ -1463,6 +1551,12 @@ class Component extends DCLogic {
       const out = [
         this.UND('und1', 'I undertake that all the activities of project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances as required from time to time under the law) are completed. All the details given in support of specific actions taken for project preparatory activities, as given under “E” above, are true and correct and nothing material has been concealed thereof.'),
         this.UND('und2', 'I further undertake that the technical standards for connectivity specified in the Central Electricity Authority (Technical Standards for Connectivity to the Grid) Regulations, 2007 have been complied with.'),
+        this.UND('und2b', 'I further undertake as follows:', [
+          { no:'(iii)', t:'I undertake that I shall comply with the guidelines and procedures for connectivity issued by BSPTCL.' },
+          { no:'(iv)', t:'I undertake that I shall comply with the BERC (Terms and Conditions for Intra-State Open Access) Regulations, 2018.' },
+          { no:'(v)', t:'I undertake that I shall comply with the Bihar Electricity Grid Code, 2010.' },
+          { no:'(vi)', t:'I undertake that I shall comply with any other applicable guidelines, regulations, and their amendments issued from time to time.' }
+        ]),
         this.RADIO('oaReq', 'Application for grant of long term open access',
           [{ v:'yes', t:'Required' }, { v:'no', t:'Not required' }],
           'Pick the declaration that applies. Only the matching set of conditions is submitted with the format.')
@@ -1659,10 +1753,12 @@ class Component extends DCLogic {
         title:lic ? 'A. Details of the Intra-State Transmission Licensee' : 'A. Details of the Applicant', sub:'' },
       { id:'B', label:'Maps', ref:'FORMAT-4 · B', title:'B. Maps and Diagrams',
         sub:'Schedules I to III. Site plans and single line diagrams are submitted in both hard and soft copy, in AutoCAD 2000 or above.' },
-      { id:'C', label:'Connection', ref:'FORMAT-4 · C / D',
+      { id:'C', label:'Connection', ref:'C / D',
         title:lic ? 'C. Details of Connection — Intra-State Transmission Licensee'
                   : (gen ? 'C. Details of Connection — Generating Plant'
                          : 'D. Details of Connection — Distribution Licensee, Captive User and Open Access Consumer'), sub:'' },
+      { id:'BG', label:'Bank Guarantee', ref:'FORMAT-7', title:'Bank Guarantee',
+        sub:'Reference: Page No. 61, FORMAT-7. Submit the hard copy of the Bank Guarantee to BSPTCL.' },
       { id:'E', label:'Communication', ref:'FORMAT-4 · E', title:'E. Details of Connection — Data and Voice Communication',
         sub:'As per the interface requirement and other guidelines made available by the RLDC / SLDC.' },
       { id:'S4', label:'Sch. IV', ref:'Schedule IV', title:'Schedule IV — Rating of Generating Units',
@@ -1727,7 +1823,7 @@ class Component extends DCLogic {
       this.FLD([
         this.F('statusRO', lic ? 'Status of transmission licensee' : 'Status of applicant company', { ro:true }),
         this.F('completion', lic ? 'Estimated time of completion of the transmission system' : 'Estimated time of completion of the project',
-          { ph:'e.g. 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below.' })
+          { ph:'e.g. Immediately, or 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below. Enter “Immediately” if the work is already complete.' })
       ]),
       this.DOCS([{ key:'pert', no:'A.6', label:'PERT chart', note:'Mandatory enclosure with the estimated time of completion.', req:true }])
     ];
@@ -1791,11 +1887,16 @@ class Component extends DCLogic {
       ];
     }
 
+    if(tab === 'BG') return [
+      this.NOTE('Upload a soft copy of the Bank Guarantee below. The hard copy of the Bank Guarantee must separately be submitted to BSPTCL. Reference: Page No. 61, FORMAT-7.', 'warn'),
+      this.DOCS([{ key:'bankGuarantee', label:'Bank Guarantee (soft copy)', note:'Upload a scanned copy of the Bank Guarantee. The hard copy is to be submitted to BSPTCL separately.', req:false }])
+    ];
+
     if(tab === 'E'){
       const out = [
         this.H('E.1 – E.3', 'Data and voice communication'),
         this.FLD([
-          this.F('dispatchAuthority', 'Dispatch authority', { options:['', 'SLDC', 'RLDC'].map(v => ({ v, t:v || 'Select' })),
+          this.F('dispatchAuthority', 'Dispatch authority', { options:['', 'SLDC', 'RLDC', 'ULDC'].map(v => ({ v, t:v || 'Select' })),
             hint:'The load dispatch centre this connection interfaces with.' }),
           this.F('gatewayType', 'Type of data gateway', { no:'1',
             options:['', 'Remote terminal unit (RTU)', 'Sub-station automation system gateway'].map(v => ({ v, t:v || 'Select' })) }),
@@ -1950,7 +2051,7 @@ class Component extends DCLogic {
       this.FLD([
         this.F('statusRO', 'Status of transmission licensee', { no:'5', ro:true }),
         this.F('completion', 'Estimated time of completion of the transmission system', { no:'6',
-          ph:'e.g. 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below.' })
+          ph:'e.g. Immediately, or 14 months from the date of the connection agreement', hint:'Enclose the PERT chart below. Enter “Immediately” if the work is already complete.' })
       ]),
       this.DOCS([{ key:'pert', no:'A.6', label:'PERT chart',
         note:'Mandatory enclosure with the estimated time of completion of the transmission system.', req:true }])
@@ -2167,7 +2268,7 @@ class Component extends DCLogic {
     return [
       { id:'A', label:'Project & site', ref:'WRD · NOC', title:'Project and Site Details',
         sub:'The project for which the no-objection of the Department of Water Resources is sought.' },
-      { id:'B', label:'Water body', ref:'WRD · NOC', title:'Type of water Body for which Clearance is Required', sub:'' },
+      { id:'B', label:'Water body', ref:'WRD · NOC', title:'Type of Water Body / Chart Land for which Clearance is Required', sub:'' },
       { id:'D', label:'Enclosures', ref:'WRD · NOC', title:'Enclosures', sub:'' },
       { id:'C', label:'Declaration', ref:'WRD · NOC', title:'Declaration & Signature', sub:'' }
     ];
@@ -2190,31 +2291,37 @@ class Component extends DCLogic {
     ];
 
     if(tab === 'B'){
-      return [
+      const isChartLand = this.fv('waterBody') === 'Chart Land';
+      const out = [
         this.FLD([
-          this.F('waterBody', 'Type of water body for which clearance is required', { span:2,
-            options:['', 'Canal', 'Reservoir', 'Pond', 'River', 'Ground Water', 'Land'].map(v => ({ v, t:v || 'Select' })) })
+          this.F('waterBody', 'Type of Water Body / Chart Land for which clearance is required', { span:2,
+            options:['', 'Canal', 'Reservoir', 'Pond', 'River', 'Ground Water', 'Land', 'Chart Land'].map(v => ({ v, t:v || 'Select' })) })
         ]),
         this.FLD([
-          this.F('waterName', 'Name of river/ canal/ reservoir/ pond', { span:2, opt:true })
+          this.F('waterName', 'Name of river / canal / reservoir / pond / Chart Land', { span:2, opt:true })
         ]),
         this.FLD([
           this.F('latitude', 'Latitude of water body', { opt:true }),
           this.F('longitude', 'Longitude of water body', { opt:true })
-        ]),
-        this.FLD([
-          this.F('area', 'Area of land required', { opt:true })
-        ]),
-        this.FLD([
-          this.F('volumeUsed', 'Volume of water required', { opt:true }),
-          this.F('distanceToBody', 'Distance of the project boundary from the water body (m)', { kind:'num', opt:true })
-        ]),
-        this.FLD([
-          this.F('landDetails', 'Land details', { span:2, kind:'area', rows:2, opt:true,
-            ph:'Khasra / plot number, area and location of the land for which clearance is required' })
-        ]),
-        this.NOTE('The Department of Water Resources issues the no-objection for projects that cross, abut or draw from a canal, reservoir, pond or river. Attach the site plan marking the water body and the project boundary in the next section.', 'info')
+        ])
       ];
+      if(isChartLand){
+        out.push(this.FLD([
+          this.F('area', 'Area of land required (Chart Land)', { opt:true })
+        ]));
+      }
+      out.push(this.FLD([
+        this.F('volumeUsed', 'Volume of water required', { opt:true }),
+        this.F('distanceToBody', 'Distance of the project boundary from the water body (m)', { kind:'num', opt:true })
+      ]));
+      if(isChartLand){
+        out.push(this.FLD([
+          this.F('landDetails', 'Land details (Chart Land)', { span:2, kind:'area', rows:2, opt:true,
+            ph:'Khasra / plot number, area and location of the Chart Land for which clearance is required' })
+        ]));
+      }
+      out.push(this.NOTE('The Department of Water Resources issues the no-objection for projects that cross, abut or draw from a canal, reservoir, pond, river or Chart Land. Attach the site plan marking the water body and the project boundary in the next section.', 'info'));
+      return out;
     }
 
     if(tab === 'C') return [];
@@ -2222,9 +2329,43 @@ class Component extends DCLogic {
     if(tab === 'D') return [
       this.DOCS([
         { key:'wrPlan', no:'1.', label:'Site plan marking the water body and the project boundary', note:'Showing the distance from the canal, reservoir, pond or river.', req:true },
-        { key:'wrOther', no:'2.', label:'Any other supporting document', note:'Optional.', req:false }
+        { key:'wrWorkOrder', no:'2.', label:'Work Order (BREDA)', note:'Work order issued by BREDA for the project.', req:false },
+        { key:'wrNocFormat', no:'3.', label:'WRD NOC Format', note:'The filled-in Water Resources Department NOC format.', req:false },
+        { key:'wrOther', no:'4.', label:'Any other supporting document', note:'Optional.', req:false }
       ])
     ];
+
+    return [];
+  }
+
+  // =============================== Metering Specification Approval (NBPDCL/SBPDCL)
+  msaTabs(){
+    return [
+      { id:'A', label:'Specification', ref:'NBPDCL / SBPDCL · Metering', title:'Metering Specification', sub:'' },
+      { id:'B', label:'Documents', ref:'NBPDCL / SBPDCL · Metering', title:'Supporting Documents', sub:'' },
+      { id:'C', label:'Declaration', ref:'NBPDCL / SBPDCL · Metering', title:'Declaration & Signature', sub:'' }
+    ];
+  }
+  msaGroups(tab){
+    if(tab === 'A') return [
+      this.H('', 'Project'),
+      this.FLD([
+        this.F('projectName', 'Name of the project', { auto:true }),
+        this.F('projectCap', 'Capacity', { auto:true })
+      ]),
+      this.H('', 'Meter specification'),
+      this.FLD([
+        this.F('meterType', 'Type of meter', { options:['', 'LT', 'HT', 'ABT'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('phaseSupply', 'Phase supply', { options:['', '3 Phase', 'Single Phase'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('meterRating', 'Rating', { ph:'e.g. 10-40A, 3x240V' })
+      ])
+    ];
+
+    if(tab === 'B') return [
+      this.DOCS([{ key:'msaDocs', label:'Upload documents', note:'Attach the meter test report, specification sheet or any other supporting document. Multiple files allowed.', req:true, multi:true }])
+    ];
+
+    if(tab === 'C') return [];
 
     return [];
   }
@@ -2233,15 +2374,16 @@ class Component extends DCLogic {
   tabsFor(kind){
     return kind === 'F2' ? this.f2Tabs() : kind === 'F4' ? this.f4Tabs()
          : kind === 'F4L' ? this.f4lTabs()
-         : kind === 'WCR' ? this.wcrTabs() : this.wrTabs();
+         : kind === 'WCR' ? this.wcrTabs() : kind === 'MSA' ? this.msaTabs() : this.wrTabs();
   }
   groupsForKind(kind, tab){
     return kind === 'F2' ? this.f2Groups(tab) : kind === 'F4' ? this.f4Groups(tab)
          : kind === 'F4L' ? this.f4lGroups(tab)
-         : kind === 'WCR' ? this.wcrGroups(tab) : this.wrGroups(tab);
+         : kind === 'WCR' ? this.wcrGroups(tab) : kind === 'MSA' ? this.msaGroups(tab) : this.wrGroups(tab);
   }
   signTabFor(kind){
-    return kind === 'F2' ? 'G' : kind === 'F4' ? 'F' : kind === 'F4L' ? 'E' : kind === 'WR' ? 'C' : null;
+    return kind === 'F2' ? 'G' : kind === 'F4' ? 'F' : kind === 'F4L' ? 'E'
+         : kind === 'WR' ? 'C' : kind === 'MSA' ? 'C' : null;
   }
 
   // ------------------------------------------------------- completeness
@@ -2277,14 +2419,16 @@ class Component extends DCLogic {
       label:d.label, name:d.name,
       countText:d.services.length + (d.services.length === 1 ? ' service' : ' services'),
       services:d.services.map(s => {
-        const checked = !!sel[s.id];
+        const awaited = !!s.formAwaited;
+        const checked = !awaited && !!sel[s.id];
         const doc = S.docs[s.id] || {};
         const hasProof = !!(doc.proof || (doc.receipt && doc.receipt.trim()));
         const row = {
           name:s.name, sla:s.sla, authority:s.authority, checked,
-          onToggle:() => this.toggle(s.id), rowPad,
+          onToggle:awaited ? (() => {}) : (() => this.toggle(s.id)), rowPad,
+          rowCursor:awaited ? 'default' : 'pointer',
           rowBg:(checked && highlightSelected) ? '#f3faf6' : '#fff',
-          boxBorder:checked ? '#1e9b5f' : '#cdd6d0',
+          boxBorder:awaited ? '#dce3df' : (checked ? '#1e9b5f' : '#cdd6d0'),
           boxBg:checked ? '#1e9b5f' : '#fff',
           supportLabel:doc.support ? ('✓ ' + doc.support) : 'Upload supporting doc',
           supportBorder:doc.support ? '#1e9b5f' : '#1e7a4d', supportColor:'#1e7a4d',
@@ -2297,7 +2441,9 @@ class Component extends DCLogic {
           onReceipt:(e) => this.setDoc(s.id, { receipt:e.target.value }),
           onChallan:() => alert('Challan PDF for ' + s.name + ' would download here (demo).'),
           showFeeCard:!s.noFee,
-          hasForm:false
+          hasForm:false,
+          formAwaited:awaited,
+          formAwaitedNote:d.label + ' has not supplied the form for this clearance yet, so it cannot be applied for. It appears here so you know it exists.'
         };
         if(s.form) Object.assign(row, this.formRow(s));
         return row;
