@@ -286,6 +286,9 @@
                     <span style="flex:none;font-size:12px;color:#8e9e97;white-space:nowrap;">{{ d.countText }}</span>
                   </div>
                   <div style="display:flex;flex-direction:column;">
+                    <sc-if value="{{ d.isEmpty }}" hint-placeholder-val="{{ false }}">
+                      <div style="padding:16px 18px;font-size:12px;color:#8e9e97;line-height:1.6;">No services listed for this department yet.</div>
+                    </sc-if>
                     <sc-for list="{{ d.services }}" as="s" hint-placeholder-count="1">
                       <div style="border-top:1px solid #eef1ef;background:{{ s.rowBg }};">
                         <div onClick="{{ s.onToggle }}"
@@ -527,6 +530,14 @@
                                                     </sc-for>
                                                   </select>
                                                 </div>
+                                                <sc-if value="{{ a.needsSec4 }}" hint-placeholder-val="{{ false }}">
+                                                  <label
+                                                    style="margin-top:10px;display:flex;align-items:flex-start;gap:9px;cursor:pointer;border:1px solid {{ a.sec4Bd }};background:{{ a.sec4Bg }};border-radius:8px;padding:9px 11px;">
+                                                    <input type="checkbox" checked="{{ a.sec4 }}" onChange="{{ a.onSec4 }}"
+                                                      style="accent-color:#1e9b5f;margin-top:2px;flex:none;width:15px;height:15px;">
+                                                    <span style="font-size:12px;line-height:1.6;color:#1c2530;">Whether land is being acquired under Section 4 of the Land Acquisition Act, 1894? <span style="color:#b4453a;font-weight:700;">*</span></span>
+                                                  </label>
+                                                </sc-if>
                                                 <sc-if value="{{ a.expanded }}" hint-placeholder-val="{{ true }}">
                                                   <div
                                                     style="margin-top:10px;display:grid;grid-template-columns:1fr 210px;gap:11px;align-items:start;">
@@ -886,8 +897,7 @@
 //  Apply for Departmental Clearances
 //  Statutory forms are filled in-place, inside the clearance row, as tabs:
 //   · BSPTCL Grid Connectivity            → FORMAT-2 (grant of connectivity)
-//   · BSPTCL Final Grid Connectivity Appr. → FORMAT-4 (connection agreement)
-//   · BSPTCL Connection Agreement (licensee) → FORMAT-4, the intra-State transmission licensee variant
+//   (FORMAT-4 / FORMAT-4 Licensee code is kept below but their rows were removed from the CR — dept request, Oct 2026)
 //   · NBPDCL/SBPDCL Metering Specification Approval → MSA (meter type, phase supply, rating, multi-file upload)
 //  A clearance with a form can only be submitted once its form is complete.
 //  NBPDCL/SBPDCL services whose form the DISCOM hasn't supplied yet render a "Form awaited"
@@ -897,28 +907,19 @@
 const DEPARTMENTS = [
   { label:'BSPTCL', name:'Bihar State Power Transmission Company Limited (BSPTCL / STU)', services:[
     { id:'bsptcl-grid', name:'Grid Connectivity', sla:30, authority:'DISCOMs / BSPTCL', form:'F2', noFee:true },
-    { id:'bsptcl-final', name:'Final Grid Connectivity Approval', sla:120, authority:'BSPTCL', form:'F4', noFee:true },
-    { id:'bsptcl-final-lic', name:'Connection Agreement — Intra-State Transmission Licensee', sla:120,
-      authority:'BSPTCL / STU', form:'F4L', noFee:true },
-  ]},
-  { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
-    { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
   ]},
   { label:'NBPDCL', name:'North Bihar Power Distribution Company Limited', services:[
     { id:'nbpdcl-pss', name:'PSS Allocation', sla:30, authority:'DISCOMs (NBPDCL/SBPDCL)' },
     { id:'nbpdcl-msa', name:'Metering Specification Approval', sla:13, authority:'DISCOMs (NBPDCL/SBPDCL)', form:'MSA', noFee:true },
-    { id:'nbpdcl-startup', name:'Startup Power Approval', sla:15, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
-    { id:'mrt-sem', name:'NOC for Special Energy Meter (MRT)', sla:7, authority:'DISCOMs (MRT)', formAwaited:true },
-    { id:'nbpdcl-sem-install', name:'Installation of SEM Meter', sla:7, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
-    { id:'nbpdcl-ptc', name:'Permission to Commission (PTC)', sla:7, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
-    { id:'nbpdcl-pcfo', name:'Project Commissioning by Field Office', sla:3, authority:'DISCOMs (NBPDCL/SBPDCL)', formAwaited:true },
   ]},
   { label:'EIO', name:'Electrical Inspector Office', services:[
-    { id:'eio-plan', name:'Plan Approval', sla:4, authority:'Electrical Inspector Office' },
-    { id:'eio-charge', name:'Charging Permission', sla:10, authority:'Electrical Inspector Office', form:'WCR', noFee:true },
+    // services removed Oct 2026 — new EIO services to be specified by the client
   ]},
   { label:'PHED', name:'Public Health Engineering Department', services:[
     { id:'phed-noc', name:'NOC for Canal / Reservoir / Pond', sla:75, authority:'Water Resource Dept. / PHED', form:'WR', noFee:true },
+  ]},
+  { label:'SLDC', name:'State Load Dispatch Centre (SLDC), Bihar', services:[
+    { id:'sldc-sync', name:'Synchronization Permission', sla:7, authority:'SLDC' },
   ]},
   { label:'BSPCB', name:'Bihar State Pollution Control Board (BSPCB)', services:[
     { id:'bspcb-poll', name:'Pollution Clearance', sla:15, authority:'BSPCB' },
@@ -961,6 +962,7 @@ const ACTS_LINE = [
   'Commissioning schedule'
 ];
 
+const LAND_ACT = 'Site identification and land acquisition';
 const ACT_STATES = [
   { v:'',     t:'Select status',   accent:'#cdd6d0', bg:'#fff',    selBg:'#fff',    selBd:'#cdd6d0', selFg:'#6b7c72' },
   { v:'done', t:'Completed',       accent:'#1e9b5f', bg:'#f7fcf9', selBg:'#e7f4ec', selBd:'#bfe3cd', selFg:'#1e7a4d' },
@@ -1144,7 +1146,7 @@ function newForm(kind){
   } else if(kind === 'MSA'){
     base.vals = Object.assign({}, CARRIED, {
       projectName:'Rajeev Industrial Solar 250 kW', projectCap:'250 kW',
-      meterType:'', phaseSupply:'', meterRating:'',
+      meterType:'', phaseSupply:'', meterRating:'', meterMake:'', voltageLevel:'',
       signPlace:'Patna', signName:'', signDesig:''
     });
   } else {
@@ -1337,10 +1339,15 @@ class Component extends DCLogic {
     return this.G({ isActs:true, rows:this.actList().map((name, i) => {
       const key = 'a' + (i + 1), a = f.acts[key] || {};
       const st = ACT_STATES.find(s => s.v === (a.status || '')) || ACT_STATES[0];
+      const isLand = name === LAND_ACT;
+      const opts = isLand ? ACT_STATES.filter(s => ['', 'done', 'prog'].includes(s.v)) : ACT_STATES;
       return {
         no:'E.' + (i + 1), name, accent:st.accent, bg:st.bg, selBg:st.selBg, selBd:st.selBd, selFg:st.selFg,
-        status:a.status || '', options:ACT_STATES.map(s => ({ v:s.v, t:s.t })),
+        status:a.status || '', options:opts.map(s => ({ v:s.v, t:s.t })),
         onStatus:(e) => this.setAct(id, key, { status:e.target.value }),
+        needsSec4:isLand && a.status === 'prog', sec4:!!a.sec4,
+        sec4Bd:a.sec4 ? '#bfe3cd' : '#f0d6ac', sec4Bg:a.sec4 ? '#f7fcf9' : '#fffcf7',
+        onSec4:(e) => this.setAct(id, key, { sec4:e.target.checked }),
         expanded:!!a.status && a.status !== 'na',
         desc:a.desc || '', onDesc:(e) => this.setAct(id, key, { desc:e.target.value }),
         placeholder:'Concise description of the activity and its present status…',
@@ -1526,8 +1533,6 @@ class Component extends DCLogic {
     if(tab === 'E') return [
       this.NOTE('For every activity record its present status, add a concise description of the work completed with regard to project planning, designing and pre-construction activities (including all licences, authorisations, permissions and clearances required under law), and attach the duly signed supporting document.', 'info'),
       this.ACTS(),
-      this.H('', 'SLDC registration', 'Upload the State Load Despatch Centre registration document, if obtained.'),
-      this.DOCS([{ key:'sldcReg', label:'SLDC Registration Document', note:'Optional at this stage.', req:false }]),
       this.H('', 'Any other relevant information required by STU', 'Any other clearance obtained or applied for, not covered above.'),
       this.FLD([ this.F('otherClearances', 'Any other relevant information required by STU', { kind:'area', rows:3, span:2, opt:true }) ]),
       this.FLD([ this.F('additionalActivity', 'Additional activity / information', { kind:'area', rows:3, span:2, opt:true,
@@ -2357,12 +2362,20 @@ class Component extends DCLogic {
       this.FLD([
         this.F('meterType', 'Type of meter', { options:['', 'LT', 'HT', 'ABT'].map(v => ({ v, t:v || 'Select' })) }),
         this.F('phaseSupply', 'Phase supply', { options:['', '3 Phase', 'Single Phase'].map(v => ({ v, t:v || 'Select' })) }),
-        this.F('meterRating', 'Rating', { ph:'e.g. 10-40A, 3x240V' })
+        this.F('meterRating', 'Rating', { ph:'e.g. 10-40A, 3x240V' }),
+        this.F('meterMake', 'Make', { options:['', 'Secure', 'Genius', 'HP2', 'Schneider'].map(v => ({ v, t:v || 'Select' })) }),
+        this.F('voltageLevel', 'Voltage level', { options:['', 'LT', '33kV/110V', '11kV/110V', '132kV/110V'].map(v => ({ v, t:v || 'Select' })) })
       ])
     ];
 
     if(tab === 'B') return [
-      this.DOCS([{ key:'msaDocs', label:'Upload documents', note:'Attach the meter test report, specification sheet or any other supporting document. Multiple files allowed.', req:true, multi:true }])
+      this.DOCS([
+        { key:'msaGttp', no:'1.', label:'GTTP Drawing', note:'', req:true },
+        { key:'msaDesign', no:'2.', label:'Design of Meter', note:'', req:true },
+        { key:'msaNabl', no:'3.', label:'NABL Lab Type Test Certificate', note:'Not older than 2 years.', req:true },
+        { key:'msaMrt', no:'4.', label:'MRT Test Certificate', note:'', req:true },
+        { key:'msaDocs', no:'5.', label:'Any other supporting document', note:'Optional. Multiple files allowed.', req:false, multi:true }
+      ])
     ];
 
     if(tab === 'C') return [];
@@ -2394,6 +2407,7 @@ class Component extends DCLogic {
       if(g.isFields) g.fields.forEach(f => { if(f.required && String(f.value).trim() === '') ok = false; });
       if(g.isDocs) g.rows.forEach(d => { if(d.required && !d.hasFile) ok = false; });
       if(g.isUndertaking && !g.checked) ok = false;
+      if(g.isActs) g.rows.forEach(a => { if(a.needsSec4 && !a.sec4) ok = false; });
       if(g.isUnits && g.rows.length === 0 && !g.isOptionalList) { /* empty repeating lists are allowed */ }
     });
     // the generic signature block lives on the last data tab, where the format uses one
@@ -2418,6 +2432,7 @@ class Component extends DCLogic {
     const departments = DEPARTMENTS.map(d => ({
       label:d.label, name:d.name,
       countText:d.services.length + (d.services.length === 1 ? ' service' : ' services'),
+      isEmpty:d.services.length === 0,
       services:d.services.map(s => {
         const awaited = !!s.formAwaited;
         const checked = !awaited && !!sel[s.id];
