@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;}body{margin:0;background:#eef1ef;}button{font-family:inherit;cursor:pointer;}input,select{font-family:inherit;}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid #1d6fb8;outline-offset:2px;}</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
+    <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;">
+      <div>
+        <div style="font-weight:700;font-size:18px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Officer Console</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Dashboard
+      </div>
+      <a href="BREDA Officer Entry Point.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+        My Applications
+      </a>
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></svg>
+        All Applications
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Notifications
+        <span style="margin-left:auto;background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;">4</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </div>
+    </nav>
+    <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.07);">
+      <div style="font-size:12px;color:#7d9a8a;">Signed in as</div>
+      <div style="font-size:13.5px;font-weight:600;color:#fff;margin-top:2px;">Officer Priya S.</div>
+      <div style="font-size:11.5px;color:#7d9a8a;margin-top:1px;">BREDA HQ · Solar Division</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">All Applications</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">BREDA OFFICER</span>
+        <div style="position:relative;width:36px;height:36px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="width:36px;height:36px;border-radius:50%;background:#1a5a96;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">BO</div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / All Applications</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">All Applications</h1>
+        <a href="BREDA Officer Entry Point.dc.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;color:#fff;font-size:13.5px;font-weight:600;border-radius:9px;padding:9px 16px;text-decoration:none;">Open applications queue →</a>
+      </div>
+    </div>
+
+    <div style="padding:20px 28px 40px;display:flex;flex-direction:column;gap:18px;">
+
+      <!-- KPI cards -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="3">
+          <button type="button" onClick="{{k.onClick}}" aria-pressed="{{k.pressed}}" aria-label="Filter table: {{k.label}}" style="display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;background:#fff;border:1px solid {{k.bdr}};border-radius:14px;box-shadow:{{k.shadow}};padding:18px 20px;border-left:4px solid {{k.color}};">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#8e9e97;text-transform:uppercase;">{{k.label}}</div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px;">
+              <span style="font-family:'IBM Plex Serif',serif;font-size:38px;font-weight:700;color:#0f2319;line-height:1;">{{k.value}}</span>
+              <span style="font-size:12.5px;font-weight:600;color:{{k.fg}};background:{{k.bg}};border:1px solid {{k.bd}};border-radius:999px;padding:2px 9px;">{{k.chip}}</span>
+            </div>
+            <div style="font-size:12.5px;color:#6b7c72;margin-top:8px;">{{k.sub}}</div>
+          </button>
+        </sc-for>
+      </div>
+
+      <!-- Applications table -->
+      <section aria-labelledby="apps-h" style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);overflow:hidden;">
+        <div style="padding:18px 20px 14px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <h2 id="apps-h" style="font-size:15px;font-weight:600;color:#0f2319;margin:0;">Applications</h2>
+            <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
+            <div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px;">
+              <label for="f-q" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">SEARCH</label>
+              <input id="f-q" type="search" value="{{f.q}}" onInput="{{onQ}}" placeholder="Applicant, project, ack. no…" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 12px;font-size:13px;color:#1c2530;background:#fff;">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label for="f-status" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">STATUS</label>
+              <select id="f-status" value="{{f.status}}" onChange="{{onStatus}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:150px;">
+                <sc-for list="{{statusOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label for="f-type" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">PROJECT TYPE</label>
+              <select id="f-type" value="{{f.type}}" onChange="{{onType}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:160px;">
+                <sc-for list="{{typeOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+              </select>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label for="f-dist" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">DISTRICT</label>
+              <select id="f-dist" value="{{f.district}}" onChange="{{onDistrict}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:160px;">
+                <sc-for list="{{districtOpts}}" as="o" hint-placeholder-count="9"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+              </select>
+            </div>
+            <sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}">
+              <button type="button" onClick="{{onClear}}" style="background:none;border:1px solid #d6dfd8;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;color:#5b6b62;">&#x2715; Clear filters</button>
+            </sc-if>
+          </div>
+        </div>
+
+        <div role="table" aria-label="Applications">
+          <div role="row" style="display:grid;grid-template-columns:2fr 1.1fr 1.1fr .8fr 1.2fr 1.3fr 90px;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-top:1px solid #e3e9e6;border-bottom:1px solid #e3e9e6;">
+            <div role="columnheader">APPLICANT / PROJECT</div>
+            <div role="columnheader">ACK. NO. &amp; DATE</div>
+            <div role="columnheader">DISTRICT</div>
+            <div role="columnheader">CAPACITY</div>
+            <div role="columnheader">STATUS</div>
+            <div role="columnheader">SLA</div>
+            <div role="columnheader" style="text-align:right;">ACTION</div>
+          </div>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+            <div role="row" style="display:grid;grid-template-columns:2fr 1.1fr 1.1fr .8fr 1.2fr 1.3fr 90px;align-items:center;padding:11px 20px;border-bottom:1px solid #eef1ef;border-left:3px solid {{r.accent}};">
+              <div role="cell">
+                <div style="font-size:14px;font-weight:600;color:#0f2319;">{{r.name}}</div>
+                <div style="font-size:12px;color:#6b7c72;margin-top:2px;">{{r.project}}</div>
+              </div>
+              <div role="cell">
+                <div style="font-size:13px;font-weight:600;color:#1c2530;">{{r.ack}}</div>
+                <div style="font-size:12px;color:#8e9e97;margin-top:2px;">{{r.date}}</div>
+              </div>
+              <div role="cell" style="font-size:13.5px;color:#1c2530;">{{r.district}}</div>
+              <div role="cell" style="font-size:13.5px;color:#1c2530;">{{r.capacity}}</div>
+              <div role="cell">
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 11px;background:{{r.sBg}};border:1px solid {{r.sBd}};color:{{r.sFg}};">
+                  <span style="width:7px;height:7px;border-radius:50%;background:{{r.sDot}};flex:none;"></span>{{r.status}}
+                </span>
+              </div>
+              <div role="cell" style="font-size:12.5px;font-weight:{{r.slaW}};color:{{r.slaFg}};">{{r.sla}}</div>
+              <div role="cell" style="text-align:right;">
+                <a href="{{r.href}}" aria-label="{{r.cta}} {{r.ack}}" style="color:{{r.ctaFg}};font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">{{r.cta}} →</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{isEmpty}}" hint-placeholder-val="{{false}}">
+          <div style="text-align:center;padding:48px 24px;color:#8e9e97;">
+            <div style="font-size:15px;font-weight:600;color:#5b6b62;margin-bottom:6px;">No applications match these filters</div>
+            <div style="font-size:13px;">Try clearing a filter above.</div>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#f6f8f7;">
+          <span style="font-size:12.5px;color:#6b7c72;">{{pageLabel}}</span>
+          <div style="display:flex;gap:8px;">
+            <button type="button" onClick="{{onPrev}}" disabled="{{prevOff}}" style="background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c2530;opacity:{{prevOp}};">← Previous</button>
+            <button type="button" onClick="{{onNext}}" disabled="{{nextOff}}" style="background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c2530;opacity:{{nextOp}};">Next →</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { status:'all', type:'all', district:'all', q:'', page:0 };
+  }
+  setF(patch){ this.setState({ ...patch, page:0 }); }
+  toggle(key, val){ this.setF({ [key]: this.state[key]===val ? 'all' : val }); }
+
+  renderVals(){
+    // s = sanctioned, p = in progress (includes delayed), d = delayed (SLA breached)
+    const DISTRICTS = [
+      { name:'Patna',        s:12, p:14, d:2 },
+      { name:'Gaya',         s:6,  p:8,  d:1 },
+      { name:'Muzaffarpur',  s:5,  p:7,  d:1 },
+      { name:'Bhagalpur',    s:4,  p:6,  d:1 },
+      { name:'Darbhanga',    s:4,  p:5,  d:1 },
+      { name:'Nalanda',      s:3,  p:5,  d:0 },
+      { name:'Purnia',       s:2,  p:4,  d:1 },
+      { name:'Other districts', s:2, p:5, d:0 }
+    ];
+    const TYPES = [
+      { name:'Solar Rooftop',   s:20, p:22, d:2, caps:['100 kW','250 kW','500 kW'] },
+      { name:'Ground-Mounted',  s:12, p:21, d:4, caps:['2 MW','5 MW','10 MW'] },
+      { name:'Solar + Storage', s:6,  p:11, d:1, caps:['6 MW','12 MW','20 MW'] }
+    ];
+    const sum = (a,k) => a.reduce((n,r)=>n+r[k],0);
+    const S = sum(DISTRICTS,'s'), P = sum(DISTRICTS,'p'), D = sum(DISTRICTS,'d');
+    const pct = (n,t) => (t ? (n/t*100) : 0).toFixed(1)+'%';
+
+    // ---- application rows, generated so they add up to the counts above ----
+    const OPEN = [
+      { label:'Pending Review', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' },
+      { label:'Under Review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
+      { label:'Query Raised',   bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', dot:'#e0922a', accent:'#e0922a' },
+      { label:'Dept. Review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
+      { label:'Payment Verification', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' }
+    ];
+    const DONE = { label:'Approved', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', dot:'#1e9b5f', accent:'#1e9b5f' };
+    const NAMES = ['Rajesh Kumar','Sunita Devi','Bihar Solar Pvt. Ltd.','Amit Verma','Prakash Jha','M/s Green Power Bihar','Anita Singh','Manoj Prasad','Kavita Kumari','Suresh Yadav','Ritu Sharma','Sunrise Energy LLP'];
+    const expand = (arr, f) => arr.flatMap(r => Array(f(r)).fill(r.name));
+    // k is coprime with each list length, so the stride visits every type slot exactly once
+    const classes = [
+      { key:'sanctioned', k:5, dist:expand(DISTRICTS,r=>r.s),     type:expand(TYPES,r=>r.s) },
+      { key:'ontrack',    k:5, dist:expand(DISTRICTS,r=>r.p-r.d), type:expand(TYPES,r=>r.p-r.d) },
+      { key:'delayed',    k:3, dist:expand(DISTRICTS,r=>r.d),     type:expand(TYPES,r=>r.d) }
+    ];
+    const today = new Date(2026,9,7);
+    const fmt = d => d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+    let n = 0;
+    const ALL = [];
+    classes.forEach(c => c.dist.forEach((district,i) => {
+      n++;
+      const tName = c.type[(i*c.k) % c.type.length];
+      const T = TYPES.find(t => t.name===tName);
+      const cap = T.caps[(n*7) % T.caps.length];
+      const age = (n*11) % 110 + 4;
+      const date = new Date(today); date.setDate(date.getDate()-age);
+      const st = c.key==='sanctioned' ? DONE : OPEN[n % OPEN.length];
+      let sla = 'Closed', slaFg = '#8e9e97', slaW = 500;
+      if (c.key==='ontrack') { sla = (3 + (n*5)%25)+' days left'; slaFg = '#1e7a4d'; }
+      if (c.key==='delayed') { sla = 'Delayed '+(2 + (n*3)%19)+' days'; slaFg = '#92400e'; slaW = 700; }
+      ALL.push({
+        cls:c.key, name:NAMES[n % NAMES.length], project:tName+' · '+cap,
+        ack:'Ack/2025/'+String(100+n).padStart(3,'0'), date:fmt(date), age,
+        type:tName, district, capacity:cap,
+        status:st.label, sBg:st.bg, sBd:st.bd, sFg:st.fg, sDot:st.dot, accent:c.key==='delayed' ? '#c2740f' : st.accent,
+        sla, slaFg, slaW,
+        cta: c.key==='sanctioned' ? 'View' : 'Review', ctaFg: c.key==='sanctioned' ? '#8e9e97' : '#1e9b5f',
+        href:'BREDA Review Page.dc.html'
+      });
+    }));
+    ALL.sort((a,b) => a.age - b.age);
+
+    // ---- filtering ----
+    const f = this.state;
+    const q = f.q.trim().toLowerCase();
+    const match = r =>
+      (f.status==='all' || (f.status==='sanctioned' ? r.cls==='sanctioned' : f.status==='inprogress' ? r.cls!=='sanctioned' : r.cls==='delayed')) &&
+      (f.type==='all' || r.type===f.type) &&
+      (f.district==='all' || r.district===f.district) &&
+      (!q || (r.name+' '+r.project+' '+r.ack+' '+r.district).toLowerCase().includes(q));
+    const filtered = ALL.filter(match);
+    const PER = 10;
+    const pages = Math.max(1, Math.ceil(filtered.length/PER));
+    const page = Math.min(f.page, pages-1);
+    const rows = filtered.slice(page*PER, page*PER+PER);
+    const hasFilters = f.status!=='all' || f.type!=='all' || f.district!=='all' || !!q;
+
+    // ---- summary blocks (always over all projects; clicking one sets the table filter) ----
+    const split = r => {
+      const tot = r.s + r.p;
+      return { wS:pct(r.s,tot), wP:pct(r.p-r.d,tot), wD:pct(r.d,tot), total:tot };
+    };
+    const maxTot = Math.max(...DISTRICTS.map(r=>r.s+r.p));
+    const ON = '#1d6fb8';
+    const kpis = [
+      { key:'sanctioned', label:'Projects sanctioned', value:S, chip:'Approved', color:'#1e9b5f', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', sub:'Number of projects approved by BREDA' },
+      { key:'inprogress', label:'Projects in progress', value:P, chip:(P-D)+' on track', color:'#1d6fb8', bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', sub:'Under BREDA or Dept. review, or awaiting applicant' },
+      { key:'delayed',    label:'Projects delayed', value:D, chip:pct(D,P)+' of in progress', color:'#c2740f', bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', sub:'Projects with delayed SLA' }
+    ].map(k => { const on = f.status===k.key; return { ...k, pressed:on, bdr:on?ON:'#e3e9e6', shadow:on?'0 0 0 2px '+ON+'33':'0 1px 4px rgba(15,35,25,.05)', onClick:()=>this.toggle('status',k.key) }; });
+    const types = TYPES.map(r => { const on = f.type===r.name; return { ...r, ...split(r), pressed:on, bg:on?'#f2f7fc':'#fff', bdr:on?ON:'transparent', onClick:()=>this.toggle('type',r.name) }; });
+    const districts = DISTRICTS.map(r => { const on = f.district===r.name; return { ...r, ...split(r), barW:pct(r.s+r.p,maxTot), dFg:r.d?'#92400e':'#8e9e97', pressed:on, bg:on?'#f2f7fc':'#fff', onClick:()=>this.toggle('district',r.name) }; });
+
+    const opts = (list, cur) => list.map(([v,l]) => ({ v, l, sel:v===cur }));
+    const statusOpts = opts([['all','All'],['sanctioned','Approved'],['inprogress','In progress'],['delayed','Delayed']], f.status);
+    const typeOpts = opts([['all','All types'], ...TYPES.map(t=>[t.name,t.name])], f.type);
+    const districtOpts = opts([['all','All districts'], ...DISTRICTS.map(d=>[d.name,d.name])], f.district);
+
+    const from = filtered.length ? page*PER+1 : 0;
+    return {
+      kpis, types, districts, rows, f, statusOpts, typeOpts, districtOpts, hasFilters,
+      isEmpty: filtered.length===0,
+      resultLabel: 'Showing '+filtered.length+' of '+ALL.length+' applications',
+      pageLabel: filtered.length ? from+'–'+(from+rows.length-1)+' of '+filtered.length+' · Page '+(page+1)+' of '+pages : 'No results',
+      prevOff: page===0, nextOff: page>=pages-1, prevOp: page===0?.45:1, nextOp: page>=pages-1?.45:1,
+      onPrev: () => this.setState({ page: Math.max(0,page-1) }),
+      onNext: () => this.setState({ page: Math.min(pages-1,page+1) }),
+      onQ: e => this.setF({ q:e.target.value }),
+      onStatus: e => this.setF({ status:e.target.value }),
+      onType: e => this.setF({ type:e.target.value }),
+      onDistrict: e => this.setF({ district:e.target.value }),
+      onClear: () => this.setF({ status:'all', type:'all', district:'all', q:'' })
+    };
+  }
+}
+</script>
+</body>
+</html>
