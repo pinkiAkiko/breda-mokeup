@@ -89,25 +89,13 @@
       <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / All Applications</div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
         <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">All Applications</h1>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <div role="group" aria-label="Filter by status" style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
-            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
-              <button type="button" onClick="{{t.onClick}}" aria-pressed="{{t.pressed}}" style="background:{{t.bg}};color:{{t.fg}};border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;box-shadow:{{t.shadow}};">{{t.label}} <span style="background:{{t.badgeBg}};color:{{t.badgeFg}};border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px;">{{t.count}}</span></button>
-            </sc-for>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e6;border-radius:9px;padding:7px 12px;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e9e97" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            <label for="f-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search applications</label>
-            <input id="f-q" type="search" value="{{f.q}}" onInput="{{onQ}}" placeholder="Search by name, ack. no…" style="border:none;outline:none;font-size:13px;color:#1c2530;width:200px;background:transparent;">
-          </div>
-        </div>
       </div>
     </div>
 
     <!-- Stats strip -->
     <div style="display:flex;background:#fff;border-bottom:1px solid #e3e9e6;">
       <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
-        <div style="flex:1;min-width:0;padding:12px 20px;border-right:1px solid #eef1ef;display:flex;align-items:center;gap:14px;">
+        <button type="button" onClick="{{s.onClick}}" aria-pressed="{{s.pressed}}" aria-label="Show {{s.label}}" style="flex:1;min-width:0;text-align:left;font:inherit;color:inherit;cursor:pointer;background:{{s.bg}};border:none;border-right:1px solid #eef1ef;border-bottom:none;padding:12px 20px;display:flex;align-items:center;gap:14px;">
           <span style="width:4px;align-self:stretch;border-radius:2px;background:{{s.color}};flex:none;"></span>
           <div>
             <div style="display:flex;align-items:center;gap:8px;">
@@ -117,7 +105,7 @@
             <div style="font-size:11.5px;font-weight:600;color:#5b6b62;margin-top:4px;white-space:nowrap;">{{s.label}}</div>
             <div style="font-size:11.5px;line-height:1.35;color:#6b7c72;margin-top:2px;max-width:260px;">{{s.note}}</div>
           </div>
-        </div>
+        </button>
       </sc-for>
     </div>
 
@@ -147,9 +135,13 @@
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-            <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
+            <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e6;border-radius:9px;padding:7px 12px;height:36px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e9e97" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <label for="f-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search applications</label>
+              <input id="f-q" type="search" value="{{f.q}}" onInput="{{onQ}}" placeholder="Search by name, ack. no…" style="border:none;outline:none;font-size:13px;color:#1c2530;width:190px;background:transparent;">
+            </div>
             <div style="position:relative;">
-              <button type="button" onClick="{{onMenu}}" aria-haspopup="true" aria-expanded="{{menuOpen}}" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;border:1px solid #1e9b5f;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;color:#fff;">
+              <button type="button" onClick="{{onMenu}}" aria-haspopup="true" aria-expanded="{{menuOpen}}" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;border:1px solid #1e9b5f;border-radius:8px;padding:0 14px;height:36px;font-size:13px;font-weight:600;color:#fff;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 20h16"/></svg>Download
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
               <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
@@ -212,7 +204,7 @@
         </sc-if>
 
         <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f6f8f7;">
-          <span style="font-size:12.5px;color:#6b7c72;">{{pageLabel}}</span>
+          <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}} <span style="color:#8e9e97;">· {{pageLabel}}</span></span>
           <div style="display:flex;gap:8px;">
             <button type="button" onClick="{{onPrev}}" disabled="{{prevOff}}" style="background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c2530;opacity:{{prevOp}};">← Previous</button>
             <button type="button" onClick="{{onNext}}" disabled="{{nextOff}}" style="background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c2530;opacity:{{nextOp}};">Next →</button>
@@ -372,11 +364,12 @@ class Component extends DCLogic {
         badgeBg:warn?'#e05c1a':'#eef1ef', badgeFg:warn?'#fff':'#5b6b62',
         onClick:()=>this.setF({ status:t.key, holder:'all' }) }; });
     const stats = [
-      { value:ALL.length, label:'Total applications',   note:'Every application received by BREDA',            color:'#5b6b62', chip:'', chipBg:'', chipFg:'' },
-      { value:S, label:'Projects sanctioned',  note:'Final approval granted by BREDA',          color:'#1e9b5f', chip:'Approved',            chipBg:'#e7f4ec', chipFg:'#1e7a4d' },
-      { value:P, label:'Projects in progress', note:'Still being processed: with BREDA, a Dept., Finance or the applicant', color:'#1d6fb8', chip:(P-D)+' on track', chipBg:'#e6f0f9', chipFg:'#1a5a96' },
-      { value:D, label:'Projects delayed',     note:'In progress but past the SLA deadline',                     color:'#c2740f', chip:pct(D,P)+' of in progress', chipBg:'#fef3e3', chipFg:'#92400e' }
+      { key:'all', value:ALL.length, label:'Total applications',   note:'Every application received by BREDA',            color:'#5b6b62', chip:'', chipBg:'', chipFg:'' },
+      { key:'sanctioned', value:S, label:'Projects sanctioned',  note:'Final approval granted by BREDA',          color:'#1e9b5f', chip:'Approved',            chipBg:'#e7f4ec', chipFg:'#1e7a4d' },
+      { key:'inprogress', value:P, label:'Projects in progress', note:'Still being processed: with BREDA, a Dept., Finance or the applicant', color:'#1d6fb8', chip:(P-D)+' on track', chipBg:'#e6f0f9', chipFg:'#1a5a96' },
+      { key:'delayed', value:D, label:'Projects delayed',     note:'In progress but past the SLA deadline',                     color:'#c2740f', chip:pct(D,P)+' of in progress', chipBg:'#fef3e3', chipFg:'#92400e' }
     ];
+    stats.forEach(x => { const on = f.status===x.key; x.pressed = on; x.bg = on ? '#f4f9f6' : '#fff'; x.onClick = () => this.setF({ status:x.key, holder:'all' }); });
 
     const opts = (list, cur) => list.map(([v,l]) => ({ v, l, sel:v===cur }));
     const delayedRows = ALL.filter(r => r.cls==='delayed');
