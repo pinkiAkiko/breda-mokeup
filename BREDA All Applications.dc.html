@@ -25,25 +25,37 @@
       </div>
     </div>
     <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
-      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
-        Dashboard
-      </div>
       <a href="BREDA Officer Entry Point.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
-        My Applications
+        Applications
       </a>
       <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
         <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></svg>
         All Applications
       </div>
-      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+      <a href="Commissioning.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+        COD Verification
+      </a>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+        Purpose of RE Project
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Activity log
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
         Notifications
         <span style="margin-left:auto;background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;">4</span>
       </div>
-      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;">
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6"/><path d="M12 17h.01"/></svg>
+        Help &amp; Grievance
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         Profile
       </div>
@@ -102,7 +114,21 @@
         <div style="padding:18px 20px 14px;display:flex;flex-direction:column;gap:12px;">
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <h2 id="apps-h" style="font-size:15px;font-weight:600;color:#0f2319;margin:0;">Applications</h2>
-            <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
+              <div style="position:relative;">
+                <button type="button" onClick="{{onMenu}}" aria-haspopup="true" aria-expanded="{{menuOpen}}" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;border:1px solid #1e9b5f;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:600;color:#fff;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 20h16"/></svg>Download
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+                <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+                  <div role="menu" aria-label="Download format" style="position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #e3e9e6;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);min-width:170px;padding:6px;z-index:30;">
+                    <button type="button" role="menuitem" onClick="{{onPdf}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">PDF document (.pdf)</button>
+                    <button type="button" role="menuitem" onClick="{{onCsv}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">CSV file (.csv)</button>
+                    <button type="button" role="menuitem" onClick="{{onXls}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">Excel sheet (.xls)</button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
             <div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px;">
@@ -192,10 +218,43 @@
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { status:'all', type:'all', district:'all', q:'', page:0 };
+    this.state = { status:'all', type:'all', district:'all', q:'', page:0, menu:false };
   }
   setF(patch){ this.setState({ ...patch, page:0 }); }
   toggle(key, val){ this.setF({ [key]: this.state[key]===val ? 'all' : val }); }
+
+  // Exports every row that matches the current filters (not just the visible page).
+  download(list, kind){
+    const head = ['Applicant','Project','Ack. No.','Submitted','Project type','District','Capacity','Status','SLA'];
+    const data = list.map(r => [r.name, r.project, r.ack, r.date, r.type, r.district, r.capacity, r.status, r.sla]);
+    const esc = v => String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    const tr = (row, tag) => '<tr>'+row.map(v => '<'+tag+'>'+esc(v)+'</'+tag+'>').join('')+'</tr>';
+    const END = '<'+'/body><'+'/html>'; // not written literally: the page loader would end this script block at it
+    const table = '<table border="1" cellspacing="0" cellpadding="5">'+tr(head,'th')+data.map(r=>tr(r,'td')).join('')+'</table>';
+    this.setState({ menu:false });
+    if (kind==='pdf'){
+      // opens a print view; choose "Save as PDF" as the destination
+      const w = window.open('', '_blank');
+      if (!w) return;
+      w.document.write('<html><head><meta charset="utf-8"><title>BREDA applications</title><style>body{font-family:sans-serif;font-size:11px;margin:20px}h1{font-size:16px}table{border-collapse:collapse;width:100%}th{background:#eef1ef;text-align:left}</style></head><body><h1>BREDA SWCS \u2014 Applications ('+data.length+')</h1>'+table+END);
+      w.document.close(); w.focus(); setTimeout(() => w.print(), 300);
+      return;
+    }
+    let body, mime;
+    if (kind==='csv'){
+      const q = v => '"'+String(v).replace(/"/g,'""')+'"';
+      body = '\ufeff'+[head,...data].map(row => row.map(q).join(',')).join('\r\n');
+      mime = 'text/csv;charset=utf-8';
+    } else {
+      body = '<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body>'+table+END;
+      mime = 'application/vnd.ms-excel';
+    }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([body], { type:mime }));
+    a.download = 'breda-applications.'+kind;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
 
   renderVals(){
     // s = sanctioned, p = in progress (includes delayed), d = delayed (SLA breached)
@@ -310,6 +369,10 @@ class Component extends DCLogic {
       onStatus: e => this.setF({ status:e.target.value }),
       onType: e => this.setF({ type:e.target.value }),
       onDistrict: e => this.setF({ district:e.target.value }),
+      menuOpen: f.menu, onMenu: () => this.setState({ menu: !f.menu }),
+      onPdf: () => this.download(filtered, 'pdf'),
+      onCsv: () => this.download(filtered, 'csv'),
+      onXls: () => this.download(filtered, 'xls'),
       onClear: () => this.setF({ status:'all', type:'all', district:'all', q:'' })
     };
   }
