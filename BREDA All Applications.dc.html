@@ -89,106 +89,116 @@
       <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / All Applications</div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
         <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">All Applications</h1>
-        <a href="BREDA Officer Entry Point.dc.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;color:#fff;font-size:13.5px;font-weight:600;border-radius:9px;padding:9px 16px;text-decoration:none;">Open applications queue →</a>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div role="group" aria-label="Filter by status" style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
+            <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+              <button type="button" onClick="{{t.onClick}}" aria-pressed="{{t.pressed}}" style="background:{{t.bg}};color:{{t.fg}};border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;box-shadow:{{t.shadow}};">{{t.label}} <span style="background:{{t.badgeBg}};color:{{t.badgeFg}};border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px;">{{t.count}}</span></button>
+            </sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #e3e9e6;border-radius:9px;padding:7px 12px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8e9e97" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <label for="f-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Search applications</label>
+            <input id="f-q" type="search" value="{{f.q}}" onInput="{{onQ}}" placeholder="Search by name, ack. no…" style="border:none;outline:none;font-size:13px;color:#1c2530;width:200px;background:transparent;">
+          </div>
+        </div>
       </div>
     </div>
 
-    <div style="padding:20px 28px 40px;display:flex;flex-direction:column;gap:18px;">
-
-      <!-- KPI cards -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="3">
-          <button type="button" onClick="{{k.onClick}}" aria-pressed="{{k.pressed}}" aria-label="Filter table: {{k.label}}" style="display:block;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;background:#fff;border:1px solid {{k.bdr}};border-radius:14px;box-shadow:{{k.shadow}};padding:18px 20px;border-left:4px solid {{k.color}};">
-            <div style="font-size:12px;font-weight:700;letter-spacing:.5px;color:#8e9e97;text-transform:uppercase;">{{k.label}}</div>
-            <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px;">
-              <span style="font-family:'IBM Plex Serif',serif;font-size:38px;font-weight:700;color:#0f2319;line-height:1;">{{k.value}}</span>
-              <span style="font-size:12.5px;font-weight:600;color:{{k.fg}};background:{{k.bg}};border:1px solid {{k.bd}};border-radius:999px;padding:2px 9px;">{{k.chip}}</span>
+    <!-- Stats strip -->
+    <div style="display:flex;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+        <div style="flex:1;min-width:0;padding:12px 20px;border-right:1px solid #eef1ef;display:flex;align-items:center;gap:14px;">
+          <span style="width:4px;align-self:stretch;border-radius:2px;background:{{s.color}};flex:none;"></span>
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:22px;font-weight:700;color:#0f2319;line-height:1;">{{s.value}}</span>
+              <sc-if value="{{s.chip}}" hint-placeholder-val="{{true}}"><span style="font-size:11.5px;font-weight:600;color:{{s.chipFg}};background:{{s.chipBg}};border-radius:999px;padding:2px 8px;white-space:nowrap;">{{s.chip}}</span></sc-if>
             </div>
-            <div style="font-size:12.5px;color:#6b7c72;margin-top:8px;">{{k.sub}}</div>
-          </button>
-        </sc-for>
-      </div>
-
-      <!-- Applications table -->
-      <section aria-labelledby="apps-h" style="background:#fff;border:1px solid #e3e9e6;border-radius:14px;box-shadow:0 1px 4px rgba(15,35,25,.05);overflow:hidden;">
-        <div style="padding:18px 20px 14px;display:flex;flex-direction:column;gap:12px;">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <h2 id="apps-h" style="font-size:15px;font-weight:600;color:#0f2319;margin:0;">Applications</h2>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-              <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
-              <div style="position:relative;">
-                <button type="button" onClick="{{onMenu}}" aria-haspopup="true" aria-expanded="{{menuOpen}}" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;border:1px solid #1e9b5f;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:600;color:#fff;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 20h16"/></svg>Download
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
-                <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
-                  <div role="menu" aria-label="Download format" style="position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #e3e9e6;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);min-width:170px;padding:6px;z-index:30;">
-                    <button type="button" role="menuitem" onClick="{{onPdf}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">PDF document (.pdf)</button>
-                    <button type="button" role="menuitem" onClick="{{onCsv}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">CSV file (.csv)</button>
-                    <button type="button" role="menuitem" onClick="{{onXls}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">Excel sheet (.xls)</button>
-                  </div>
-                </sc-if>
-              </div>
-            </div>
+            <div style="font-size:11.5px;font-weight:600;color:#5b6b62;margin-top:4px;white-space:nowrap;">{{s.label}}</div>
+            <div style="font-size:11.5px;line-height:1.35;color:#6b7c72;margin-top:2px;max-width:260px;">{{s.note}}</div>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;">
-            <div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:220px;">
-              <label for="f-q" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">SEARCH</label>
-              <input id="f-q" type="search" value="{{f.q}}" onInput="{{onQ}}" placeholder="Applicant, project, ack. no…" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 12px;font-size:13px;color:#1c2530;background:#fff;">
-            </div>
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <label for="f-status" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">STATUS</label>
-              <select id="f-status" value="{{f.status}}" onChange="{{onStatus}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:150px;">
-                <sc-for list="{{statusOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
-              </select>
-            </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="padding:20px 28px 40px;">
+      <section aria-label="Applications" style="background:#fff;border:1px solid #e3e9e6;border-radius:12px;box-shadow:0 1px 4px rgba(15,35,25,.05);overflow:hidden;">
+        <div style="padding:12px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;">
             <div style="display:flex;flex-direction:column;gap:4px;">
               <label for="f-type" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">PROJECT TYPE</label>
               <select id="f-type" value="{{f.type}}" onChange="{{onType}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:160px;">
                 <sc-for list="{{typeOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
               </select>
             </div>
+            <sc-if value="{{showHolder}}" hint-placeholder-val="{{false}}">
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <label for="f-holder" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#92400e;">DELAYED AT</label>
+                <select id="f-holder" value="{{f.holder}}" onChange="{{onHolder}}" style="border:1px solid #f0d6ac;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fffaf2;min-width:170px;">
+                  <sc-for list="{{holderOpts}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+                </select>
+              </div>
+            </sc-if>
             <div style="display:flex;flex-direction:column;gap:4px;">
               <label for="f-dist" style="font-size:11px;font-weight:700;letter-spacing:.4px;color:#6b7c72;">DISTRICT</label>
               <select id="f-dist" value="{{f.district}}" onChange="{{onDistrict}}" style="border:1px solid #d6dfd8;border-radius:9px;padding:8px 10px;font-size:13px;color:#1c2530;background:#fff;min-width:160px;">
                 <sc-for list="{{districtOpts}}" as="o" hint-placeholder-count="9"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
               </select>
             </div>
-            <sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}">
-              <button type="button" onClick="{{onClear}}" style="background:none;border:1px solid #d6dfd8;border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;color:#5b6b62;">&#x2715; Clear filters</button>
-            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <span aria-live="polite" style="font-size:12.5px;color:#6b7c72;">{{resultLabel}}</span>
+            <div style="position:relative;">
+              <button type="button" onClick="{{onMenu}}" aria-haspopup="true" aria-expanded="{{menuOpen}}" style="display:inline-flex;align-items:center;gap:6px;background:#1e9b5f;border:1px solid #1e9b5f;border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;color:#fff;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 20h16"/></svg>Download
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+              <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+                <div role="menu" aria-label="Download format" style="position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #e3e9e6;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.13);min-width:170px;padding:6px;z-index:30;">
+                  <button type="button" role="menuitem" onClick="{{onPdf}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">PDF document (.pdf)</button>
+                  <button type="button" role="menuitem" onClick="{{onCsv}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">CSV file (.csv)</button>
+                  <button type="button" role="menuitem" onClick="{{onXls}}" style="display:block;width:100%;text-align:left;background:none;border:none;border-radius:7px;padding:9px 10px;font-size:13px;color:#1c2530;">Excel sheet (.xls)</button>
+                </div>
+              </sc-if>
+            </div>
           </div>
         </div>
 
         <div role="table" aria-label="Applications">
-          <div role="row" style="display:grid;grid-template-columns:2fr 1.1fr 1.1fr .8fr 1.2fr 1.3fr 90px;padding:10px 20px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-top:1px solid #e3e9e6;border-bottom:1px solid #e3e9e6;">
+          <div role="row" style="display:grid;grid-template-columns:1.9fr 1.1fr .8fr .85fr 1.15fr 1.15fr 1fr 100px;padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;background:#f6f8f7;border-top:1px solid #e3e9e6;border-bottom:1px solid #e3e9e6;">
             <div role="columnheader">APPLICANT / PROJECT</div>
             <div role="columnheader">ACK. NO. &amp; DATE</div>
-            <div role="columnheader">DISTRICT</div>
             <div role="columnheader">CAPACITY</div>
+            <div role="columnheader">DISTRICT</div>
             <div role="columnheader">STATUS</div>
+            <div role="columnheader">STAGE</div>
             <div role="columnheader">SLA</div>
             <div role="columnheader" style="text-align:right;">ACTION</div>
           </div>
           <sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
-            <div role="row" style="display:grid;grid-template-columns:2fr 1.1fr 1.1fr .8fr 1.2fr 1.3fr 90px;align-items:center;padding:11px 20px;border-bottom:1px solid #eef1ef;border-left:3px solid {{r.accent}};">
+            <div role="row" style="display:grid;grid-template-columns:1.9fr 1.1fr .8fr .85fr 1.15fr 1.15fr 1fr 100px;align-items:center;padding:12px 16px;border-bottom:1px solid #eef1ef;border-left:3px solid {{r.accent}};">
               <div role="cell">
                 <div style="font-size:14px;font-weight:600;color:#0f2319;">{{r.name}}</div>
-                <div style="font-size:12px;color:#6b7c72;margin-top:2px;">{{r.project}}</div>
+                <div style="font-size:12px;color:#6b7c72;margin-top:3px;">{{r.project}}</div>
               </div>
               <div role="cell">
                 <div style="font-size:13px;font-weight:600;color:#1c2530;">{{r.ack}}</div>
-                <div style="font-size:12px;color:#8e9e97;margin-top:2px;">{{r.date}}</div>
+                <div style="font-size:12px;color:#8e9e97;margin-top:3px;">{{r.date}}</div>
               </div>
-              <div role="cell" style="font-size:13.5px;color:#1c2530;">{{r.district}}</div>
               <div role="cell" style="font-size:13.5px;color:#1c2530;">{{r.capacity}}</div>
+              <div role="cell" style="font-size:13.5px;color:#1c2530;">{{r.district}}</div>
               <div role="cell">
                 <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;border-radius:999px;padding:4px 11px;background:{{r.sBg}};border:1px solid {{r.sBd}};color:{{r.sFg}};">
                   <span style="width:7px;height:7px;border-radius:50%;background:{{r.sDot}};flex:none;"></span>{{r.status}}
                 </span>
               </div>
+              <div role="cell">
+                <span style="display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:{{r.hBg}};color:{{r.hFg}};">{{r.holder}}</span>
+                <div style="font-size:12px;color:#6b7c72;margin-top:4px;">{{r.stage}}</div>
+              </div>
               <div role="cell" style="font-size:12.5px;font-weight:{{r.slaW}};color:{{r.slaFg}};">{{r.sla}}</div>
-              <div role="cell" style="text-align:right;">
-                <a href="{{r.href}}" aria-label="{{r.cta}} {{r.ack}}" style="color:{{r.ctaFg}};font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">{{r.cta}} →</a>
+              <div role="cell" style="display:flex;justify-content:flex-end;">
+                <a href="{{r.href}}" aria-label="{{r.cta}} {{r.ack}}" style="display:inline-flex;align-items:center;gap:5px;color:{{r.ctaFg}};font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;">{{r.cta}}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
               </div>
             </div>
           </sc-for>
@@ -201,7 +211,7 @@
           </div>
         </sc-if>
 
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#f6f8f7;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#f6f8f7;">
           <span style="font-size:12.5px;color:#6b7c72;">{{pageLabel}}</span>
           <div style="display:flex;gap:8px;">
             <button type="button" onClick="{{onPrev}}" disabled="{{prevOff}}" style="background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:#1c2530;opacity:{{prevOp}};">← Previous</button>
@@ -218,15 +228,15 @@
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { status:'all', type:'all', district:'all', q:'', page:0, menu:false };
+    this.state = { status:'all', type:'all', district:'all', q:'', page:0, menu:false, holder:'all' };
   }
   setF(patch){ this.setState({ ...patch, page:0 }); }
   toggle(key, val){ this.setF({ [key]: this.state[key]===val ? 'all' : val }); }
 
   // Exports every row that matches the current filters (not just the visible page).
   download(list, kind){
-    const head = ['Applicant','Project','Ack. No.','Submitted','Project type','District','Capacity','Status','SLA'];
-    const data = list.map(r => [r.name, r.project, r.ack, r.date, r.type, r.district, r.capacity, r.status, r.sla]);
+    const head = ['Applicant','Project','Ack. No.','Submitted','Project type','District','Capacity','Status','Stage','Stage detail','SLA'];
+    const data = list.map(r => [r.name, r.project, r.ack, r.date, r.type, r.district, r.capacity, r.status, r.holder, r.stage, r.sla]);
     const esc = v => String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;');
     const tr = (row, tag) => '<tr>'+row.map(v => '<'+tag+'>'+esc(v)+'</'+tag+'>').join('')+'</tr>';
     const END = '<'+'/body><'+'/html>'; // not written literally: the page loader would end this script block at it
@@ -279,13 +289,20 @@ class Component extends DCLogic {
 
     // ---- application rows, generated so they add up to the counts above ----
     const OPEN = [
-      { label:'Pending Review', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' },
-      { label:'Under Review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
-      { label:'Query Raised',   bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', dot:'#e0922a', accent:'#e0922a' },
-      { label:'Dept. Review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
-      { label:'Payment Verification', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' }
+      { label:'Pending Review', holder:'BREDA', stage:'Scrutiny', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' },
+      { label:'Under Review', holder:'BREDA', stage:'Detailed review',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
+      { label:'Query Raised', holder:'Applicant', stage:'Query response',   bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', dot:'#e0922a', accent:'#e0922a' },
+      { label:'Dept. Review', holder:'Dept. Officer', stage:'Clearances',   bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', dot:'#1d6fb8', accent:'#1d6fb8' },
+      { label:'Payment Verification', holder:'Finance', stage:'Fee verification', bg:'#f6f8f7', bd:'#d6dfd8', fg:'#46524b', dot:'#8e9e97', accent:'#d6dfd8' }
     ];
-    const DONE = { label:'Approved', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', dot:'#1e9b5f', accent:'#1e9b5f' };
+    const HOLD = {
+      'BREDA':        { bg:'#e6f0f9', fg:'#1a5a96' },
+      'Dept. Officer':{ bg:'#f1eafb', fg:'#5b34a8' },
+      'Finance':      { bg:'#e3f4f4', fg:'#17696b' },
+      'COD':          { bg:'#e7f4ec', fg:'#1e7a4d' },
+      'Applicant':    { bg:'#fef3e3', fg:'#92400e' }
+    };
+    const DONE = { label:'Approved', holder:'BREDA', stage:'Sanctioned', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', dot:'#1e9b5f', accent:'#1e9b5f' };
     const NAMES = ['Rajesh Kumar','Sunita Devi','Bihar Solar Pvt. Ltd.','Amit Verma','Prakash Jha','M/s Green Power Bihar','Anita Singh','Manoj Prasad','Kavita Kumari','Suresh Yadav','Ritu Sharma','Sunrise Energy LLP'];
     const expand = (arr, f) => arr.flatMap(r => Array(f(r)).fill(r.name));
     // k is coprime with each list length, so the stride visits every type slot exactly once
@@ -305,15 +322,20 @@ class Component extends DCLogic {
       const cap = T.caps[(n*7) % T.caps.length];
       const age = (n*11) % 110 + 4;
       const date = new Date(today); date.setDate(date.getDate()-age);
-      const st = c.key==='sanctioned' ? DONE : OPEN[n % OPEN.length];
+      // A query pauses BREDA's SLA (the applicant has a response window), so a delayed application is never one with a query.
+      const POOL = c.key==='delayed' ? OPEN.filter(o => o.label!=='Query Raised') : OPEN;
+      let st = c.key==='sanctioned' ? DONE : POOL[n % POOL.length];
+      if (c.key==='sanctioned' && n%3!==2) st = { ...DONE, holder:'COD', stage: n%3===0 ? 'COD pending' : 'COD verification' };
+      if (c.key==='sanctioned' && n%3===2) st = { ...DONE, stage:'Registered' };
       let sla = 'Closed', slaFg = '#8e9e97', slaW = 500;
-      if (c.key==='ontrack') { sla = (3 + (n*5)%25)+' days left'; slaFg = '#1e7a4d'; }
+      if (c.key==='ontrack' && st.label==='Query Raised') { sla = 'Applicant: '+(3 + (n*5)%12)+' days to respond'; slaFg = '#92400e'; }
+      else if (c.key==='ontrack') { sla = (3 + (n*5)%25)+' days left'; slaFg = '#1e7a4d'; }
       if (c.key==='delayed') { sla = 'Delayed '+(2 + (n*3)%19)+' days'; slaFg = '#92400e'; slaW = 700; }
       ALL.push({
         cls:c.key, name:NAMES[n % NAMES.length], project:tName+' · '+cap,
         ack:'Ack/2025/'+String(100+n).padStart(3,'0'), date:fmt(date), age,
         type:tName, district, capacity:cap,
-        status:st.label, sBg:st.bg, sBd:st.bd, sFg:st.fg, sDot:st.dot, accent:c.key==='delayed' ? '#c2740f' : st.accent,
+        status:st.label, holder:st.holder, stage:st.stage, hBg:HOLD[st.holder].bg, hFg:HOLD[st.holder].fg, sBg:st.bg, sBd:st.bd, sFg:st.fg, sDot:st.dot, accent:c.key==='delayed' ? '#c2740f' : st.accent,
         sla, slaFg, slaW,
         cta: c.key==='sanctioned' ? 'View' : 'Review', ctaFg: c.key==='sanctioned' ? '#8e9e97' : '#1e9b5f',
         href:'BREDA Review Page.dc.html'
@@ -328,6 +350,7 @@ class Component extends DCLogic {
       (f.status==='all' || (f.status==='sanctioned' ? r.cls==='sanctioned' : f.status==='inprogress' ? r.cls!=='sanctioned' : r.cls==='delayed')) &&
       (f.type==='all' || r.type===f.type) &&
       (f.district==='all' || r.district===f.district) &&
+      (f.status!=='delayed' || f.holder==='all' || r.holder===f.holder) &&
       (!q || (r.name+' '+r.project+' '+r.ack+' '+r.district).toLowerCase().includes(q));
     const filtered = ALL.filter(match);
     const PER = 10;
@@ -336,29 +359,34 @@ class Component extends DCLogic {
     const rows = filtered.slice(page*PER, page*PER+PER);
     const hasFilters = f.status!=='all' || f.type!=='all' || f.district!=='all' || !!q;
 
-    // ---- summary blocks (always over all projects; clicking one sets the table filter) ----
-    const split = r => {
-      const tot = r.s + r.p;
-      return { wS:pct(r.s,tot), wP:pct(r.p-r.d,tot), wD:pct(r.d,tot), total:tot };
-    };
-    const maxTot = Math.max(...DISTRICTS.map(r=>r.s+r.p));
-    const ON = '#1d6fb8';
-    const kpis = [
-      { key:'sanctioned', label:'Projects sanctioned', value:S, chip:'Approved', color:'#1e9b5f', bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d', sub:'Number of projects approved by BREDA' },
-      { key:'inprogress', label:'Projects in progress', value:P, chip:(P-D)+' on track', color:'#1d6fb8', bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96', sub:'Under BREDA or Dept. review, or awaiting applicant' },
-      { key:'delayed',    label:'Projects delayed', value:D, chip:pct(D,P)+' of in progress', color:'#c2740f', bg:'#fef3e3', bd:'#f0d6ac', fg:'#92400e', sub:'Projects with delayed SLA' }
-    ].map(k => { const on = f.status===k.key; return { ...k, pressed:on, bdr:on?ON:'#e3e9e6', shadow:on?'0 0 0 2px '+ON+'33':'0 1px 4px rgba(15,35,25,.05)', onClick:()=>this.toggle('status',k.key) }; });
-    const types = TYPES.map(r => { const on = f.type===r.name; return { ...r, ...split(r), pressed:on, bg:on?'#f2f7fc':'#fff', bdr:on?ON:'transparent', onClick:()=>this.toggle('type',r.name) }; });
-    const districts = DISTRICTS.map(r => { const on = f.district===r.name; return { ...r, ...split(r), barW:pct(r.s+r.p,maxTot), dFg:r.d?'#92400e':'#8e9e97', pressed:on, bg:on?'#f2f7fc':'#fff', onClick:()=>this.toggle('district',r.name) }; });
+    // ---- tab counts and stats strip (always over all projects) ----
+    const cnt = { all:ALL.length, sanctioned:S, inprogress:P, delayed:D };
+    const tabs = [
+      { key:'all',        label:'All' },
+      { key:'sanctioned', label:'Approved' },
+      { key:'inprogress', label:'In progress' },
+      { key:'delayed',    label:'Delayed' }
+    ].map(t => { const on = f.status===t.key; const warn = t.key==='delayed' && !on;
+      return { ...t, count:cnt[t.key], pressed:on,
+        bg:on?'#fff':'transparent', fg:on?'#0f2319':'#5b6b62', shadow:on?'0 1px 3px rgba(0,0,0,.1)':'none',
+        badgeBg:warn?'#e05c1a':'#eef1ef', badgeFg:warn?'#fff':'#5b6b62',
+        onClick:()=>this.setF({ status:t.key, holder:'all' }) }; });
+    const stats = [
+      { value:ALL.length, label:'Total applications',   note:'Every application received by BREDA',            color:'#5b6b62', chip:'', chipBg:'', chipFg:'' },
+      { value:S, label:'Projects sanctioned',  note:'Final approval granted by BREDA',          color:'#1e9b5f', chip:'Approved',            chipBg:'#e7f4ec', chipFg:'#1e7a4d' },
+      { value:P, label:'Projects in progress', note:'Still being processed: with BREDA, a Dept., Finance or the applicant', color:'#1d6fb8', chip:(P-D)+' on track', chipBg:'#e6f0f9', chipFg:'#1a5a96' },
+      { value:D, label:'Projects delayed',     note:'In progress but past the SLA deadline',                     color:'#c2740f', chip:pct(D,P)+' of in progress', chipBg:'#fef3e3', chipFg:'#92400e' }
+    ];
 
     const opts = (list, cur) => list.map(([v,l]) => ({ v, l, sel:v===cur }));
-    const statusOpts = opts([['all','All'],['sanctioned','Approved'],['inprogress','In progress'],['delayed','Delayed']], f.status);
+    const delayedRows = ALL.filter(r => r.cls==='delayed');
+    const holderOpts = opts([['all','All ('+delayedRows.length+')'], ...['BREDA','Dept. Officer','Finance'].map(h => [h, h+' ('+delayedRows.filter(r=>r.holder===h).length+')'])], f.holder);
     const typeOpts = opts([['all','All types'], ...TYPES.map(t=>[t.name,t.name])], f.type);
     const districtOpts = opts([['all','All districts'], ...DISTRICTS.map(d=>[d.name,d.name])], f.district);
 
     const from = filtered.length ? page*PER+1 : 0;
     return {
-      kpis, types, districts, rows, f, statusOpts, typeOpts, districtOpts, hasFilters,
+      tabs, stats, rows, f, typeOpts, holderOpts, showHolder: f.status==='delayed', onHolder: e => this.setF({ holder:e.target.value }), districtOpts, hasFilters,
       isEmpty: filtered.length===0,
       resultLabel: 'Showing '+filtered.length+' of '+ALL.length+' applications',
       pageLabel: filtered.length ? from+'–'+(from+rows.length-1)+' of '+filtered.length+' · Page '+(page+1)+' of '+pages : 'No results',
