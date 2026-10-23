@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{margin:0;background:#eef1ef;}
+button{font-family:inherit;cursor:pointer;}
+.card{background:#fff;border:1px solid #e3e9e6;border-radius:12px;box-shadow:0 1px 4px rgba(15,35,25,.05);padding:16px 18px;min-width:0;}
+.ch{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:22px;}
+.ct{font-size:14px;font-weight:700;color:#0f2319;}
+.cs{font-size:12px;color:#8e9e97;margin-top:2px;}
+.tbl{background:none;border:none;font-size:12px;color:#1a5a96;font-weight:600;padding:2px 0;white-space:nowrap;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.rank{display:flex;gap:11px;align-items:flex-start;}
+.rk{width:20px;height:20px;border-radius:50%;background:#eef1ef;color:#5b6b62;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+.rk.top{background:#1a4731;color:#fff;}
+.nav{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;}
+.open{color:#1a5a96;font-size:12.5px;font-weight:600;text-decoration:none;white-space:nowrap;}
+.dl{background:#1a4731;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:12.5px;font-weight:600;}
+.sh{background:#fff;color:#0f2319;border:1px solid #d6dfd8;border-radius:8px;padding:9px 14px;font-size:12.5px;font-weight:600;}
+.rt{display:grid;gap:10px;padding:10px 4px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:#5c6b62;border-bottom:1px solid #e3e9e6;}
+.rr{display:grid;gap:10px;padding:10px 4px;font-size:13px;color:#1c2530;border-bottom:1px solid #eef1ef;}
+.r{text-align:right;font-variant-numeric:tabular-nums;}
+.tw{border:1px solid #e3e9e6;border-radius:10px;overflow:hidden;}
+.tw .rt{background:#f6f8f7;padding:11px 16px;position:sticky;top:0;z-index:1;}
+.tw .rr{padding:12px 16px;}
+.tw .rr:nth-child(even){background:#fafcfb;}
+.tw .rr:last-child{border-bottom:none;}
+.tw .rr > div:first-child{font-weight:600;color:#0f2319;}
+.fl{display:flex;flex-direction:column;gap:4px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:#8e9e97;}
+.fl select{font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0;color:#1c2530;background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:8px 30px 8px 12px;min-width:150px;height:38px;cursor:pointer;}
+.seg{display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;}
+.seg button{border:none;border-radius:7px;padding:7px 14px;font-size:13px;font-weight:600;}
+.pg{display:flex;justify-content:space-between;align-items:center;padding-top:14px;font-size:12px;color:#5c6b62;}
+.pb{background:#fff;border:1px solid #d6dfd8;border-radius:8px;padding:9px 16px;font-size:12.5px;font-weight:600;color:#0f2319;}
+.pb.nx{border-color:#1a4731;}
+
+.card{transition:box-shadow .18s,transform .18s;}
+.card:hover{box-shadow:0 6px 18px rgba(15,35,25,.10);}
+.tbl:hover{text-decoration:underline;}
+.dl:hover{background:#0f2f1f;}
+.sh:hover,.pb:hover{background:#f6f8f7;}
+.rr:hover{background:#f6f8f7;}
+.open:hover{text-decoration:underline;}
+button:focus-visible,a:focus-visible{outline:2px solid #2b78c4;outline-offset:2px;border-radius:6px;}
+.rk{box-shadow:0 0 0 2px #fff;}
+@media (max-width:1180px){.g6{grid-template-columns:repeat(3,1fr)!important;}}
+@media (max-width:1100px){.g3c{grid-template-columns:1fr 1fr!important;}}
+@media (max-width:900px){.gm,.g3c,.grid2{grid-template-columns:1fr!important;}.g3{grid-template-columns:1fr 1fr!important;}}
+@media (max-width:600px){.g6,.g3{grid-template-columns:1fr 1fr!important;}}
+.scrl{max-height:440px;overflow-y:auto;padding-right:8px;scrollbar-width:thin;scrollbar-color:#c5d1ca transparent;}
+.scrl::-webkit-scrollbar{width:6px;}
+.scrl::-webkit-scrollbar-thumb{background:#c5d1ca;border-radius:3px;}
+</style>
+</helmet>
+
+<div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
+
+  <!-- SIDEBAR -->
+  <aside style="width:224px;flex:none;background:#1a4731;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
+    <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);">
+      <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;">
+      <div>
+        <div style="font-weight:700;font-size:18px;color:#fff;line-height:1.15;">BREDA SWCS</div>
+        <div style="font-size:11px;color:#7d9a8a;margin-top:1px;">Officer Console</div>
+      </div>
+    </div>
+    <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <div class="nav" style="position:relative;background:rgba(255,255,255,.07);color:#fff;font-weight:600;">
+        <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Dashboard
+      </div>
+      <a href="BREDA Officer Entry Point.dc.html" class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+        Review Inbox
+      </a>
+      <a href="BREDA All Applications.dc.html" class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></svg>
+        MIS Reports
+      </a>
+      <a href="Commissioning.dc.html" class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+        COD Verification
+      </a>
+      <div class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h10M4 17h16"/></svg>
+        Purpose of RE Project
+      </div>
+      <div class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Activity log
+      </div>
+      <div class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6"/><path d="M12 17h.01"/></svg>
+        Grievances
+      </div>
+      <div class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Notifications
+        <span style="margin-left:auto;background:#e05c1a;color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px;">4</span>
+      </div>
+      <div class="nav">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        Profile
+      </div>
+    </nav>
+    <div style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.07);">
+      <div style="font-size:12px;color:#7d9a8a;">Signed in as</div>
+      <div style="font-size:13.5px;font-weight:600;color:#fff;margin-top:2px;">Test Breda Admin</div>
+      <div style="font-size:11.5px;color:#7d9a8a;margin-top:1px;">BREDA HQ · Admin</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
+
+    <!-- Top bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Dashboard</span>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
+        <div style="position:relative;width:36px;height:36px;border-radius:50%;border:1px solid #e3e9e6;display:flex;align-items:center;justify-content:center;color:#5b6b62;cursor:pointer;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+          <span style="position:absolute;top:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:#e05c1a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">4</span>
+        </div>
+        <div style="text-align:right;line-height:1.2;">
+          <div style="font-size:13px;font-weight:600;color:#0f2319;">Test Breda Admin</div>
+          <div style="font-size:10.5px;color:#8e9e97;">BREDA ADMIN</div>
+        </div>
+        <div id="role-wrap" style="position:relative;"><div data-role-btn="1" style="width:36px;height:36px;border-radius:50%;background:#1a5a96;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;cursor:pointer;user-select:none;" title="Switch role">TB</div><div id="role-menu" style="display:none;position:absolute;right:0;top:calc(100% + 10px);background:#fff;border:1px solid #e3e9e6;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.13);min-width:220px;z-index:9999;overflow:hidden;"><div style="padding:10px 14px 8px;border-bottom:1px solid #f0f4f2;font-size:10px;font-weight:700;color:#8e9e97;text-transform:uppercase;letter-spacing:.6px;">Demo — Switch Role</div><div style="padding:6px;"><a href="Applicant Dashboard.dc.html" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;margin-bottom:2px;"><span style="width:30px;height:30px;border-radius:50%;background:#3a9a6a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none;">RK</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#0f2319;">Applicant</div><div style="font-size:11px;color:#5c6b62;">Rajeev Kumar</div></div></a><a href="BREDA Dashboard.dc.html" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;background:#eef1ef;text-decoration:none;margin-bottom:2px;"><span style="width:30px;height:30px;border-radius:50%;background:#1a5a96;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none;">BO</span><div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#0f2319;">BREDA Officer</div><div style="font-size:11px;color:#5c6b62;">Priya Sharma</div></div><span style="width:7px;height:7px;border-radius:50%;background:#1a5a96;flex:none;"></span></a><a href="Dept Officer Entry Point.dc.html" style="display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-decoration:none;"><span style="width:30px;height:30px;border-radius:50%;background:#6f42c1;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex:none;">DO</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#0f2319;">Dept. Officer</div><div style="font-size:11px;color:#5c6b62;">Clearance queue</div></div></a></div><div style="padding:8px 14px;border-top:1px solid #f0f4f2;"><a href="index.html" style="display:flex;align-items:center;gap:8px;font-size:13px;color:#8e9e97;text-decoration:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sign out</a></div></div></div>
+      </div>
+    </div>
+
+    <!-- Page header -->
+    <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / Dashboard</div>
+      <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">Dashboard</h1>
+      <div style="font-size:12.5px;color:#5c6b62;margin-top:3px;">Applications, capacity and SLA across BREDA</div>
+    </div>
+
+    <!-- ============ OVERVIEW TAB ============ -->
+    <sc-if value="{{isOverview}}" hint-placeholder-val="{{true}}">
+    <div style="padding:18px 28px 40px;display:flex;flex-direction:column;gap:14px;">
+
+      <!-- Filters -->
+      <div class="card" style="padding:12px 16px;display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;">
+        <label class="fl">YEAR
+          <select onChange="{{setYear}}">
+            <sc-for list="{{yearOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+          </select>
+        </label>
+        <label class="fl">MONTH
+          <select onChange="{{setMonth}}">
+            <sc-for list="{{monthOpts}}" as="o" hint-placeholder-count="7"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+          </select>
+        </label>
+        <label class="fl">DISCOM
+          <select onChange="{{setDiscom}}">
+            <sc-for list="{{discomOpts}}" as="o" hint-placeholder-count="3"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+          </select>
+        </label>
+        <label class="fl">PROJECT TYPE
+          <select onChange="{{setType}}">
+            <sc-for list="{{typeOpts}}" as="o" hint-placeholder-count="4"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+          </select>
+        </label>
+        <label class="fl">DISTRICT
+          <select onChange="{{setDistrict}}">
+            <sc-for list="{{districtOpts}}" as="o" hint-placeholder-count="6"><option value="{{o.v}}" selected="{{o.sel}}">{{o.l}}</option></sc-for>
+          </select>
+        </label>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:12px;padding-bottom:8px;">
+          <span style="font-size:12.5px;color:#5c6b62;">{{filterNote}}</span>
+          <sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}"><button onClick="{{clearFilters}}" style="background:none;border:none;font-size:12.5px;color:#1a5a96;font-weight:600;">✕ Clear filters</button></sc-if>
+        </div>
+      </div>
+
+      <!-- Project type + Total grievances + Applications by month -->
+      <div class="g3c" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+        <div class="card">
+          <div class="ch"><div><div class="ct">Applications by Project Type</div></div><button class="tbl" onClick="{{tgType}}">{{lbType}}</button></div>
+<sc-if value="{{cType}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+            <div style="position:relative;width:200px;max-width:100%;aspect-ratio:1/1;">
+              <div style="width:100%;height:100%;border-radius:50%;background:conic-gradient({{donutGrad}});"></div>
+              <div style="position:absolute;inset:18%;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div style="font-size:30px;font-weight:700;color:#0f2319;line-height:1;">{{typeTotal}}</div><div style="font-size:12px;color:#8e9e97;margin-top:4px;">applications</div></div>
+            </div>
+            <div style="width:100%;display:flex;flex-direction:column;gap:7px;">
+              <sc-for list="{{types}}" as="t" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:9px;font-size:13.5px;"><span style="width:11px;height:11px;border-radius:3px;background:{{t.color}};flex:none;"></span><span style="flex:1;">{{t.label}}</span><b style="color:#0f2319;">{{t.count}}</b><span style="width:36px;text-align:right;color:#8e9e97;">{{t.pct}}</span></div>
+              </sc-for>
+            </div>
+          </div>
+</sc-if>
+<sc-if value="{{tType}}" hint-placeholder-val="{{false}}"><div class="tw">
+<div class="rt" style="grid-template-columns:2fr 1fr 1fr;"><div class="">PROJECT TYPE</div><div class="r">APPLICATIONS</div><div class="r">SHARE</div></div>
+<sc-for list="{{types}}" as="t" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:2fr 1fr 1fr;"><div class="">{{t.label}}</div><div class="r">{{t.count}}</div><div class="r">{{t.pct}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;">
+          <div class="ch"><div><div class="ct">Grievances by Status</div></div><button class="tbl" onClick="{{tgGr}}">{{lbGr}}</button></div>
+<sc-if value="{{cGr}}" hint-placeholder-val="{{true}}">
+          <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;">
+          <div style="display:grid;grid-template-columns:34px 1fr;column-gap:6px;">
+            <div style="position:relative;height:190px;font-size:10px;color:#8e9e97;"><span style="position:absolute;right:0;bottom:0;transform:translateY(50%);">0</span><span style="position:absolute;right:0;bottom:75px;transform:translateY(50%);">{{axGm}}</span><span style="position:absolute;right:0;bottom:150px;transform:translateY(50%);">{{axG}}</span></div>
+            <div style="position:relative;height:190px;border-bottom:1px solid #d6dfd8;">
+              <div style="position:absolute;left:0;right:0;bottom:75px;border-top:1px solid #eef1ef;"></div>
+              <div style="position:absolute;left:0;right:0;bottom:150px;border-top:1px solid #eef1ef;"></div>
+              <div style="position:absolute;inset:0;display:flex;align-items:flex-end;">
+                <sc-for list="{{gbars}}" as="b" hint-placeholder-count="6"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;"><span style="font-size:12px;font-weight:700;color:#0f2319;">{{b.v}}</span><div style="width:{{b.bw}};height:{{b.h}}px;background:{{b.color}};border-radius:4px 4px 0 0;"></div></div></sc-for>
+              </div>
+            </div>
+            <div></div>
+            <div style="display:flex;margin-top:8px;"><sc-for list="{{gbars}}" as="b" hint-placeholder-count="6"><span style="flex:1;text-align:center;font-size:11px;color:#5b6b62;font-weight:{{b.fw}};">{{b.name}}</span></sc-for></div>
+          </div>
+          <div style="text-align:center;font-size:12.5px;color:#5c6b62;margin-top:6px;">Total grievances: <b style="color:#0f2319;">{{grTotal}}</b></div>
+          </div>
+</sc-if>
+<sc-if value="{{tGr}}" hint-placeholder-val="{{false}}"><div class="tw">
+<div class="rt" style="grid-template-columns:2fr 1fr 1fr;"><div>STATUS</div><div class="r">GRIEVANCES</div><div class="r">SHARE</div></div>
+<sc-for list="{{grStatus}}" as="t" hint-placeholder-count="3"><div class="rr" style="grid-template-columns:2fr 1fr 1fr;"><div>{{t.label}}</div><div class="r">{{t.count}}</div><div class="r">{{t.pct}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+        <div class="card">
+          <div class="ch"><div><div class="ct">Monthly Application Trend</div></div><button class="tbl" onClick="{{tgMonth}}">{{lbMonth}}</button></div>
+<sc-if value="{{cMonth}}" hint-placeholder-val="{{true}}">
+          <div style="display:grid;grid-template-columns:34px 1fr;column-gap:6px;">
+            <div style="position:relative;height:280px;font-size:10px;color:#8e9e97;"><span style="position:absolute;right:0;bottom:0;transform:translateY(50%);">0</span><span style="position:absolute;right:0;bottom:120px;transform:translateY(50%);">{{axMm}}</span><span style="position:absolute;right:0;bottom:240px;transform:translateY(50%);">{{axM}}</span></div>
+            <div style="position:relative;height:280px;border-bottom:1px solid #d6dfd8;">
+              <div style="position:absolute;left:0;right:0;bottom:120px;border-top:1px solid #eef1ef;"></div>
+              <div style="position:absolute;left:0;right:0;bottom:240px;border-top:1px solid #eef1ef;"></div>
+              <div style="position:absolute;inset:0;display:flex;align-items:flex-end;">
+                <sc-for list="{{mbars}}" as="b" hint-placeholder-count="6"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;"><span style="font-size:12px;font-weight:700;color:#0f2319;">{{b.v}}</span><div style="width:{{b.bw}};height:{{b.h}}px;background:{{b.color}};border-radius:4px 4px 0 0;"></div></div></sc-for>
+              </div>
+            </div>
+            <div></div>
+            <div style="display:flex;margin-top:8px;"><sc-for list="{{mbars}}" as="b" hint-placeholder-count="6"><span style="flex:1;text-align:center;font-size:11px;color:#5b6b62;font-weight:{{b.fw}};">{{b.name}}</span></sc-for></div>
+          </div>
+</sc-if>
+<sc-if value="{{tMonth}}" hint-placeholder-val="{{false}}"><div class="tw">
+<div class="rt" style="grid-template-columns:2fr 1fr;"><div class="">MONTH</div><div class="r">APPLICATIONS</div></div>
+<sc-for list="{{mrows}}" as="m" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:2fr 1fr;"><div class="">{{m.m}}</div><div class="r">{{m.v}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+      </div>
+
+      <!-- Capacity pipeline + Pending clearances by department -->
+      <div class="gm" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div class="card">
+          <div class="ch"><div><div class="ct">Capacity Progress by Stage (MW)</div></div><button class="tbl" onClick="{{tgPipe}}">{{lbPipe}}</button></div>
+<sc-if value="{{cPipe}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{pipeline}}" as="p" hint-placeholder-count="4">
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px;">
+                  <div style="display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:#0f2319;"><span class="rk">{{p.n}}</span>{{p.label}}</div>
+                  <div style="font-size:14px;font-weight:700;color:#0f2319;white-space:nowrap;">{{p.mw}} <span style="font-size:11.5px;font-weight:500;color:#8e9e97;">({{p.projects}})</span></div>
+                </div>
+                <div style="height:16px;background:#eef1ef;border-radius:4px;overflow:hidden;"><div style="width:{{p.w}};height:100%;background:{{p.color}};border-radius:4px;"></div></div>
+                <div style="font-size:11px;color:#8e9e97;margin-top:3px;display:{{p.showPct}};">{{p.pct}} of applied</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:14px;font-size:12px;color:#5c6b62;display:flex;align-items:center;gap:7px;"><span style="width:10px;height:10px;border-radius:2px;background:#dc3545;"></span>{{rejNote}}</div>
+</sc-if>
+<sc-if value="{{tPipe}}" hint-placeholder-val="{{false}}"><div class="tw">
+<div class="rt" style="grid-template-columns:3fr 1.3fr 1fr 1fr;"><div class="">STAGE</div><div class="r">CAPACITY</div><div class="r">PROJECTS</div><div class="r">% OF APPLIED</div></div>
+<sc-for list="{{pipeline}}" as="p" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:3fr 1.3fr 1fr 1fr;"><div class="">{{p.label}}</div><div class="r">{{p.mw}}</div><div class="r">{{p.projects}}</div><div class="r">{{p.pctT}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+        <div class="card">
+          <div class="ch"><div><div class="ct">Pending Clearances by Department (SLA Status)</div></div>
+            <div style="display:flex;align-items:center;gap:14px;font-size:12px;color:#5b6b62;">
+              <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;border-radius:2px;background:#198754;"></span>In time</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;border-radius:2px;background:#dc3545;"></span>Breached</span>
+              <button class="tbl" onClick="{{tgDept}}">{{lbDept}}</button>
+            </div>
+          </div>
+  <sc-if value="{{cDept}}" hint-placeholder-val="{{true}}">
+          <div class="scrl" style="display:flex;flex-direction:column;gap:12px;max-height:380px;">
+            <sc-for list="{{depts}}" as="d" hint-placeholder-count="8">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:4px;"><span style="color:#1c2530;">{{d.name}}</span><span style="color:#5c6b62;">{{d.label}}</span></div>
+                <div style="display:flex;height:9px;background:#f6f8f7;border-radius:3px;overflow:hidden;"><div style="width:{{d.okW}};background:#198754;"></div><div style="width:{{d.badW}};background:#dc3545;"></div></div>
+              </div>
+            </sc-for>
+          </div>
+</sc-if>
+  <sc-if value="{{tDept}}" hint-placeholder-val="{{false}}"><div class="tw scrl" style="max-height:380px;">
+  <div class="rt" style="grid-template-columns:3fr 1fr 1fr 1fr;"><div class="">DEPARTMENT</div><div class="r">PENDING</div><div class="r">IN TIME</div><div class="r">BREACHED</div></div>
+  <sc-for list="{{depts}}" as="d" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:3fr 1fr 1fr 1fr;"><div class="">{{d.name}}</div><div class="r">{{d.tot}}</div><div class="r">{{d.ok}}</div><div class="r">{{d.bad}}</div></div></sc-for>
+  </div></sc-if>
+        </div>
+      </div>
+
+      <!-- Capacity source + districts -->
+      <div class="grid2">
+        <div class="card">
+          <div class="ch"><div><div class="ct">Capacity by Plant Type (MW)</div></div><button class="tbl" onClick="{{tgSrc}}">{{lbSrc}}</button></div>
+<sc-if value="{{cSrc}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center;">
+            <div style="position:relative;width:220px;max-width:100%;aspect-ratio:1/1;flex:none;">
+              <div style="width:100%;height:100%;border-radius:50%;background:conic-gradient({{srcGrad}});"></div>
+              <div style="position:absolute;inset:20%;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;"><div style="font-size:22px;font-weight:700;color:#0f2319;line-height:1.1;">{{srcTotal}}</div><div style="font-size:11.5px;color:#8e9e97;margin-top:4px;">total capacity</div></div>
+            </div>
+            <div class="scrl" style="flex:1;min-width:230px;max-height:300px;display:flex;flex-direction:column;gap:10px;">
+              <sc-for list="{{srcLegend}}" as="s" hint-placeholder-count="9"><div style="display:flex;align-items:center;gap:10px;font-size:13px;padding-bottom:9px;border-bottom:1px solid #eef1ef;"><span style="width:12px;height:12px;border-radius:3px;background:{{s.sw}};flex:none;"></span><div style="flex:1;min-width:0;"><div style="color:#0f2319;font-weight:600;">{{s.name}}</div><div style="font-size:11px;color:#8e9e97;">{{s.group}} · {{s.sub}}</div></div><div style="text-align:right;"><div style="font-weight:700;color:#0f2319;">{{s.mw}}</div><div style="font-size:11px;color:#8e9e97;">{{s.share}}</div></div></div></sc-for>
+            </div>
+          </div>
+</sc-if>
+<sc-if value="{{tSrc}}" hint-placeholder-val="{{false}}"><div class="scrl tw" style="max-height:330px;">
+<div class="rt" style="grid-template-columns:1.4fr 1fr 1.2fr 2.2fr;"><div class="">PLANT KIND</div><div class="">GROUP</div><div class="r">CAPACITY</div><div class="r">DETAIL</div></div>
+<sc-for list="{{sources}}" as="s" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:1.4fr 1fr 1.2fr 2.2fr;"><div class="">{{s.name}}</div><div class="">{{s.group}}</div><div class="r">{{s.mw}}</div><div class="r">{{s.sub}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+        <div class="card">
+          <div class="ch"><div><div class="ct">Top 10 Districts by Capacity (MW)</div></div><button class="tbl" onClick="{{tgDist}}">{{lbDist}}</button></div>
+<sc-if value="{{cDist}}" hint-placeholder-val="{{true}}">
+          <div style="display:flex;align-items:flex-end;gap:10px;height:270px;padding:0 4px;border-bottom:1px solid #d6dfd8;">
+            <sc-for list="{{distCols}}" as="d" hint-placeholder-count="10"><div title="{{d.name}} — {{d.mw}}" style="flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:#0f2319;">{{d.short}}</span><div style="width:70%;max-width:44px;height:{{d.h}}px;background:{{d.color}};border-radius:5px 5px 0 0;"></div></div></sc-for>
+          </div>
+          <div style="display:flex;gap:10px;padding:10px 4px 0;">
+            <sc-for list="{{distCols}}" as="d" hint-placeholder-count="10"><div style="flex:1;text-align:center;font-size:10.5px;font-weight:600;color:#5c6b62;overflow:hidden;text-overflow:ellipsis;">{{d.name}}</div></sc-for>
+          </div>
+          <div style="font-size:11.5px;color:#8e9e97;margin-top:12px;">Megawatts. {{distNote}}</div>
+</sc-if>
+<sc-if value="{{tDist}}" hint-placeholder-val="{{false}}"><div class="scrl tw" style="max-height:330px;">
+<div class="rt" style="grid-template-columns:1.4fr 1.2fr 2.4fr;"><div class="">DISTRICT</div><div class="r">CAPACITY</div><div class="r">DETAIL</div></div>
+<sc-for list="{{districts}}" as="s" hint-placeholder-count="10"><div class="rr" style="grid-template-columns:1.4fr 1.2fr 2.4fr;"><div class="">{{s.name}}</div><div class="r">{{s.mw}}</div><div class="r">{{s.sub}}</div></div></sc-for>
+</div></sc-if>
+        </div>
+      </div>
+
+    </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440}}">
+class Component extends DCLogic {
+  constructor(props){ super(props); this.state = { tv:{}, f:{ month:'all', year:'all', discom:'all', type:'all', district:'all' } };
+    this.flip = k => () => this.setState({ tv:{ ...this.state.tv, [k]: !this.state.tv[k] } }); }
+
+  renderVals(){
+    const on = (b, a, i) => b ? a : i;
+
+    // ---- filters: every dimension is a share of the whole portfolio (sample data) ----
+    const F = this.state.f;
+    const TOT_MW = 5531.49, APP_MW = 4750.71;
+    const SH = {
+      discom:   { nbpdcl:[27/51, 3811.61/TOT_MW], sbpdcl:[24/51, 1719.88/TOT_MW] },
+      type:     { solar:[39/51, 3793.71/APP_MW], storage:[2/51, 45/APP_MW], non:[10/51, 912/APP_MW] },
+      district: { gaya:[6/51, 2456.12/TOT_MW], kishanganj:[1/51, 1138/TOT_MW], katihar:[4/51, 810.58/TOT_MW], jamui:[1/51, 700/TOT_MW], aurangabad:[3/51, 80.19/TOT_MW] }
+    };
+    const sh = (dim) => F[dim]==='all' ? [1,1] : SH[dim][F[dim]];
+    const [dC,dM] = sh('discom'), [tC,tM] = sh('type'), [gC,gM] = sh('district');
+    const MB = [['May',3,3,0],['Jun',4,3,0],['Jul',5,2,2],['Aug',10,10,0],['Sep',8,7,1],['Oct',21,9,1]];
+    const MNAMES = ['May','Jun','Jul','Aug','Sep','Oct'];
+    const mi = MNAMES.indexOf(F.month);                 // -1 = all months, or a month with no data
+    const yearOk = F.year==='all' || F.year==='2026';   // the sample data is April 2026 onwards
+    const empty = !yearOk || (F.month!=='all' && mi<0);
+    const mS = empty ? 0 : (mi < 0 ? 1 : MB[mi][1]/51);
+    const yS = yearOk ? 1 : 0;
+    const cfBase = dC*tC*gC*yS, mfBase = dM*tM*gM*yS;   // everything except the month
+    const cf = cfBase*mS, mf = mfBase*mS;
+    const filtered = cf !== 1 || mf !== 1;
+    const n0 = v => Math.round(v);
+    const n1 = v => v > 0 && v < 1 ? 1 : Math.round(v);   // a non-empty slice never rounds to zero
+    const mwFmt = v => v.toLocaleString('en-US', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' MW';
+    const plural = (n, w) => n + ' ' + w + (n===1 ? '' : 's');
+    const nice = m => [2,4,6,10,12,20,30,50,100].find(x => x >= m) || Math.ceil(m/10)*10;
+    const barsOf = (items, colorOf, boldLast, scale = 150) => {
+      const mx = nice(Math.max(1, ...items.map(i => i[1])));
+      return { mx, mid: mx/2, list: items.map(([name, v], i) => ({ name, v, h: v/mx*scale, bw:'38px',
+        color: colorOf(i), fw: boldLast && i===items.length-1 ? 700 : 500 })) };
+    };
+
+    const P = 'month';
+    const A = mi >= 0 ? [MB[mi][1], mi ? MB[mi-1][1] : 0] : null;
+    const FULL = { Jan:'January', Feb:'February', Mar:'March', Apr:'April', May:'May', Jun:'June', Jul:'July', Aug:'August', Sep:'September', Oct:'October', Nov:'November', Dec:'December' };
+    const yr = F.year==='all' ? '2026' : F.year;
+    const apps  = empty ? [0,0] : (A || [21,8]);
+    const appr  = empty ? [0,0] : (mi >= 0 ? [MB[mi][2], mi ? MB[mi-1][2] : 0] : [9,7]);
+    const rejs  = empty ? [0,0] : (mi >= 0 ? [MB[mi][3], mi ? MB[mi-1][3] : 0] : [1,1]);
+    const mLabel = F.month!=='all' ? FULL[F.month] + ' ' + yr : (F.year==='all' || F.year==='2026' ? 'this month' : F.year);
+    const mTitle = F.month!=='all' ? 'in ' + FULL[F.month] : (F.year==='all' || F.year==='2026' ? 'This Month' : 'in ' + F.year);
+    const kf = cfBase;
+    const delta = (cur, prev) => {
+      if (mi === 0) return 'First month on record';
+      const d = cur - prev;
+      return d===0 ? 'No change vs last month' : (d>0 ? '▲ ' : '▼ ') + Math.abs(d) + ' vs last month (' + prev + ')';
+    };
+    const gr3 = [3,5,6].map(v => n0(v*cf));
+    const grTot = gr3[0]+gr3[1]+gr3[2];
+    const kpis = [
+      { label:'Total Applications (' + mLabel + ')', value:n1(apps[0]*kf), note:delta(n1(apps[0]*kf), n0(apps[1]*kf)), noteColor:'#198754', color:'#2b78c4', icon:'M7 3h7l5 5v13H7zM9 13h6M9 17h6' },
+      { label:'Pending BREDA Review',            value:n0(11*cf), note:'', noteColor:'#8e9e97', color:'#c97b12', icon:'M12 7v5l3 2' },
+      { label:'Pending Dept Clearances',         value:n0(32*cf), note:'across ' + plural(n0(12*cf),'application'), noteColor:'#8e9e97', color:'#e05c1a', icon:'M4 7h16M4 12h10M4 17h16' },
+      { label:'Approved ' + mTitle,             value:n0(appr[0]*kf),  note:delta(n0(appr[0]*kf), n0(appr[1]*kf)), noteColor:'#198754', color:'#198754', icon:'M20 6 9 17l-5-5' },
+      { label:'Rejected ' + mTitle,             value:n0(rejs[0]*kf),  note:delta(n0(rejs[0]*kf), n0(rejs[1]*kf)), noteColor:'#8e9e97', color:'#dc3545', icon:'M18 6 6 18M6 6l12 12' },
+      { label:'Total Grievances (all statuses)', value:grTot, note:gr3[0]+' pending · '+gr3[1]+' open · '+gr3[2]+' closed', noteColor:'#8e9e97', color:'#1a4731', icon:'M5 21V4M5 4h11l-2 4 2 4H5' }
+    ];
+
+    const sla = [
+      { dot:'#dc3545', who:'South Bihar Power Distribution Company Limited', ref:'Ack/2026/123', note:'1 day left' },
+      { dot:'#dc3545', who:'Finance',                                         ref:'PRJ/2026/7022', note:'1 day left' },
+      { dot:'#dc3545', who:'North Bihar Power Distribution Company Limited', ref:'Ack/2026/122', note:'1 day left' },
+      { dot:'#c97b12', who:'BREDA',                                           ref:'PRJ/2026/7031', note:'3 days left' },
+      { dot:'#c97b12', who:'Finance',                                         ref:'PRJ/2026/7033', note:'3 days left' },
+      { dot:'#c97b12', who:'Bihar State Pollution Control Board',             ref:'Ack/2026/122', note:'3 days left' }
+    ];
+    const queries = [
+      { dot:'#dc3545', who:'BREDA',                                           ref:'PRJ/2026/7025', note:'Open for 15 days' },
+      { dot:'#dc3545', who:'South Bihar Power Distribution Company Limited', ref:'Ack/2026/115', note:'Open for 15 days' },
+      { dot:'#dc3545', who:'Finance',                                         ref:'PRJ/2026/7030', note:'Open for 13 days' },
+      { dot:'#c97b12', who:'South Bihar Power Distribution Company Limited', ref:'Ack/2026/120', note:'Open for 11 days' },
+      { dot:'#c97b12', who:'COD',                                             ref:'Ack/2026/113', note:'Open for 10 days' },
+      { dot:'#c97b12', who:'North Bihar Power Distribution Company Limited', ref:'Ack/2026/118', note:'Open for 9 days' },
+      { dot:'#c97b12', who:'South Bihar Power Distribution Company Limited', ref:'Ack/2026/117', note:'Open for 9 days' }
+    ];
+
+    const pipeBase = [
+      [1,'Applied',5531.49,51],[2,'Approved — Acknowledgement issued',4751.21,35],[3,'Cleared by every department',3641.95,28],[4,'Registered — COD verified',3756.79,17]
+    ];
+    const pipeColors = ['#1a4731','#2c6b49','#4f8d6b','#7fb08f'];
+    const pipeline = pipeBase.map(([n,label,mw,pr], i) => {
+      const v = mw*mf, top = 5531.49*mf, pct = top ? Math.round(v/top*100) : 0;
+      const SHORT = ['Applied','Approved','Cleared by every dept.','Registered'];
+      return { n, label, mw: filtered ? mwFmt(v) : mw.toLocaleString('en-US',{minimumFractionDigits:2}) + ' MW', projects: plural(n0(pr*cf),'project'),
+        w: (top ? v/top*100 : 0) + '%', color: pipeColors[i], pct: pct+'%', showPct: i===0 ? 'none' : 'block',
+        short: SHORT[i], mwShort: Math.round(v).toLocaleString('en-US') + ' MW', h: top ? v/top*220 : 0,
+        sub: plural(n0(pr*cf),'project') + (i ? ' · ' + pct + '%' : '') };
+    });
+    const rejMw = 9.24*mf;
+
+    const tBase = [['Solar',39,'solar','#3a9a6a'],['Solar with storage',2,'storage','#c97b12'],['Non-solar',10,'non','#2b78c4']];
+    const tCounts = tBase.map(([label,c,key,color]) => ({ label, color, count: (F.type==='all' || F.type===key) ? n1(c*dC*gC*mS) : 0 }));
+    const typeTotal = tCounts.reduce((a,t) => a + t.count, 0);
+    const types = tCounts.map(t => ({ ...t, pct: typeTotal ? Math.round(t.count/typeTotal*100)+'%' : '0%' }));
+    let acc = 0;
+    const donutGrad = typeTotal ? types.filter(t => t.count).map(t => { const a0 = acc; acc += t.count/typeTotal*100; return t.color+' '+a0+'% '+acc+'%'; }).join(', ') : '#eef1ef 0% 100%';
+
+    const discoms = [
+      { name:'NBPDCL', color:'#3a9a6a', mw:'3,811.61 MW', days:'15.1', sub:'42 decided in six months',
+        stats:[{l:'APPLICATIONS',v:27},{l:'PENDING',v:14},{l:'APPROVED',v:20},{l:'REGISTERED',v:11}] },
+      { name:'SBPDCL', color:'#2b78c4', mw:'1,719.88 MW', days:'13.1', sub:'27 decided in six months',
+        stats:[{l:'APPLICATIONS',v:24},{l:'PENDING',v:16},{l:'APPROVED',v:15},{l:'REGISTERED',v:6}] }
+    ];
+
+    const rank = (list, colors) => {
+      const max = Math.max(1, ...list.map(x => x.v));
+      return list.map((x, i) => ({ ...x, n:i+1, top: i===0 ? 'top' : '', w: (x.v / max * 100) + '%', color: colors(x, i) }));
+    };
+    const fmtNum = v => v.toLocaleString('en-US', { minimumFractionDigits: v % 1 ? 2 : 0 }) + ' MW';
+    const SRC = [
+      ['Rooftop',2339.10,'Solar',12,'12 projects · 1,321 MW registered'],['Ground mounted',2191,'Solar',12,'12 projects · 1,357 MW registered'],
+      ['Bio',304,'Non-solar',6,'6 projects · 304 MW registered'],['Wind',143,'Non-solar',3,'3 projects'],
+      ['Hydro',19,'Non-solar',1,'1 project · 19 MW registered'],['Floating',14,'Solar',2,'2 projects · 14 MW registered'],
+      ['Canal / Cover-top',4,'Solar',1,'1 project'],['Waste to energy',2,'Non-solar',1,'1 project'],['Other',1,'Solar',1,'1 project']
+    ];
+    const sm = mS, sc = mS;
+    const srcPlain = (dM*gM*sm === 1 && F.type === 'all');
+    const srcScale = dM*gM*sm*(F.type==='storage' ? 45/3793.71 : 1);
+    const srcCnt = dC*gC*sc*(F.type==='storage' ? 2/39 : 1);
+    const srcKeep = x => F.type==='all' || (F.type==='non' ? x[2]==='Non-solar' : x[2]==='Solar');
+    const sources = rank(SRC.filter(srcKeep).map(([name,v,group,p,sub]) => {
+      const val = v*srcScale;
+      return { name, v:val, mw: srcPlain ? fmtNum(v) : mwFmt(val), group, sub: srcPlain ? sub : plural(n0(p*srcCnt),'project') };
+    }), x => x.group === 'Solar' ? '#3a9a6a' : '#2b78c4');
+
+    const DIS = [
+      ['Gaya','gaya',2456.12,6,'6 projects · 2,053 MW registered'],['Kishanganj','kishanganj',1138,1,'1 project'],['Katihar','katihar',810.58,4,'4 projects'],
+      ['Jamui','jamui',700,1,'1 project'],['Aurangabad','aurangabad',80.19,3,'3 projects · 9.5 MW registered'],['Araria','araria',66.60,2,'2 projects · 31 MW registered'],
+      ['Begusarai','begusarai',66.32,1,'1 project · 0.3 MW registered'],['Bhojpur','bhojpur',64.35,2,'2 projects'],['Gopalganj','gopalganj',25.20,1,'1 project'],['Banka','banka',24,1,'1 project']
+    ];
+    const disScale = dM*tM*mS, disCnt = dC*tC*mS;
+    const disPlain = (disScale === 1 && disCnt === 1);
+    const districts = rank(DIS.filter(x => F.district==='all' || F.district===x[1]).map(([name,key,v,p,sub]) => {
+      const val = v*disScale;
+      return { name, v:val, mw: disPlain ? fmtNum(v) : mwFmt(val), sub: disPlain ? sub : plural(n0(p*disCnt),'project') };
+    }), (x, i) => i < 4 ? '#1a4731' : '#7fb08f');
+    const dmax = Math.max(1, ...districts.map(x => x.v));
+    const distCols = districts.map((x, i) => ({ ...x, h: x.v/dmax*210, short: Math.round(x.v).toLocaleString('en-US'), color: i < 4 ? '#1a4731' : '#7fb08f' }));
+    const SOLAR_SW = ['#1f6b47','#3a9a6a','#6fbb93','#a6d6bb','#cfe9da'], NON_SW = ['#1d5a99','#2b78c4','#6aa3dc','#a6c8ec'];
+    const used = { 'Solar':0, 'Non-solar':0 };
+    const srcSum = sources.reduce((a, x) => a + x.v, 0);
+    const srcLegend = sources.map(x => {
+      const pal = x.group === 'Solar' ? SOLAR_SW : NON_SW, k = used[x.group]++;
+      return { ...x, sw: pal[Math.min(k, pal.length-1)], share: srcSum ? Math.round(x.v/srcSum*100) + '%' : '0%' };
+    });
+    let sacc = 0;
+    const srcGrad = srcSum ? srcLegend.map(x => { const a0 = sacc; sacc += x.v/srcSum*100; return x.sw+' '+a0+'% '+sacc+'%'; }).join(', ') : '#eef1ef 0% 100%';
+    const srcTotal = Math.round(srcSum).toLocaleString('en-US') + ' MW';
+    const distNoteShow = (F.district==='all' && disPlain) ? 'block' : 'none';
+    const distNote = '+ 9 other districts · 90.76 MW';
+
+    const slow = [
+      { name:'NOC for Canal / Reservoir / Pond', days:'38.0 days', dept:'Water Resources Department', count:'7 decided',  v:38,   color:'#c97b12' },
+      { name:'PSS Allocation',                   days:'15.4 days', dept:'South Bihar Power Distribution Company Limited', count:'14 decided', v:15.4, color:'#2b78c4' },
+      { name:'Grid Connectivity',                days:'15.0 days', dept:'Bihar State Power Transmission Company Limited', count:'7 decided', v:15.0, color:'#2b78c4' },
+      { name:'Pollution Clearance',              days:'11.6 days', dept:'Bihar State Pollution Control Board', count:'4 decided', v:11.6, color:'#2b78c4' },
+      { name:'Electrical Safety Clearance (Electrical Inspectorate portal)', days:'11.2 days', dept:'Electrical Inspector Office', count:'3 decided', v:11.2, color:'#2b78c4' }
+    ].map((x, i) => ({ ...x, n:i+1, top: i===0 ? 'top' : '', w:(x.v/38*100)+'%' }));
+
+    const stages = [
+      { n:1, name:'BREDA review',         days:'5.6',  sub:'38 cases' },
+      { n:2, name:'Finance review',       days:'6.8',  sub:'31 cases' },
+      { n:3, name:'Department clearance', days:'14.3', sub:'71 cases' },
+      { n:4, name:'COD verification',     days:'2.8',  sub:'17 cases' }
+    ];
+
+    const D = [
+      ['South Bihar Power Distribution Company Limited', 5, 8], ['North Bihar Power Distribution Company Limited', 11, 3],
+      ['Bihar State Power Transmission Company Limited', 2, 0], ['Electrical Inspector Office', 3, 4],
+      ['State Load Dispatch Centre', 4, 5], ['Bihar State Pollution Control Board', 3, 2],
+      ['Water Resources Department', 5, 0], ['Industry Department', 2, 0]
+    ];
+    const ABBR = { 'South Bihar Power Distribution Company Limited':'SBPDCL', 'North Bihar Power Distribution Company Limited':'NBPDCL',
+      'Bihar State Power Transmission Company Limited':'BSPTCL', 'Electrical Inspector Office':'EIO', 'State Load Dispatch Centre':'SLDC',
+      'Bihar State Pollution Control Board':'BSPCB', 'Water Resources Department':'WRD', 'Industry Department':'Industry' };
+    const Ds = D.map(([name, ok, bad]) => [name, n0(ok*cf), n0(bad*cf)]);
+    const MAX = Math.max(1, ...Ds.map(d => d[1]+d[2]));
+    const depts = Ds.map(([name, ok, bad]) => ({
+      name, ok, bad, tot: ok + bad, okW:(ok/MAX*100)+'%', badW:(bad/MAX*100)+'%',
+      abbr: ABBR[name] || name, okH: ok/MAX*200, badH: bad/MAX*200,
+      label: (ok+bad) + ' pending' + (bad ? ', ' + bad + ' breached' : '')
+    }));
+
+    const ST = {
+      review: { l:'Under Review',            bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96' },
+      dept:   { l:'Under Department Review', bg:'#e6f0f9', bd:'#c9dff2', fg:'#1a5a96' },
+      appr:   { l:'BREDA Approved',          bg:'#e7f4ec', bd:'#bfe3cd', fg:'#1e7a4d' }
+    };
+    const R = [
+      ['PRJ/2026/9859','Varun Akiba','500 kW','Solar · Rooftop','SBPDCL','review','23-10-2026'],
+      ['PRJ/2026/7039','Gaya Solar Cooperative Society','55 kW','Solar · Rooftop','NBPDCL','review','21-10-2026'],
+      ['PRJ/2026/7038','Green Beam Energy Pvt Ltd','80 kW','Solar · Rooftop','NBPDCL','review','21-10-2026'],
+      ['PRJ/2026/7037','Mohammad Arif','45 kW','Solar · Rooftop','NBPDCL','review','18-10-2026'],
+      ['Ack/2026/126','Sunita Devi','22 MW','Solar · Ground mounted','NBPDCL','appr','16-10-2026'],
+      ['Ack/2026/125','Rakesh Bisha','3 MW','Non-solar · Bio','SBPDCL','dept','13-10-2026'],
+      ['PRJ/2026/9854','Varun Akiba','700 MW','Solar · Rooftop','SBPDCL','review','13-10-2026'],
+      ['PRJ/2026/7034','Priya Verma','15 kW','Solar · Rooftop','SBPDCL','review','12-10-2026'],
+      ['Ack/2026/127','Anil Kumar Singh','14 MW','Solar · Ground mounted','SBPDCL','dept','11-10-2026'],
+      ['PRJ/2026/7033','Anil Kumar Singh','25 MW','Solar · Rooftop','SBPDCL','review','10-10-2026']
+    ];
+    const rows = R.map(([file, name, capacity, type, discom, k, date]) => ({
+      file, name, capacity, type, discom, date, status:ST[k].l, bg:ST[k].bg, bd:ST[k].bd, fg:ST[k].fg
+    }));
+
+    const setF = (key) => (e) => this.setState({ f:{ ...this.state.f, [key]: (e && e.target) ? e.target.value : e } });
+    const opts = (list, cur) => list.map(([v,l]) => ({ v, l, sel: v===cur }));
+    const active = [F.month!=='all', F.year!=='all', F.discom!=='all', F.type!=='all', F.district!=='all'].filter(Boolean).length;
+    const tv = this.state.tv;
+    const views = {};
+    ['Pipe','Month','Type','Src','Dist','Dept','Gr'].forEach(k => {
+      views['c'+k] = !tv[k]; views['t'+k] = !!tv[k];
+      views['lb'+k] = tv[k] ? 'Show as chart' : 'Show as table'; views['tg'+k] = this.flip(k);
+    });
+    const mBase = [['May',3],['Jun',4],['Jul',5],['Aug',10],['Sep',8],['Oct',21]];
+    const mScaled = mBase.map(([m,v]) => [m, n1(v*cfBase)]);
+    const mrows = mScaled.map(([m,v]) => ({ m, v }));
+    const hi = mi >= 0 ? mi : 5;
+    const mb = barsOf(mScaled, i => i===hi ? '#1a4731' : '#3a9a6a', false, 240);
+    mb.list.forEach((b, i) => { b.fw = i===hi ? 700 : 500; });
+    const grStatus = [['Pending',gr3[0]],['Open',gr3[1]],['Closed',gr3[2]]].map(([label,count]) => ({ label, count, pct: grTot ? Math.round(count/grTot*100)+'%' : '0%' }));
+    const gb = barsOf([['Pending',gr3[0]],['Open',gr3[1]],['Closed',gr3[2]]], i => ['#c97b12','#2b78c4','#198754'][i], false);
+    gb.list.forEach(b => { b.bw = '56px'; });
+    return {
+      ...views, mrows, grStatus, grTotal: grTot,
+      mbars: mb.list, axM: mb.mx, axMm: mb.mid, gbars: gb.list, axG: gb.mx, axGm: gb.mid,
+      srcGrad, srcLegend, srcTotal, distCols,
+      typeTotal, donutGrad, distNote, distNoteShow, rejNote: 'Rejected · ' + plural(n0(4*cf),'project') + ' · ' + mwFmt(rejMw),
+      discomOpts: opts([['all','All DISCOMs'],['nbpdcl','NBPDCL'],['sbpdcl','SBPDCL']], F.discom),
+      typeOpts: opts([['all','All types'],['solar','Solar'],['storage','Solar with storage'],['non','Non-solar']], F.type),
+      districtOpts: opts([['all','All districts'],['gaya','Gaya'],['kishanganj','Kishanganj'],['katihar','Katihar'],['jamui','Jamui'],['aurangabad','Aurangabad']], F.district),
+      monthOpts: opts([['all','All months'], ...Object.keys(FULL).map(k => [k, FULL[k]])], F.month),
+      yearOpts: opts([['all','All years'],['2026','2026'],['2025','2025']], F.year),
+      setYear: setF('year'),
+      setMonth: setF('month'),
+      setDiscom: setF('discom'), setType: setF('type'), setDistrict: setF('district'),
+      hasFilters: active>0,
+      filterNote: active ? active + (active===1 ? ' filter' : ' filters') + ' applied' : 'Showing all applications',
+      clearFilters: () => this.setState({ f:{ month:'all', year:'all', discom:'all', type:'all', district:'all' } }),
+      kpis, sla, queries, pipeline: pipeline.map(p => ({ ...p, pctT: p.pct || '100%' })), types, discoms, sources, districts, slow, stages, depts, rows,
+      isOverview: true
+    };
+  }
+}
+</script>
+<script>
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest ? e.target.closest('[data-role-btn]') : null;
+    if (!btn && e.target.dataset && e.target.dataset.roleBtn) btn = e.target;
+    var menu = document.getElementById('role-menu');
+    if (!menu) return;
+    if (btn) { menu.style.display = menu.style.display !== 'block' ? 'block' : 'none'; e.stopPropagation(); return; }
+    var wrap = document.getElementById('role-wrap');
+    if (wrap && !wrap.contains(e.target)) menu.style.display = 'none';
+  });
+</script>
+</body>
+</html>

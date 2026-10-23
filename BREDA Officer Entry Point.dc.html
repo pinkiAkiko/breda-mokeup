@@ -16,7 +16,7 @@
 <div style="font-family:'IBM Plex Sans',system-ui,sans-serif;color:#1c2530;background:#eef1ef;min-height:100vh;display:flex;">
 
   <!-- SIDEBAR -->
-  <aside style="width:252px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
+  <aside style="width:224px;flex:none;background:#0f2319;color:#c8d8cf;min-height:100vh;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
     <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.07);">
       <img src="uploads/pasted-1781946364812-0.png" alt="BREDA" style="width:42px;height:42px;flex:none;border-radius:8px;object-fit:cover;">
       <div>
@@ -25,14 +25,18 @@
       </div>
     </div>
     <nav style="padding:10px 8px;display:flex;flex-direction:column;gap:1px;flex:1;">
+      <a href="BREDA Dashboard.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        Dashboard
+      </a>
       <div style="position:relative;display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600;">
         <span style="position:absolute;left:0;top:6px;bottom:6px;width:3px;border-radius:0 2px 2px 0;background:#f59e0b;"></span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
-        Applications
+        Review Inbox
       </div>
       <a href="BREDA All Applications.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 12 10 5 10-5"/><path d="m2 17 10 5 10-5"/></svg>
-        All Applications
+        MIS Reports
       </a>
       <a href="Commissioning.dc.html" style="display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:8px;color:#c8d8cf;font-size:14px;text-decoration:none;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
@@ -72,7 +76,7 @@
 
     <!-- Top bar -->
     <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:#fff;border-bottom:1px solid #e3e9e6;flex:none;position:sticky;top:0;z-index:20;">
-      <span style="font-size:16px;font-weight:600;color:#0f2319;">Applications</span>
+      <span style="font-size:16px;font-weight:600;color:#0f2319;">Review Inbox</span>
       <div style="display:flex;align-items:center;gap:12px;">
         <span style="background:#fef9c3;color:#92400e;font-size:11px;font-weight:700;border-radius:999px;padding:3px 10px;border:1px solid #fde68a;">DEMO BUILD</span>
         <span style="font-size:11px;font-weight:600;letter-spacing:.4px;color:#8e9e97;">BREDA OFFICER</span>
@@ -86,9 +90,9 @@
 
     <!-- Page header -->
     <div style="padding:16px 28px 14px;background:#fff;border-bottom:1px solid #e3e9e6;">
-      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / Applications</div>
+      <div style="font-size:12px;color:#8e9e97;margin-bottom:6px;">Officer Console / Review Inbox</div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-        <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">Applications Assigned to Me</h1>
+        <h1 style="font-family:'IBM Plex Serif',serif;font-size:23px;font-weight:700;margin:0;color:#0f2319;">Review Inbox</h1>
         <div style="display:flex;align-items:center;gap:8px;">
           <div style="display:flex;background:#eef1ef;border:1px solid #e3e9e6;border-radius:9px;padding:2px;gap:2px;">
             <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
