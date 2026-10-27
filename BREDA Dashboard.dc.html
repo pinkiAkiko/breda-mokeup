@@ -280,20 +280,20 @@ button:focus-visible,a:focus-visible{outline:2px solid #2b78c4;outline-offset:2p
 
       <!-- Capacity pipeline + Pending clearances by department -->
       <div class="gm" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="card">
+        <div class="card" style="display:flex;flex-direction:column;">
           <div class="ch"><div><div class="ct">Capacity Progress by Stage (MW)</div></div><button class="tbl" onClick="{{tgPipe}}">{{lbPipe}}</button></div>
 <sc-if value="{{cPipe}}" hint-placeholder-val="{{true}}">
-          <div style="display:flex;flex-direction:column;gap:14px;">
-            <sc-for list="{{pipeline}}" as="p" hint-placeholder-count="4">
-              <div>
-                <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px;">
-                  <div style="display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:#0f2319;"><span class="rk">{{p.n}}</span>{{p.label}}</div>
-                  <div style="font-size:14px;font-weight:700;color:#0f2319;white-space:nowrap;">{{p.mw}} <span style="font-size:11.5px;font-weight:500;color:#8e9e97;">({{p.projects}})</span></div>
-                </div>
-                <div style="height:16px;background:#eef1ef;border-radius:4px;overflow:hidden;"><div style="width:{{p.w}};height:100%;background:{{p.color}};border-radius:4px;"></div></div>
-                <div style="font-size:11px;color:#8e9e97;margin-top:3px;display:{{p.showPct}};">{{p.pct}} of applied</div>
+          <div style="flex:1;display:flex;align-items:flex-end;gap:22px;padding:0 10px;border-bottom:1px solid #d6dfd8;min-height:270px;">
+            <sc-for list="{{pipeline}}" as="p" hint-placeholder-count="3">
+              <div style="flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;">
+                <div style="font-size:15px;font-weight:700;color:#0f2319;white-space:nowrap;">{{p.mw}}</div>
+                <div style="font-size:11.5px;color:#8e9e97;">{{p.projects}} · {{p.pctT}}</div>
+                <div style="width:62%;max-width:120px;height:{{p.h}}px;background:{{p.color}};border-radius:6px 6px 0 0;margin-top:4px;"></div>
               </div>
             </sc-for>
+          </div>
+          <div style="display:flex;gap:22px;padding:10px 10px 0;">
+            <sc-for list="{{pipeline}}" as="p" hint-placeholder-count="3"><div style="flex:1;text-align:center;font-size:12.5px;font-weight:600;color:#0f2319;"><span class="rk" style="display:inline-flex;margin-right:6px;vertical-align:middle;">{{p.n}}</span>{{p.label}}</div></sc-for>
           </div>
           <div style="margin-top:14px;font-size:12px;color:#5c6b62;display:flex;align-items:center;gap:7px;"><span style="width:10px;height:10px;border-radius:2px;background:#dc3545;"></span>{{rejNote}}</div>
 </sc-if>
@@ -348,10 +348,13 @@ button:focus-visible,a:focus-visible{outline:2px solid #2b78c4;outline-offset:2p
             </div>
             <div style="border-top:1px solid #e3e9e6;padding-top:14px;">
               <div style="font-size:11px;font-weight:700;letter-spacing:.5px;color:#8e9e97;margin-bottom:9px;">PROJECT PIPELINE</div>
-              <div style="display:flex;flex-direction:column;gap:9px;">
-                <sc-for list="{{sel.stages}}" as="g" hint-placeholder-count="4">
-                  <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;"><span style="color:#1c2530;">{{g.label}}</span><b style="color:#0f2319;">{{g.n}}</b></div>
-                  <div style="height:8px;background:#eef1ef;border-radius:4px;overflow:hidden;"><div style="width:{{g.w}};height:100%;background:{{g.color}};border-radius:4px;"></div></div></div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+                <sc-for list="{{sel.stages}}" as="g" hint-placeholder-count="3">
+                  <div style="background:#fff;border:1px solid #e3e9e6;border-top:3px solid {{g.color}};border-radius:8px;padding:9px 10px 10px;">
+                    <div style="font-size:22px;font-weight:700;color:#0f2319;line-height:1;">{{g.n}}</div>
+                    <div style="font-size:11.5px;color:#1c2530;margin-top:5px;line-height:1.25;">{{g.label}}</div>
+                    <div style="font-size:11px;color:#8e9e97;margin-top:3px;">{{g.pct}}</div>
+                  </div>
                 </sc-for>
               </div>
             </div>
@@ -507,12 +510,12 @@ class Component extends DCLogic {
     ];
 
     const pipeBase = [
-      [1,'Applied',5531.49,51],[2,'Approved by BREDA and Finance — Acknowledgement issued',4751.21,35],[3,'Cleared by every department',3641.95,28],[4,'Registered — COD verified',3756.79,17]
+      [1,'Applied',5531.49,51],[2,'Approved by BREDA',4751.21,35],[3,'Project registered',3756.79,17]
     ];
-    const pipeColors = ['#1a4731','#2c6b49','#4f8d6b','#7fb08f'];
+    const pipeColors = ['#1a4731','#2c6b49','#7fb08f'];
     const pipeline = pipeBase.map(([n,label,mw,pr], i) => {
       const v = mw*mf, top = 5531.49*mf, pct = top ? Math.round(v/top*100) : 0;
-      const SHORT = ['Applied','Approved (BREDA + Finance)','Cleared by every dept.','Registered'];
+      const SHORT = ['Applied','Approved by BREDA','Registered'];
       return { n, label, mw: filtered ? mwFmt(v) : mw.toLocaleString('en-US',{minimumFractionDigits:2}) + ' MW', projects: plural(n0(pr*cf),'project'),
         w: (top ? v/top*100 : 0) + '%', color: pipeColors[i], pct: pct+'%', showPct: i===0 ? 'none' : 'block',
         short: SHORT[i], mwShort: Math.round(v).toLocaleString('en-US') + ' MW', h: top ? v/top*220 : 0,
@@ -673,8 +676,8 @@ class Component extends DCLogic {
       sub: sHas ? sD.sub : 'No applications for this district under the current filters.',
       regMw: sHas ? mwFmt(sD.v*0.68) : '0.00 MW', avgDays: sHas ? (11 + (sName.length % 7) + (sName.charCodeAt(0) % 4)) + '.' + (sName.length % 10) + ' days' : '—',
       pending: sHas ? n0(sD.p*0.55) : 0, rejected: sHas ? n0(sD.p*4/51) : 0,
-      stages: [['Applied',1,'#1a4731'],['Approved by BREDA & Finance',35/51,'#2c6b49'],['Cleared by every dept.',28/51,'#4f8d6b'],['Registered — COD verified',17/51,'#7fb08f']].map(([label,f,color]) => ({ label, color,
-        n: sHas ? (f===1 ? n1(sD.p) : n0(sD.p*f)) : 0, w: sHas ? (f*100) + '%' : '0%' })),
+      stages: [['Applied',1,'#1a4731'],['Approved by BREDA',35/51,'#2c6b49'],['Project registered',17/51,'#7fb08f']].map(([label,f,color]) => ({ label, color,
+        n: sHas ? (f===1 ? n1(sD.p) : n0(sD.p*f)) : 0, pct: Math.round(f*100) + '% of applied' })),
       mix: [['Solar',39/51,'#3a9a6a'],['Solar with storage',2/51,'#c97b12'],['Non-solar',10/51,'#2b78c4']].map(([label,f,color]) => ({ label, color,
         count: sHas ? n0(sD.p*f) : 0, pct: sHas ? Math.round(f*100) + '%' : '0%' })),
       canFilter: !!dKey[sName] && F.district !== dKey[sName], apply: () => this.setState({ f:{ ...this.state.f, district:dKey[sName] } }) };
